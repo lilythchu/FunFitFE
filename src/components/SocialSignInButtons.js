@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import CustomButton from '../CustomButton';
+import CustomButton from './CustomButton';
 
 const SocialSignInButtons = () => {
   const onSignInFacebook = () => {
