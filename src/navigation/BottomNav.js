@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
-import ProfileScreen from '../screens/MainScreen/ProfileScreen';
-import ChatScreen from '../screens/MainScreen/ChatScreen';
-import CalendarScreen from '../screens/MainScreen/CalendarScreen';
-import NotiScreen from '../screens/MainScreen/NotiScreen';
-import RoutineScreen from '../screens/MainScreen/RoutineScreen';
+import ProfileScreen from '../screens/MainScreen/ProfileScreen.js';
+import ChatScreen from '../screens/MainScreen/ChatScreen.js';
+import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
+import NotiScreen from '../screens/MainScreen/NotiScreen.js';
+import RoutineScreen from '../screens/MainScreen/RoutineScreen.js';
 
 const BottomNav = () => {
   const [index, setIndex] = React.useState(0);
@@ -26,7 +26,8 @@ const BottomNav = () => {
 
   return (
     <BottomNavigation
-      activeColor='blue'
+      activeColor='black'
+      inactiveColor='pink'
       barStyle={{backgroundColor: 'white'}}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}

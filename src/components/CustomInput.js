@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Controller} from 'react-hook-form';
+//import { TextInput } from 'react-native-paper';
 
 const CustomInput = ({
   control,
@@ -51,7 +52,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginVertical: 5,
   },
-  input: {},
+  input: {
+    height: 50,
+  },
 });
 
 export default CustomInput;

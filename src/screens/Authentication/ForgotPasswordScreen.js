@@ -5,6 +5,7 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
+import { TextInput } from 'react-native-paper';
 
 const ForgotPasswordScreen = () => {
   const {control, handleSubmit} = useForm();
@@ -31,7 +32,7 @@ const ForgotPasswordScreen = () => {
           rules={{
             required: 'Username is required',
           }}
-        />
+        /> 
 
         <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
 

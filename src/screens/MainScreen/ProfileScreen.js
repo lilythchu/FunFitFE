@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react'
-import { globalStyles } from '../../../styles/global'
+import { globalStyles } from '../../../styles/global.js'
 import { useNavigation } from '@react-navigation/native'
 
 const ProfileScreen = () => {

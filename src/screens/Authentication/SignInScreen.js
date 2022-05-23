@@ -7,17 +7,20 @@ import {
   useWindowDimensions,
   ScrollView,
   TextInput,
+  CheckBox,
+  TouchableOpacity
 } from 'react-native';
 import Logo from '../../../assets/images/cs.jpg';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
+import CustomInput from '../../components/CustomInput.js';
+import CustomButton from '../../components/CustomButton.js';
+import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
+  const [check, setCheck] = useState(false);
 
   const {
     control,
@@ -67,22 +70,37 @@ const SignInScreen = () => {
             },
           }}
         />
-
+        <View style={{flexDirection: 'row'}}>
+          <View style={{flex: 0.5}}>
+            <CheckBox 
+              value={check}
+              onValueChange={() => setCheck(!check)}
+            />
+            <Text>Remember me</Text>
+          </View>
+          <View style={{flex: 0.5, alignItems: 'flex-end'}}>
+            <TouchableOpacity onPress={onForgotPasswordPressed}>
+              <Text>Forgot Password?</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
+        <CustomButton 
+          text={
+            <Text>
+              Don't have an account ? <Text style={{color: 'blue'}}>Sign Up</Text>
+            </Text>
+          }
+          onPress={onSignUpPress} 
+          type="TERTIARY"
+        />
 
-        <CustomButton
+        {/*<CustomButton
           text="Forgot password?"
           onPress={onForgotPasswordPressed}
           type="TERTIARY"
-        />
-
+        />*/}
         <SocialSignInButtons />
-
-        <CustomButton
-          text="Don't have an account? Create one"
-          onPress={onSignUpPress}
-          type="TERTIARY"
-        />
       </View>
     </ScrollView>
   );
@@ -90,13 +108,20 @@ const SignInScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
     padding: 20,
   },
   logo: {
     width: '70%',
     maxWidth: 300,
     maxHeight: 200,
+    alignSelf: 'center'
+  },
+  checkboxContainer: {
+    flex: 1,
+    marginBottomL: 20,
+  },
+  checkbox: {
+    alignSelf: 'center',
   },
 });
 
