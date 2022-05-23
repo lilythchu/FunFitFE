@@ -113,7 +113,6 @@ const SignUpScreen = () => {
 
 const styles = StyleSheet.create({
   root: {
-    alignItems: 'center',
     padding: 20,
   },
   title: {

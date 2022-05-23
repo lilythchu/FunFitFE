@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Controller} from 'react-hook-form';
+import Feather from 'react-native-vector-icons/Feather';
 //import { TextInput } from 'react-native-paper';
 
 const CustomInput = ({
@@ -55,6 +56,15 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
   },
+  icon: {
+    padding: 10,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightColor: '#ccc',
+    borderRightWidth: 1,
+    width: 50,
+  }
 });
 
 export default CustomInput;

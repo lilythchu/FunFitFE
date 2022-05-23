@@ -80,7 +80,7 @@ const SignInScreen = () => {
           </View>
           <View style={{flex: 0.5, alignItems: 'flex-end'}}>
             <TouchableOpacity onPress={onForgotPasswordPressed}>
-              <Text>Forgot Password?</Text>
+              <Text style={{color: '#4867aa'}}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -88,7 +88,7 @@ const SignInScreen = () => {
         <CustomButton 
           text={
             <Text>
-              Don't have an account ? <Text style={{color: 'blue'}}>Sign Up</Text>
+              Don't have an account ? <Text style={{color: '#4867aa'}}>Sign Up</Text>
             </Text>
           }
           onPress={onSignUpPress} 
