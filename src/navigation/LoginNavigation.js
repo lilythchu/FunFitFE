@@ -20,7 +20,7 @@ const LoginNavigation = () => {
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
-        <Stack.Screen name="BottomNav" component={BottomNav} />
+        <Stack.Screen name="BottomNav" component={BottomNav}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

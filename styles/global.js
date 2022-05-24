@@ -12,7 +12,7 @@ export const globalStyles = StyleSheet.create({
     color: 'pink',
   },
   link: {
-    color: '#4867aa',
+    color: '#003060',
   },
   logo: {
     width: '70%',
@@ -20,13 +20,15 @@ export const globalStyles = StyleSheet.create({
   },
   root: {
     padding: 20,
-    alignItems: 'center',
+    backgroundColor: 'white',
+    flex: 1
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#051C60',
+    color: '#0e86d4',
     margin: 10,
+    alignSelf: 'center'
   },
   text: {
     color: 'gray',
@@ -34,8 +36,17 @@ export const globalStyles = StyleSheet.create({
   },
 });
 
-const colors = StyleSheet.create({
-  c1: {
-    color: '#4867aa',
+export const globalColors = StyleSheet.create({
+  babyBlue: {
+    color: '#68bbe3',
+  },
+  blueGrotto: {
+    color: '#0e86d4',
+  },
+  blue: {
+    color: '#055c9d',
+  },
+  navyBlue: {
+    color: '#003060',
   },
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Controller} from 'react-hook-form';
 import Feather from 'react-native-vector-icons/Feather';
-//import { TextInput } from 'react-native-paper';
 
 const CustomInput = ({
   control,
@@ -21,7 +20,7 @@ const CustomInput = ({
           <View
             style={[
               styles.container,
-              {borderColor: error ? 'red' : '#e8e8e8'},
+              {borderColor: error ? 'red' : defBorderCol},
             ]}>
             <TextInput
               value={value}
@@ -41,12 +40,13 @@ const CustomInput = ({
   );
 };
 
+const defBorderCol = '#a6a2a2';
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     width: '100%',
 
-    borderColor: '#e8e8e8',
     borderWidth: 1,
     borderRadius: 20,
 
@@ -56,15 +56,6 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
   },
-  icon: {
-    padding: 10,
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRightColor: '#ccc',
-    borderRightWidth: 1,
-    width: 50,
-  }
 });
 
 export default CustomInput;

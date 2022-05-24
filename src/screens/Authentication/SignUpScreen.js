@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image, useWindowDimensions} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import { globalStyles } from '../../../styles/global';
-import Pic from '../../../assets/images/forgot.png';
+import Picture from '../../../assets/images/newPass.png';
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const SignUpScreen = () => {
+  const {height} = useWindowDimensions();
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
   const navigation = useNavigation();
@@ -36,8 +37,8 @@ const SignUpScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
         <Image 
-          style={globalStyles.logo}
-          source={Pic}
+          style={[globalStyles.logo, {height: height * 0.3}]}
+          source={Picture}
           resizeMode="contain"
         />
         <Text style={globalStyles.title}>Create an account</Text>

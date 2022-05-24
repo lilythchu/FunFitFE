@@ -7,7 +7,6 @@ import {
   useWindowDimensions,
   ScrollView,
   TextInput,
-  CheckBox,
   TouchableOpacity
 } from 'react-native';
 import Logo from '../../../assets/images/login.png';
@@ -17,6 +16,7 @@ import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
 import { globalStyles } from '../../../styles/global';
+import { Checkbox } from 'react-native-paper';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
@@ -44,7 +44,7 @@ const SignInScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
+      <View style={globalStyles.root}>
         <Image
           source={Logo}
           style={[globalStyles.logo, {height: height * 0.3}]}
@@ -71,21 +71,24 @@ const SignInScreen = () => {
             },
           }}
         />
+
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 0.5, flexDirection: 'row', alignItems: 'center'}}>
-            <CheckBox 
-              value={check}
-              onValueChange={() => setCheck(!check)}
+          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+            <Checkbox 
+              status={check ? 'checked' : 'unchecked'}
+              onPress={() => setCheck(!check)}
             />
-            <Text style={{margin: 8}}>Remember me</Text>
+            <Text>Remember me</Text>
           </View>
-          <View style={{flex: 0.5, alignItems: 'flex-end'}}>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
             <TouchableOpacity onPress={onForgotPasswordPressed}>
-              <Text style={{color: '#4867aa'}}>Forgot Password?</Text>
+              <Text style={globalStyles.link}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
+
+        <CustomButton text="Sign in" onPress={handleSubmit(onSignInPressed)} />
+
         <CustomButton 
           text={
             <Text>
@@ -95,6 +98,7 @@ const SignInScreen = () => {
           }
           type="TERTIARY"
         />
+
         <SocialSignInButtons />
       </View>
     </ScrollView>
@@ -102,16 +106,6 @@ const SignInScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  root: {
-    padding: 20,
-  },
-  checkboxContainer: {
-    flex: 1,
-    marginBottomL: 20,
-  },
-  checkbox: {
-    alignSelf: 'center',
-  },
 });
 
 export default SignInScreen;
