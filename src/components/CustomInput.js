@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Controller} from 'react-hook-form';
-import Feather from 'react-native-vector-icons/Feather';
 
 const CustomInput = ({
   control,
@@ -32,7 +31,9 @@ const CustomInput = ({
             />
           </View>
           {error && (
-            <Text style={{color: 'red', alignSelf: 'stretch'}}>{error.message || 'Error'}</Text>
+            <Text style={{color: 'red', alignSelf: 'stretch'}}>
+              {error.message || 'Error'}
+            </Text>
           )}
         </>
       )}

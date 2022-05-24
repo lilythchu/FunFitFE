@@ -1,10 +1,17 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, useWindowDimensions, Image} from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  useWindowDimensions,
+  Image
+} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import { globalStyles } from '../../../styles/global';
+import {globalStyles} from '../../../styles/global';
 import ResetPic from '../../../assets/images/newPass.png';
 
 const NewPasswordScreen = () => {
@@ -25,7 +32,7 @@ const NewPasswordScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
-        <Image 
+        <Image
           source={ResetPic}
           style={[globalStyles.logo, {height: height * 0.3}]}
           resizeMode="contain"
@@ -64,8 +71,5 @@ const NewPasswordScreen = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default NewPasswordScreen;

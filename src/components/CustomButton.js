@@ -1,12 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import { Button } from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {Button} from 'react-native-paper';
 
-const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor, iconType}) => {
+const CustomButton = ({
+  onPress,
+  text,
+  type = 'PRIMARY',
+  bgColor,
+  fgColor,
+  iconType,
+}) => {
   return (
-    <Button 
+    <Button
       uppercase={false}
-      color='gray'
+      color="gray"
       icon={iconType}
       onPress={onPress}
       style={[
@@ -18,8 +25,7 @@ const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor, iconTy
         styles.text,
         styles[`text_${type}`],
         fgColor ? {color: fgColor} : {},
-      ]} 
-    >
+      ]}>
       {text}
     </Button>
   );
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#05eefa'
   },
   container_FOURTH: {
-    backgroundColor: '#e6eaf4'
+    backgroundColor: '#e6eaf4',
   },
   container_FIFTH: {
     backgroundColor: '#f5e7ea',
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
   },
   text_FIFTH: {
     color: '#de4d41',
-  }
+  },
 });
 
 export default CustomButton;

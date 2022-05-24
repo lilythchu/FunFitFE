@@ -6,17 +6,16 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
-  TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 import {useNavigation} from '@react-navigation/native';
-import {useForm, Controller} from 'react-hook-form';
-import { globalStyles } from '../../../styles/global';
-import { Checkbox } from 'react-native-paper';
+import {useForm} from 'react-hook-form';
+import {globalStyles} from '../../../styles/global';
+import {Checkbox} from 'react-native-paper';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
@@ -89,11 +88,13 @@ const SignInScreen = () => {
 
         <CustomButton text="Sign in" onPress={handleSubmit(onSignInPressed)} />
 
-        <CustomButton 
+        <CustomButton
           text={
             <Text>
-              Don't have an account ? {' '}
-                <Text style={globalStyles.link} onPress={onSignUpPress}>Sign up</Text>
+              Don't have an account?{' '}
+              <Text style={globalStyles.link} onPress={onSignUpPress}>
+                Sign up
+              </Text>
             </Text>
           }
           type="TERTIARY"
@@ -104,8 +105,5 @@ const SignInScreen = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default SignInScreen;

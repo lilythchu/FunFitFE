@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import { globalStyles } from '../../../styles/global';
+import {globalStyles} from '../../../styles/global';
 import Pic from '../../../assets/images/forgot.png';
 
 const ForgotPasswordScreen = () => {
@@ -31,7 +31,7 @@ const ForgotPasswordScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
-        <Image 
+        <Image
           source={Pic}
           style={[globalStyles.logo, {height: height * 0.3}]}
           resizeMode="contain"
@@ -46,7 +46,7 @@ const ForgotPasswordScreen = () => {
           rules={{
             required: 'Username is required',
           }}
-        /> 
+        />
 
         <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
 
@@ -59,8 +59,5 @@ const ForgotPasswordScreen = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default ForgotPasswordScreen;

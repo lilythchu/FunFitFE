@@ -1,6 +1,5 @@
 import React from 'react';
 import {View} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import CustomButton from './CustomButton';
 
 const SocialSignInButtons = () => {
@@ -13,14 +12,14 @@ const SocialSignInButtons = () => {
   };
 
   return (
-   <View>
-      <CustomButton 
+    <View>
+      <CustomButton
         text="Sign in with Facebook"
         iconType="facebook"
         type="FOURTH"
         onPress={onSignInFacebook}
       />
-      <CustomButton 
+      <CustomButton
         text="Sign in with Google"
         iconType="google"
         type="FIFTH"

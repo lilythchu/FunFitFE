@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Image, useWindowDimensions} from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import { globalStyles } from '../../../styles/global';
+import {globalStyles} from '../../../styles/global';
 import Picture from '../../../assets/images/newPass.png';
 
 const EMAIL_REGEX =
@@ -111,8 +118,11 @@ const SignUpScreen = () => {
 
         <CustomButton
           text={
-            <Text> Have an account ? {' '}
-              <Text style={globalStyles.link} onPress={onSignInPress}>Sign in</Text>
+            <Text>
+              Have an account?{' '}
+              <Text style={globalStyles.link} onPress={onSignInPress}>
+                Sign in
+              </Text>
             </Text>
           }
           type="TERTIARY"
@@ -121,8 +131,5 @@ const SignUpScreen = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default SignUpScreen;
