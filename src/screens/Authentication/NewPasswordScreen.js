@@ -5,6 +5,7 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import { globalStyles } from '../../../styles/global';
 
 const NewPasswordScreen = () => {
   const {control, handleSubmit} = useForm();
@@ -22,8 +23,8 @@ const NewPasswordScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Reset your password</Text>
+      <View style={globalStyles.root}>
+        <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
           placeholder="Code"
@@ -59,23 +60,6 @@ const NewPasswordScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 10,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: '#FDB075',
-  },
 });
 
 export default NewPasswordScreen;

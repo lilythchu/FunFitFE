@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
+import { globalStyles } from '../../../styles/global';
+import Pic from '../../../assets/images/forgot.png';
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -15,7 +17,7 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail');
+    navigation.navigate('BottomNav');
   };
 
   const onSignInPress = () => {
@@ -32,8 +34,13 @@ const SignUpScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Create an account</Text>
+      <View style={globalStyles.root}>
+        <Image 
+          style={globalStyles.logo}
+          source={Pic}
+          resizeMode="contain"
+        />
+        <Text style={globalStyles.title}>Create an account</Text>
 
         <CustomInput
           name="username"
@@ -88,13 +95,13 @@ const SignUpScreen = () => {
           onPress={handleSubmit(onRegisterPressed)}
         />
 
-        <Text style={styles.text}>
+        <Text style={globalStyles.text}>
           By registering, you confirm that you accept our{' '}
-          <Text style={styles.link} onPress={onTermsOfUsePressed}>
+          <Text style={globalStyles.link} onPress={onTermsOfUsePressed}>
             Terms of Use
           </Text>{' '}
           and{' '}
-          <Text style={styles.link} onPress={onPrivacyPressed}>
+          <Text style={globalStyles.link} onPress={onPrivacyPressed}>
             Privacy Policy
           </Text>
         </Text>
@@ -102,8 +109,11 @@ const SignUpScreen = () => {
         <SocialSignInButtons />
 
         <CustomButton
-          text="Have an account? Sign in"
-          onPress={onSignInPress}
+          text={
+            <Text> Have an account ? {' '}
+              <Text style={globalStyles.link} onPress={onSignInPress}>Sign in</Text>
+            </Text>
+          }
           type="TERTIARY"
         />
       </View>
@@ -112,22 +122,6 @@ const SignUpScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  root: {
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 10,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: '#FDB075',
-  },
 });
 
 export default SignUpScreen;

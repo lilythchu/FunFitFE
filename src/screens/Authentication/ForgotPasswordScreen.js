@@ -1,13 +1,21 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import { TextInput } from 'react-native-paper';
+import { globalStyles } from '../../../styles/global';
+import Pic from '../../../assets/images/forgot.png';
 
 const ForgotPasswordScreen = () => {
+  const {height} = useWindowDimensions();
   const {control, handleSubmit} = useForm();
   const navigation = useNavigation();
 
@@ -22,8 +30,14 @@ const ForgotPasswordScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Text style={styles.title}>Reset your password</Text>
+      <View style={globalStyles.root}>
+        <Image 
+          source={Pic}
+          style={[globalStyles.logo, {height: height * 0.3}]}
+          resizeMode="contain"
+        />
+
+        <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
           name="username"
@@ -47,23 +61,6 @@ const ForgotPasswordScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#051C60',
-    margin: 10,
-  },
-  text: {
-    color: 'gray',
-    marginVertical: 10,
-  },
-  link: {
-    color: '#FDB075',
-  },
 });
 
 export default ForgotPasswordScreen;

@@ -10,12 +10,13 @@ import {
   CheckBox,
   TouchableOpacity
 } from 'react-native';
-import Logo from '../../../assets/images/cs.jpg';
+import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import { globalStyles } from '../../../styles/global';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
@@ -46,7 +47,7 @@ const SignInScreen = () => {
       <View style={styles.root}>
         <Image
           source={Logo}
-          style={[styles.logo, {height: height * 0.3}]}
+          style={[globalStyles.logo, {height: height * 0.3}]}
           resizeMode="contain"
         />
 
@@ -71,12 +72,12 @@ const SignInScreen = () => {
           }}
         />
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 0.5}}>
+          <View style={{flex: 0.5, flexDirection: 'row', alignItems: 'center'}}>
             <CheckBox 
               value={check}
               onValueChange={() => setCheck(!check)}
             />
-            <Text>Remember me</Text>
+            <Text style={{margin: 8}}>Remember me</Text>
           </View>
           <View style={{flex: 0.5, alignItems: 'flex-end'}}>
             <TouchableOpacity onPress={onForgotPasswordPressed}>
@@ -88,18 +89,12 @@ const SignInScreen = () => {
         <CustomButton 
           text={
             <Text>
-              Don't have an account ? <Text style={{color: '#4867aa'}}>Sign Up</Text>
+              Don't have an account ? {' '}
+                <Text style={globalStyles.link} onPress={onSignUpPress}>Sign up</Text>
             </Text>
           }
-          onPress={onSignUpPress} 
           type="TERTIARY"
         />
-
-        {/*<CustomButton
-          text="Forgot password?"
-          onPress={onForgotPasswordPressed}
-          type="TERTIARY"
-        />*/}
         <SocialSignInButtons />
       </View>
     </ScrollView>
@@ -109,12 +104,6 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   root: {
     padding: 20,
-  },
-  logo: {
-    width: '70%',
-    maxWidth: 300,
-    maxHeight: 200,
-    alignSelf: 'center'
   },
   checkboxContainer: {
     flex: 1,

@@ -32,10 +32,6 @@ const SocialSignInButtons = () => {
     console.warn('onSignInGoogle');
   };
 
-  const onSignInApple = () => {
-    console.warn('onSignInApple');
-  };
-
   return (
    <View>
       <SocialButton
@@ -62,7 +58,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     flexDirection: 'row',
-    borderRadius: 3,
+    borderRadius: 20,
   },
   iconWrapper: {
     width: 30,
