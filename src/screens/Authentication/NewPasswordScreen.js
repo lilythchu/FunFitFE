@@ -62,12 +62,12 @@ const NewPasswordScreen = () => {
           }}
         />
 
-        <CustomButton text="Submit" onPress={handleSubmit(onSubmitPressed)} />
+        <CustomButton title="Submit" onPress={handleSubmit(onSubmitPressed)} />
 
         <CustomButton
-          text="Back to Sign in"
+          title="Back to Sign in"
           onPress={onSignInPress}
-          type="TERTIARY"
+          type="THIRD"
         />
       </View>
     </ScrollView>

@@ -6,6 +6,7 @@ import SignUpScreen from '../screens/Authentication/SignUpScreen.js';
 import ForgotPasswordScreen from '../screens/Authentication/ForgotPasswordScreen.js';
 import ConfirmEmailScreen from '../screens/Authentication/ConfirmEmailScreen.js';
 import NewPasswordScreen from '../screens/Authentication/NewPasswordScreen.js';
+import OnboardingScreen from '../screens/OnboardingScreen.js';
 import BottomNav from './BottomNav.js';
 
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,7 @@ const LoginNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        {/*<Stack.Screen name="Onboarding" component={OnboardingScreen} />*/}
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />

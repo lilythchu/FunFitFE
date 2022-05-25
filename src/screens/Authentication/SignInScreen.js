@@ -80,7 +80,7 @@ const SignInScreen = () => {
           }}
         />
 
-        <View style={{flexDirection: 'row', paddingTop: 10}}>
+        <View style={{flexDirection: 'row', paddingVertical: 10}}>
           <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
             <Checkbox 
               status={check ? 'checked' : 'unchecked'}
@@ -95,10 +95,10 @@ const SignInScreen = () => {
           </View>
         </View>
 
-        <CustomButton text="Sign in" onPress={handleSubmit(onSignInPressed)} />
+        <CustomButton title="Sign in" onPress={handleSubmit(onSignInPressed)} />
 
         <CustomButton
-          text={
+          title={
             <Text>
               Don't have an account?{' '}
               <Text style={globalStyles.link} onPress={onSignUpPress}>
@@ -106,7 +106,7 @@ const SignInScreen = () => {
               </Text>
             </Text>
           }
-          type="TERTIARY"
+          type="THIRD"
         />
 
         <SocialSignInButtons />

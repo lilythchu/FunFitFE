@@ -104,7 +104,7 @@ const SignUpScreen = () => {
         />
 
         <CustomButton
-          text="Register"
+          title="Register"
           onPress={handleSubmit(onRegisterPressed)}
         />
 
@@ -122,7 +122,7 @@ const SignUpScreen = () => {
         <SocialSignInButtons />
 
         <CustomButton
-          text={
+          title={
             <Text>
               Have an account?{' '}
               <Text style={globalStyles.link} onPress={onSignInPress}>
@@ -130,7 +130,7 @@ const SignUpScreen = () => {
               </Text>
             </Text>
           }
-          type="TERTIARY"
+          type="THIRD"
         />
       </View>
     </ScrollView>

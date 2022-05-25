@@ -1,33 +1,28 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Button} from 'react-native-paper';
+import { Button, ThemeProvider } from '@rneui/themed';
 
 const CustomButton = ({
-  onPress,
-  text,
-  type = 'PRIMARY',
-  bgColor,
-  fgColor,
-  iconType,
+  type='FIRST',
+  ...props
 }) => {
   return (
-    <Button
-      uppercase={false}
-      color="gray"
-      icon={iconType}
-      onPress={onPress}
-      style={[
-        styles.container,
-        styles[`container_${type}`],
-        bgColor ? {backgroundColor: bgColor} : {},
-      ]}
-      labelStyle={[
-        styles.text,
-        styles[`text_${type}`],
-        fgColor ? {color: fgColor} : {},
-      ]}>
-      {text}
-    </Button>
+    <ThemeProvider>
+      <Button
+        buttonStyle={[
+          styles.btn,
+          styles[`btn_${type}`]
+        ]}
+        containerStyle={styles.container}
+        titleStyle={[
+          styles.title,
+          styles[`title_${type}`]
+        ]}
+        iconContainerStyle={{marginRight: 10}}
+        {...props}
+      >
+      </Button>
+    </ThemeProvider>
   );
 };
 
@@ -35,44 +30,46 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     marginTop: 10,
-    padding: 15,
-    marginVertical: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    height: 50,
   },
-  container_PRIMARY: {
+  btn: {
+    borderWidth: 0,
+    borderRadius: 30,
+    borderColor: 'transparent',
+  },
+  btn_FIRST: {
     backgroundColor: '#68bbe3',
   },
-  container_SECONDARY: {
+  btn_SECOND: {
     borderColor: '#3B71F3',
     borderWidth: 2,
   },
-  container_TERTIARY: {
-    //backgroundColor: '#05eefa'
+  btn_THIRD: {
+    backgroundColor: 'white'
   },
-  container_FOURTH: {
+  btn_FOURTH: {
     backgroundColor: '#e6eaf4',
   },
-  container_FIFTH: {
+  btn_FIFTH: {
     backgroundColor: '#f5e7ea',
   },
-  text: {
+  title: {
+  },
+  title_FIRST: {
     fontWeight: 'bold',
     color: 'white',
-    fontSize: 16,
   },
-  text_SECONDARY: {
+  title_SECOND: {
     color: '#3B71F3',
   },
-  text_TERTIARY: {
+  title_THIRD: {
     color: 'gray',
   },
-  text_FOURTH: {
+  title_FOURTH: {
+    fontWeight: '600',
     color: '#4867aa',
   },
-  text_FIFTH: {
+  title_FIFTH: {
+    fontWeight: '600',
     color: '#de4d41',
   },
 });

@@ -49,12 +49,18 @@ const ForgotPasswordScreen = () => {
           }}
         />
 
-        <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
+        <CustomButton title="Send" onPress={handleSubmit(onSendPressed)} />
 
         <CustomButton
-          text="Back to Sign in"
-          onPress={onSignInPress}
-          type="TERTIARY"
+          title={
+            <Text>
+              Back to{' '} 
+              <Text style={globalStyles.link} onPress={onSignInPress}>
+                Sign in
+              </Text>
+            </Text>
+          }
+          type="THIRD"
         />
       </View>
     </ScrollView>
