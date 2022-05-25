@@ -35,18 +35,3 @@ export const globalStyles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-
-export const globalColors = StyleSheet.create({
-  babyBlue: {
-    color: '#68bbe3',
-  },
-  blueGrotto: {
-    color: '#0e86d4',
-  },
-  blue: {
-    color: '#055c9d',
-  },
-  navyBlue: {
-    color: '#003060',
-  },
-});

@@ -40,6 +40,7 @@ const NewPasswordScreen = () => {
         <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
+          type="FIRST"
           placeholder="Code"
           name="code"
           control={control}
@@ -47,6 +48,7 @@ const NewPasswordScreen = () => {
         />
 
         <CustomInput
+          type="FIRST"
           placeholder="Enter your new password"
           name="name"
           control={control}

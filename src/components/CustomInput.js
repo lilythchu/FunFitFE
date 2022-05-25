@@ -1,6 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {Controller} from 'react-hook-form';
+import globalColors from '../../styles/colors';
+import {TextInput} from 'react-native-paper';
 
 const CustomInput = ({
   control,
@@ -8,6 +10,8 @@ const CustomInput = ({
   rules = {},
   placeholder,
   secureTextEntry,
+  type,
+  ...props
 }) => {
   return (
     <Controller
@@ -16,18 +20,16 @@ const CustomInput = ({
       rules={rules}
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <>
-          <View
-            style={[
-              styles.container,
-              {borderColor: error ? 'red' : defBorderCol},
-            ]}>
+          <View>
             <TextInput
+              activeUnderlineColor={globalColors.babyBlue}
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
-              style={styles.input}
               secureTextEntry={secureTextEntry}
+              style={styles[`container_${type}`]}
+              {...props}
             />
           </View>
           {error && (
@@ -44,17 +46,9 @@ const CustomInput = ({
 const defBorderCol = '#a6a2a2';
 
 const styles = StyleSheet.create({
-  container: {
+  container_FIRST: {
     backgroundColor: 'white',
     width: '100%',
-
-    borderWidth: 1,
-    borderRadius: 20,
-
-    paddingHorizontal: 10,
-    marginVertical: 5,
-  },
-  input: {
     height: 50,
   },
 });

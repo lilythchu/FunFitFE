@@ -24,7 +24,8 @@ const SignUpScreen = () => {
   const pwd = watch('password');
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
+  const onRegisterPressed = data => {
+    console.log(data);
     navigation.navigate('BottomNav');
   };
 
@@ -51,6 +52,7 @@ const SignUpScreen = () => {
         <Text style={globalStyles.title}>Create an account</Text>
 
         <CustomInput
+          type="FIRST"
           name="username"
           control={control}
           placeholder="Username"
@@ -67,6 +69,7 @@ const SignUpScreen = () => {
           }}
         />
         <CustomInput
+          type="FIRST"
           name="email"
           control={control}
           placeholder="Email"
@@ -76,6 +79,7 @@ const SignUpScreen = () => {
           }}
         />
         <CustomInput
+          type="FIRST"
           name="password"
           control={control}
           placeholder="Password"
@@ -89,6 +93,7 @@ const SignUpScreen = () => {
           }}
         />
         <CustomInput
+          type="FIRST"
           name="password-repeat"
           control={control}
           placeholder="Repeat Password"

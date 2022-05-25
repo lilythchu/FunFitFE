@@ -16,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
@@ -55,9 +56,17 @@ const SignInScreen = () => {
           placeholder="Username"
           control={control}
           rules={{required: 'Username is required'}}
+          type="FIRST"
+          left={
+            <TextInput.Icon name="account-circle-outline" />
+          }
         />
 
         <CustomInput
+          type="FIRST"
+          left={
+            <TextInput.Icon name="lock-outline" />
+          }
           name="password"
           placeholder="Password"
           secureTextEntry
@@ -71,7 +80,7 @@ const SignInScreen = () => {
           }}
         />
 
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', paddingTop: 10}}>
           <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
             <Checkbox 
               status={check ? 'checked' : 'unchecked'}
