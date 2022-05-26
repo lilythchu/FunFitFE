@@ -40,17 +40,17 @@ const NewPasswordScreen = () => {
         <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
-          type="FIRST"
           placeholder="Code"
           name="code"
+          icon='lock'
           control={control}
           rules={{required: 'Code is required'}}
         />
 
         <CustomInput
-          type="FIRST"
           placeholder="Enter your new password"
           name="name"
+          icon='lock'
           control={control}
           secureTextEntry
           rules={{

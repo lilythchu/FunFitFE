@@ -61,7 +61,7 @@ const SignUpScreen = () => {
         <Text style={globalStyles.title}>Create an account</Text>
 
         <CustomInput
-          type="FIRST"
+          icon='user'
           name="username"
           control={control}
           placeholder="Username"
@@ -79,8 +79,8 @@ const SignUpScreen = () => {
         />
 
         <CustomInput
-          type="FIRST"
           name="email"
+          icon='mail'
           control={control}
           placeholder="Email"
           rules={{
@@ -90,8 +90,8 @@ const SignUpScreen = () => {
         />
 
         <CustomInput
-          type="FIRST"
           name="password"
+          icon='lock'
           control={control}
           placeholder="Password"
           secureTextEntry
@@ -105,8 +105,8 @@ const SignUpScreen = () => {
         />
         
         <CustomInput
-          type="FIRST"
           name="password-repeat"
+          icon='lock'
           control={control}
           placeholder="Repeat Password"
           secureTextEntry

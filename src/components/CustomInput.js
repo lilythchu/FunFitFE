@@ -2,9 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Controller} from 'react-hook-form';
 import globalColors from '../../styles/colors';
-import {TextInput} from 'react-native-paper';
+import { Input, Icon} from "@rneui/themed";
 
 const CustomInput = ({
+  icon,
   control,
   name,
   rules = {},
@@ -21,17 +22,31 @@ const CustomInput = ({
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <>
           <View>
-            <TextInput
-              activeUnderlineColor={globalColors.babyBlue}
+            <Input
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
               secureTextEntry={secureTextEntry}
-              style={styles[`container_${type}`]}
+              labelStyle={styles.label}
+              containerStyle={[
+                styles.container,
+                styles[`container_${type}`]
+              ]}
+              inputContainerStyle={styles.inputContainer}
+              inputStyle={styles.input}
+              leftIcon = {
+                <Icon 
+                  type={'font-awesome'}
+                  name={icon}
+                  color='#424040'
+                />
+              }
+              leftIconContainerStyle={styles.iconLeft}
               {...props}
             />
           </View>
+          
           {error && (
             <Text style={{color: 'red', alignSelf: 'stretch'}}>
               {error.message || 'Error'}
@@ -43,13 +58,20 @@ const CustomInput = ({
   );
 };
 
-const defBorderCol = '#a6a2a2';
-
 const styles = StyleSheet.create({
+  container: {
+  },
   container_FIRST: {
     backgroundColor: 'white',
-    width: '100%',
-    height: 50,
+  },
+  iconLeft: {
+    marginRight: 8,
+  },
+  label: {
+  },
+  input: {
+  },
+  inputContainer: {
   },
 });
 

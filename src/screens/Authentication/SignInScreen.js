@@ -19,6 +19,7 @@ import {Checkbox} from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
 import { useLogin } from '../../../context/AuthProvider';
 import { SignInURL } from '../../../api/client';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import base64 from 'base-64';
 
 const SignInScreen = () => {
@@ -84,20 +85,18 @@ const SignInScreen = () => {
 
         <CustomInput
           name="username"
+          label="Username"
           placeholder="Username"
           control={control}
           rules={{required: 'Username is required'}}
           type="FIRST"
-          left={
-            <TextInput.Icon name="account-circle-outline" />
-          }
+          icon='user'
         />
 
         <CustomInput
           type="FIRST"
-          left={
-            <TextInput.Icon name="lock-outline" />
-          }
+          label="Password"
+          icon='lock'
           name="password"
           placeholder="Password"
           secureTextEntry
