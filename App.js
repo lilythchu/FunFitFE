@@ -1,14 +1,13 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import LoginNavigation from './src/navigation/LoginNavigation';
-import Clone from './Clone';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import Providers from './src/navigation/Providers';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <LoginNavigation />
+      <Providers />
     </SafeAreaView>
-  );
+  )
 };
 
 const styles = StyleSheet.create({

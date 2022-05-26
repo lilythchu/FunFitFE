@@ -10,7 +10,7 @@ const CustomInput = ({
   rules = {},
   placeholder,
   secureTextEntry,
-  type,
+  type='FIRST',
   ...props
 }) => {
   return (

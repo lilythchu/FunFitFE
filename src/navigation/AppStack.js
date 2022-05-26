@@ -6,7 +6,7 @@ import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
 import NotiScreen from '../screens/MainScreen/NotiScreen.js';
 import RoutineScreen from '../screens/MainScreen/RoutineScreen.js';
 
-const BottomNav = () => {
+const AppStack = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'routine', title: 'Routine', icon: 'home-variant'},
@@ -36,4 +36,4 @@ const BottomNav = () => {
   );
 };
 
-export default BottomNav;
+export default AppStack;

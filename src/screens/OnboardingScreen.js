@@ -58,7 +58,7 @@ const OnboardingScreen = ({navigation}) => {
       pages={[
         {
           backgroundColor: globalColors.blueGrotto,
-          image: <Image source={require('../../assets/images/cs.jpg')} />,
+          image: <Image source={require('../../assets/images/login.png')} />,
           title: 'Welcome',
         },
         {

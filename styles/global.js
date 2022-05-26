@@ -1,4 +1,5 @@
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StyleSheet} from 'react-native';
+import { windowHeight } from '../utils/Dimentions';
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -17,6 +18,7 @@ export const globalStyles = StyleSheet.create({
   logo: {
     width: '70%',
     alignSelf: 'center',
+    height: windowHeight * 0.3,
   },
   root: {
     padding: 20,

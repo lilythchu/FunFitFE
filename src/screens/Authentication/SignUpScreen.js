@@ -13,40 +13,49 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
-import Picture from '../../../assets/images/newPass.png';
-
-const EMAIL_REGEX =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+import Picture from '../../../assets/images/signup.png';
+import { SignUpURL } from '../../../api/client';
+import { EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed } from '../../../utils/methods';
 
 const SignUpScreen = () => {
-  const {height} = useWindowDimensions();
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
   const navigation = useNavigation();
 
-  const onRegisterPressed = data => {
-    console.log(data);
-    navigation.navigate('BottomNav');
-  };
-
   const onSignInPress = () => {
     navigation.navigate('SignIn');
   };
-
-  const onTermsOfUsePressed = () => {
-    console.warn('onTermsOfUsePressed');
-  };
-
-  const onPrivacyPressed = () => {
-    console.warn('onPrivacyPressed');
+  const onRegisterPressed = data => {
+    fetch(SignUpURL, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password,
+      }),
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.message === "User created!") {
+        alert(response.message);
+        navigation.navigate("SignIn");
+      } else {
+        alert(response.message);
+      }
+    });
   };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
         <Image 
-          style={[globalStyles.logo, {height: height * 0.3}]}
           source={Picture}
+          style={globalStyles.logo}
           resizeMode="contain"
         />
         <Text style={globalStyles.title}>Create an account</Text>
@@ -68,6 +77,7 @@ const SignUpScreen = () => {
             },
           }}
         />
+
         <CustomInput
           type="FIRST"
           name="email"
@@ -78,6 +88,7 @@ const SignUpScreen = () => {
             pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
           }}
         />
+
         <CustomInput
           type="FIRST"
           name="password"
@@ -92,6 +103,7 @@ const SignUpScreen = () => {
             },
           }}
         />
+        
         <CustomInput
           type="FIRST"
           name="password-repeat"

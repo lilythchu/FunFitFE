@@ -2,11 +2,13 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../../../styles/global.js'
 import { useNavigation } from '@react-navigation/native'
+import { useLogin } from '../../../context/AuthProvider.js'
 
 const ProfileScreen = () => {
+  const {setIsLoggedIn} = useLogin();
   const navigation = useNavigation();
   const handleLogOut = () => {
-    navigation.navigate('SignIn');
+    setIsLoggedIn(false);
   }
 
   return (

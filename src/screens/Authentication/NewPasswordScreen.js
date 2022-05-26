@@ -21,8 +21,8 @@ const NewPasswordScreen = () => {
   const navigation = useNavigation();
 
   const onSubmitPressed = data => {
-    console.warn(data);
-    navigation.navigate('BottomNav');
+    console.log(data);
+    navigation.navigate('SignIn');
   };
 
   const onSignInPress = () => {
@@ -34,7 +34,7 @@ const NewPasswordScreen = () => {
       <View style={globalStyles.root}>
         <Image
           source={ResetPic}
-          style={[globalStyles.logo, {height: height * 0.3}]}
+          style={globalStyles.logo}
           resizeMode="contain"
         />
         <Text style={globalStyles.title}>Reset your password</Text>

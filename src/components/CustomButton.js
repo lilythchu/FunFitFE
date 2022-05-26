@@ -28,7 +28,6 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
     marginTop: 10,
   },
   btn: {
@@ -65,10 +64,12 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   title_FOURTH: {
+    marginLeft: 10,
     fontWeight: '600',
     color: '#4867aa',
   },
   title_FIFTH: {
+    marginLeft: 10,
     fontWeight: '600',
     color: '#de4d41',
   },

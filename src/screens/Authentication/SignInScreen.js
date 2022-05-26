@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {
+  ActivityIndicator,
   View,
   Text,
   Image,
   StyleSheet,
-  useWindowDimensions,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -12,33 +12,64 @@ import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
+import { useLogin } from '../../../context/AuthProvider';
+import { SignInURL } from '../../../api/client';
+import base64 from 'base-64';
 
 const SignInScreen = () => {
-  const {height} = useWindowDimensions();
+  const {setIsLoggedIn} = useLogin();
   const navigation = useNavigation();
   const [check, setCheck] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
-
+  
   const onSignInPressed = data => {
     console.log(data);
-    navigation.navigate('BottomNav');
+    setLoading(true);
+    setIsLoggedIn(true);
+    // const {setIsLoggedIn} = useLogin();
+    // setLoading(true);
+    // fetch(SignInURL, {
+    //   method: "GET",
+    //   headers: {
+    //     "cache-control": "no-cache",
+    //     Connection: "keep-alive",
+    //     "Accept-Encoding": "gzip, deflate",
+    //     "Cache-Control": "no-cache",
+    //     Accept: "*/*",
+    //     Authorization: `Basic ${base64.encode(
+    //       `${data.username}:${data.password}`
+    //     )}`,
+    //   },
+    // })
+    // .then((response) => {
+    //   setLoading(false);
+    //   return response.json();
+    // })
+    // .then((response) => {
+    //   if (response.token) {
+    //     navigation.navigate("AppStack", {
+    //       username: data.username,
+    //       token: response.token,
+    //     });
+    //   } else alert("Username or Password is Incorrect!");
+    // });
   };
 
   const onForgotPasswordPressed = () => {
     navigation.navigate('ForgotPassword');
   };
 
-  const onSignUpPress = () => {
+  const onSignUpPressed = () => {
     navigation.navigate('SignUp');
   };
 
@@ -47,7 +78,7 @@ const SignInScreen = () => {
       <View style={globalStyles.root}>
         <Image
           source={Logo}
-          style={[globalStyles.logo, {height: height * 0.3}]}
+          style={globalStyles.logo}
           resizeMode="contain"
         />
 
@@ -96,20 +127,24 @@ const SignInScreen = () => {
         </View>
 
         <CustomButton title="Sign in" onPress={handleSubmit(onSignInPressed)} />
-
+        
         <CustomButton
           title={
             <Text>
               Don't have an account?{' '}
-              <Text style={globalStyles.link} onPress={onSignUpPress}>
+              <Text style={globalStyles.link} onPress={onSignUpPressed}>
                 Sign up
               </Text>
             </Text>
           }
           type="THIRD"
         />
-
         <SocialSignInButtons />
+        <ActivityIndicator 
+          animating={loading}
+          style={{padding: 25, color: 'black'}}
+          size="large"
+        />
       </View>
     </ScrollView>
   );

@@ -27,13 +27,13 @@ const ForgotPasswordScreen = () => {
   const onSignInPress = () => {
     navigation.navigate('SignIn');
   };
-
+  
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
         <Image
           source={Pic}
-          style={[globalStyles.logo, {height: height * 0.3}]}
+          style={globalStyles.logo}
           resizeMode="contain"
         />
 
