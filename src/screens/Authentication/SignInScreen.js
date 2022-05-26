@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -12,14 +11,12 @@ import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
-import { TextInput } from 'react-native-paper';
-import { useLogin } from '../../../context/AuthProvider';
-import { SignInURL } from '../../../api/client';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {useLogin} from '../../../context/AuthProvider';
+import {SignInURL} from '../../../api/client';
 import base64 from 'base-64';
 
 const SignInScreen = () => {
@@ -77,11 +74,7 @@ const SignInScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
-        <Image
-          source={Logo}
-          style={globalStyles.logo}
-          resizeMode="contain"
-        />
+        <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
 
         <CustomInput
           name="username"
@@ -90,13 +83,13 @@ const SignInScreen = () => {
           control={control}
           rules={{required: 'Username is required'}}
           type="FIRST"
-          icon='user'
+          icon="user"
         />
 
         <CustomInput
           type="FIRST"
           label="Password"
-          icon='lock'
+          icon="lock"
           name="password"
           placeholder="Password"
           secureTextEntry

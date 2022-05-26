@@ -15,28 +15,16 @@ const SocialSignInButtons = () => {
   return (
     <View>
       <CustomButton
-        title ="Sign in with Facebook"
+        title="Sign in with Facebook"
         type="FOURTH"
         onPress={onSignInFacebook}
-        icon={
-          <FontAwesome 
-            name="facebook" 
-            size={22} 
-            color='#4867aa'
-          />
-        }
+        icon={<FontAwesome name="facebook" size={22} color="#4867aa"/>}
       />
       <CustomButton
         title="Sign in with Google"
         type="FIFTH"
         onPress={onSignInGoogle}
-        icon={
-          <FontAwesome 
-            name="google" 
-            size={22} 
-            color='#de4d41'
-          />
-        }
+        icon={<FontAwesome name="google" size={22} color="#de4d41" />}
       />
     </View>
   );

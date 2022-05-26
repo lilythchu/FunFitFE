@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import React from 'react';
+import {View, Text, ScrollView} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import { globalStyles } from '../../../styles/global';
+import {globalStyles} from '../../../styles/global';
 
 const ConfirmEmailScreen = () => {
   const {control, handleSubmit} = useForm();
@@ -39,7 +38,10 @@ const ConfirmEmailScreen = () => {
           }}
         />
 
-        <CustomButton title="Confirm" onPress={handleSubmit(onConfirmPressed)} />
+        <CustomButton
+          title="Confirm"
+          onPress={handleSubmit(onConfirmPressed)}
+        />
 
         <CustomButton
           title="Resend code"
@@ -57,7 +59,5 @@ const ConfirmEmailScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-});
-
 export default ConfirmEmailScreen;
+

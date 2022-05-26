@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-  useWindowDimensions,
-} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
@@ -14,8 +7,8 @@ import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import Picture from '../../../assets/images/signup.png';
-import { SignUpURL } from '../../../api/client';
-import { EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed } from '../../../utils/methods';
+import {SignUpURL} from '../../../api/client';
+import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
 
 const SignUpScreen = () => {
   const {control, handleSubmit, watch} = useForm();
@@ -27,27 +20,27 @@ const SignUpScreen = () => {
   };
   const onRegisterPressed = data => {
     fetch(SignUpURL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username: data.username,
         password: data.password,
       }),
     })
-    .then((response) => {
-      return response.json();
-    })
-    .then((response) => {
-      if (response.message === "User created!") {
-        alert(response.message);
-        navigation.navigate("SignIn");
-      } else {
-        alert(response.message);
-      }
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.message === 'User created!') {
+          alert(response.message);
+          navigation.navigate('SignIn');
+        } else {
+          alert(response.message);
+        }
+      });
   };
 
   return (
@@ -61,7 +54,7 @@ const SignUpScreen = () => {
         <Text style={globalStyles.title}>Create an account</Text>
 
         <CustomInput
-          icon='user'
+          icon="user"
           name="username"
           control={control}
           placeholder="Username"
@@ -80,7 +73,7 @@ const SignUpScreen = () => {
 
         <CustomInput
           name="email"
-          icon='mail'
+          icon="envelope"
           control={control}
           placeholder="Email"
           rules={{
@@ -91,7 +84,7 @@ const SignUpScreen = () => {
 
         <CustomInput
           name="password"
-          icon='lock'
+          icon="key"
           control={control}
           placeholder="Password"
           secureTextEntry
@@ -106,7 +99,7 @@ const SignUpScreen = () => {
         
         <CustomInput
           name="password-repeat"
-          icon='lock'
+          icon="lock"
           control={control}
           placeholder="Repeat Password"
           secureTextEntry

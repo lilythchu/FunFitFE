@@ -1,5 +1,5 @@
-import { StyleSheet} from 'react-native';
-import { windowHeight } from '../utils/Dimentions';
+import {StyleSheet} from 'react-native';
+import {windowHeight} from '../utils/Dimentions';
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -23,14 +23,14 @@ export const globalStyles = StyleSheet.create({
   root: {
     padding: 20,
     backgroundColor: 'white',
-    flex: 1
+    flex: 1,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#0e86d4',
     margin: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   text: {
     color: 'gray',

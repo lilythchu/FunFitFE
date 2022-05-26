@@ -1,27 +1,17 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import { Button, ThemeProvider } from '@rneui/themed';
+import {Button, ThemeProvider} from '@rneui/themed';
 
-const CustomButton = ({
-  type='FIRST',
-  ...props
-}) => {
+const CustomButton = ({type = 'FIRST', ...props}) => {
   return (
     <ThemeProvider>
       <Button
-        buttonStyle={[
-          styles.btn,
-          styles[`btn_${type}`]
-        ]}
+        buttonStyle={[styles.btn, styles[`btn_${type}`]]}
         containerStyle={styles.container}
-        titleStyle={[
-          styles.title,
-          styles[`title_${type}`]
-        ]}
+        titleStyle={[styles.title, styles[`title_${type}`]]}
         iconContainerStyle={{marginRight: 10}}
         {...props}
-      >
-      </Button>
+      />
     </ThemeProvider>
   );
 };
@@ -43,7 +33,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   btn_THIRD: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   btn_FOURTH: {
     backgroundColor: '#e6eaf4',
@@ -51,8 +41,7 @@ const styles = StyleSheet.create({
   btn_FIFTH: {
     backgroundColor: '#f5e7ea',
   },
-  title: {
-  },
+  title: {},
   title_FIRST: {
     fontWeight: 'bold',
     color: 'white',

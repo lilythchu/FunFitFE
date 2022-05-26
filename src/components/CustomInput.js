@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Controller} from 'react-hook-form';
 import globalColors from '../../styles/colors';
-import { Input, Icon} from "@rneui/themed";
+import {Input, Icon} from '@rneui/themed';
 
 const CustomInput = ({
   icon,
@@ -11,7 +11,7 @@ const CustomInput = ({
   rules = {},
   placeholder,
   secureTextEntry,
-  type='FIRST',
+  type = 'FIRST',
   ...props
 }) => {
   return (
@@ -29,24 +29,16 @@ const CustomInput = ({
               placeholder={placeholder}
               secureTextEntry={secureTextEntry}
               labelStyle={styles.label}
-              containerStyle={[
-                styles.container,
-                styles[`container_${type}`]
-              ]}
+              containerStyle={[styles.container, styles[`container_${type}`]]}
               inputContainerStyle={styles.inputContainer}
               inputStyle={styles.input}
               leftIcon = {
-                <Icon 
-                  type={'font-awesome'}
-                  name={icon}
-                  color='#424040'
-                />
+                <Icon type={'font-awesome'} name={icon} color="#424040" />
               }
               leftIconContainerStyle={styles.iconLeft}
               {...props}
             />
-          </View>
-          
+          </View>   
           {error && (
             <Text style={{color: 'red', alignSelf: 'stretch'}}>
               {error.message || 'Error'}
@@ -59,20 +51,18 @@ const CustomInput = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   container_FIRST: {
     backgroundColor: 'white',
   },
   iconLeft: {
     marginRight: 8,
+    width: 24,
+    height: 24,
   },
-  label: {
-  },
-  input: {
-  },
-  inputContainer: {
-  },
+  label: {},
+  input: {},
+  inputContainer: {},
 });
 
 export default CustomInput;

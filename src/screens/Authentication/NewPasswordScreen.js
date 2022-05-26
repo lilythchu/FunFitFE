@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  useWindowDimensions,
-  Image
-} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -15,7 +8,6 @@ import {globalStyles} from '../../../styles/global';
 import ResetPic from '../../../assets/images/newPass.png';
 
 const NewPasswordScreen = () => {
-  const {height} = useWindowDimensions();
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
@@ -42,7 +34,7 @@ const NewPasswordScreen = () => {
         <CustomInput
           placeholder="Code"
           name="code"
-          icon='lock'
+          icon="key"
           control={control}
           rules={{required: 'Code is required'}}
         />
@@ -50,7 +42,7 @@ const NewPasswordScreen = () => {
         <CustomInput
           placeholder="Enter your new password"
           name="name"
-          icon='lock'
+          icon="lock"
           control={control}
           secureTextEntry
           rules={{

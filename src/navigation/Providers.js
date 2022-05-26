@@ -8,6 +8,6 @@ const Providers = () => {
       <Routes />
     </AuthProvider>
   );
-}
+};
 
 export default Providers;

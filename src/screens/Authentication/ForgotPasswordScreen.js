@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Image,
-  useWindowDimensions,
-} from 'react-native';
+import {View, Text, ScrollView, Image} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
@@ -15,7 +8,6 @@ import {globalStyles} from '../../../styles/global';
 import Pic from '../../../assets/images/forgot.png';
 
 const ForgotPasswordScreen = () => {
-  const {height} = useWindowDimensions();
   const {control, handleSubmit} = useForm();
   const navigation = useNavigation();
 
@@ -31,12 +23,8 @@ const ForgotPasswordScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={globalStyles.root}>
-        <Image
-          source={Pic}
-          style={globalStyles.logo}
-          resizeMode="contain"
-        />
-
+        <Image source={Pic} style={globalStyles.logo} resizeMode="contain" />
+        
         <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
