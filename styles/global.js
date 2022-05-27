@@ -36,4 +36,8 @@ export const globalStyles = StyleSheet.create({
     color: 'gray',
     marginVertical: 10,
   },
+  activityIdicator: {
+    padding: 25,
+    color: 'black',
+  }
 });

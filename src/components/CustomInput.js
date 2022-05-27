@@ -35,7 +35,7 @@ const CustomInput = ({
               leftIcon = {
                 <Icon type={'font-awesome'} name={icon} color="#424040" />
               }
-              leftIconContainerStyle={styles.iconLeft}
+              leftIconContainerStyle={icon ? styles.iconLeft : {}}
               {...props}
             />
           </View>   
