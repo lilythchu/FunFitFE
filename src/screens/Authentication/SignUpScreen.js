@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  ActivityIndicator,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
@@ -7,44 +14,40 @@ import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import Picture from '../../../assets/images/signup.png';
-import {SignUpURL} from '../../../api/client';
 import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
+import {signupURL} from '../../../api/client';
+import axios from 'axios';
 
 const SignUpScreen = () => {
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
   const navigation = useNavigation();
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [dismiss, setDismiss] = useState(true);
 
   const onSignInPress = () => {
     navigation.navigate('SignIn');
   };
-  const onRegisterPressed = data => {
-    fetch(SignUpURL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: data.username,
-        password: data.password,
-      }),
-    })
+  const onRegisterPressed = credentials => {
+    setLoading(true);
+    axios
+      .post(signupURL, credentials)
       .then((response) => {
-        return response.json();
+        setLoading(false);
+        navigation.navigate('SignIn');
       })
-      .then((response) => {
-        if (response.message === 'User created!') {
-          alert(response.message);
-          navigation.navigate('SignIn');
-        } else {
-          alert(response.message);
-        }
-      });
+      .catch(error => {
+        console.log(error);
+        setDismiss(false);
+        setLoading(false);
+        setMessage("Oops! Something went wrong, try again");
+      })
   };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+      <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
       <View style={globalStyles.root}>
         <Image 
           source={Picture}
@@ -55,27 +58,27 @@ const SignUpScreen = () => {
 
         <CustomInput
           icon="user"
-          name="username"
+          name="name"
           control={control}
-          placeholder="Username"
+          placeholder="Name"
           rules={{
-            required: 'Username is required',
+            required: 'Name is required',
             minLength: {
               value: 3,
-              message: 'Username should be at least 3 characters long',
+              message: 'Name should be at least 3 characters long',
             },
             maxLength: {
               value: 24,
-              message: 'Username should be max 24 characters long',
+              message: 'Name should be max 24 characters long',
             },
           }}
         />
 
-        <CustomInput
+        <CustomInput 
           name="email"
           icon="envelope"
-          control={control}
           placeholder="Email"
+          control={control}
           rules={{
             required: 'Email is required',
             pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
@@ -84,7 +87,7 @@ const SignUpScreen = () => {
 
         <CustomInput
           name="password"
-          icon="key"
+          icon="lock"
           control={control}
           placeholder="Password"
           secureTextEntry
@@ -98,15 +101,41 @@ const SignUpScreen = () => {
         />
         
         <CustomInput
-          name="password-repeat"
-          icon="lock"
+          name="confirm-password"
+          icon="key"
           control={control}
-          placeholder="Repeat Password"
+          placeholder="Confirm Password"
           secureTextEntry
           rules={{
             validate: value => value === pwd || 'Password do not match',
           }}
         />
+
+        <CustomInput 
+          name="sex"
+          icon="transgender"
+          control={control}
+          placeholder="Gender"
+          rules={{
+            required: 'Gender is required',
+          }}
+        />
+
+        <CustomInput 
+          name="country"
+          icon="globe"
+          control={control}
+          placeholder="Country"
+          rules={{
+            required: 'Contry is required',
+          }}
+        />
+
+        <View style={{alignItems: 'center'}}>
+          <Text style={{color: 'red', fontSize: 16}}>
+            {(message && !dismiss) ? message : ''}
+          </Text>
+        </View>
 
         <CustomButton
           title="Register"
@@ -137,7 +166,13 @@ const SignUpScreen = () => {
           }
           type="THIRD"
         />
+        <ActivityIndicator 
+          animating={loading}
+          style={{padding: 25, color: 'black'}}
+          size="large"
+        />
       </View>
+    </TouchableWithoutFeedback>
     </ScrollView>
   );
 };

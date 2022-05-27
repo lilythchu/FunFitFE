@@ -5,6 +5,7 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
+import { EMAIL_REGEX } from '../../../utils/methods';
 import Pic from '../../../assets/images/forgot.png';
 
 const ForgotPasswordScreen = () => {
@@ -28,11 +29,13 @@ const ForgotPasswordScreen = () => {
         <Text style={globalStyles.title}>Reset your password</Text>
 
         <CustomInput
-          name="username"
+          name="email"
+          icon="envelope"
           control={control}
-          placeholder="Username"
+          placeholder="Email"
           rules={{
-            required: 'Username is required',
+            required: 'Email is required',
+            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
           }}
         />
 

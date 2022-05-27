@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
@@ -16,51 +17,32 @@ import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
 import {useLogin} from '../../../context/AuthProvider';
-import {SignInURL} from '../../../api/client';
-import base64 from 'base-64';
+import {loginURL} from '../../../api/client';
+import {EMAIL_REGEX} from '../../../utils/methods';
+import axios from 'axios';
 
 const SignInScreen = () => {
-  const {setIsLoggedIn} = useLogin();
+  const {setIsLoggedIn, setProfile} = useLogin();
   const navigation = useNavigation();
   const [check, setCheck] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const {control, handleSubmit, formState: {errors}} = useForm();
+  const [message, setMessage] = useState('');
+  const [dismiss, setDismiss] = useState(true);
   
-  const onSignInPressed = data => {
-    console.log(data);
+  const onSignInPressed = (credentials) => {
     setLoading(true);
-    setIsLoggedIn(true);
-    // const {setIsLoggedIn} = useLogin();
-    // setLoading(true);
-    // fetch(SignInURL, {
-    //   method: "GET",
-    //   headers: {
-    //     "cache-control": "no-cache",
-    //     Connection: "keep-alive",
-    //     "Accept-Encoding": "gzip, deflate",
-    //     "Cache-Control": "no-cache",
-    //     Accept: "*/*",
-    //     Authorization: `Basic ${base64.encode(
-    //       `${data.username}:${data.password}`
-    //     )}`,
-    //   },
-    // })
-    // .then((response) => {
-    //   setLoading(false);
-    //   return response.json();
-    // })
-    // .then((response) => {
-    //   if (response.token) {
-    //     navigation.navigate("AppStack", {
-    //       username: data.username,
-    //       token: response.token,
-    //     });
-    //   } else alert("Username or Password is Incorrect!");
-    // });
+    axios
+      .post(loginURL, credentials)
+      .then((response) => {
+        setLoading(false);
+        setIsLoggedIn(true);
+      })
+      .catch(error => {
+        setLoading(false);
+        setDismiss(false);
+        setMessage(error.response.data);
+      })
   };
 
   const onForgotPasswordPressed = () => {
@@ -73,21 +55,23 @@ const SignInScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
+    <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
       <View style={globalStyles.root}>
         <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
 
-        <CustomInput
-          name="username"
-          label="Username"
-          placeholder="Username"
+        <CustomInput 
+          name="email"
+          icon="envelope"
+          label="Email"
+          placeholder="Email"
           control={control}
-          rules={{required: 'Username is required'}}
-          type="FIRST"
-          icon="user"
+          rules={{
+            required: "Email is required",
+            pattern: {value: EMAIL_REGEX, message: "Email is invalid"},
+          }}
         />
 
         <CustomInput
-          type="FIRST"
           label="Password"
           icon="lock"
           name="password"
@@ -117,6 +101,9 @@ const SignInScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{color: 'red', fontSize: 16}}>{(message && !dismiss) ? message : ''}</Text>
+        </View>
 
         <CustomButton title="Sign in" onPress={handleSubmit(onSignInPressed)} />
         
@@ -138,6 +125,7 @@ const SignInScreen = () => {
           size="large"
         />
       </View>
+      </TouchableWithoutFeedback>
     </ScrollView>
   );
 };
