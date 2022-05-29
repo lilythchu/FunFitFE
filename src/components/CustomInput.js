@@ -9,8 +9,6 @@ const CustomInput = ({
   control,
   name,
   rules = {},
-  placeholder,
-  secureTextEntry,
   type = 'FIRST',
   ...props
 }) => {
@@ -26,8 +24,6 @@ const CustomInput = ({
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              placeholder={placeholder}
-              secureTextEntry={secureTextEntry}
               labelStyle={styles.label}
               containerStyle={[styles.container, styles[`container_${type}`]]}
               inputContainerStyle={styles.inputContainer}

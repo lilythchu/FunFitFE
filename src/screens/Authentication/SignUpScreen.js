@@ -16,14 +16,16 @@ import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import Picture from '../../../assets/images/signup.png';
 import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
-import {signupURL} from '../../../api/client';
+import {signupURL, userURL} from '../../../api/client';
+import {useLogin} from '../../../context/AuthProvider';
 import { Icon } from '@rneui/themed';
 import axios from 'axios';
 
 const SignUpScreen = () => {
+  const navigation = useNavigation();
+  const {setIsLoggedIn, setProfile} = useLogin();
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
-  const navigation = useNavigation();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [dismiss, setDismiss] = useState(true);
@@ -44,7 +46,14 @@ const SignUpScreen = () => {
       .post(signupURL, credentials)
       .then((response) => {
         setLoading(false);
-        navigation.navigate('SignIn');
+        setIsLoggedIn(true);
+        const token = response.data.token;
+        axios
+          .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
+          .then(response => {
+            setProfile(response.data);
+          })
+          .catch(error => console.log(error));
       })
       .catch(error => {
         setDismiss(false);
