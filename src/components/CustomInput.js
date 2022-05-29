@@ -36,14 +36,16 @@ const CustomInput = ({
                 <Icon type={'font-awesome'} name={icon} color="#424040" />
               }
               leftIconContainerStyle={icon ? styles.iconLeft : {}}
+              errorMessage={error ? error.message : ''}
+              errorStyle={{fontSize: 15}}
               {...props}
             />
           </View>   
-          {error && (
+          {/* {error && (
             <Text style={{color: 'red', alignSelf: 'stretch'}}>
               {error.message || 'Error'}
             </Text>
-          )}
+          )} */}
         </>
       )}
     />

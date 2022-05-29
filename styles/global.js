@@ -20,10 +20,11 @@ export const globalStyles = StyleSheet.create({
     alignSelf: 'center',
     height: windowHeight * 0.3,
   },
-  root: {
-    padding: 20,
+  scrollView: {
     backgroundColor: 'white',
-    flex: 1,
+    padding: 20,
+  },
+  root: {
   },
   title: {
     fontSize: 24,
@@ -39,5 +40,9 @@ export const globalStyles = StyleSheet.create({
   activityIdicator: {
     padding: 25,
     color: 'black',
+  },
+  textLinkContainer: {
+    padding: 10,
+    alignItems: 'center',
   }
 });

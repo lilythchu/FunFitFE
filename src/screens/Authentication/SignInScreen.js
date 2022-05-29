@@ -17,7 +17,7 @@ import {useForm} from 'react-hook-form';
 import {globalStyles} from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
 import {useLogin} from '../../../context/AuthProvider';
-import {loginURL} from '../../../api/client';
+import {loginURL, userURL} from '../../../api/client';
 import {EMAIL_REGEX} from '../../../utils/methods';
 import {Icon} from '@rneui/themed';
 import axios from 'axios';
@@ -44,6 +44,13 @@ const SignInScreen = () => {
       .then((response) => {
         setLoading(false);
         setIsLoggedIn(true);
+        const token = response.data.token;
+        axios
+          .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
+          .then(response => {
+            setProfile(response.data);
+          })
+          .catch(error => console.log(error));
       })
       .catch(error => {
         setLoading(false);
@@ -66,7 +73,7 @@ const SignInScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
@@ -127,19 +134,17 @@ const SignInScreen = () => {
             ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
             : <CustomButton title="Sign in" onPress={handleSubmit(onSignInPressed)} />
           }
-          
-          <CustomButton
-            title={
-              <Text>
-                Don't have an account?{' '}
-                <Text style={globalStyles.link} onPress={onSignUpPressed}>
-                  Sign up
-                </Text>
+
+          <View style={globalStyles.textLinkContainer}>
+            <Text>
+              Don't have an account?{' '}
+              <Text style={globalStyles.link} onPress={onSignUpPressed}>
+                Sign up
               </Text>
-            }
-            type="THIRD"
-          />
-          <SocialSignInButtons />
+            </Text>
+          </View>
+
+          {/* <SocialSignInButtons /> */}
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

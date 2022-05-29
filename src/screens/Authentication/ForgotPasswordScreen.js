@@ -22,7 +22,7 @@ const ForgotPasswordScreen = () => {
   };
   
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
       <View style={globalStyles.root}>
         <Image source={Pic} style={globalStyles.logo} resizeMode="contain" />
         
@@ -41,17 +41,15 @@ const ForgotPasswordScreen = () => {
 
         <CustomButton title="Send" onPress={handleSubmit(onSendPressed)} />
 
-        <CustomButton
-          title={
-            <Text>
-              Back to{' '} 
-              <Text style={globalStyles.link} onPress={onSignInPress}>
-                Sign in
-              </Text>
+        <View style={globalStyles.textLinkContainer}>
+          <Text>
+            Back to{' '} 
+            <Text style={globalStyles.link} onPress={onSignInPress}>
+              Sign in
             </Text>
-          }
-          type="THIRD"
-        />
+          </Text>
+        </View>
+        
       </View>
     </ScrollView>
   );

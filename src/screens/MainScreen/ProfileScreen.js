@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useLogin } from '../../../context/AuthProvider.js'
 
 const ProfileScreen = () => {
-  const {setIsLoggedIn} = useLogin();
+  const {setIsLoggedIn, profile} = useLogin();
   const navigation = useNavigation();
   const handleLogOut = () => {
     setIsLoggedIn(false);
@@ -13,7 +13,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.paragraph}>ProfileScreen</Text>
+      <Text style={globalStyles.paragraph}>Hi {profile.name}</Text>
       <Button title='Log out' onPress={handleLogOut}/>
     </View>
   )

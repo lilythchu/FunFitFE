@@ -25,7 +25,7 @@ const ConfirmEmailScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
       <View style={globalStyles.root}>
         <Text style={globalStyles.title}>Confirm your email</Text>
 

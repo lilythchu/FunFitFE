@@ -54,7 +54,7 @@ const SignUpScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image 
@@ -118,7 +118,7 @@ const SignUpScreen = () => {
             icon="key"
             control={control}
             placeholder="Confirm Password"
-            secureTextEntry
+            secureTextEntry={!viewPassword}
             rules={{
               validate: value => value === pwd || 'Password do not match',
             }}
@@ -127,20 +127,12 @@ const SignUpScreen = () => {
             name="sex"
             icon="transgender"
             control={control}
-            placeholder="Gender"
+            placeholder="Male/Female/Others"
             rules={{
               required: 'Gender is required',
+              validate: value => value === "Male" || value === "Female" || value === "Others" || 'Gender does not match', 
             }}
           />
-            {/* <TouchableOpacity>
-              <Icon type={'font-awesome'} name="venus" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Icon type={'font-awesome'} name="mars" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Icon type={'font-awesome'} name="transgender-alt" />
-            </TouchableOpacity> */}
 
           <CustomInput 
             name="country"
@@ -174,19 +166,17 @@ const SignUpScreen = () => {
             </Text>
           </Text>
 
-          <SocialSignInButtons />
+          {/* <SocialSignInButtons /> */}
 
-          <CustomButton
-            title={
-              <Text>
-                Have an account?{' '}
-                <Text style={globalStyles.link} onPress={onSignInPress}>
-                  Sign in
-                </Text>
+          <View style={globalStyles.textLinkContainer}>
+            <Text>
+              Have an account?{' '}
+              <Text style={globalStyles.link} onPress={onSignInPress}>
+                Sign in
               </Text>
-            }
-            type="THIRD"
-          />
+            </Text>
+          </View>
+
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

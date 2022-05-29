@@ -22,7 +22,7 @@ const NewPasswordScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
       <View style={globalStyles.root}>
         <Image
           source={ResetPic}
