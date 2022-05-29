@@ -19,6 +19,7 @@ import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils
 import {signupURL, userURL} from '../../../api/client';
 import {useLogin} from '../../../context/AuthProvider';
 import { Icon } from '@rneui/themed';
+import CountryPicker from 'react-native-country-picker-modal';
 import axios from 'axios';
 
 const SignUpScreen = () => {
@@ -31,6 +32,13 @@ const SignUpScreen = () => {
   const [dismiss, setDismiss] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);
   const [text, setText] = useState();
+  const [countryCode, setCountryCode] = useState('VN');
+  const [country, setCountry] = useState();
+
+  const onSelect = (country) => {
+    setCountry(country.name);
+    setCountryCode(country.cca2)
+  };
 
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
@@ -41,9 +49,16 @@ const SignUpScreen = () => {
   };
 
   const onRegisterPressed = credentials => {
+    const userInfo = {
+      "email": credentials.email,
+      "name": credentials.name,
+      "password": credentials.password,
+      "sex": credentials.sex,
+      "country": country
+    }
     setLoading(true);
     axios
-      .post(signupURL, credentials)
+      .post(signupURL, userInfo)
       .then((response) => {
         setLoading(false);
         setIsLoggedIn(true);
@@ -143,7 +158,7 @@ const SignUpScreen = () => {
             }}
           />
 
-          <CustomInput 
+          {/* <CustomInput 
             name="country"
             icon="globe"
             control={control}
@@ -151,6 +166,25 @@ const SignUpScreen = () => {
             rules={{
               required: 'Contry is required',
             }}
+          /> */}
+          <CustomInput 
+            name="country"
+            icon="globe"
+            rightIcon={
+              <CountryPicker 
+                withFilter
+                countryCode={countryCode}
+                withAlphaFilter={false}
+                withFlag
+                withEmoji={false}
+                withCurrencyButton={false}
+                onSelect={onSelect}
+              />
+            }
+            control={control}
+            placeholder="Select your country"
+            value={country}
+            disabled={true}
           />
 
           <View style={{alignItems: 'center'}}>
