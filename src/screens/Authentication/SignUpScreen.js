@@ -73,7 +73,12 @@ const SignUpScreen = () => {
       .catch(error => {
         setDismiss(false);
         setLoading(false);
-        setMessage("Oops! Something went wrong, try again");
+        const mes = error.response.data;
+        if (mes === 'User already existed') {
+          setMessage('Email already existed');
+        } else {
+          setMessage('Oops! Something went wrong, try again');
+        }
       })
   };
 
@@ -195,7 +200,7 @@ const SignUpScreen = () => {
 
           { loading
             ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-            : <CustomButton title="Sign in" onPress={handleSubmit(onRegisterPressed)} />
+            : <CustomButton title="Sign up" onPress={handleSubmit(onRegisterPressed)} />
           }
           
           <Text style={globalStyles.text}>

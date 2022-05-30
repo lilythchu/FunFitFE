@@ -13,11 +13,11 @@ const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+      <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
-      <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
       <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen} />
     </Stack.Navigator>
   );
 };

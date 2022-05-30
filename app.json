@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "LoginFF",
-    "slug": "LoginFF",
+    "name": "FUNFIT",
+    "slug": "funfit_app",
+    "owner": "funfit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +29,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
