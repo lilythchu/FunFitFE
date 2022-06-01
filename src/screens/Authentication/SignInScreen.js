@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  StatusBar,
   ActivityIndicator,
   View,
   Text,
@@ -74,6 +75,13 @@ const SignInScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+      <StatusBar 
+        animated={true}
+        backgroundColor="black"
+        barStyle='default'
+        showHideTransition='slide'
+        hidden={false}
+      />
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
@@ -112,13 +120,13 @@ const SignInScreen = () => {
           />
 
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+            {/* <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
               <Checkbox 
                 status={check ? 'checked' : 'unchecked'}
                 onPress={() => setCheck(!check)}
               />
               <Text>Remember me</Text>
-            </View>
+            </View> */}
             <View style={{flex: 1, alignItems: 'flex-end'}}>
               <TouchableOpacity onPress={onForgotPasswordPressed}>
                 <Text style={globalStyles.link}>Forgot Password?</Text>
