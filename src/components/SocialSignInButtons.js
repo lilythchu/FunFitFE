@@ -16,13 +16,13 @@ const SocialSignInButtons = () => {
     <View>
       <CustomButton
         title="Sign in with Facebook"
-        type="FOURTH"
+        type="FACE"
         onPress={onSignInFacebook}
         icon={<FontAwesome name="facebook" size={22} color="#4867aa"/>}
       />
       <CustomButton
         title="Sign in with Google"
-        type="FIFTH"
+        type="GG"
         onPress={onSignInGoogle}
         icon={<FontAwesome name="google" size={22} color="#de4d41" />}
       />

@@ -8,7 +8,7 @@ const Routes = () => {
   const {isLoggedIn} = useLogin();
   return (
     <NavigationContainer>
-      {isLoggedIn ? <AppStack /> : <AuthStack />}
+      {!isLoggedIn ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

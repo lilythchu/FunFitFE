@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import {BottomNavigation} from 'react-native-paper';
 import ProfileScreen from '../screens/MainScreen/ProfileScreen.js';
 import ChatScreen from '../screens/MainScreen/ChatScreen.js';
 import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
 import NotiScreen from '../screens/MainScreen/NotiScreen.js';
-import RoutineScreen from '../screens/MainScreen/RoutineScreen.js';
+import globalColors from '../../styles/colors.js';
+import RoutineStack from './RoutineStack.js';
 
 const AppStack = () => {
   const [index, setIndex] = React.useState(0);
@@ -17,7 +19,7 @@ const AppStack = () => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    routine: RoutineScreen,
+    routine: RoutineStack,
     chat: ChatScreen,
     calendar: CalendarScreen,
     notifications: NotiScreen,
@@ -26,8 +28,8 @@ const AppStack = () => {
 
   return (
     <BottomNavigation
-      activeColor="black"
-      inactiveColor="pink"
+      activeColor={globalColors.navyBlue}
+      inactiveColor={globalColors.blueGrotto}
       barStyle={{backgroundColor: 'white'}}
       navigationState={{index, routes}}
       onIndexChange={setIndex}

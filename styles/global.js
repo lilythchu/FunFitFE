@@ -1,11 +1,17 @@
 import {StyleSheet} from 'react-native';
-import {windowHeight} from '../utils/Dimentions';
+import {windowHeight, windowWidth} from '../utils/Dimensions';
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  overlay: {
+    width: windowWidth - 50,
+    height: windowHeight - 300,
+    borderRadius: 20,
+    padding: 20,
   },
   paragraph: {
     fontSize: 30,
@@ -19,6 +25,10 @@ export const globalStyles = StyleSheet.create({
     width: '70%',
     alignSelf: 'center',
     height: windowHeight * 0.3,
+  },
+  imageBackground: {
+    height: windowHeight * 0.6,
+    justifyContent: 'space-between',
   },
   scrollView: {
     backgroundColor: 'white',
@@ -44,5 +54,42 @@ export const globalStyles = StyleSheet.create({
   textLinkContainer: {
     padding: 10,
     alignItems: 'center',
-  }
+  },
+  cardInfoContainer: {
+    borderRadius: 10,
+    marginTop: 10,
+    padding: 5,
+  },
+  recItem: {
+    height: 250,
+    justifyContent: 'flex-end',
+    width: windowWidth/2 - 40,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    marginRight: 20,
+  },
+  cardContainer: {
+    width: windowWidth/2 - 25,
+    marginVertical: 5,
+    borderRadius: 20,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: 'gray',
+  },
+  myRoutineItemContainer: {
+    marginVertical: 15,
+    widt: windowWidth/2 - 20,
+  },
+  myRoutineItemWrapper: {
+    borderRadius: 15,
+    paddingRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  myRoutineItem: {
+    width: windowWidth/2 - 50,
+    height: windowWidth/2 - 40,
+    justifyContent: 'flex-end',
+  },
 });

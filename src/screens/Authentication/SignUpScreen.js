@@ -162,16 +162,6 @@ const SignUpScreen = () => {
               validate: value => value === "Male" || value === "Female" || value === "Others" || 'Gender does not match', 
             }}
           />
-
-          {/* <CustomInput 
-            name="country"
-            icon="globe"
-            control={control}
-            placeholder="Country"
-            rules={{
-              required: 'Contry is required',
-            }}
-          /> */}
           <CustomInput 
             name="country"
             icon="globe"
