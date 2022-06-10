@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 10,
   },
+  btn_THIRD: {
+    marginHorizontal: 30,
+    backgroundColor: globalColors.babyBlue,
+    alignItems: 'center',
+    borderRadius: 20,
+  },
   btn_FACE: {
     backgroundColor: '#e6eaf4',
   },
@@ -52,6 +58,10 @@ const styles = StyleSheet.create({
   },
   title_SECOND: {
     fontSize: 18,
+    color: 'white',
+  },
+  title_THIRD: {
+    fontSize: 16,
     color: 'white',
   },
   title_FACE: {
