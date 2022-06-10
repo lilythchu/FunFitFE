@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimensions';
 
 export const globalStyles = StyleSheet.create({
@@ -91,5 +91,9 @@ export const globalStyles = StyleSheet.create({
     width: windowWidth/2 - 50,
     height: windowWidth/2 - 40,
     justifyContent: 'flex-end',
+  },
+  backIcon: {
+    marginLeft: 20,
+    marginTop: 60,
   },
 });

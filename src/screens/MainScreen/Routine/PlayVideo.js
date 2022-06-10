@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { useRoute } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
 
 const PlayVideo = () => {
   const video = React.useRef(null);
@@ -11,16 +12,20 @@ const PlayVideo = () => {
 
   return (
     <View style={styles.container}>
-      <Video 
+      <WebView
+        source={{ uri: 'https://www.youtube.com/embed/Eml2xnoLpYE' }}
+        style={{ marginTop: 20 }}
+      />
+      {/* <Video 
         ref={video}
         style={styles.video}
         source={{
-          uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+          uri: 'https://www.youtube.com/embed/bleOTMDa3_4',
         }}
         useNativeControls
         resizeMode='contain'
         onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
+      /> */}
     </View>
   );
 };

@@ -61,14 +61,15 @@ const SignUpScreen = () => {
       .post(signupURL, userInfo)
       .then((response) => {
         setLoading(false);
-        setIsLoggedIn(true);
-        const token = response.data.token;
-        axios
-          .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
-          .then(response => {
-            setProfile(response.data);
-          })
-          .catch(error => console.log(error));
+        navigation.navigate('SignIn');
+        // setIsLoggedIn(true);
+        // const token = response.data.token;
+        // axios
+        //   .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
+        //   .then(response => {
+        //     setProfile(response.data);
+        //   })
+        //   .catch(error => console.log(error));
       })
       .catch(error => {
         setDismiss(false);

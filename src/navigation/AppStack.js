@@ -19,11 +19,11 @@ const AppStack = () => {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
+    profile: ProfileScreen,
     routine: RoutineStack,
     chat: ChatScreen,
     calendar: CalendarScreen,
     notifications: NotiScreen,
-    profile: ProfileScreen,
   });
 
   return (

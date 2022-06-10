@@ -26,7 +26,7 @@ import axios from 'axios';
 const SignInScreen = () => {
   const navigation = useNavigation();
   const {control, handleSubmit, formState: {errors}} = useForm();
-  const {setIsLoggedIn, setProfile} = useLogin();
+  const {setIsLoggedIn, setProfile, setToken, profile} = useLogin();
 
   const [check, setCheck] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,13 +43,18 @@ const SignInScreen = () => {
     axios
       .post(loginURL, credentials)
       .then((response) => {
-        setLoading(false);
-        setIsLoggedIn(true);
         const token = response.data.token;
+        setToken(token);
         axios
           .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
           .then(response => {
-            setProfile(response.data);
+            if (response.data.age === undefined) {
+              navigation.navigate("ExtraInfo");
+            } else {
+              setLoading(false);
+              setIsLoggedIn(true);
+              setProfile(response.data);
+            }
           })
           .catch(error => console.log(error));
       })

@@ -11,55 +11,47 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { useRoute,  useNavigation } from '@react-navigation/native';
 import globalColors from '../../../../styles/colors';
 import CustomButton from '../../../components/CustomButton';
-import RoutineModal from '../../../components/RoutineModal';
 import { globalStyles } from '../../../../styles/global';
-import { Overlay } from '@rneui/themed';
-import learnMoreData from '../../../../assets/data/learnMoreData';
+import images from '../../../../assets/images/australia.png';
+import { useLogin } from '../../../../context/AuthProvider';
+import { addRoutineURL } from '../../../../api/client';
+import axios from 'axios';
 
 const DetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const {token} = useLogin();
   const {item} = route.params;
-  const [visible, setVisible] = useState(false);
-  const toggleOverlay = () => {
-    setVisible(!visible);
+  const onAddRoutine = () => {
+    axios
+      .post(addRoutineURL, item, {headers : {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        navigation.navigate('Routine');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   return (
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
       {/* Image backgound */}
-      <ImageBackground source={item.image} style={globalStyles.imageBackground}>
+      <ImageBackground source={images} style={globalStyles.imageBackground}>
         <TouchableOpacity
-          style={styles.backIcon}
+          style={globalStyles.backIcon}
           onPress={() => navigation.goBack()}>
           <Entypo name='chevron-left' size={32} color='white' />
         </TouchableOpacity>
 
         <View style={styles.titlesWrapper}>
-          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemTitle}>{item.name}</Text>
           <View style={styles.locationWrapper}>
             <Entypo name="battery" size={24} color='white' />
-            <Text style={styles.locationText}>{item.location}</Text>
+            <Text style={styles.locationText}></Text>
           </View>
         </View>
       </ImageBackground>
-      
-      {/* Overlay */}
-      <Overlay 
-        isVisible={visible}
-        onBackdropPress={toggleOverlay}
-        overlayStyle={globalStyles.overlay}
-      >
-        <RoutineModal />
-        <CustomButton
-          title="Add"
-          onPress={() => {
-            learnMoreData.push(item);
-            navigation.navigate('Routine');
-          }}
-        />
-      </Overlay>
-
+     
       {/* Description */}
       <View style={styles.descriptionWrapper}>
         <View style={styles.heartWrapper}>
@@ -68,7 +60,7 @@ const DetailsScreen = () => {
 
         <View style={styles.descriptionTextWrapper}>
           <Text style={styles.descriptionTitle}>Description</Text>
-          <Text style={styles.descriptionText}>{item.description}</Text>
+          <Text style={styles.descriptionText}>{item.name}</Text>
         </View>
 
         {/* Basic routine's information */}
@@ -100,7 +92,7 @@ const DetailsScreen = () => {
         <CustomButton 
           type='SECOND'
           title="Add Routine"
-          onPress={toggleOverlay}
+          onPress={onAddRoutine}
         />
       </View>
 
@@ -115,10 +107,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingBottom: 30,
-  },
-  backIcon: {
-    marginLeft: 20,
-    marginTop: 60,
   },
   titlesWrapper: {
     marginHorizontal: 20,

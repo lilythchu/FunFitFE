@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,8 +10,6 @@ import {
   FlatList,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import discoverData from '../../../../assets/data/discoverData';
-import learnMoreData from '../../../../assets/data/learnMoreData';
 import { useNavigation } from '@react-navigation/native';
 import CustomSwiper from '../../../components/CustomSwiper';
 import profile from '../../../../assets/pf.jpg';
@@ -20,8 +18,35 @@ import globalColors from '../../../../styles/colors';
 import { ProgressBar } from 'react-native-paper';
 import RecRoutineItem from '../../../components/RecRoutineItem';
 import { ListItem } from '@rneui/themed';
+import { useLogin } from '../../../../context/AuthProvider';
+import {getRecURL, getMyURL} from '../../../../api/client';
+import axios from "axios";
+import CustomButton from '../../../components/CustomButton';
+import learnMoreData from '../../../../assets/data/learnMoreData';
 
 const RoutineScreen = () => {
+  const {token} = useLogin();
+  const [recData, setRecData] = useState([]);
+  const [myData, setMyData] = useState([]);
+
+  // axios
+  //   .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
+  //   .then(response => {
+  //     setMyData(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
+
+  axios
+    .get(getRecURL, {headers : {"Authorization": `Bearer ${token}`}})
+    .then(response => {
+      setRecData(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
   const navigation = useNavigation();
   const renderMyRoutines= ({item}) => {
     return (
@@ -92,32 +117,24 @@ const RoutineScreen = () => {
 
         {/* Recommended */}
         <View style={styles.discoverWrapper}>
-          {/* <TouchableOpacity style={styles.titleWrapper} onPress={() => navigation.navigate('Recommended')}>
-            <Text style={styles.titleText}>Discover</Text>
-            <Feather
-              name='chevron-right'
-              size={24}
-              color='black'
-            />
-          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => navigation.navigate('Recommended')}>
-          <ListItem>
-            <ListItem.Content>
-              <ListItem.Title style={styles.titleText}>Discover</ListItem.Title>
-            </ListItem.Content>
-            <Feather
-              name='chevron-right'
-              size={24}
-              color='black'
-            />
-          </ListItem>
+            <ListItem>
+              <ListItem.Content>
+                <ListItem.Title style={styles.titleText}>Discover</ListItem.Title>
+              </ListItem.Content>
+              <Feather
+                name='chevron-right'
+                size={24}
+                color='black'
+              />
+            </ListItem>
           </TouchableOpacity>
 
           <View style={styles.discoverItemsWrapper}>
             <FlatList
-              data={discoverData}
+              data={recData}
               renderItem={renderRecRoutines}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
@@ -126,23 +143,24 @@ const RoutineScreen = () => {
 
         {/* My Routines */}
         <View style={styles.myRoutineWrapper}>
-          {/* <Text style={styles.myRoutineTitle}>My Routines</Text> */}
-          <View style={styles.titleWrapper} onPress={() => navigation.navigate('Recommended')}>
-            <Text style={styles.myRoutineTitle}>My Routines</Text>
-            <TouchableOpacity>
+          <ListItem>
+            <ListItem.Content>
+              <ListItem.Title style={styles.myRoutineTitle}>My Routines</ListItem.Title>
+            </ListItem.Content>
+            <TouchableOpacity onPress={() => navigation.navigate('AddRoutine')}>
               <Feather
                 name='plus'
                 size={24}
                 color='black'
               />
             </TouchableOpacity>
-          </View>
+          </ListItem>
 
           <View style={styles.myRoutineItemsWrapper}>
             <FlatList
               data={learnMoreData}
               renderItem={renderMyRoutines}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item._id}
               numColumns={2}
               columnWrapperStyle={{justifyContent: 'space-between'}}
               showsHorizontalScrollIndicator={false}
@@ -174,14 +192,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleWrapper: {
-    borderColor: 'd1d3d2',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 5,
-    borderRadius: 15,
-  },
   titleText: {
     fontSize: 32,
     fontWeight: '500',
@@ -196,13 +206,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   myRoutineTitle: {
-    borderRadius: 15,
-    padding: 5,
     fontSize: 24,
     fontWeight: '500',
   },
   myRoutineItemsWrapper: {
-    paddingVertical: 10,
+    //paddingVertical: 10,
   },
   learnMoreItemImage: {
     borderRadius: 20,
