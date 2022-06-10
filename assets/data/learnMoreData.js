@@ -8,14 +8,14 @@ const learnMoreData = [
   },
   {
     id: 'learnMore-2',
-    title: 'Surfing in Hawaii',
+    title: 'Weight Loss',
     image: require('../images/australia.png'),
     progress: 0.2,
     uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
   },
   {
     id: 'learnMore-3',
-    title: 'Australia Outback',
+    title: 'Build muscle',
     image: require('../images/australia.png'),
     progress: 0.3,
     uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
