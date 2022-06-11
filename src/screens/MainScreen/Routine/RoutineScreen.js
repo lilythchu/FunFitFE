@@ -29,14 +29,14 @@ const RoutineScreen = () => {
   const [recData, setRecData] = useState([]);
   const [myData, setMyData] = useState([]);
 
-  // axios
-  //   .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
-  //   .then(response => {
-  //     setMyData(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+  axios
+    .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
+    .then(response => {
+      setMyData(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
   axios
     .get(getRecURL, {headers : {"Authorization": `Bearer ${token}`}})
@@ -158,7 +158,7 @@ const RoutineScreen = () => {
 
           <View style={styles.myRoutineItemsWrapper}>
             <FlatList
-              data={learnMoreData}
+              data={myData}
               renderItem={renderMyRoutines}
               keyExtractor={(item) => item._id}
               numColumns={2}
