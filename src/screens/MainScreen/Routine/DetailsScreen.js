@@ -36,7 +36,10 @@ const DetailsScreen = () => {
   return (
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
       {/* Image backgound */}
-      <ImageBackground source={images} style={globalStyles.imageBackground}>
+      <ImageBackground
+        //source={images}
+        source={item.thumbnail}
+        style={globalStyles.imageBackground}>
         <TouchableOpacity
           style={globalStyles.backIcon}
           onPress={() => navigation.goBack()}>
@@ -47,7 +50,7 @@ const DetailsScreen = () => {
           <Text style={styles.itemTitle}>{item.name}</Text>
           <View style={styles.locationWrapper}>
             <Entypo name="battery" size={24} color='white' />
-            <Text style={styles.locationText}></Text>
+            <Text style={styles.locationText}>{item.genre}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -60,7 +63,7 @@ const DetailsScreen = () => {
 
         <View style={styles.descriptionTextWrapper}>
           <Text style={styles.descriptionTitle}>Description</Text>
-          <Text style={styles.descriptionText}>{item.name}</Text>
+          <Text style={styles.descriptionText}>{item.description}</Text>
         </View>
 
         {/* Basic routine's information */}
@@ -68,22 +71,22 @@ const DetailsScreen = () => {
           <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>TOTAL</Text>
             <View style={styles.infoTextWrapper}>
-              <Text style={styles.infoNum}>4</Text>
+              <Text style={styles.infoNum}></Text>
               <Text style={styles.infoSubText}>/weeks</Text>
             </View>
           </View>
 
           <View style={styles.infoItem}>
-            <Text style={styles.infoTitle}>CATEGORY</Text>
+            <Text style={styles.infoTitle}>DIFFICULTY</Text>
             <View style={styles.infoTextWrapper}>
-              <Text style={styles.infoText}>Weight loss</Text>
+              <Text style={styles.infoText}>{item.difficulty}</Text>
             </View>
           </View>
 
           <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>DURATION</Text>
             <View style={styles.infoTextWrapper}>
-              <Text style={styles.infoNum}>3</Text>
+              <Text style={styles.infoNum}></Text>
               <Text style={styles.infoSubText}>/hours</Text>
             </View>
           </View>

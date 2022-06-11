@@ -6,7 +6,8 @@ import cover from '../../assets/images/australia.png';
 const RecRoutineItem = ({item}) => {
   return (
     <ImageBackground
-      source={{uri: 'https://i.ytimg.com/vi/Eml2xnoLpYE/hqdefault.jpg?sqp=-oaymwEbCMQBEG5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLB9RS-RTYWsK_-9zhD3gfmoglVOEg'}}
+      //source={{uri: 'https://i.ytimg.com/vi/Eml2xnoLpYE/hqdefault.jpg?sqp=-oaymwEbCMQBEG5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLB9RS-RTYWsK_-9zhD3gfmoglVOEg'}}
+      source={item.thumbnail}
       style={styles.discoverItem}
       imageStyle={styles.discoverItemImage}>
       <Text style={styles.discoverItemTitle}>{item.name}</Text>
