@@ -1,6 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native'
-import React from 'react'
-import { globalStyles } from '../../styles/global'
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+  Alert
+} from 'react-native';
+import { globalStyles } from '../../styles/global';
 import coverImg from '../../assets/images/australia.png';
 import globalColors from '../../styles/colors';
 import Feather from 'react-native-vector-icons/Feather';
@@ -13,12 +20,11 @@ const MyRoutineItem = ({navigation, item, token}) => {
     const body = {
       "id": item._id
     }
-    console.log(item);
-    console.log(body);
-    console.log(token);
     axios
-      .delete(deleteRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
+      .delete(deleteRoutineURL, {headers : {"Authorization": `Bearer ${token}`}, body})
       .then(response => {
+        console.log(body);
+        console.log(response);
         navigation.navigate('Routine');
       })
       .catch(error => {

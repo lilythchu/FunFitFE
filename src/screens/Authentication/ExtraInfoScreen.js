@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useLogin } from '../../../context/AuthProvider';
@@ -8,11 +14,22 @@ import { useForm } from 'react-hook-form';
 import { updateProfileURL } from '../../../api/client';
 import axios from 'axios';
 import { Chip } from 'react-native-paper';
+import globalColors from '../../../styles/colors';
 
 const ExtraInfoScreen = () => {
   const {control, handleSubmit} = useForm();
   const {setIsLoggedIn, setProfile, token} = useLogin();
   const interests = [];
+
+  // const genre = [
+  //   {id: '1', text: 'at-home', icon: ''},
+  //   {id: '2', text: 'equipment', icon: ''},
+  //   {id: '3', text: 'gym', icon: ''},
+  //   {id: '4', text: 'harsh', icon: ''},
+  //   {id: '5', text: 'no-equipment', icon: ''},
+  //   {id: '6', text: 'yoga', icon: ''},
+  //   {id: '7', text: 'others', icon: ''},
+  // ]
   
   const onSubmitPressed = data => {
     const info = {
@@ -37,7 +54,7 @@ const ExtraInfoScreen = () => {
         <Chip
           icon={icon}
           mode="outlined"
-          selectedColor="red"
+          selectedColor={globalColors.navyBlue}
           disabled={!active}
           onPress={() => {
             interests.push(text);
@@ -69,33 +86,39 @@ const ExtraInfoScreen = () => {
             required: 'Lifestyle Target is required' 
           }}
         />
-        {/* <CustomInput 
-          name='workoutInterests'
-          placeholder='Choose from the below'
-          control={control}
-        /> */}
 
         <View>
           <Text style={styles.subTitle}>Choose your workout interests</Text>
           <View style={{flexDirection: 'row'}}>
-            <CustomChip text='at-home' icon='heart' />
-            <CustomChip text='yoga' icon='heart' />
+            <CustomChip text='at-home' />
+            <CustomChip text='yoga' icon='meditation' />
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <CustomChip text='equipment' icon='heart' />
-            <CustomChip text='no-equipment' icon='heart' />
+            <CustomChip text='equipment' icon='dumbbell' />
+            <CustomChip text='no-equipment'/>
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            <CustomChip text='gym' icon='heart' />
-            <CustomChip text='harsh' icon='heart' />
+            <CustomChip text='gym' icon='weight-lifter' />
+            <CustomChip text='harsh' />
           </View>
 
-          <CustomChip text='other' icon='heart' />
+          <CustomChip text='other'/>
+          {/* <FlatList 
+            data={genre}
+            renderItem={CustomChip}
+            numColumns={2}
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            showsHorizontalScrollIndicator={false}
+          /> */}
         </View>
 
-        <CustomButton title="Submit" onPress={handleSubmit(onSubmitPressed)}/>
+        <CustomButton
+          type='SECOND'
+          title="Submit"
+          onPress={handleSubmit(onSubmitPressed)}
+        />
     </ScrollView>
   )
 }
