@@ -145,7 +145,11 @@ const AddRoutineScreen = () => {
       {/* Button */}
       { loading
         ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-        : <CustomButton title="Add" onPress={handleSubmit(onAddRoutine)}/>
+        : <CustomButton
+            title="Add"
+            onPress={handleSubmit(onAddRoutine)}
+            type="SECOND"
+          />
       }
     </ScrollView>
   )

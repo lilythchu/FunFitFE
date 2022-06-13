@@ -1,5 +1,6 @@
 import {StyleSheet, Platform} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimensions';
+import globalColors from './colors';
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -94,5 +95,10 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,
+  },
+  roundTitle: {
+    backgroundColor: globalColors.cream,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
 });

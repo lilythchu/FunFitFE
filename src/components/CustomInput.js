@@ -26,8 +26,11 @@ const CustomInput = ({
               onBlur={onBlur}
               labelStyle={styles.label}
               containerStyle={[styles.container, styles[`container_${type}`]]}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.input}
+              inputContainerStyle={[
+                styles.inputContainer,
+                styles[`inputContainer_${type}`]
+              ]}
+              inputStyle={[styles.input, styles[`input_${type}`]]}
               leftIcon = {
                 <Icon type={'font-awesome'} name={icon} color="#424040" />
               }
@@ -53,6 +56,12 @@ const styles = StyleSheet.create({
   container_FIRST: {
     backgroundColor: 'white',
   },
+  container_SECOND: {
+    borderWidth: 1,
+  },
+  container_THIRD: {
+    borderWidth: 1,
+  },
   iconLeft: {
     marginRight: 8,
     width: 24,
@@ -60,7 +69,11 @@ const styles = StyleSheet.create({
   },
   label: {},
   input: {},
-  inputContainer: {},
+  input_THIRD: {
+    fontSize: 15,
+  },
+  inputContainer: {
+  },
 });
 
 export default CustomInput;
