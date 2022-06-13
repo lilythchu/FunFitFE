@@ -60,7 +60,7 @@ const RoutineScreen = () => {
 
   const renderMyRoutines= ({item}) => {
     return (
-      <MyRoutineItem navigation={navigation} item={item} />
+      <MyRoutineItem navigation={navigation} item={item} token={token}/>
     );
   };
 
@@ -89,6 +89,7 @@ const RoutineScreen = () => {
 
         {/* Recommended */}
         <View style={styles.discoverWrapper}>
+          {/* Title */}
           <TouchableOpacity onPress={() => navigation.navigate('Recommended')}>
             <ListItem>
               <ListItem.Content>
@@ -102,10 +103,10 @@ const RoutineScreen = () => {
             </ListItem>
           </TouchableOpacity>
 
+          {/* List */}
           <View style={styles.discoverItemsWrapper}>
             {recData && (
               <FlatList
-                //data={getRecData()}
                 data={recData}
                 renderItem={renderRecRoutines}
                 keyExtractor={(item) => item._id}
@@ -118,6 +119,7 @@ const RoutineScreen = () => {
 
         {/* My Routines */}
         <View style={styles.myRoutineWrapper}>
+          {/* Title */}
           <ListItem>
             <ListItem.Content>
               <ListItem.Title style={styles.myRoutineTitle}>My Routines</ListItem.Title>
@@ -130,7 +132,8 @@ const RoutineScreen = () => {
               />
             </TouchableOpacity>
           </ListItem>
-
+          
+          {/* List */}
           <View style={styles.myRoutineItemsWrapper}>
             {myData && (
               <FlatList

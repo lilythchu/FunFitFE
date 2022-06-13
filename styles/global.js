@@ -78,22 +78,21 @@ export const globalStyles = StyleSheet.create({
   },
   myRoutineItemContainer: {
     marginVertical: 15,
-    widt: windowWidth/2 - 20,
-  },
-  myRoutineItemWrapper: {
-    borderRadius: 15,
-    paddingRight: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    width: windowWidth/2 - 30,
   },
   myRoutineItem: {
-    width: windowWidth/2 - 50,
     height: windowWidth/2 - 40,
     justifyContent: 'flex-end',
+    marginBottom: 10,
   },
   backIcon: {
     marginLeft: 20,
     marginTop: 60,
+  },
+  genreWrapper: {
+    width: windowWidth/2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
   },
 });
