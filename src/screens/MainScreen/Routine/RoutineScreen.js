@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import CustomSwiper from '../../../components/CustomSwiper';
 import profile from '../../../../assets/pf.jpg';
+import coverImg from '../../../../assets/images/australia.png';
 import { globalStyles } from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
 import { ProgressBar } from 'react-native-paper';
@@ -22,79 +23,50 @@ import { useLogin } from '../../../../context/AuthProvider';
 import {getRecURL, getMyURL} from '../../../../api/client';
 import axios from "axios";
 import CustomButton from '../../../components/CustomButton';
-import learnMoreData from '../../../../assets/data/learnMoreData';
+import MyRoutineItem from '../../../components/MyRoutineItem';
 
 const RoutineScreen = () => {
+  const navigation = useNavigation();
   const {token} = useLogin();
   const [recData, setRecData] = useState([]);
   const [myData, setMyData] = useState([]);
 
-  axios
-    .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
-    .then(response => {
-      setMyData(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  const getMyData = () => {
+    axios
+      .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        setMyData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-  axios
-    .get(getRecURL, {headers : {"Authorization": `Bearer ${token}`}})
-    .then(response => {
-      setRecData(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  const getRecData = () => {
+    axios
+      .get(getRecURL, {headers : {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        setRecData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-  const navigation = useNavigation();
+  useEffect(() => {
+    getRecData();
+    getMyData();
+  }, []);
+
   const renderMyRoutines= ({item}) => {
     return (
-      <View style={globalStyles.myRoutineItemContainer}>
-        <TouchableOpacity
-          style={globalStyles.myRoutineItemWrapper}
-          onPress={() => navigation.navigate('Video', {item})}>
-          <ImageBackground
-            source={item.image}
-            style={globalStyles.myRoutineItem}
-            imageStyle={styles.learnMoreItemImage}>
-            <Text style={styles.learnMoreItemText}>{item.title}</Text>
-          </ImageBackground>
-          <TouchableOpacity>
-            <Feather
-              name='more-vertical'
-              size={24}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent:'space-between',
-            paddingHorizontal: 40,
-            marginBottom: 10,
-          }}>
-          <Feather name="trash" size={24} />
-          <Feather name="edit" size={24}/>
-        </View>
-
-        <View style={{paddingRight: 30, paddingLeft: 5}}>
-          <ProgressBar
-            progress={item.progress}
-            color={globalColors.navyBlue}
-            style={{height: 6, borderRadius: 5}}
-          />
-        </View>
-      </View>
+      <MyRoutineItem navigation={navigation} item={item} />
     );
   };
 
   const renderRecRoutines = ({item}) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("Details", {item})}>
-        <RecRoutineItem item={item} />
-      </TouchableOpacity>
+      <RecRoutineItem item={item} navigation={navigation} />
     )
   }
 
@@ -131,13 +103,16 @@ const RoutineScreen = () => {
           </TouchableOpacity>
 
           <View style={styles.discoverItemsWrapper}>
-            <FlatList
-              data={recData}
-              renderItem={renderRecRoutines}
-              keyExtractor={(item) => item._id}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-            />
+            {recData && (
+              <FlatList
+                //data={getRecData()}
+                data={recData}
+                renderItem={renderRecRoutines}
+                keyExtractor={(item) => item._id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            )}
           </View>
         </View>
 
@@ -157,14 +132,16 @@ const RoutineScreen = () => {
           </ListItem>
 
           <View style={styles.myRoutineItemsWrapper}>
-            <FlatList
-              data={myData}
-              renderItem={renderMyRoutines}
-              keyExtractor={(item) => item._id}
-              numColumns={2}
-              columnWrapperStyle={{justifyContent: 'space-between'}}
-              showsHorizontalScrollIndicator={false}
-            />
+            {myData && (
+              <FlatList
+                data={myData}
+                renderItem={renderMyRoutines}
+                keyExtractor={(item) => item._id}
+                numColumns={2}
+                columnWrapperStyle={{justifyContent: 'space-between'}}
+                showsHorizontalScrollIndicator={false}
+              />
+            )}
           </View>
         </View>
 
@@ -211,14 +188,5 @@ const styles = StyleSheet.create({
   },
   myRoutineItemsWrapper: {
     //paddingVertical: 10,
-  },
-  learnMoreItemImage: {
-    borderRadius: 20,
-  },
-  learnMoreItemText: {
-    fontSize: 18,
-    color: 'white',
-    marginHorizontal: 10,
-    marginVertical: 20,
   },
 });
