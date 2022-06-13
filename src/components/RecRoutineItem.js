@@ -1,21 +1,28 @@
 import React from 'react';
-import {View, Text, ImageBackground, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import cover from '../../assets/images/australia.png';
 
-const RecRoutineItem = ({item}) => {
+const RecRoutineItem = ({navigation, item}) => {
   return (
-    <ImageBackground
-      //source={{uri: 'https://i.ytimg.com/vi/Eml2xnoLpYE/hqdefault.jpg?sqp=-oaymwEbCMQBEG5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLB9RS-RTYWsK_-9zhD3gfmoglVOEg'}}
-      source={item.thumbnail}
-      style={styles.discoverItem}
-      imageStyle={styles.discoverItemImage}>
-      <Text style={styles.discoverItemTitle}>{item.name}</Text>
-      {/* <View style={styles.discoverItemLocationWrapper}>
-        <Entypo name="dumbbell" size={18} color={'white'} />
-        <Text style={styles.discoverItemLocationText}>{item.genre}</Text>
-      </View> */}
-    </ImageBackground>
+    <TouchableOpacity onPress={() => navigation.navigate("Details", {item})}>
+      <ImageBackground
+        source={item.thumbnail}
+        style={styles.discoverItem}
+        imageStyle={styles.discoverItemImage}>
+        <Text style={styles.discoverItemTitle}>{item.name}</Text>
+        {/* <View style={styles.discoverItemLocationWrapper}>
+          <Entypo name="dumbbell" size={18} color={'white'} />
+          <Text style={styles.discoverItemLocationText}>{item.genre}</Text>
+        </View> */}
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 

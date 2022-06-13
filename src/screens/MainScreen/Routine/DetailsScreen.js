@@ -15,6 +15,7 @@ import { globalStyles } from '../../../../styles/global';
 import images from '../../../../assets/images/australia.png';
 import { useLogin } from '../../../../context/AuthProvider';
 import { addRoutineURL } from '../../../../api/client';
+import { arrayToString } from '../../../../utils/methods';
 import axios from 'axios';
 
 const DetailsScreen = () => {
@@ -35,22 +36,23 @@ const DetailsScreen = () => {
 
   return (
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+
       {/* Image backgound */}
       <ImageBackground
-        //source={images}
         source={item.thumbnail}
         style={globalStyles.imageBackground}>
+        {/* Back Icon */}
         <TouchableOpacity
           style={globalStyles.backIcon}
           onPress={() => navigation.goBack()}>
           <Entypo name='chevron-left' size={32} color='white' />
         </TouchableOpacity>
-
+        {/* Name & Genre */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.itemTitle}>{item.name}</Text>
           <View style={styles.locationWrapper}>
             <Entypo name="battery" size={24} color='white' />
-            <Text style={styles.locationText}>{item.genre}</Text>
+            <Text style={styles.locationText}>{arrayToString(item.genre)}</Text>
           </View>
         </View>
       </ImageBackground>
