@@ -16,6 +16,7 @@ import images from '../../../../assets/images/australia.png';
 import { useLogin } from '../../../../context/AuthProvider';
 import { addRoutineURL } from '../../../../api/client';
 import { arrayToString } from '../../../../utils/methods';
+import Img from '../../../../assets/images/australia.png';
 import axios from 'axios';
 
 const DetailsScreen = () => {
@@ -23,15 +24,16 @@ const DetailsScreen = () => {
   const route = useRoute();
   const {token} = useLogin();
   const {item} = route.params;
-  const onAddRoutine = () => {
-    axios
-      .post(addRoutineURL, item, {headers : {"Authorization": `Bearer ${token}`}})
-      .then(response => {
-        navigation.navigate('Routine');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  const onStart = () => {
+    // axios
+    //   .post(addRoutineURL, item, {headers : {"Authorization": `Bearer ${token}`}})
+    //   .then(response => {
+    //     navigation.navigate('Routine');
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    navigation.navigate('Video', {item})
   }
 
   return (
@@ -39,7 +41,8 @@ const DetailsScreen = () => {
 
       {/* Image backgound */}
       <ImageBackground
-        source={item.thumbnail}
+        //source={{uri: item.thumbnail}}
+        source={Img}
         style={globalStyles.imageBackground}>
         {/* Back Icon */}
         <TouchableOpacity
@@ -50,9 +53,9 @@ const DetailsScreen = () => {
         {/* Name & Genre */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.itemTitle}>{item.name}</Text>
-          <View style={styles.locationWrapper}>
+          <View style={globalStyles.genreWrapper}>
             <Entypo name="battery" size={24} color='white' />
-            <Text style={styles.locationText}>{arrayToString(item.genre)}</Text>
+            <Text style={styles.genreText}>{arrayToString(item.genre)}</Text>
           </View>
         </View>
       </ImageBackground>
@@ -94,10 +97,11 @@ const DetailsScreen = () => {
           </View>
         </View>
 
+        {/* Button */}
         <CustomButton 
           type='SECOND'
-          title="Add Routine"
-          onPress={onAddRoutine}
+          title="Start"
+          onPress={onStart}
         />
       </View>
 
@@ -118,17 +122,13 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   itemTitle: {
-    fontSize: 32,
+    fontSize: 28,
     color: 'white',
   },
-  locationWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-  locationText: {
+  genreText: {
     fontSize: 16,
     color: 'white',
+    marginLeft: 10,
   },
   descriptionWrapper: {
     flex: 1,

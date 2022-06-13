@@ -5,43 +5,73 @@ import coverImg from '../../assets/images/australia.png';
 import globalColors from '../../styles/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import { ProgressBar } from 'react-native-paper';
+import { deleteRoutineURL, editRoutineURL } from '../../api/client';
+import axios from 'axios';
 
-const MyRoutineItem = ({navigation, item}) => {
+const MyRoutineItem = ({navigation, item, token}) => {
+  const onDeleteRoutine= () => {
+    const body = {
+      "id": item._id
+    }
+    console.log(item);
+    console.log(body);
+    console.log(token);
+    axios
+      .delete(deleteRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        navigation.navigate('Routine');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const onEditRoutine = data => {
+    axios
+      .put(editRoutineURL, data, {headers : {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        navigation.navigate('Routine');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   return (
     <View style={globalStyles.myRoutineItemContainer}>
-      <TouchableOpacity
-        style={globalStyles.myRoutineItemWrapper}
-        onPress={() => navigation.navigate('Video', {item})}>
+      
+      {/* Cover Image */}
+      <TouchableOpacity>
         <ImageBackground
           source={coverImg}
           style={globalStyles.myRoutineItem}
           imageStyle={styles.myRoutineItemImage}>
           <Text style={styles.myRoutineItemText}>{item.name}</Text>
         </ImageBackground>
-        <TouchableOpacity>
-          <Feather
-            name='more-vertical'
-            size={24}
-          />
-        </TouchableOpacity>
       </TouchableOpacity>
 
+      {/* CRUD icon */}
       <View
         style={{
           flexDirection: 'row',
           justifyContent:'space-between',
-          paddingHorizontal: 40,
-          marginBottom: 10,
+          paddingHorizontal: 20,
+          marginVertical: 5,
         }}>
-        <Feather name="trash" size={24} />
-        <Feather name="edit" size={24}/>
+        <TouchableOpacity onPress={onDeleteRoutine}>
+          <Feather name="trash" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onEditRoutine}>
+          <Feather name="edit" size={24}/>
+        </TouchableOpacity>
       </View>
 
-      <View style={{paddingRight: 30, paddingLeft: 5}}>
+      {/* Progress Bar */}
+      <View>
         <ProgressBar
           progress={item.progress}
           color={globalColors.navyBlue}
-          style={{height: 6, borderRadius: 5}}
+          style={{height: 6, borderRadius: 5, marginVertical: 5}}
         />
       </View>
     </View>

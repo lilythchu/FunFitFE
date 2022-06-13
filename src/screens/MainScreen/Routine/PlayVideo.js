@@ -14,7 +14,7 @@ const PlayVideo = () => {
     <View style={styles.container}>
       <WebView
         //source={{ uri: `https://www.youtube.com/embed/${item.youtubeVideoId}` }}
-        source={item.youtubeVideo}
+        source={{uri: item.youtubeVideo}}
         style={{ marginTop: 20 }}
       />
       {/* <Video 

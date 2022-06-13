@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, ThemeProvider} from '@rneui/themed';
 import globalColors from '../../styles/colors';
+import { windowHeight, windowWidth } from '../../utils/Dimensions';
 
 const CustomButton = ({type = 'FIRST', ...props}) => {
   return (
@@ -31,12 +32,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#68bbe3',
   },
   btn_SECOND: {
+    alignSelf: 'center',
     marginHorizontal: 20,
-    marginTop: 40,
+    marginVertical: 20,
     backgroundColor: globalColors.babyBlue,
-    alignItems: 'center',
-    paddingVertical: 15,
-    borderRadius: 10,
+    height: windowHeight/18,
+    width: windowWidth/2,
   },
   btn_THIRD: {
     marginHorizontal: 30,

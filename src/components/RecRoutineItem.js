@@ -13,7 +13,9 @@ const RecRoutineItem = ({navigation, item}) => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate("Details", {item})}>
       <ImageBackground
-        source={item.thumbnail}
+        source={{
+          uri: item.thumbnail
+        }}
         style={styles.discoverItem}
         imageStyle={styles.discoverItemImage}>
         <Text style={styles.discoverItemTitle}>{item.name}</Text>
