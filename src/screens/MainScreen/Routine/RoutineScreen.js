@@ -56,7 +56,7 @@ const RoutineScreen = () => {
   useEffect(() => {
     getRecData();
     getMyData();
-  }, []);
+  }, [myData]);
 
   const renderMyRoutines= ({item}) => {
     return (
