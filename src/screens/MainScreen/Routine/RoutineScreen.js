@@ -80,7 +80,9 @@ const RoutineScreen = () => {
             size={32}
             color='black'
           />
-          <Image source={profile} style={styles.profileImage} />
+          <TouchableOpacity>
+            <Image source={profile} style={styles.profileImage} />
+          </TouchableOpacity>
         </View>
 
 
@@ -90,7 +92,7 @@ const RoutineScreen = () => {
         {/* Recommended */}
         <View style={styles.discoverWrapper}>
           {/* Title */}
-          <TouchableOpacity onPress={() => navigation.navigate('Recommended')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Recommended', {recData})}>
             <ListItem>
               <ListItem.Content>
                 <ListItem.Title style={styles.titleText}>Discover</ListItem.Title>
@@ -167,10 +169,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   menuWrapper: {
-    paddingTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   titleText: {
     fontSize: 32,

@@ -5,27 +5,27 @@ const categoriesData = [
   },
   {
     id: 'type-2',
-    title: 'Cardio',
+    title: 'Yoga',
   },
   {
     id: 'type-3',
-    title: 'HIT',
+    title: 'At-home',
   },
   {
     id: 'type-4',
-    title: 'Stretching',
+    title: 'Equipment',
   },
   {
     id: 'type-5',
-    title: 'Balance',
+    title: 'No-Equipment',
   },
   {
     id: 'type-6',
-    title: 'Strengthening',
+    title: 'Gym',
   },
   {
     id: 'type-7',
-    title: 'Aerobic',
+    title: 'Others',
   },
 ];
 

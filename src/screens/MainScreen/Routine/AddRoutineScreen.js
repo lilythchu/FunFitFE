@@ -4,9 +4,9 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
@@ -57,10 +57,11 @@ const AddRoutineScreen = () => {
     myLoop.push(
       <View style={{flexDirection: 'row'}}> 
         <TextInput
+          style={{flex: 1, textAlign: 'center'}}
           placeholder={`Step ${i + 1}`}
           onChangeText={text => steps[i] = text}
         />
-        <View style={{flexDirection: 'row'}}>
+        <View style={styles.timingContainer}>
           <TextInput
             style={styles.textBox}
             keyboardType='numeric'
@@ -126,8 +127,9 @@ const AddRoutineScreen = () => {
       />
 
       <ListItem.Accordion
+        style={{borderWidth: 1}}
         content={
-          <>
+          <ListItem.Content>
             <TextInput 
               placeholder='Number of steps(< 10)'
               onChangeText={number => {
@@ -135,18 +137,20 @@ const AddRoutineScreen = () => {
                 setExpanded(!expanded);
               }}
             />
-          </>
+          </ListItem.Content>
         }
         isExpanded={expanded}
       >
-        {myLoop}
+        <View style={{alignItems: 'center', marginVertical: 10}}>
+          {myLoop}
+        </View>
       </ListItem.Accordion>
       
       {/* Button */}
       { loading
         ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
         : <CustomButton
-            title="Add"
+            title="Create"
             onPress={handleSubmit(onAddRoutine)}
             type="SECOND"
           />
@@ -163,5 +167,11 @@ const styles = StyleSheet.create({
     width: 30,
     margin: 5,
     textAlign: 'center',
+  },
+  timingContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

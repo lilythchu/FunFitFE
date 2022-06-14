@@ -9,31 +9,37 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import { globalStyles } from '../../styles/global';
 
-const RecCard = ({item}) => {
+const RecCard = ({item, navigation}) => {
   return (
-    <View >
+    <View style={globalStyles.cardContainer}>
       <ImageBackground
-        source={item.image}
+        source={{uri: item.thumbnail}}
         style={globalStyles.recItem}
-        imageStyle={styles.discoverItemImage}>
-        <Text style={styles.discoverItemTitle}>{item.title}</Text>
+        imageStyle={styles.ItemImage}>
       </ImageBackground>
 
       <View style={globalStyles.cardInfoContainer}>
-        <Text numberOfLines={3} style={{textAlign: 'auto'}}>{item.description}</Text>
+        <Text style={styles.routineName}>{item.name}</Text>
+        <Text numberOfLines={2} style={{textAlign: 'auto'}}>{item.description}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Details', {item})}>
+          <Text
+            style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
+            More 
+          </Text>
+        </TouchableOpacity>
       </View>
-      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  discoverItemImage: {
+  ItemImage: {
     borderRadius: 20,
   },
-  discoverItemTitle: {
-    fontSize: 18,
-    color: 'white',
+  routineName: {
+    fontSize: 14,
+    color: 'black',
+    fontWeight: '600',
   },
 });
 

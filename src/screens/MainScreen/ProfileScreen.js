@@ -6,9 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
+  TouchableHighlight,
 } from 'react-native';
-import ava from '../../../assets/pf.jpg';
 import { globalStyles } from '../../../styles/global';
 import { useLogin } from '../../../context/AuthProvider.js'
 import { ListItem, Icon, Avatar, Switch } from '@rneui/themed';
@@ -17,9 +16,11 @@ import CustomButton from '../../components/CustomButton';
 import { useForm } from 'react-hook-form';
 import { updateProfileURL } from '../../../api/client';
 import globalColors from '../../../styles/colors';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
   const {setIsLoggedIn, profile, token, setProfile} = useLogin();
   const [expanded, setExpanded] = useState(false);
   const {control, handleSubmit} = useForm();
@@ -38,6 +39,9 @@ const ProfileScreen = () => {
       })
       .catch(error => console.log(error));
   }
+  const onChangeInterests = () => {
+    //navigation.navigate('ChangeInterests');
+  }
 
   return (
       <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
@@ -46,13 +50,14 @@ const ProfileScreen = () => {
           <Avatar 
             size={90}
             rounded
-            source={ava}
+            title={profile.name.charAt(0).toUpperCase()}
+            containerStyle={{backgroundColor: globalColors.navyBlue}}
           >
-            <Avatar.Accessory
+            {/* <Avatar.Accessory
               size={23}
               name="camera"
               type="feather"
-            />  
+            />   */}
           </Avatar>
         </View>
 
@@ -118,8 +123,20 @@ const ProfileScreen = () => {
             </View>
           </ListItem.Accordion>
 
-          {/* Others */}
-          <ListItem bottomDivider>
+          {/* Workout Interests */}
+          <ListItem bottomDivider  >
+            <ListItem.Content>
+              <ListItem.Title>Change workout interests</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron color='black'/>
+          </ListItem>
+
+          {/* Noti */}
+          <ListItem
+            bottomDivider
+            Component={TouchableOpacity}
+            onPress={onChangeInterests}
+          >
             <ListItem.Content>
               <ListItem.Title>Notifications</ListItem.Title>
             </ListItem.Content>
@@ -128,6 +145,7 @@ const ProfileScreen = () => {
               onValueChange={(value) => setSwitch1(value)}
             />
           </ListItem>
+
         </View>
         
         {/* More */}
@@ -144,7 +162,7 @@ const ProfileScreen = () => {
             <ListItem.Content>
               <ListItem.Title>About us</ListItem.Title>
             </ListItem.Content>
-            <ListItem.Chevron />
+            <ListItem.Chevron color='black' />
           </ListItem>
 
           {/* Terms and Condition */}
@@ -153,9 +171,17 @@ const ProfileScreen = () => {
             <ListItem.Content>
               <ListItem.Title>Terms and Conditions</ListItem.Title>
             </ListItem.Content>
-            <ListItem.Chevron />
+            <ListItem.Chevron color='black' />
           </ListItem>
         </View>
+
+        {/* Log out */}
+        <ListItem Component={TouchableHighlight} onPress={handleLogOut}>
+          <ListItem.Content>
+            <ListItem.Title>Log out</ListItem.Title>
+          </ListItem.Content>
+          <Icon name="log-out" type='feather'/>
+        </ListItem>
       </ScrollView>
   );
 };
@@ -165,7 +191,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   userImage: {
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
   },
   userName: {
     fontSize: 18,
