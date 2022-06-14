@@ -69,7 +69,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
         <TouchableOpacity onPress={onDeleteRoutine}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onEditRoutine}>
+        <TouchableOpacity onPress={() => navigation.navigate('EditRoutine', {item})}>
           <Feather name="edit" size={24}/>
         </TouchableOpacity>
       </View>
