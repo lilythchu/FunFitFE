@@ -23,14 +23,12 @@ const MyRoutineItem = ({navigation, item, token}) => {
     setVisible(!visible);
   }
   const onDeleteRoutine= () => {
-    const body = {
-      "id": item._id
-    }
     axios
-      .delete(deleteRoutineURL, {headers : {"Authorization": `Bearer ${token}`}, body})
+      .delete(deleteRoutineURL, {
+        headers : {"Authorization": `Bearer ${token}`},
+        data: {id: item._id}
+      })
       .then(response => {
-        console.log(body);
-        console.log(response.data);
         navigation.navigate('Routine');
       })
       .catch(error => {
@@ -71,7 +69,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
         <TouchableOpacity onPress={onDeleteRoutine}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onEditRoutine}>
+        <TouchableOpacity onPress={() => navigation.navigate('EditRoutine', {item})}>
           <Feather name="edit" size={24}/>
         </TouchableOpacity>
       </View>
