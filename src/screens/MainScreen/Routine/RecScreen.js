@@ -15,7 +15,7 @@ import discoverData from '../../../../assets/data/discoverData';
 import {windowWidth} from '../../../../utils/Dimensions';
 import { globalStyles } from '../../../../styles/global';
 import categoriesData from '../../../../assets/data/categoriesData';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomButton from '../../../components/CustomButton';
 
 const CategoryList = () => {
@@ -57,23 +57,11 @@ const CategoryList = () => {
 
 const RecScreen = () => {
   const navigation = useNavigation();
+  const {recData} = useRoute().params;
   
   const renderRecCard = ({item}) => {
     return (
-      <View style={globalStyles.cardContainer}>
-        <RecCard item={item}/>
-        <TouchableOpacity onPress={() => navigation.navigate('Details', {item})}>
-          <Text
-            style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
-            More 
-          </Text>
-        </TouchableOpacity>
-        <CustomButton
-          title='Add'
-          containerStyle={{margin: 10}}
-          onPress={() => navigation.navigate('Routine')}
-        />
-      </View>
+      <RecCard item={item} navigation={navigation} />
     );
   };
 
@@ -81,10 +69,9 @@ const RecScreen = () => {
     <View style={{flex: 1, padding: 20, backgroundColor: 'white'}}>
       <CategoryList />
       <FlatList
-        columnWrapperStyle={{justifyContent: 'space-between'}}
+        data={recData}
         showsVerticalScrollIndicator={false}
-        numColumns={2}
-        data={discoverData}
+        keyExtractor={(item) => item._id}
         renderItem={renderRecCard}
       />
     </View>

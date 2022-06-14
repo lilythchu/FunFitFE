@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
   },
   overlay: {
     width: windowWidth - 50,
-    height: windowHeight - 300,
+    //height: windowHeight - 300,
     borderRadius: 20,
     padding: 20,
   },
@@ -58,24 +58,20 @@ export const globalStyles = StyleSheet.create({
   },
   cardInfoContainer: {
     borderRadius: 10,
-    marginTop: 10,
-    padding: 5,
+    padding: 10, 
+    backgroundColor: globalColors.cream,
+    flex: 1,
   },
   recItem: {
-    height: 250,
     justifyContent: 'flex-end',
-    width: windowWidth/2 - 40,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    marginRight: 20,
+    flex: 2,
   },
   cardContainer: {
-    width: windowWidth/2 - 25,
+    height: windowHeight * 0.4,
     marginVertical: 5,
     borderRadius: 20,
     padding: 5,
     borderWidth: 1,
-    borderColor: 'gray',
   },
   myRoutineItemContainer: {
     marginVertical: 15,
@@ -84,7 +80,6 @@ export const globalStyles = StyleSheet.create({
   myRoutineItem: {
     height: windowWidth/2 - 40,
     justifyContent: 'flex-end',
-    marginBottom: 10,
   },
   backIcon: {
     marginLeft: 20,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,9 +13,15 @@ import globalColors from '../../styles/colors';
 import Feather from 'react-native-vector-icons/Feather';
 import { ProgressBar } from 'react-native-paper';
 import { deleteRoutineURL, editRoutineURL } from '../../api/client';
+import {Overlay, ListItem} from '@rneui/themed';
+import { arrayToSteps, arrayToString } from '../../utils/methods';
 import axios from 'axios';
 
 const MyRoutineItem = ({navigation, item, token}) => {
+  const [visible, setVisible] = useState(false);
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  }
   const onDeleteRoutine= () => {
     const body = {
       "id": item._id
@@ -24,7 +30,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
       .delete(deleteRoutineURL, {headers : {"Authorization": `Bearer ${token}`}, body})
       .then(response => {
         console.log(body);
-        console.log(response);
+        console.log(response.data);
         navigation.navigate('Routine');
       })
       .catch(error => {
@@ -43,11 +49,15 @@ const MyRoutineItem = ({navigation, item, token}) => {
       });
   }
 
+  const myRoutineDetail = () => {
+    setVisible(!visible);
+  }
+
   return (
     <View style={globalStyles.myRoutineItemContainer}>
       
       {/* Cover Image */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={myRoutineDetail}>
         <ImageBackground
           source={coverImg}
           style={globalStyles.myRoutineItem}
@@ -57,13 +67,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
       </TouchableOpacity>
 
       {/* CRUD icon */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent:'space-between',
-          paddingHorizontal: 20,
-          marginVertical: 5,
-        }}>
+      <View style={styles.crudIcon}>
         <TouchableOpacity onPress={onDeleteRoutine}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
@@ -72,14 +76,50 @@ const MyRoutineItem = ({navigation, item, token}) => {
         </TouchableOpacity>
       </View>
 
+      {/* Routines Details */}
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+        overlayStyle={globalStyles.overlay}
+      >
+        <Text style={globalStyles.title}>{item.name}</Text>
+
+        <ListItem bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title style={styles.listTitle}>
+              Duration:
+            </ListItem.Title>
+          </ListItem.Content>
+          <Text>{item.duration}</Text>
+        </ListItem>
+        
+        <ListItem bottomDivider>
+          <ListItem.Content>
+            <ListItem.Title style={styles.listTitle}>
+              Genre:
+            </ListItem.Title>
+          </ListItem.Content>
+          <Text>{arrayToString(item.genre)}</Text>
+        </ListItem>
+        
+        <ListItem bottomDivider>
+            <ListItem.Title style={styles.listTitle}>
+              Steps:
+            </ListItem.Title>
+        </ListItem>
+        <View style={{paddingHorizontal: 20}}>
+          {arrayToSteps(item.steps, item.timings)}
+        </View>
+      </Overlay>
+
       {/* Progress Bar */}
-      <View>
+      {/* <View>
         <ProgressBar
           progress={item.progress}
           color={globalColors.navyBlue}
           style={{height: 6, borderRadius: 5, marginVertical: 5}}
         />
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -96,4 +136,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 20,
   },
+  crudIcon: {
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    marginVertical: 5,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    backgroundColor: globalColors.cream,
+  },
+  listTitle: {
+    fontWeight: 'bold',
+  }
 })

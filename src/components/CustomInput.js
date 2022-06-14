@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   container_THIRD: {
-    borderWidth: 1,
   },
   iconLeft: {
     marginRight: 8,
