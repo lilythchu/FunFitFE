@@ -17,9 +17,9 @@ import { ListItem } from '@rneui/themed';
 import { globalStyles } from '../../../../styles/global';
 import {editRoutineURL} from '../../../../api/client';
 import { useLogin } from '../../../../context/AuthProvider';
+import { arrayToString } from '../../../../utils/methods';
 import axios from 'axios';
 import globalColors from '../../../../styles/colors';
-import { combineTransition } from 'react-native-reanimated';
 
 const EditRoutineScreen = () => {
   const {token} = useLogin();
@@ -100,7 +100,8 @@ const EditRoutineScreen = () => {
       {/* Navigation */}
       <TouchableOpacity
         style={globalStyles.backIcon}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation.goBack()}
+      >
         <Entypo name='chevron-left' size={32} color={globalColors.babyBlue} />
       </TouchableOpacity>
 
@@ -115,7 +116,7 @@ const EditRoutineScreen = () => {
       />
       <CustomInput 
         name="genre"
-        placeholder={item.genre}
+        placeholder={arrayToString(item.genre)}
         control={control}
       />
       <CustomInput 
