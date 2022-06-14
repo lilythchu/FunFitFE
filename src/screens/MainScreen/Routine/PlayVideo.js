@@ -1,32 +1,32 @@
-import * as React from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
 import { useRoute } from '@react-navigation/native';
-import { WebView } from 'react-native-webview';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 const PlayVideo = () => {
-  const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
   const route = useRoute();
   const {item} = route.params;
+  const [playing, setPlaying] = useState(false);
+
+  const onStateChange = useCallback((state) => {
+    if (state === "ended") {
+      setPlaying(false);
+      Alert.alert("video has finished playing!");
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <WebView
-        //source={{ uri: `https://www.youtube.com/embed/${item.youtubeVideoId}` }}
-        source={{uri: item.youtubeVideo}}
-        style={{ marginTop: 20 }}
+      <YoutubePlayer
+        height={300}
+        play={playing}
+        videoId={item.youtubeVideo}
+        onChangeState={onStateChange}
       />
-      {/* <Video 
-        ref={video}
-        style={styles.video}
-        source={{
-          uri: 'https://www.youtube.com/embed/bleOTMDa3_4',
-        }}
-        useNativeControls
-        resizeMode='contain'
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-      /> */}
     </View>
   );
 };
