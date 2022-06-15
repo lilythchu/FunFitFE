@@ -55,6 +55,7 @@ export const globalStyles = StyleSheet.create({
   textLinkContainer: {
     padding: 10,
     alignItems: 'center',
+    marginBottom: 30,
   },
   cardInfoContainer: {
     borderRadius: 10,
