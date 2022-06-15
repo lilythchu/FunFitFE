@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
   },
   overlay: {
     width: windowWidth - 50,
-    //height: windowHeight - 300,
+    maxHeight: windowHeight - 300,
     borderRadius: 20,
     padding: 20,
   },

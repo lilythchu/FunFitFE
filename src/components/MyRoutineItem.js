@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import coverImg from '../../assets/images/australia.png';
@@ -80,34 +81,36 @@ const MyRoutineItem = ({navigation, item, token}) => {
         onBackdropPress={toggleOverlay}
         overlayStyle={globalStyles.overlay}
       >
-        <Text style={globalStyles.title}>{item.name}</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={globalStyles.title}>{item.name}</Text>
 
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title style={styles.listTitle}>
-              Duration:
-            </ListItem.Title>
-          </ListItem.Content>
-          <Text>{arrayToTime(item.duration)}</Text>
-        </ListItem>
-        
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title style={styles.listTitle}>
-              Genre:
-            </ListItem.Title>
-          </ListItem.Content>
-          <Text>{arrayToString(item.genre)}</Text>
-        </ListItem>
-        
-        <ListItem bottomDivider>
-            <ListItem.Title style={styles.listTitle}>
-              Steps:
-            </ListItem.Title>
-        </ListItem>
-        <View style={{paddingHorizontal: 20}}>
-          {arrayToSteps(item.steps, item.timings)}
-        </View>
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.listTitle}>
+                Duration:
+              </ListItem.Title>
+            </ListItem.Content>
+            <Text>{arrayToTime(item.duration)}</Text>
+          </ListItem>
+          
+          <ListItem bottomDivider>
+            <ListItem.Content>
+              <ListItem.Title style={styles.listTitle}>
+                Genre:
+              </ListItem.Title>
+            </ListItem.Content>
+            <Text>{arrayToString(item.genre)}</Text>
+          </ListItem>
+          
+          <ListItem bottomDivider>
+              <ListItem.Title style={styles.listTitle}>
+                Steps:
+              </ListItem.Title>
+          </ListItem>
+          <View style={{paddingHorizontal: 20}}>
+            {arrayToSteps(item.steps, item.timings)}
+          </View>
+        </ScrollView>
       </Overlay>
 
       {/* Progress Bar */}
