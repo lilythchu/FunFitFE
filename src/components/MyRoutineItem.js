@@ -14,7 +14,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { ProgressBar } from 'react-native-paper';
 import { deleteRoutineURL, editRoutineURL } from '../../api/client';
 import {Overlay, ListItem} from '@rneui/themed';
-import { arrayToSteps, arrayToString } from '../../utils/methods';
+import { arrayToSteps, arrayToString, arrayToTime } from '../../utils/methods';
 import axios from 'axios';
 
 const MyRoutineItem = ({navigation, item, token}) => {
@@ -88,7 +88,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
               Duration:
             </ListItem.Title>
           </ListItem.Content>
-          <Text>{item.duration}</Text>
+          <Text>{arrayToTime(item.duration)}</Text>
         </ListItem>
         
         <ListItem bottomDivider>

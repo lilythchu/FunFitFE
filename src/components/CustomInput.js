@@ -34,7 +34,7 @@ const CustomInput = ({
               leftIcon = {
                 <Icon type={'font-awesome'} name={icon} color="#424040" />
               }
-              leftIconContainerStyle={icon ? styles.iconLeft : {}}
+              leftIconContainerStyle={icon ? [styles.iconLeft, styles[`iconLeft_${type}`]] : {}}
               errorMessage={error ? error.message : ''}
               errorStyle={{fontSize: 12}}
               {...props}
