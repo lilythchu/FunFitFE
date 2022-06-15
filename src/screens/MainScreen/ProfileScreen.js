@@ -7,16 +7,18 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
+  ActivityIndicator
 } from 'react-native';
 import { globalStyles } from '../../../styles/global';
 import { useLogin } from '../../../context/AuthProvider.js'
-import { ListItem, Icon, Avatar, Switch } from '@rneui/themed';
+import { ListItem, Icon, Avatar, Switch, Overlay } from '@rneui/themed';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useForm } from 'react-hook-form';
 import { updateProfileURL } from '../../../api/client';
 import globalColors from '../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
+import CustomChip from '../../components/CustomChip';
 import axios from 'axios';
 
 const ProfileScreen = () => {
@@ -25,22 +27,34 @@ const ProfileScreen = () => {
   const [expanded, setExpanded] = useState(false);
   const {control, handleSubmit} = useForm();
   const [switch1, setSwitch1] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const interests = [];
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  }
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
   }
   const updateUserInfo = data => {
-    console.log(data);
+    setLoading(true);
     axios
       .post(updateProfileURL, data, {headers: {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setProfile(response.data);
+        setLoading(false);
         setExpanded(false);
       })
       .catch(error => console.log(error));
   }
   const onChangeInterests = () => {
-    //navigation.navigate('ChangeInterests');
+    axios
+      .post(updateProfileURL, info, {headers: {"Authorization": `Bearer ${token}`}})
+      .then(response => {
+        setProfile(response.data);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
@@ -90,53 +104,69 @@ const ProfileScreen = () => {
               <CustomInput 
                 name='name'
                 type='THIRD'
-                placeholder='Name'
+                leftIcon={<Text>Name</Text>}
+                placeholder={profile.name}
                 control={control}
-                rules={{
-                  required: 'Name is required'
-                }}
+              />
+              <CustomInput 
+                name='lifestyleTarget'
+                type='THIRD'
+                leftIcon={<Text>Bio</Text>}
+                placeholder={profile.lifestyleTarget}
+                control={control}
               />
               <CustomInput 
                 name="sex"
                 type='THIRD'
+                leftIcon={<Text>Gender</Text>}
                 control={control}
                 placeholder="Male/Female/Others"
-                rules={{
-                  required: 'Gender is required',
-                  validate: value => value === "Male" || value === "Female" || value === "Others" || 'Gender does not match', 
-                }}
               />
               <CustomInput 
                 name="age"
+                leftIcon={<Text>Age</Text>}
                 type='THIRD'
                 placeholder="Age"
                 control={control}
-                rules={{
-                  required: 'Age is required'
-                }}
               />
-              <CustomButton
-                type='SECOND' 
-                title="Update"
-                onPress={handleSubmit(updateUserInfo)}
-              />
+              {loading 
+                ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
+                : <CustomButton
+                    type='SECOND' 
+                    title="Update"
+                    onPress={handleSubmit(updateUserInfo)}
+                  />
+              }
             </View>
           </ListItem.Accordion>
 
           {/* Workout Interests */}
-          <ListItem bottomDivider  >
+          <ListItem
+            bottomDivider
+            Component={TouchableOpacity}
+            onPress={() => setVisible(!visible)}
+          >
             <ListItem.Content>
               <ListItem.Title>Change workout interests</ListItem.Title>
             </ListItem.Content>
             <ListItem.Chevron color='black'/>
           </ListItem>
 
-          {/* Noti */}
-          <ListItem
-            bottomDivider
-            Component={TouchableOpacity}
-            onPress={onChangeInterests}
+          {/* Overlay */}
+          <Overlay
+            isVisible={visible}
+            onBackdropPress={toggleOverlay}
+            overlayStyle={globalStyles.overlay}
           >
+            <CustomButton 
+              title="Update"
+              type='SECOND'
+              onPress={onChangeInterests}
+            />
+          </Overlay>
+
+          {/* Noti */}
+          <ListItem bottomDivider >
             <ListItem.Content>
               <ListItem.Title>Notifications</ListItem.Title>
             </ListItem.Content>
@@ -215,5 +245,8 @@ const styles = StyleSheet.create({
   },
   accordionContainer: {
     marginHorizontal: 30,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: globalColors.cream,
   },
 });

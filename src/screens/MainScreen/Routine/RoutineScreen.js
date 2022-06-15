@@ -10,7 +10,7 @@ import {
   FlatList,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationAction } from '@react-navigation/native';
 import CustomSwiper from '../../../components/CustomSwiper';
 import profile from '../../../../assets/pf.jpg';
 import coverImg from '../../../../assets/images/australia.png';
@@ -80,7 +80,9 @@ const RoutineScreen = () => {
             size={32}
             color='black'
           />
-          <TouchableOpacity>
+          <TouchableOpacity
+            //onPress={() => navigation.navigate('profile')}
+          >
             <Image source={profile} style={styles.profileImage} />
           </TouchableOpacity>
         </View>
