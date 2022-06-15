@@ -40,10 +40,10 @@ const EditRoutineScreen = () => {
       "steps": item.steps,
     };
     if (data.name !== undefined) {body.name = data.name}
-    if (data.duration!== undefined) {body.duration= data.duration}
     if (data.genre !== undefined) {body.genre = data.genre}
-    if (steps !== undefined) {body.steps = steps}
-    if (timings !== undefined) {body.timings = timings}
+    if (steps[0] !== undefined) {body.steps = steps}
+    if (timings[0] !== undefined) {body.timings = timings}
+    if (duration[0] !== undefined) {body.duration = duration}
     setLoading(true);
     axios
       .put(editRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
@@ -59,6 +59,7 @@ const EditRoutineScreen = () => {
   var myLoop = [];
   var steps = [];
   var timings = [];
+  var duration = [];
   
   for (let i = 0; i < number; i++) {
     timings[i] = new Array(3);
@@ -111,26 +112,51 @@ const EditRoutineScreen = () => {
       {/* Form */}
       <CustomInput 
         name="name"
+        leftIcon={<Text>Name</Text>}
+        type="THIRD"
         placeholder={item.name}
         control={control}
       />
       <CustomInput 
         name="genre"
+        leftIcon={<Text>Genre</Text>}
+        type="THIRD"
         placeholder={arrayToString(item.genre)}
         control={control}
       />
-      <CustomInput 
-        name="duration"
-        placeholder={`Duration: ${item.duration}`}
-        control={control}
-        rightIcon={<Text>/hours</Text>}
-      />
+
+      <View style={{flexDirection: 'row', paddingBottom: 10, paddingLeft: 10, alignItems: 'center'}}>
+        <Text>Duration</Text>
+        <View style={styles.timingContainer}>
+          <TextInput
+            style={styles.textBox}
+            keyboardType='numeric'
+            placeholder={item.duration[0]}
+            onChangeText={number => duration[0] = number}
+          />
+          <Text>:</Text>
+          <TextInput
+            style={styles.textBox}
+            keyboardType='numeric'
+            placeholder={item.duration[1]}
+            onChangeText={number => duration[1] = number}
+          />
+          <Text>:</Text>
+          <TextInput
+            style={styles.textBox}
+            keyboardType='numeric'
+            placeholder={item.duration[2]}
+            onChangeText={number => duration[2] = number}
+          />
+        </View>
+      </View>
 
       <ListItem.Accordion
         style={{borderWidth: 1}}
         content={
           <ListItem.Content>
             <TextInput 
+              keyboardType='numeric'
               placeholder='Number of steps(< 10)'
               onChangeText={number => {
                 setNumber(number);
