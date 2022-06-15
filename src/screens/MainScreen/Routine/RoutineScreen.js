@@ -18,7 +18,7 @@ import { globalStyles } from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
 import { ProgressBar } from 'react-native-paper';
 import RecRoutineItem from '../../../components/RecRoutineItem';
-import { ListItem } from '@rneui/themed';
+import { ListItem, Header } from '@rneui/themed';
 import { useLogin } from '../../../../context/AuthProvider';
 import {getRecURL, getMyURL} from '../../../../api/client';
 import axios from "axios";
