@@ -36,7 +36,7 @@ const CustomInput = ({
               }
               leftIconContainerStyle={icon ? styles.iconLeft : {}}
               errorMessage={error ? error.message : ''}
-              errorStyle={{fontSize: 15}}
+              errorStyle={{fontSize: 12}}
               {...props}
             />
           </View>   
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   input: {},
   input_THIRD: {
     fontSize: 15,
+    textAlign: 'center'
   },
   inputContainer: {
   },
