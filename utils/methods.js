@@ -42,4 +42,8 @@ export function arrayToSteps(step, timing) {
   return res;
 };
 
+export function arrayToSum(time) {
+  return parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
+}
+
 
