@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
-  FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
@@ -13,67 +12,40 @@ import { globalStyles } from '../../../styles/global';
 import { useForm } from 'react-hook-form';
 import { updateProfileURL } from '../../../api/client';
 import axios from 'axios';
-import { Chip } from 'react-native-paper';
-import globalColors from '../../../styles/colors';
+import GenreChip from '../../components/GenreChip';
 
 const ExtraInfoScreen = () => {
+  const [loading, setLoading] = useState(false);
   const {control, handleSubmit} = useForm();
   const {setIsLoggedIn, setProfile, token} = useLogin();
   const interests = [];
-
-  // const genre = [
-  //   {id: '1', text: 'at-home', icon: ''},
-  //   {id: '2', text: 'equipment', icon: ''},
-  //   {id: '3', text: 'gym', icon: ''},
-  //   {id: '4', text: 'harsh', icon: ''},
-  //   {id: '5', text: 'no-equipment', icon: ''},
-  //   {id: '6', text: 'yoga', icon: ''},
-  //   {id: '7', text: 'others', icon: ''},
-  // ]
   
   const onSubmitPressed = data => {
+    setLoading(true);
     const info = {
       "age": data.age,
       "workoutInterests": interests,
       "lifestyleTarget": data.lifestyleTarget
     }
-    console.log(interests);
     axios
       .post(updateProfileURL, info, {headers: {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setProfile(response.data);
         setIsLoggedIn(true);
+        setLoading(false);
       })
       .catch(error => console.log(error));
   }
 
-  const CustomChip = ({text, icon}) => {
-    const [active, setActive] = useState(true);
-    return (
-      <View style={styles.chip}>
-        <Chip
-          icon={icon}
-          mode="outlined"
-          selectedColor={globalColors.navyBlue}
-          disabled={!active}
-          onPress={() => {
-            interests.push(text);
-            setActive(false);
-          }}>
-          {text}
-        </Chip>
-      </View>
-    );
-  };
-
   return (
     <ScrollView style={globalStyles.scrollView}>
-        <Text style={globalStyles.title}>Extra Info</Text>
+        <Text style={[globalStyles.title, {padding: 30}]}>Extra Info</Text>
 
         <CustomInput
           name="age"
           control={control}
           placeholder="Age"
+          keyboardType='numeric'
           rules={{
             required: 'Age is required'
           }}
@@ -87,54 +59,18 @@ const ExtraInfoScreen = () => {
           }}
         />
 
-        <View>
-          <Text style={styles.subTitle}>Choose your workout interests</Text>
-          <View style={{flexDirection: 'row'}}>
-            <CustomChip text='at-home' />
-            <CustomChip text='yoga' icon='meditation' />
-          </View>
-
-          <View style={{flexDirection: 'row'}}>
-            <CustomChip text='equipment' icon='dumbbell' />
-            <CustomChip text='no-equipment'/>
-          </View>
-
-          <View style={{flexDirection: 'row'}}>
-            <CustomChip text='gym' icon='weight-lifter' />
-            <CustomChip text='harsh' />
-          </View>
-
-          <CustomChip text='other'/>
-          {/* <FlatList 
-            data={genre}
-            renderItem={CustomChip}
-            numColumns={2}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
-            showsHorizontalScrollIndicator={false}
-          /> */}
-        </View>
-
-        <CustomButton
-          type='SECOND'
-          title="Submit"
-          onPress={handleSubmit(onSubmitPressed)}
-        />
+        <GenreChip interests={interests} />
+        
+        {loading
+          ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
+          : <CustomButton
+              type='SECOND'
+              title="Submit"
+              onPress={handleSubmit(onSubmitPressed)}
+            />
+        }
     </ScrollView>
   )
 }
 
 export default ExtraInfoScreen;
-
-const styles = StyleSheet.create({
-  chip: {
-    width: 150,
-    marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  subTitle: {
-    fontSize: 18,
-    alignSelf: 'center',
-    marginVertical: 20,
-  },
-})

@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import { updateProfileURL } from '../../../api/client';
 import globalColors from '../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
-import CustomChip from '../../components/CustomChip';
+import GenreChip from '../../components/GenreChip';
 import axios from 'axios';
 
 const ProfileScreen = () => {
@@ -29,7 +29,9 @@ const ProfileScreen = () => {
   const [switch1, setSwitch1] = useState(true);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const interests = [];
+
   const toggleOverlay = () => {
     setVisible(!visible);
   }
@@ -49,9 +51,15 @@ const ProfileScreen = () => {
       .catch(error => console.log(error));
   }
   const onChangeInterests = () => {
+    setLoading2(true);
     axios
-      .post(updateProfileURL, info, {headers: {"Authorization": `Bearer ${token}`}})
+      .post(updateProfileURL, 
+        {"workoutInterests": interests},
+        {headers: {"Authorization": `Bearer ${token}`}}
+      )
       .then(response => {
+        toggleOverlay();
+        setLoading2(false);
         setProfile(response.data);
       })
       .catch(error => console.log(error));
@@ -115,16 +123,17 @@ const ProfileScreen = () => {
                 placeholder={profile.lifestyleTarget}
                 control={control}
               />
-              <CustomInput 
+              {/* <CustomInput 
                 name="sex"
                 type='THIRD'
                 leftIcon={<Text>Gender</Text>}
                 control={control}
                 placeholder="Male/Female/Others"
-              />
+              /> */}
               <CustomInput 
                 name="age"
                 leftIcon={<Text>Age</Text>}
+                keyboardType='numeric'
                 type='THIRD'
                 placeholder="Age"
                 control={control}
@@ -152,17 +161,24 @@ const ProfileScreen = () => {
             <ListItem.Chevron color='black'/>
           </ListItem>
 
-          {/* Overlay */}
+          {/* Change Interests Overlay */}
           <Overlay
             isVisible={visible}
             onBackdropPress={toggleOverlay}
             overlayStyle={globalStyles.overlay}
           >
-            <CustomButton 
-              title="Update"
-              type='SECOND'
-              onPress={onChangeInterests}
-            />
+            <ScrollView style={globalStyles.scrollView}>
+              <GenreChip interests={interests} />
+            </ScrollView>
+            
+            {loading2
+              ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
+              : <CustomButton
+                  title="Update"
+                  type='SECOND'
+                  onPress={onChangeInterests}
+                />
+            }
           </Overlay>
 
           {/* Noti */}
