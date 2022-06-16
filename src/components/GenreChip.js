@@ -1,27 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import React from 'react'
 import CustomChip from './CustomChip'
 import globalColors from '../../styles/colors'
 
 const GenreChip = ({interests}) => {
   return (
-    <View>
+    <View style={{justifyContent: 'center'}}>
       <Text style={styles.title}>Choose your workout interests</Text>
-      <View style={styles.rowContainer} >
-        <CustomChip text='at-home' array={interests} />
+      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
+        <CustomChip text='cardio' array={interests} />
         <CustomChip text='yoga' array={interests} />
-        <CustomChip text='equipment' array={interests} />
-      </View>
+        <CustomChip text='pilates' array={interests} />
+      </ScrollView>
 
-      <View style={styles.rowContainer} >
+      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
         <CustomChip text='no-equipment' array={interests} />
-        <CustomChip text='gym' array={interests} />
-        <CustomChip text='harsh' array={interests} />
-      </View>
+        <CustomChip text='fat-burning' array={interests} />
+      </ScrollView>
 
-      <View style={styles.rowContainer} >
-        <CustomChip text='other' array={interests} />
-      </View>
+      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
+        <CustomChip text='full-body-workout' array={interests} />
+      </ScrollView>
     </View>
   )
 }
@@ -30,7 +29,7 @@ export default GenreChip
 
 const styles = StyleSheet.create({
   rowContainer: {
-    flexDirection: 'row',
+    //flexDirection: 'row',
     justifyContent: 'center',
   },
   title: {

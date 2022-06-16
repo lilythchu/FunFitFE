@@ -141,7 +141,7 @@ const ProfileScreen = () => {
               {loading 
                 ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
                 : <CustomButton
-                    type='SECOND' 
+                    type='SECOND'
                     title="Update"
                     onPress={handleSubmit(updateUserInfo)}
                   />
@@ -175,7 +175,7 @@ const ProfileScreen = () => {
               ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
               : <CustomButton
                   title="Update"
-                  type='SECOND'
+                  type={interests[0] === undefined ? 'FOURTH' : 'SECOND'}
                   onPress={onChangeInterests}
                 />
             }
