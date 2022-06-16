@@ -5,6 +5,7 @@ const globalColors = {
   navyBlue: '#003060',
   blueFaded: '#8D8FAD',
   cream: '#f2f1f0',
+  inactive: '#e6eaf4',
 };
 
 export default globalColors;

@@ -45,6 +45,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
   },
+  btn_FOURTH: {
+    alignSelf: 'center',
+    marginHorizontal: 20,
+    marginVertical: 20,
+    backgroundColor: globalColors.inactive,
+    height: windowHeight/18,
+    width: windowWidth/2,
+  },
   btn_FACE: {
     backgroundColor: '#e6eaf4',
   },
@@ -63,6 +71,10 @@ const styles = StyleSheet.create({
   },
   title_THIRD: {
     fontSize: 16,
+    color: 'white',
+  },
+  title_FOURTH: {
+    fontSize: 18,
     color: 'white',
   },
   title_FACE: {

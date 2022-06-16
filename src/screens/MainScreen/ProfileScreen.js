@@ -141,7 +141,7 @@ const ProfileScreen = () => {
               {loading 
                 ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
                 : <CustomButton
-                    type='SECOND' 
+                    type='SECOND'
                     title="Update"
                     onPress={handleSubmit(updateUserInfo)}
                   />

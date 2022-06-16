@@ -15,12 +15,16 @@ import Feather from 'react-native-vector-icons/Feather';
 import CustomButton from './CustomButton';
 import { ProgressBar } from 'react-native-paper';
 import { deleteRoutineURL, editRoutineURL } from '../../api/client';
-import {Overlay, ListItem} from '@rneui/themed';
+import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
 import { arrayToSteps, arrayToString, arrayToTime } from '../../utils/methods';
 import axios from 'axios';
 
 const MyRoutineItem = ({navigation, item, token}) => {
   const [visible, setVisible] = useState(false);
+  const [visibleDia, setVisibleDia] = useState(false);
+  const toggleDialog = () => {
+    setVisibleDia(!visibleDia);
+  }
   const toggleOverlay = () => {
     setVisible(!visible);
   }
@@ -68,13 +72,28 @@ const MyRoutineItem = ({navigation, item, token}) => {
 
       {/* CRUD icon */}
       <View style={styles.crudIcon}>
-        <TouchableOpacity onPress={onDeleteRoutine}>
+        <TouchableOpacity onPress={toggleDialog}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('EditRoutine', {item})}>
           <Feather name="edit" size={24}/>
         </TouchableOpacity>
       </View>
+
+      {/* Delete Routine Dialog */}
+      <ThemeProvider>
+        <Dialog 
+          isVisible={visibleDia}
+          onBackdropPress={toggleDialog}
+          overlayStyle={{borderRadius: 15}}
+        >
+          <Dialog.Title title='Are you sure want to delete' />
+          <Dialog.Actions>
+            <Dialog.Button title='Yes' onPress={onDeleteRoutine}/>
+            <Dialog.Button title='No' onPress={toggleDialog}/>
+          </Dialog.Actions>
+        </Dialog>
+      </ThemeProvider>
 
       {/* Routines Details */}
       <Overlay

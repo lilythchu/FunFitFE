@@ -5,15 +5,15 @@ const categoriesData = [
   },
   {
     id: 'type-2',
-    title: 'Yoga',
+    title: 'Cardio',
   },
   {
     id: 'type-3',
-    title: 'At-home',
+    title: 'Yoga',
   },
   {
     id: 'type-4',
-    title: 'Equipment',
+    title: 'Pilates',
   },
   {
     id: 'type-5',
@@ -21,11 +21,11 @@ const categoriesData = [
   },
   {
     id: 'type-6',
-    title: 'Gym',
+    title: 'Fat-burning',
   },
   {
     id: 'type-7',
-    title: 'Others',
+    title: 'Full-body-workout',
   },
 ];
 
