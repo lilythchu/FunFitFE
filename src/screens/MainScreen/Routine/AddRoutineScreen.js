@@ -25,11 +25,10 @@ const AddRoutineScreen = () => {
   const navigation = useNavigation();
   const [expanded, setExpanded] = useState(false);
   const {control, handleSubmit} = useForm();
-  const [number, setNumber] = useState();
+  const [number, setNumber] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const onAddRoutine = data => {
-    console.log(duration);
     setLoading(true);
     const body = {
       "name": data.name,
@@ -52,7 +51,7 @@ const AddRoutineScreen = () => {
   var myLoop = [];
   var steps = [];
   var timings = [];
-  
+
   for (let i = 0; i < number; i++) {
     steps[i] = `Step ${i + 1}`;
     timings[i] = ['00', '00', '00'];
