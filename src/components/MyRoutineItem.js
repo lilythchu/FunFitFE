@@ -12,6 +12,7 @@ import { globalStyles } from '../../styles/global';
 import coverImg from '../../assets/images/australia.png';
 import globalColors from '../../styles/colors';
 import Feather from 'react-native-vector-icons/Feather';
+import CustomButton from './CustomButton';
 import { ProgressBar } from 'react-native-paper';
 import { deleteRoutineURL, editRoutineURL } from '../../api/client';
 import {Overlay, ListItem} from '@rneui/themed';
@@ -111,6 +112,11 @@ const MyRoutineItem = ({navigation, item, token}) => {
             {arrayToSteps(item.steps, item.timings)}
           </View>
         </ScrollView>
+        <CustomButton
+          type='SECOND'
+          title='Play'
+          onPress={() => navigation.navigate("Audio", {item})}
+        />
       </Overlay>
 
       {/* Progress Bar */}

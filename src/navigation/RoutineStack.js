@@ -6,6 +6,7 @@ import RecScreen from '../screens/MainScreen/Routine/RecScreen.js';
 import PlayVideo from '../screens/MainScreen/Routine/PlayVideo.js';
 import AddRoutineScreen from '../screens/MainScreen/Routine/AddRoutineScreen.js';
 import EditRoutineScreen from '../screens/MainScreen/Routine/EditRoutineScreen.js';
+import PlayAudio from '../screens/MainScreen/Routine/PlayAudio.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -13,6 +14,21 @@ const RoutineStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name='Routine' component={RoutineScreen} />
+      <Stack.Screen
+        name='Audio'
+        component={PlayAudio}
+        options={{
+          headerStyle: {
+            backgroundColor: 'white',
+          },
+          headerTintColor: 'gray',
+          headerTitleStyle: {
+            fontWeight: '400',
+            fontSize: 25,
+          },
+          headerShown: true,
+        }}
+      />
       <Stack.Screen name='Details' component={DetailsScreen} />
       <Stack.Screen name='AddRoutine' component={AddRoutineScreen} />
       <Stack.Screen name='EditRoutine' component={EditRoutineScreen} />
