@@ -73,13 +73,13 @@ const DetailsScreen = () => {
 
         {/* Basic routine's information */}
         <View style={styles.infoWrapper}>
-          <View style={styles.infoItem}>
+          {/* <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>TOTAL</Text>
             <View style={styles.infoTextWrapper}>
               <Text style={styles.infoNum}></Text>
               <Text style={styles.infoSubText}>/weeks</Text>
             </View>
-          </View>
+          </View> */}
 
           <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>DIFFICULTY</Text>
@@ -88,13 +88,13 @@ const DetailsScreen = () => {
             </View>
           </View>
 
-          <View style={styles.infoItem}>
+          {/* <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>DURATION</Text>
             <View style={styles.infoTextWrapper}>
               <Text style={styles.infoNum}></Text>
               <Text style={styles.infoSubText}>/hours</Text>
             </View>
-          </View>
+          </View> */}
         </View>
 
         {/* Button */}
