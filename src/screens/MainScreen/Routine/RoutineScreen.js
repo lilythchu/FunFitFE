@@ -72,7 +72,10 @@ const RoutineScreen = () => {
 
   return (
     // <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={globalStyles.scrollView}
+      >
         {/*Header*/}
         <View style={styles.menuWrapper}>
           <Feather 
@@ -180,10 +183,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   discoverItemsWrapper: {
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   myRoutineWrapper: {
-    marginVertical: 10,
   },
   myRoutineTitle: {
     fontSize: 24,
