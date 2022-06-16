@@ -11,11 +11,11 @@ const CustomChip = ({text, icon, array, ...props}) => {
         ? <Chip
             title={text}
             type='outline'
-            icon={{
-              name: icon,
-              type: 'font-awesome',
-              size: 20,
-            }}
+            // icon={{
+            //   name: icon,
+            //   type: 'font-awesome',
+            //   size: 20,
+            // }}
             containerStyle={styles.container}
             mode="outlined"
             selectedColor={globalColors.navyBlue}
@@ -53,7 +53,8 @@ export default CustomChip;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    marginVertical: 10,
+    marginHorizontal: 5,
     height: 40,
     borderWidth: 1,
     borderColor: globalColors.navyBlue,
