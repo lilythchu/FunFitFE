@@ -175,7 +175,7 @@ const ProfileScreen = () => {
               ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
               : <CustomButton
                   title="Update"
-                  type={interests[0] === undefined ? 'FOURTH' : 'SECOND'}
+                  type='SECOND'
                   onPress={onChangeInterests}
                 />
             }

@@ -5,22 +5,22 @@ import globalColors from '../../styles/colors'
 
 const GenreChip = ({interests}) => {
   return (
-    <View style={{justifyContent: 'center'}}>
+    <View>
       <Text style={styles.title}>Choose your workout interests</Text>
-      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
+      <View style={styles.rowContainer}>
         <CustomChip text='cardio' array={interests} />
         <CustomChip text='yoga' array={interests} />
         <CustomChip text='pilates' array={interests} />
-      </ScrollView>
+      </View>
 
-      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
+      <View style={styles.rowContainer}>
         <CustomChip text='no-equipment' array={interests} />
         <CustomChip text='fat-burning' array={interests} />
-      </ScrollView>
+      </View>
 
-      <ScrollView contentContainerStyle={styles.rowContainer} horizontal showsHorizontalScrollIndicator={false}>
+      <View style={styles.rowContainer}>
         <CustomChip text='full-body-workout' array={interests} />
-      </ScrollView>
+      </View>
     </View>
   )
 }
@@ -29,7 +29,7 @@ export default GenreChip
 
 const styles = StyleSheet.create({
   rowContainer: {
-    //flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'center',
   },
   title: {
