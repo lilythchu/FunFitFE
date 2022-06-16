@@ -12,7 +12,6 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation, NavigationAction } from '@react-navigation/native';
 import CustomSwiper from '../../../components/CustomSwiper';
-import profile from '../../../../assets/pf.jpg';
 import coverImg from '../../../../assets/images/australia.png';
 import { globalStyles } from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
@@ -22,12 +21,13 @@ import { ListItem, Header } from '@rneui/themed';
 import { useLogin } from '../../../../context/AuthProvider';
 import {getRecURL, getMyURL} from '../../../../api/client';
 import axios from "axios";
+import { Avatar } from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
 import MyRoutineItem from '../../../components/MyRoutineItem';
 
 const RoutineScreen = () => {
   const navigation = useNavigation();
-  const {token} = useLogin();
+  const {token, profile} = useLogin();
   const [recData, setRecData] = useState([]);
   const [myData, setMyData] = useState([]);
 
@@ -71,8 +71,8 @@ const RoutineScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    // <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
         {/*Header*/}
         <View style={styles.menuWrapper}>
           <Feather 
@@ -80,11 +80,7 @@ const RoutineScreen = () => {
             size={32}
             color='black'
           />
-          <TouchableOpacity
-            //onPress={() => navigation.navigate('profile')}
-          >
-            <Image source={profile} style={styles.profileImage} />
-          </TouchableOpacity>
+          <Text style={styles.heading}>FunFit</Text>
         </View>
 
 
@@ -153,7 +149,7 @@ const RoutineScreen = () => {
         </View>
 
       </ScrollView>
-    </View>
+    //</View>
   );
 }
 
@@ -195,5 +191,10 @@ const styles = StyleSheet.create({
   },
   myRoutineItemsWrapper: {
     //paddingVertical: 10,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: globalColors.babyBlue,
   },
 });

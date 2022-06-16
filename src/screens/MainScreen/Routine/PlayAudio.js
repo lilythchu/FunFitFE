@@ -1,38 +1,46 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+import { Text, View, StyleSheet, ScrollView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import * as Speech from 'expo-speech';
 import { arrayToSum } from '../../../../utils/methods';
 import CustomButton from '../../../components/CustomButton';
+import {globalStyles} from '../../../../styles/global';
+import { Audio } from 'expo-av';
+import globalColors from '../../../../styles/colors';
 
 const PlayAudio = () => {
   const [ith, setIth] = useState(0);
+  const [playing, setPlaying] = useState(false);
   const [start, setStart] = useState(false);
-  const [valid, setValid] = useState(true);
   const {item} = useRoute().params;
 
   const steps = item.steps;
   const timings = item.timings;
   
-  if (steps[0] === undefined || timings[0] === undefined) {
-    setValid(false);
-  }
-  
   const onStart = () => {
+    setStart(true);
+    playSound();
     Speech.speak("Let's get started");
     Speech.speak("step 1");
-    Speech.speak(steps[0]);
-    setStart(true);
+    Speech.speak(steps[0], {
+      onDone: onDone
+    });
   }
+
+  const onDone = () => {
+    setPlaying(true);
+  }
+
   const timeleft = () => {
-    const thingToSay = '5 seconds left';
+    const thingToSay = '10 seconds left';
     Speech.speak(thingToSay);
   };
   const nextStep = () => {
     if (ith === steps.length) {
       Speech.speak("Done");
-      setStart(false);
+      setPlaying(false);
+      pauseSound();
     } else {
       const stepName = steps[ith]
       Speech.speak('Next');
@@ -41,10 +49,36 @@ const PlayAudio = () => {
     }
   };
 
+  const [sound, setSound] = useState();
+
+  const pauseSound = async () => {
+    sound.pauseAsync();
+  }
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+       require('../../../../assets/audio/bg.mp3')
+    );
+    setSound(sound);
+    await sound.playAsync(); 
+    await sound.setVolumeAsync(0.2);
+    await sound.setIsLoopingAsync(true);
+  }
+
+  React.useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync(); }
+      : undefined;
+  }, [sound]);
+
+
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>{ith === steps.length ? `Done` : `Step ${ith + 1}`}</Text>
+      <Text style={styles.subtitle}>{steps[ith]}</Text>
       <CountdownCircleTimer
-        isPlaying={start}
+        isPlaying={playing}
         duration={arrayToSum(timings[0])}
         colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
         onComplete={() => ({
@@ -54,20 +88,29 @@ const PlayAudio = () => {
         })}
         colorsTime={[10, 6, 3, 0]}
         onUpdate={time => {
-          if (time === 5) {
+          if (time === 10) {
             timeleft();
+          }
+          if (time ===1) {
             setIth(ith + 1);
           }
-          if (time === 0) { nextStep(); }
+          if (time === 0) {
+            nextStep();
+          }
         }}
       >
         {({ remainingTime, color }) => (
           <Text style={{ color, fontSize: 40 }}>
-            {remainingTime}
+            {`${Math.floor(remainingTime / 60)} : ${remainingTime % 60}`}
           </Text>
         )}
       </CountdownCircleTimer>
-      <CustomButton title='Start' onPress={onStart} type='SECOND' />
+      <CustomButton
+        title='Start'
+        onPress={onStart}
+        type='SECOND'
+        disabled={start}
+      />
     </View>
   );
 }
@@ -80,5 +123,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ecf0f1',
     padding: 10,
+    backgroundColor: 'white',
+  },
+  title: {
+    color: globalColors.babyBlue,
+    textAlign: 'center',
+    padding: 20,
+    fontWeight: '700',
+    fontSize: 25,
+  },
+  subtitle: {
+    color: globalColors.babyBlue,
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 20,
+    paddingBottom: 60,
   },
 });

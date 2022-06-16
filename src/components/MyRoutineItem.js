@@ -115,7 +115,13 @@ const MyRoutineItem = ({navigation, item, token}) => {
         <CustomButton
           type='SECOND'
           title='Play'
-          onPress={() => navigation.navigate("Audio", {item})}
+          onPress={() => {
+            if (item.steps[0] === undefined) {
+              alert('Have you created steps')
+            } else {
+              navigation.navigate("Audio", {item})
+            }
+          }}
         />
       </Overlay>
 
