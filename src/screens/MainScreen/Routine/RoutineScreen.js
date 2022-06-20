@@ -71,11 +71,12 @@ const RoutineScreen = () => {
   }
 
   return (
-    // <View style={styles.container}>
-      <ScrollView
+    <View style={styles.container}>
+      {/* <ScrollView
         showsVerticalScrollIndicator={false}
         style={globalStyles.scrollView}
-      >
+      > */}
+
         {/*Header*/}
         <View style={styles.menuWrapper}>
           <Feather 
@@ -151,8 +152,8 @@ const RoutineScreen = () => {
           </View>
         </View>
 
-      </ScrollView>
-    //</View>
+      {/* </ScrollView> */}
+    </View>
   );
 }
 
