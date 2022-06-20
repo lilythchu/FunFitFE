@@ -15,10 +15,11 @@ import { ListItem, Icon, Avatar, Switch, Overlay } from '@rneui/themed';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useForm } from 'react-hook-form';
-import { updateProfileURL } from '../../../api/client';
+import { updateProfileURL, uploadImageURL } from '../../../api/client';
 import globalColors from '../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
 import GenreChip from '../../components/GenreChip';
+import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 
 const ProfileScreen = () => {
@@ -65,6 +66,43 @@ const ProfileScreen = () => {
       .catch(error => console.log(error));
   }
 
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+      uploadImage();
+    };
+  };
+
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append('profile', {
+      uri: image,
+      type: 'image/jpeg',
+    });
+    console.log(formData);
+    axios
+      .post(uploadImageURL, formData, {
+        headers: {
+          //"Accept": 'application/json',
+          //'Content-Type': 'multipart/form-data',
+          "Authorization": `Bearer ${token}`,
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => console.log(error));
+  }
+
   return (
       <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
         {/* User Avatar */}
@@ -72,14 +110,16 @@ const ProfileScreen = () => {
           <Avatar 
             size={90}
             rounded
-            title={profile.name.charAt(0).toUpperCase()}
-            containerStyle={{backgroundColor: globalColors.navyBlue}}
+            source={image ? {uri: image} : {}}
+            // title={profile.name.charAt(0).toUpperCase()}
+            // containerStyle={{backgroundColor: globalColors.navyBlue}}
           >
-            {/* <Avatar.Accessory
+            <Avatar.Accessory
               size={23}
               name="camera"
               type="feather"
-            />   */}
+              onPress={pickImage}
+            />   
           </Avatar>
         </View>
 
