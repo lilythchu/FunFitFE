@@ -1,42 +1,69 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import {BottomNavigation} from 'react-native-paper';
+import globalColors from '../../styles/colors.js';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Icon } from '@rneui/themed';
+
 import ProfileScreen from '../screens/MainScreen/ProfileScreen.js';
-import ChatScreen from '../screens/MainScreen/Chats/ChatScreen.js';
 import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
 import NotiScreen from '../screens/MainScreen/NotiScreen.js';
-import globalColors from '../../styles/colors.js';
 import RoutineStack from './RoutineStack.js';
 import ChatStack from './ChatStack.js';
 
+const Tab = createMaterialBottomTabNavigator();
+
 const AppStack = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    //{key: 'routine', title: 'Routine', icon: 'home-variant'},
-    {key: 'chat', title: 'Chat', icon: 'message-outline'},
-    {key: 'calendar', title: 'Calendar', icon: 'calendar-month'},
-    {key: 'notifications', title: 'Notifications', icon: 'bell-outline'},
-    {key: 'profile', title: 'Profile', icon: 'account-circle-outline'},
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    profile: ProfileScreen,
-    //routine: RoutineStack,
-    //chat: ChatScreen,
-    chat: ChatStack,
-    calendar: CalendarScreen,
-    notifications: NotiScreen,
-  });
-
   return (
-    <BottomNavigation
-      activeColor={globalColors.navyBlue}
-      inactiveColor={globalColors.blueGrotto}
+    <Tab.Navigator
+      activeColor={globalColors.blueGrotto}
       barStyle={{backgroundColor: 'white'}}
-      navigationState={{index, routes}}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
+    >
+      <Tab.Screen 
+        name='Home'
+        component={RoutineStack}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name='home' type='feather' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name='Chats'
+        component={ChatStack}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name='message-square' type='feather' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name='Calendar'
+        component={CalendarScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name='calendar' type='feather' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name='Notification'
+        component={NotiScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name='bell' type='feather' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen 
+        name='Profile'
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name='user' type='feather' size={size} color={color} />
+          )
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
