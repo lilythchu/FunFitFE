@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Text, Image, View, Pressable, ActivityIndicator, StyleSheet } from "react-native";
-//import moment from "moment";
 
 const ChatItem = () => {
   return (
@@ -32,8 +31,7 @@ export default ChatItem;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 10,
-    marginTop: 20,
+    padding: 20,
   },
   image: {
     height: 50,
