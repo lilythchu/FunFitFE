@@ -1,27 +1,42 @@
 const userData = [
   {
     id: '1',
-    name: "Jisso",
+    name: "Name",
     photo: require('../images/australia.png'),
   },
   {
-    id: '2', 
-    name: "Jennie",
+    id: '2',
+    name: "Name",
     photo: require('../images/australia.png'),
   },
   {
     id: '3',
-    name: "Rosie",
+    name: "Name",
     photo: require('../images/australia.png'),
   },
   {
     id: '4',
-    name: "Lisa",
-    photo: require('../pf.jpg'),
+    name: "Name",
+    photo: require('../images/australia.png'),
   },
   {
     id: '5',
-    name: "Blink",
+    name: "Name",
+    photo: require('../images/australia.png'),
+  },
+  {
+    id: '6',
+    name: "Name",
+    photo: require('../images/australia.png'),
+  },
+  {
+    id: '7',
+    name: "Name",
+    photo: require('../images/australia.png'),
+  },
+  {
+    id: '8',
+    name: "Name",
     photo: require('../images/australia.png'),
   },
 ]

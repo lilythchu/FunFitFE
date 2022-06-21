@@ -4,11 +4,11 @@ import globalColors from '../../styles/colors.js';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Icon } from '@rneui/themed';
 
-import ProfileScreen from '../screens/MainScreen/ProfileScreen.js';
 import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
 import NotiScreen from '../screens/MainScreen/NotiScreen.js';
 import RoutineStack from './RoutineStack.js';
 import ChatStack from './ChatStack.js';
+import ProfileStack from './ProfileStack.js';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -56,7 +56,7 @@ const AppStack = () => {
       />
       <Tab.Screen 
         name='Profile'
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name='user' type='feather' size={size} color={color} />

@@ -9,16 +9,16 @@ import {
   TouchableHighlight,
   ActivityIndicator
 } from 'react-native';
-import { globalStyles } from '../../../styles/global';
-import { useLogin } from '../../../context/AuthProvider.js'
+import { globalStyles } from '../../../../styles/global';
+import { useLogin } from '../../../../context/AuthProvider.js'
 import { ListItem, Icon, Avatar, Switch, Overlay } from '@rneui/themed';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
+import CustomInput from '../../../components/CustomInput';
+import CustomButton from '../../../components/CustomButton';
 import { useForm } from 'react-hook-form';
-import { updateProfileURL } from '../../../api/client';
-import globalColors from '../../../styles/colors';
+import { updateProfileURL } from '../../../../api/client';
+import globalColors from '../../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
-import GenreChip from '../../components/GenreChip';
+import GenreChip from '../../../components/GenreChip';
 import axios from 'axios';
 
 const ProfileScreen = () => {
