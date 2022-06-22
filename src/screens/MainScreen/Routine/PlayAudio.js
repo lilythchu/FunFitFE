@@ -11,35 +11,59 @@ import globalColors from '../../../../styles/colors';
 
 const PlayAudio = () => {
   const [ith, setIth] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [start, setStart] = useState(false);
+  const [startTimer, setStartTimer] = useState(false);
+  const [playingSound, setPlayingSound] = useState(false);
+  const [startWorkout, setStartWorkout] = useState(false);
+  const [done, setDone] = useState(false);
   const {item} = useRoute().params;
 
   const steps = item.steps;
   const timings = item.timings;
   
+  {/* Start Workout */}
   const onStart = () => {
-    setStart(true);
-    playSound();
+    setStartWorkout(true);
+    //playSound();
     Speech.speak("Let's get started");
     Speech.speak("step 1");
     Speech.speak(steps[0], {
-      onDone: onDone
+      onDone: () => {
+        setStartTimer(true);
+        playSound();
+        setPlayingSound(true);
+      }
     });
   }
 
-  const onDone = () => {
-    setPlaying(true);
+  const onPause = async () => {
+    await sound.pauseAsync();
+    setPlayingSound(false);
+  }
+
+  const onPlaySound = async () => {
+    await sound.playAsync();
+    setPlayingSound(true);
+  }
+
+  const onPlayAndPause = () => {
+    if (playingSound) {
+      onPause();
+    } else {
+      onPlaySound();
+    }
   }
 
   const timeleft = () => {
     const thingToSay = '10 seconds left';
     Speech.speak(thingToSay);
   };
+
   const nextStep = () => {
     if (ith === steps.length) {
       Speech.speak("Done");
-      setPlaying(false);
+      setStartTimer(false);
+      setPlayingSound(false);
+      setDone(true);
       pauseSound();
     } else {
       const stepName = steps[ith]
@@ -54,14 +78,18 @@ const PlayAudio = () => {
   const pauseSound = async () => {
     sound.pauseAsync();
   }
+
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
-       require('../../../../assets/audio/bg.mp3')
+       require('../../../../assets/audio/bg.mp3'),
+       {
+        shouldPlay: true,
+        isLooping: true,
+        volume: 0.2,
+       }
     );
     setSound(sound);
-    await sound.playAsync(); 
-    await sound.setVolumeAsync(0.2);
-    await sound.setIsLoopingAsync(true);
+    //await sound.playAsync();
   }
 
   React.useEffect(() => {
@@ -78,7 +106,7 @@ const PlayAudio = () => {
       <Text style={styles.title}>{ith === steps.length ? `Done` : `Step ${ith + 1}`}</Text>
       <Text style={styles.subtitle}>{steps[ith]}</Text>
       <CountdownCircleTimer
-        isPlaying={playing}
+        isPlaying={playingSound}
         duration={arrayToSum(timings[0])}
         colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
         onComplete={() => ({
@@ -105,12 +133,20 @@ const PlayAudio = () => {
           </Text>
         )}
       </CountdownCircleTimer>
-      <CustomButton
-        title='Start'
-        onPress={onStart}
-        type='SECOND'
-        disabled={start}
-      />
+      { !startWorkout && 
+        <CustomButton
+          title='Start'
+          onPress={onStart}
+          type='SECOND'
+        />
+      }
+      { startWorkout && !done &&
+        <CustomButton
+          title={playingSound ? 'Pause' : 'Play'}
+          onPress={onPlayAndPause}
+          type='SECOND'
+        />
+      }
     </View>
   );
 }
