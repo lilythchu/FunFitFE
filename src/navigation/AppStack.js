@@ -11,11 +11,11 @@ import RoutineStack from './RoutineStack.js';
 const AppStack = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'profile', title: 'Profile', icon: 'account-circle-outline'},
     {key: 'routine', title: 'Routine', icon: 'home-variant'},
     {key: 'chat', title: 'Chat', icon: 'message-outline'},
     {key: 'calendar', title: 'Calendar', icon: 'calendar-month'},
     {key: 'notifications', title: 'Notifications', icon: 'bell-outline'},
+    {key: 'profile', title: 'Profile', icon: 'account-circle-outline'},
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
