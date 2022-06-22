@@ -7,7 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
-  ActivityIndicator
+  ActivityIndicator,
+  Button,
 } from 'react-native';
 import { globalStyles } from '../../../styles/global';
 import { useLogin } from '../../../context/AuthProvider.js'
@@ -19,26 +20,24 @@ import { updateProfileURL } from '../../../api/client';
 import globalColors from '../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
 import GenreChip from '../../components/GenreChip';
+import UserPic from '../../components/Profile/UserPic';
+import More from '../../components/Profile/More';
 import axios from 'axios';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const {setIsLoggedIn, profile, token, setProfile} = useLogin();
-  const [expanded, setExpanded] = useState(false);
   const {control, handleSubmit} = useForm();
   const [switch1, setSwitch1] = useState(true);
-  const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
-  const interests = [];
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  }
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
   }
+
+  {/* Methods for updating info */}
+  const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
   const updateUserInfo = data => {
     setLoading(true);
     axios
@@ -50,6 +49,16 @@ const ProfileScreen = () => {
       })
       .catch(error => console.log(error));
   }
+
+  {/* Methods for changing interests */}
+  const interests = [];
+  const [visible, setVisible] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  }
+
   const onChangeInterests = () => {
     setLoading2(true);
     axios
@@ -66,179 +75,131 @@ const ProfileScreen = () => {
   }
 
   return (
-      <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
-        {/* User Avatar */}
-        <View style={styles.userImage}>
-          <Avatar 
-            size={90}
-            rounded
-            title={profile.name.charAt(0).toUpperCase()}
-            containerStyle={{backgroundColor: globalColors.navyBlue}}
-          >
-            {/* <Avatar.Accessory
-              size={23}
-              name="camera"
-              type="feather"
-            />   */}
-          </Avatar>
-        </View>
+    <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
+      {/* User Avatar */}
+      <UserPic token={token} names={profile.name}/>
 
-        {/* User name and bio */}
-        <Text style={styles.userName}>{profile.name}</Text>
-        <Text style={styles.aboutUser}>{profile.lifestyleTarget}</Text>
-        
-        {/* Settings */}
-        <View style={styles.settingContainer}>
-          {/* Title */}
-          <ListItem bottomDivider containerStyle={globalStyles.roundTitle}>
-            <Icon name='settings' />
-            <ListItem.Title>Settings</ListItem.Title>
-          </ListItem>
+      {/* User name and bio */}
+      <Text style={styles.userName}>{profile.name}</Text>
+      <Text style={styles.aboutUser}>{profile.lifestyleTarget}</Text>
+      
+      {/* Settings */}
+      <View style={styles.settingContainer}>
+        {/* Title */}
+        <ListItem bottomDivider containerStyle={globalStyles.roundTitle}>
+          <Icon name='settings' />
+          <ListItem.Title>Settings</ListItem.Title>
+        </ListItem>
 
-          {/* Account Settings */}
-          <ListItem.Accordion
-            content={
-              <>
-                <ListItem.Content>
-                  <ListItem.Title>Account Settings</ListItem.Title>
-                </ListItem.Content>
-              </>
-            }
-            isExpanded={expanded}
-            onPress={() => setExpanded(!expanded)}
-            bottomDivider
-          >
-            <View style={styles.accordionContainer}>
-              <CustomInput 
-                name='name'
-                type='THIRD'
-                leftIcon={<Text>Name</Text>}
-                placeholder={profile.name}
-                control={control}
-              />
-              <CustomInput 
-                name='lifestyleTarget'
-                type='THIRD'
-                leftIcon={<Text>Bio</Text>}
-                placeholder={profile.lifestyleTarget}
-                control={control}
-              />
-              {/* <CustomInput 
-                name="sex"
-                type='THIRD'
-                leftIcon={<Text>Gender</Text>}
-                control={control}
-                placeholder="Male/Female/Others"
-              /> */}
-              <CustomInput 
-                name="age"
-                leftIcon={<Text>Age</Text>}
-                keyboardType='numeric'
-                type='THIRD'
-                placeholder="Age"
-                control={control}
-              />
-              {loading 
-                ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
-                : <CustomButton
-                    type='SECOND'
-                    title="Update"
-                    onPress={handleSubmit(updateUserInfo)}
-                  />
-              }
-            </View>
-          </ListItem.Accordion>
-
-          {/* Workout Interests */}
-          <ListItem
-            bottomDivider
-            Component={TouchableOpacity}
-            onPress={() => setVisible(!visible)}
-          >
-            <ListItem.Content>
-              <ListItem.Title>Change workout interests</ListItem.Title>
-            </ListItem.Content>
-            <ListItem.Chevron color='black'/>
-          </ListItem>
-
-          {/* Change Interests Overlay */}
-          <Overlay
-            isVisible={visible}
-            onBackdropPress={toggleOverlay}
-            overlayStyle={globalStyles.overlay}
-          >
-            <ScrollView style={globalStyles.scrollView}>
-              <GenreChip interests={interests} />
-            </ScrollView>
-            
-            {loading2
+        {/* Account Settings */}
+        <ListItem.Accordion
+          content={
+            <>
+              <ListItem.Content>
+                <ListItem.Title>Account Settings</ListItem.Title>
+              </ListItem.Content>
+            </>
+          }
+          isExpanded={expanded}
+          onPress={() => setExpanded(!expanded)}
+          bottomDivider
+        >
+          <View style={styles.accordionContainer}>
+            <CustomInput 
+              name='name'
+              type='THIRD'
+              leftIcon={<Text>Name</Text>}
+              placeholder={profile.name}
+              control={control}
+            />
+            <CustomInput 
+              name='lifestyleTarget'
+              type='THIRD'
+              leftIcon={<Text>Bio</Text>}
+              placeholder={profile.lifestyleTarget}
+              control={control}
+            />
+            <CustomInput 
+              name="age"
+              leftIcon={<Text>Age</Text>}
+              keyboardType='numeric'
+              type='THIRD'
+              placeholder="Age"
+              control={control}
+            />
+            {loading 
               ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
               : <CustomButton
-                  title="Update"
                   type='SECOND'
-                  onPress={onChangeInterests}
+                  title="Update"
+                  onPress={handleSubmit(updateUserInfo)}
                 />
             }
-          </Overlay>
+          </View>
+        </ListItem.Accordion>
 
-          {/* Noti */}
-          <ListItem bottomDivider >
-            <ListItem.Content>
-              <ListItem.Title>Notifications</ListItem.Title>
-            </ListItem.Content>
-            <Switch 
-              value={switch1}
-              onValueChange={(value) => setSwitch1(value)}
-            />
-          </ListItem>
-
-        </View>
-        
-        {/* More */}
-        <View style={styles.moreContainer}>
-          {/* Title */}
-          <ListItem bottomDivider containerStyle={globalStyles.roundTitle}>
-            <Icon name='list' type='feather'/>
-            <ListItem.Title>More</ListItem.Title>
-          </ListItem>
-
-          {/* About us */}
-          <ListItem bottomDivider Component={TouchableOpacity}>
-            <Icon name='info' type='feather'/>
-            <ListItem.Content>
-              <ListItem.Title>About us</ListItem.Title>
-            </ListItem.Content>
-            <ListItem.Chevron color='black' />
-          </ListItem>
-
-          {/* Terms and Condition */}
-          <ListItem bottomDivider Component={TouchableOpacity} >
-            <Icon name='lightbulb-outline' />
-            <ListItem.Content>
-              <ListItem.Title>Terms and Conditions</ListItem.Title>
-            </ListItem.Content>
-            <ListItem.Chevron color='black' />
-          </ListItem>
-        </View>
-
-        {/* Log out */}
-        <ListItem Component={TouchableHighlight} onPress={handleLogOut}>
+        {/* Workout Interests */}
+        <ListItem
+          bottomDivider
+          Component={TouchableOpacity}
+          onPress={() => setVisible(!visible)}
+        >
           <ListItem.Content>
-            <ListItem.Title>Log out</ListItem.Title>
+            <ListItem.Title>Change workout interests</ListItem.Title>
           </ListItem.Content>
-          <Icon name="log-out" type='feather'/>
+          <ListItem.Chevron color='black'/>
         </ListItem>
-      </ScrollView>
+
+        {/* Change Interests Overlay */}
+        <Overlay
+          isVisible={visible}
+          onBackdropPress={toggleOverlay}
+          overlayStyle={globalStyles.overlay}
+        >
+          <ScrollView style={globalStyles.scrollView}>
+            <GenreChip interests={interests} />
+          </ScrollView>
+          
+          {loading2
+            ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
+            : <CustomButton
+                title="Update"
+                type='SECOND'
+                onPress={onChangeInterests}
+              />
+          }
+        </Overlay>
+
+        {/* Noti */}
+        <ListItem bottomDivider >
+          <ListItem.Content>
+            <ListItem.Title>Notifications</ListItem.Title>
+          </ListItem.Content>
+          <Switch 
+            value={switch1}
+            onValueChange={(value) => setSwitch1(value)}
+          />
+        </ListItem>
+
+      </View>
+      
+      {/* More */}
+      <More />
+
+      {/* Log out */}
+      <ListItem Component={TouchableHighlight} onPress={handleLogOut} containerStyle={{marginBottom: 50}}>
+        <ListItem.Content>
+          <ListItem.Title>Log out</ListItem.Title>
+        </ListItem.Content>
+        <Icon name="log-out" type='feather'/>
+      </ListItem>
+    </ScrollView>
   );
 };
 
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  userImage: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -254,9 +215,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   settingContainer: {
-    marginVertical: 20,
-  },
-  moreContainer: {
     marginVertical: 20,
   },
   accordionContainer: {

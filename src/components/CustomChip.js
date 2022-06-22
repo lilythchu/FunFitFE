@@ -11,14 +11,8 @@ const CustomChip = ({text, icon, array, ...props}) => {
         ? <Chip
             title={text}
             type='outline'
-            // icon={{
-            //   name: icon,
-            //   type: 'font-awesome',
-            //   size: 20,
-            // }}
-            containerStyle={styles.container}
-            mode="outlined"
-            selectedColor={globalColors.navyBlue}
+            containerStyle={[styles.container, {borderColor: globalColors.cream}]}
+            selectedColor={globalColors.blueGrotto}
             onPress={() => {
               setIsSelected(!isSelected);
               array.push(text);
@@ -36,8 +30,7 @@ const CustomChip = ({text, icon, array, ...props}) => {
             }}
             iconRight
             containerStyle={styles.container}
-            mode="outlined"
-            selectedColor={globalColors.navyBlue}
+            selectedColor={globalColors.blueGrotto}
             onPress={() => {
               setIsSelected(!isSelected);
               array.pop(text);
@@ -56,7 +49,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 5,
     height: 40,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: globalColors.navyBlue,
   }
 });
