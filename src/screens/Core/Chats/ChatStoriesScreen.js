@@ -4,16 +4,16 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   FlatList,
 } from 'react-native';
 import Stories from '../../../components/Chats/Stories';
 import {Chats} from '../../../components/Chats/ChatItem';
-import { useNavigation } from '@react-navigation/native';
-import globalColors from '../../../../styles/colors';
-import { globalStyles } from '../../../../styles/global';
 import { StoryItem } from '../../../components/Chats/Stories';
 import userData from '../../../../assets/data/userData';
+import { useNavigation } from '@react-navigation/native';
+
+import globalColors from '../../../../styles/colors';
+import { globalStyles } from '../../../../styles/global';
 
 const ChatStoriesScreen = () => {
   const navigation = useNavigation();
@@ -25,10 +25,6 @@ const ChatStoriesScreen = () => {
         <View style={{padding: 10, justifyContent: 'center'}}>
           <Text style={{fontSize: 30}}>Chats</Text>
         </View>
-        {/* <StoryItem
-          item={{name: 'Your story', photo: require('../../../../assets/images/australia.png')}}    
-          navigation={navigation}  
-        /> */}
       </View>
 
       {/* Stories */}

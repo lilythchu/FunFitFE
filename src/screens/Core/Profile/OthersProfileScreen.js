@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, ScrollView} from 'react-native'
 import React, {useState} from 'react'
 import { Icon, Image} from '@rneui/themed';
-import globalColors from '../../../../styles/colors';
 import CustomButton from '../../../components/CustomButton';
-import { globalStyles } from '../../../../styles/global';
+import globalStyles from '../../../../styles/global';
+import globalColors from '../../../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
-import Achievement from '../../../components/User/Achievement';
+import Achievements from '../../../components/Profile/Achievements';
 
 const OthersProfileScreen = () => {
   const navigation = useNavigation();
@@ -41,7 +41,7 @@ const OthersProfileScreen = () => {
         title='Request'
         onPress={addFriend}
       />
-      <Achievement />
+      <Achievements />
 
     </ScrollView>
   )

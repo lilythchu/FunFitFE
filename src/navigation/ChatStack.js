@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ChatStoriesScreen from '../screens/MainScreen/Chats/ChatStoriesScreen';
-import StoryScreen from '../screens/MainScreen/Chats/StoryScreen';
-import ChatScreen from '../screens/MainScreen/Chats/ChatScreen';
-import OthersProfileScreen from '../screens/MainScreen/Profile/OthersProfileScreen';
+
+import ChatStoriesScreen from '../screens/Core/Chats/ChatStoriesScreen';
+import StoryScreen from '../screens/Core/Chats/StoryScreen';
+import ChatScreen from '../screens/Core/Chats/ChatScreen';
+import OthersProfileScreen from '../screens/Core/Profile/OthersProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const ChatStack= () => {

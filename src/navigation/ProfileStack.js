@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProfileScreen from '../screens/MainScreen/Profile/ProfileScreen';
+
+import ProfileScreen from '../screens/Core/Profile/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const ProfileStack = () => {

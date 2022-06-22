@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
+import * as Speech from 'expo-speech';
+import { Audio } from 'expo-av';
 import { Text, View, StyleSheet, ScrollView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import * as Speech from 'expo-speech';
 import { arrayToSum } from '../../../../utils/methods';
 import CustomButton from '../../../components/CustomButton';
-import {globalStyles} from '../../../../styles/global';
-import { Audio } from 'expo-av';
+import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
 
 const PlayAudio = () => {

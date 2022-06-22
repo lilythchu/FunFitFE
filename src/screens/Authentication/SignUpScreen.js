@@ -13,7 +13,7 @@ import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import {globalStyles} from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 import Picture from '../../../assets/images/signup.png';
 import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
 import {signupURL, userURL} from '../../../api/client';

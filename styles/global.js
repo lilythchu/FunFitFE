@@ -2,7 +2,7 @@ import {StyleSheet, Platform} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimensions';
 import globalColors from './colors';
 
-export const globalStyles = StyleSheet.create({
+const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -98,3 +98,5 @@ export const globalStyles = StyleSheet.create({
     borderTopRightRadius: 20,
   },
 });
+
+export default globalStyles;

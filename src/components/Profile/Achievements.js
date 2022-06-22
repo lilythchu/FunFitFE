@@ -27,7 +27,7 @@ const images = [
   },
 ]
 
-const Achievement = () => {
+const Achievements = () => {
   return (
     <View style={styles.galleryContainer}>
       <Text style={styles.galleryText}>Achievement</Text>
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Achievement;
+export default Achievements;

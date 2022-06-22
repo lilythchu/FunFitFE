@@ -1,7 +1,7 @@
 import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import React from 'react'
-import CustomChip from './CustomChip'
-import globalColors from '../../styles/colors'
+import CustomChip from '../CustomChip'
+import globalColors from '../../../styles/colors'
 
 const GenreChip = ({interests}) => {
   return (

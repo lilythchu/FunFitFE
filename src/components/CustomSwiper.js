@@ -12,21 +12,21 @@ const CustomSwiper = () => {
         activeDotColor="#FF6347">
         <View style={styles.slide}>
           <Image
-            source={require('../../assets/banners/swiper1.png')}
+            source={require('../../assets/images/swiper1.png')}
             resizeMode="cover"
             style={styles.slideImage}
           />
         </View>
         <View style={styles.slide}>
           <Image
-            source={require('../../assets/banners/swiper2.png')}
+            source={require('../../assets/images/swiper2.png')}
             resizeMode="cover"
             style={styles.slideImage}
           />
         </View>
         <View style={styles.slide}>
           <Image
-            source={require('../../assets/banners/swiper3.png')}
+            source={require('../../assets/images/swiper3.png')}
             resizeMode="cover"
             style={styles.slideImage}
           />

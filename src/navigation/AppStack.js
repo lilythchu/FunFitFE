@@ -4,9 +4,9 @@ import globalColors from '../../styles/colors.js';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Icon } from '@rneui/themed';
 
-import CalendarScreen from '../screens/MainScreen/CalendarScreen.js';
-import NotiScreen from '../screens/MainScreen/NotiScreen.js';
-import RoutineStack from './RoutineStack.js';
+import HomeStack from './HomeStack.js';
+import CalendarScreen from '../screens/Core/CalendarScreen.js';
+import NotiScreen from '../screens/Core/NotiScreen.js';
 import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
 
@@ -20,7 +20,7 @@ const AppStack = () => {
     >
       <Tab.Screen 
         name='Home'
-        component={RoutineStack}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name='home' type='feather' size={size} color={color} />
