@@ -36,11 +36,11 @@ const OthersProfileScreen = () => {
           <Text style={styles.userName}>Name</Text>
         </View>
       </View>
-      <CustomButton 
+      {/* <CustomButton 
         type='FIFTH'
         title='Request'
         onPress={addFriend}
-      />
+      /> */}
       <Achievements />
 
     </ScrollView>

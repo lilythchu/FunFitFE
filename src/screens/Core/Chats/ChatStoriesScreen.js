@@ -7,6 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import Stories from '../../../components/Chats/Stories';
+import MyStories from '../../../components/Chats/MyStories';
 import {Chats} from '../../../components/Chats/ChatItem';
 import { StoryItem } from '../../../components/Chats/Stories';
 import userData from '../../../../assets/data/userData';
@@ -21,11 +22,13 @@ const ChatStoriesScreen = () => {
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}} showsHorizontalScrollIndicator={false}>
       {/* Header */}
-      <View style={{flexDirection: 'row', padding: 10, justifyContent: 'space-between'}}>
+      <View style={{flexDirection: 'row', padding: 20, justifyContent: 'space-between'}}>
         <View style={{padding: 10, justifyContent: 'center'}}>
           <Text style={{fontSize: 30}}>Chats</Text>
         </View>
+        <MyStories navigation={navigation}/>
       </View>
+
 
       {/* Stories */}
       <Text style={styles.title}>Stories</Text>

@@ -68,10 +68,10 @@ const StoryScreen = () => {
       />
 
       {/* Emotion */}
-      <View style={styles.emotionContainer}>
+      {/* <View style={styles.emotionContainer}>
         <Feather name='heart' />
         <Feather name='heart' />
-      </View>
+      </View> */}
 
       {/* Send Message */}
       <View style={styles.footerContainer}>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 7,
-    width: '100%',
+    width: '98%',
     borderWidth: 1,
     backgroundColor: 'gray',
     borderRadius: 10,
