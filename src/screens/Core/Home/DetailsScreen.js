@@ -8,15 +8,14 @@ import {
   ScrollView,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { useRoute,  useNavigation } from '@react-navigation/native';
-import globalColors from '../../../../styles/colors';
 import CustomButton from '../../../components/CustomButton';
-import { globalStyles } from '../../../../styles/global';
-import images from '../../../../assets/images/australia.png';
-import { useLogin } from '../../../../context/AuthProvider';
-import { addRoutineURL } from '../../../../api/client';
-import { arrayToString } from '../../../../utils/methods';
 import Img from '../../../../assets/images/australia.png';
+import globalColors from '../../../../styles/colors';
+import globalStyles from '../../../../styles/global';
+import { useLogin } from '../../../../context/AuthProvider';
+import { useRoute,  useNavigation } from '@react-navigation/native';
+import { arrayToString } from '../../../../utils/methods';
+import { addRoutineURL } from '../../../../api/client';
 import axios from 'axios';
 
 const DetailsScreen = () => {
@@ -25,14 +24,6 @@ const DetailsScreen = () => {
   const {token} = useLogin();
   const {item} = route.params;
   const onStart = () => {
-    // axios
-    //   .post(addRoutineURL, item, {headers : {"Authorization": `Bearer ${token}`}})
-    //   .then(response => {
-    //     navigation.navigate('Routine');
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
     navigation.navigate('Video', {item})
   }
 

@@ -1,19 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import RoutineScreen from '../screens/MainScreen/Routine/RoutineScreen.js';
-import DetailsScreen from '../screens/MainScreen/Routine/DetailsScreen.js';
-import RecScreen from '../screens/MainScreen/Routine/RecScreen.js';
-import PlayVideo from '../screens/MainScreen/Routine/PlayVideo.js';
-import AddRoutineScreen from '../screens/MainScreen/Routine/AddRoutineScreen.js';
-import EditRoutineScreen from '../screens/MainScreen/Routine/EditRoutineScreen.js';
-import PlayAudio from '../screens/MainScreen/Routine/PlayAudio.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import HomeScreen from '../screens/Core/Home/HomeScreen.js';
+import DetailsScreen from '../screens/Core/Home/DetailsScreen.js';
+import RecScreen from '../screens/Core/Home/RecScreen.js';
+import PlayVideo from '../screens/Core/Home/PlayVideo.js';
+import AddRoutineScreen from '../screens/Core/Home/AddRoutineScreen.js';
+import EditRoutineScreen from '../screens/Core/Home/EditRoutineScreen.js';
+import PlayAudio from '../screens/Core/Home/PlayAudio.js';
+
 const Stack = createNativeStackNavigator();
-const RoutineStack = () => {
+const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name='Routine' component={RoutineScreen} />
+      <Stack.Screen name='Routine' component={HomeScreen} />
       <Stack.Screen
         name='Audio'
         component={PlayAudio}
@@ -67,4 +68,4 @@ const RoutineStack = () => {
   )
 }
 
-export default RoutineStack;
+export default HomeStack;

@@ -10,11 +10,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import RecCard from '../../../components/RecCard';
-import discoverData from '../../../../assets/data/discoverData';
-import {windowWidth} from '../../../../utils/Dimensions';
-import { globalStyles } from '../../../../styles/global';
+import RecCard from '../../../components/Home/RecCard';
 import categoriesData from '../../../../assets/data/categoriesData';
+import globalStyles from '../../../../styles/global';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomButton from '../../../components/CustomButton';
 

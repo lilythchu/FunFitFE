@@ -7,12 +7,12 @@ import {
 } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import GenreChip from '../../components/Profile/GenreChip';
 import { useLogin } from '../../../context/AuthProvider';
-import { globalStyles } from '../../../styles/global';
 import { useForm } from 'react-hook-form';
+import globalStyles from '../../../styles/global';
 import { updateProfileURL } from '../../../api/client';
 import axios from 'axios';
-import GenreChip from '../../components/GenreChip';
 
 const ExtraInfoScreen = () => {
   const [loading, setLoading] = useState(false);

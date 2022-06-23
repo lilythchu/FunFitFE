@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import axios from 'axios';
-import { uploadImageURL, downloadPicURL } from '../../../api/client';
 import { Avatar } from '@rneui/themed';
 import globalColors from '../../../styles/colors';
+import { uploadImageURL, downloadPicURL } from '../../../api/client';
+import axios from 'axios';
 
 const UserPic= ({token, names}) => {
   const [image, setImage] = useState(null);

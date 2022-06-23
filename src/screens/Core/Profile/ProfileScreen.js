@@ -10,18 +10,18 @@ import {
   ActivityIndicator,
   Button,
 } from 'react-native';
-import { globalStyles } from '../../../styles/global';
-import { useLogin } from '../../../context/AuthProvider.js'
 import { ListItem, Icon, Avatar, Switch, Overlay } from '@rneui/themed';
-import CustomInput from '../../components/CustomInput';
-import CustomButton from '../../components/CustomButton';
-import { useForm } from 'react-hook-form';
-import { updateProfileURL } from '../../../api/client';
-import globalColors from '../../../styles/colors';
+import GenreChip from '../../../components/Profile/GenreChip';
+import UserPic from '../../../components/Profile/UserPic';
+import More from '../../../components/Profile/More';
+import CustomInput from '../../../components/CustomInput';
+import CustomButton from '../../../components/CustomButton';
+import { useLogin } from '../../../../context/AuthProvider.js'
 import { useNavigation } from '@react-navigation/native';
-import GenreChip from '../../components/GenreChip';
-import UserPic from '../../components/Profile/UserPic';
-import More from '../../components/Profile/More';
+import { useForm } from 'react-hook-form';
+import { updateProfileURL } from '../../../../api/client';
+import globalColors from '../../../../styles/colors';
+import globalStyles from '../../../../styles/global';
 import axios from 'axios';
 
 const ProfileScreen = () => {

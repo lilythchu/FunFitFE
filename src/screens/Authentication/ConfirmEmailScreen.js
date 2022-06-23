@@ -4,7 +4,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import {globalStyles} from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 
 const ConfirmEmailScreen = () => {
   const {control, handleSubmit} = useForm();

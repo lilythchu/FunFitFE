@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ListItem, Icon } from '@rneui/themed';
-import { globalStyles } from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 
 const More = () => {
   return (
