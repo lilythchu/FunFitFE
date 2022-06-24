@@ -24,7 +24,7 @@ const UserPic= ({token, names}) => {
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      await setImage(result.uri);
       uploadImage();
     };
   };

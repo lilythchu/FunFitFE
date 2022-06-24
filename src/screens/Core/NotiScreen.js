@@ -6,19 +6,37 @@ import {
   ScrollView,
   TouchableOpacity,
   TouchableHighlight,
+  Button,
 } from 'react-native';
 import { ListItem, Icon } from '@rneui/themed';
 import NotiCard from '../../components/Mails/NotiCard.js';
+import { useNavigation } from '@react-navigation/native';
+
 import globalStyles from '../../../styles/global.js';
 import globalColors from '../../../styles/colors.js';
 
+
 const NotiScreen = () => {
+  const navigation = useNavigation();
   const [task, setTask] = useState();
-  const [taskItems, setTaskItems] = useState([]);
+  const [taskItems, setTaskItems] = useState([
+    {
+      title: "Let's get started",
+      titleIcon: '️🏋️️🔥',
+      body: "Discover our workout library",
+      screen: 'Recommended',
+    },
+    {
+      title: "Creat ur own routine",
+      titleIcon: '️🚀',
+      body: "Let's try and customize by your own",
+      screen: 'AddRoutine',
+    }
+  ]);
 
   const deleteAllNoti = () => {
     console.log("delete all");
-    setTask(null);
+    setTaskItems([]);
   }
 
   const handleAddNoti = () => {
@@ -27,10 +45,11 @@ const NotiScreen = () => {
     setTask(null);
   }
 
-  const completeNoti = (index) => {
+  const completeNoti = (index, item) => {
     let itemsCopy = [...taskItems];
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy)
+    navigation.navigate('Home', {screen: item.screen})
   }
 
   return (
@@ -43,20 +62,16 @@ const NotiScreen = () => {
         </ListItem.Content>
       </ListItem>
 
-      {/* Noti Lists */}
-      <View style={styles.notiWrapper}>
-        <View style={styles.items}>
-          {
-            taskItems.map((item, index) => {
-              return (
-                <TouchableOpacity key={index}  onPress={() => completeTask(index)}>
-                  <NotiCard />
-                </TouchableOpacity>
-              )
-            })
-          }
-        </View>
+      <View>
+        {taskItems.map((item, index) => {
+          return (
+            <TouchableOpacity key={index} onPress={()=> completeNoti(index, item)}>
+              <NotiCard item={item} />
+            </TouchableOpacity>
+          )
+        })}
       </View>
+
       <TouchableOpacity style={styles.trashContainer} onPress={deleteAllNoti}>
         <Icon name='trash-2' type='feather' size={30}/>
       </TouchableOpacity>
