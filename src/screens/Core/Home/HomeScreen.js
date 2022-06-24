@@ -66,10 +66,10 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <ScrollView
+      <ScrollView
         showsVerticalScrollIndicator={false}
         style={globalStyles.scrollView}
-      > */}
+      >
 
         {/*Header*/}
         <View style={styles.menuWrapper}>
@@ -145,8 +145,7 @@ const HomeScreen = () => {
             )}
           </View>
         </View>
-
-      {/* </ScrollView> */}
+      </ScrollView>
     </View>
   );
 }
@@ -156,8 +155,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: 'white',
   },
   profileImage: {
     width: 52,
