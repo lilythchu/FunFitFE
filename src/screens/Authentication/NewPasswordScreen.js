@@ -12,7 +12,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import {globalStyles} from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 import { resetpwdURL } from '../../../api/client';
 import axios from 'axios';
 import {Icon} from '@rneui/themed';

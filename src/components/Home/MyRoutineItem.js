@@ -8,15 +8,15 @@ import {
   Alert,
   ScrollView
 } from 'react-native';
-import { globalStyles } from '../../styles/global';
-import coverImg from '../../assets/images/australia.png';
-import globalColors from '../../styles/colors';
-import Feather from 'react-native-vector-icons/Feather';
-import CustomButton from './CustomButton';
-import { ProgressBar } from 'react-native-paper';
-import { deleteRoutineURL, editRoutineURL } from '../../api/client';
 import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
-import { arrayToSteps, arrayToString, arrayToTime } from '../../utils/methods';
+import { ProgressBar } from 'react-native-paper';
+import Feather from 'react-native-vector-icons/Feather';
+import CustomButton from '../CustomButton';
+import coverImg from '../../../assets/images/australia.png';
+import globalStyles from '../../../styles/global';
+import globalColors from '../../../styles/colors';
+import { arrayToSteps, arrayToString, arrayToTime } from '../../../utils/methods';
+import { deleteRoutineURL, editRoutineURL } from '../../../api/client';
 import axios from 'axios';
 
 const MyRoutineItem = ({navigation, item, token}) => {

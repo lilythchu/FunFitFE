@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 10,
   },
-
   btn: {
     borderWidth: 0,
     borderRadius: 30,
@@ -42,8 +41,8 @@ const styles = StyleSheet.create({
   btn_THIRD: {
     marginHorizontal: 30,
     backgroundColor: globalColors.babyBlue,
-    alignItems: 'center',
     borderRadius: 20,
+    alignItems: 'center',
   },
   btn_FOURTH: {
     alignSelf: 'center',
@@ -52,6 +51,12 @@ const styles = StyleSheet.create({
     backgroundColor: globalColors.inactive,
     height: windowHeight/18,
     width: windowWidth/2,
+  },
+  btn_FIFTH: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    width: 150,
   },
   btn_FACE: {
     backgroundColor: '#e6eaf4',
@@ -76,6 +81,10 @@ const styles = StyleSheet.create({
   title_FOURTH: {
     fontSize: 18,
     color: 'white',
+  },
+  title_FITH: {
+    fontSize: 20,
+    color: 'white'
   },
   title_FACE: {
     marginLeft: 10,

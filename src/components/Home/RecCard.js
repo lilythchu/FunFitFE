@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { globalStyles } from '../../styles/global';
+import globalStyles from '../../../styles/global';
 
 const RecCard = ({item, navigation}) => {
   return (

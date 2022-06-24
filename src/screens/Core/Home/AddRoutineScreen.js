@@ -11,14 +11,14 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
-import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
 import { ListItem } from '@rneui/themed';
-import { globalStyles } from '../../../../styles/global';
-import { addRoutineURL } from '../../../../api/client';
-import { useLogin } from '../../../../context/AuthProvider';
-import axios from 'axios';
 import globalColors from '../../../../styles/colors';
+import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import { useLogin } from '../../../../context/AuthProvider';
+import globalStyles from '../../../../styles/global';
+import { addRoutineURL } from '../../../../api/client';
+import axios from 'axios';
 
 const AddRoutineScreen = () => {
   const {token} = useLogin();

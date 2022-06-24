@@ -8,18 +8,18 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { ListItem } from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
+import globalColors from '../../../../styles/colors';
+import globalStyles from '../../../../styles/global';
+import { useLogin } from '../../../../context/AuthProvider';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { ListItem } from '@rneui/themed';
-import { globalStyles } from '../../../../styles/global';
-import {editRoutineURL} from '../../../../api/client';
-import { useLogin } from '../../../../context/AuthProvider';
 import { arrayToString } from '../../../../utils/methods';
+import {editRoutineURL} from '../../../../api/client';
 import axios from 'axios';
-import globalColors from '../../../../styles/colors';
 
 const EditRoutineScreen = () => {
   const {token} = useLogin();

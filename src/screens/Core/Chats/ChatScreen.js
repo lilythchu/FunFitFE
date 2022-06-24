@@ -1,10 +1,12 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const ChatScreen = () => {
+  const {item} = useRoute().params;
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -16,7 +18,8 @@ const ChatScreen = () => {
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
+          // avatar: 'https://placeimg.com/140/140/any',
+          avatar: item.photo,
         },
       },
       {
