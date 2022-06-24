@@ -4,10 +4,12 @@ import { useRoute } from '@react-navigation/native';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { io } from 'socket.io-client';
 
 const ChatScreen = () => {
   const {item} = useRoute().params;
   const [messages, setMessages] = useState([]);
+  const socket = io.connect("https://orbital-funfit.herokuapp.com");
 
   useEffect(() => {
     setMessages([
@@ -18,7 +20,7 @@ const ChatScreen = () => {
         user: {
           _id: 2,
           name: 'React Native',
-          // avatar: 'https://placeimg.com/140/140/any',
+          //avatar: 'https://placeimg.com/140/140/any',
           avatar: item.photo,
         },
       },
