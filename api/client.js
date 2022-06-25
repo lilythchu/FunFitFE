@@ -11,6 +11,7 @@ export const deleteRoutineURL = "https://orbital-funfit.herokuapp.com/routine/de
 export const editRoutineURL = "https://orbital-funfit.herokuapp.com/routine/editRoutine";
 export const uploadImageURL = "https://orbital-funfit.herokuapp.com/user/upload";
 export const downloadPicURL = "https://orbital-funfit.herokuapp.com/user/downloadPic";
+export const getAllConvosURL = "https://orbital-funfit.herokuapp.com/chat/getAllConvos";
 
 //export default axios.create({baseURL: "https://orbital-funfit.herokuapp.com"});
 // export const loginURL = "https://secret-garden-61740.herokuapp.com/https://orbital-funfit.herokuapp.com/user/login";

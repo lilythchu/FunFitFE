@@ -8,9 +8,10 @@ import {
 } from 'react-native';
 import Stories from '../../../components/Chats/Stories';
 import MyStories from '../../../components/Chats/MyStories';
-import {Chats} from '../../../components/Chats/ChatItem';
+import Chats from '../../../components/Chats/Chats';
 import { StoryItem } from '../../../components/Chats/Stories';
 import userData from '../../../../assets/data/userData';
+import { useLogin } from '../../../../context/AuthProvider';
 import { useNavigation } from '@react-navigation/native';
 
 import globalColors from '../../../../styles/colors';
@@ -18,6 +19,7 @@ import { globalStyles } from '../../../../styles/global';
 
 const ChatStoriesScreen = () => {
   const navigation = useNavigation();
+  const {token} = useLogin();
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}} showsHorizontalScrollIndicator={false}>
@@ -50,7 +52,7 @@ const ChatStoriesScreen = () => {
 
       {/* Chats */}
       <Text style={styles.title}>Chats</Text>
-      <Chats navigation={navigation} />
+      <Chats navigation={navigation} token={token} />
     </ScrollView>
   )
 }
