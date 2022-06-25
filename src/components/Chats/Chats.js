@@ -18,7 +18,6 @@ const Chats = ({navigation, token}) => {
       .get(getAllConvosURL, {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setConvos(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -38,10 +37,17 @@ const Chats = ({navigation, token}) => {
   )
 }
 
+const socket = io.connect("https://orbital-funfit.herokuapp.com/chatFunfit");
+
 const ChatItem = ({item, navigation}) => {
 
+  const joinRoom = () => {
+    socket.emit("join", {chatId: item.convoId})
+    navigation.navigate('Chat', {item, socket})
+  }
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={joinRoom}>
       <Image
         source={require('../../../assets/images/australia.png')}
         style={styles.image}
