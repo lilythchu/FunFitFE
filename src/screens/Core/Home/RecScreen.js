@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,54 +8,86 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RecCard from '../../../components/Home/RecCard';
-import categoriesData from '../../../../assets/data/categoriesData';
-import globalStyles from '../../../../styles/global';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomButton from '../../../components/CustomButton';
 
-const CategoryList = () => {
-  const [selectedId, setSelectedId] = useState(null);
+import { useNavigation, useRoute } from '@react-navigation/native';
+import globalStyles from '../../../../styles/global';
+import categoriesData from '../../../../assets/data/categoriesData';
+import { useLogin } from '../../../../context/AuthProvider';
 
-  const renderCategoryItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => setSelectedId(item.id)}
-        style={styles.categoryItemWrapper}>
-        <Text
-          style={[
-            styles.categoryItemText,
-            {
-              color: item.id === selectedId ? 'orange' : 'gray'
-            },
-          ]}>
-          {item.title}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+import { getGenreURL } from '../../../../api/client';
+import axios from 'axios';
 
-  return (
-    <View style={styles.categoryWrapper}>
-      <View style={styles.categoryItemsWrapper}>
-        <FlatList
-          data={categoriesData}
-          renderItem={renderCategoryItem}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          extraData={selectedId}
-        />
-      </View>
-    </View>
-  );
-};
 
 const RecScreen = () => {
   const navigation = useNavigation();
-  const {recData} = useRoute().params;
+  const {token} = useLogin();
+  const [recData, setRecData] = useState([]);
+  const [selectedId, setSelectedId] = useState('type-1');
+  const [selectedGenre, setSelectedGenre] = useState('cardio');
+  const [loading, setLoading] = useState(false);
+
+  const getByGenre = (genre) => {
+    setLoading(true);
+    axios
+      .get(getGenreURL, {
+        headers: {"Authorization": `Bearer ${token}`},
+        params: {genre: genre}
+      })
+      .then(res => {
+        setLoading(false);
+        setRecData(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  useEffect(() => {
+    getByGenre(selectedGenre);
+  }, [recData]);
+  
+  const CategoryList = () => {
+    const renderCategoryItem = ({item}) => {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSelectedId(item.id);
+            setSelectedGenre(item.title);
+          }}
+          style={styles.categoryItemWrapper}>
+          <Text
+            style={[
+              styles.categoryItemText,
+              {
+                color: item.id === selectedId ? 'orange' : 'gray'
+              },
+            ]}>
+            {item.title}
+          </Text>
+        </TouchableOpacity>
+      );
+    };
+
+    return (
+      <View style={styles.categoryWrapper}>
+        <View style={styles.categoryItemsWrapper}>
+          <FlatList
+            data={categoriesData}
+            renderItem={renderCategoryItem}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            extraData={selectedId}
+          />
+        </View>
+      </View>
+    );
+  };
   
   const renderRecCard = ({item}) => {
     return (
@@ -65,7 +97,7 @@ const RecScreen = () => {
 
   return (
     <View style={{flex: 1, padding: 20, backgroundColor: 'white'}}>
-      {/* <CategoryList /> */}
+      <CategoryList />
       <FlatList
         data={recData}
         showsVerticalScrollIndicator={false}

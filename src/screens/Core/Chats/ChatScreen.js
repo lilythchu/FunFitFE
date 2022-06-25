@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
@@ -6,36 +6,43 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const ChatScreen = () => {
-  const {item} = useRoute().params;
+  const {item, socket} = useRoute().params;
+  const friendId = item.friend[0]._id;
+  const friendName = item.friend[0].name;
+
+  const isRendered = useRef(false);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hi <3',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          // avatar: 'https://placeimg.com/140/140/any',
-          avatar: item.photo,
-        },
-      },
-      {
-        _id: 2,
-        text: '-.- ^-^',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
+    socket.on("receive new message", (data) => {
+      if (data.sender !== friendId) {
+        if (!isRendered.current) {
+          var mess = {
+            user: {
+              _id: data.sender,
+              name: friendName,
+            },
+            text: data.content,
+            createAt: new Date(),
+          }
+          setMessages((previousMessages) =>
+            GiftedChat.append(previousMessages, mess),
+          );
+        }
+      }
+    })
+    return () => {
+      isRendered.current = true;
+    };
   }, []);
 
   const onSend = useCallback((messages = []) => {
+    var sendMessage = {
+      content: messages[0].text,
+      userId: friendId,
+    };
+    
+    socket.emit("send new message", sendMessage);
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages),
     );
@@ -61,14 +68,12 @@ const ChatScreen = () => {
       <Bubble
         {...props}
         wrapperStyle={{
-          right: {
-            backgroundColor: 'pink',
-          },
+          right: { backgroundColor: 'pink', },
+          left: {backgroundColor: 'pink'},
         }}
         textStyle={{
-          right: {
-            color: 'black',
-          },
+          right: { color: 'black', },
+          left: {color: 'black',},
         }}
       />
     );
@@ -83,15 +88,17 @@ const ChatScreen = () => {
   return (
     <GiftedChat
       messages={messages}
-      onSend={(messages) => onSend(messages)}
+      onSend={newMessages => onSend(newMessages)}
       user={{
-        _id: 1,
+        _id: friendId,
+        name: friendName,
       }}
       renderBubble={renderBubble}
       alwaysShowSend
       renderSend={renderSend}
       scrollToBottom
       scrollToBottomComponent={scrollToBottomComponent}
+      renderUsernameOnMessage={true}
     />
   );
 };

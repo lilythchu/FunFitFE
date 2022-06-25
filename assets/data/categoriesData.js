@@ -1,31 +1,27 @@
 const categoriesData = [
   {
     id: 'type-1',
-    title: 'All',
+    title: 'cardio',
   },
   {
     id: 'type-2',
-    title: 'Cardio',
+    title: 'yoga',
   },
   {
     id: 'type-3',
-    title: 'Yoga',
+    title: 'pilates',
   },
   {
     id: 'type-4',
-    title: 'Pilates',
+    title: 'no-equipment',
   },
   {
     id: 'type-5',
-    title: 'No-Equipment',
+    title: 'fat-burning',
   },
   {
     id: 'type-6',
-    title: 'Fat-burning',
-  },
-  {
-    id: 'type-7',
-    title: 'Full-body-workout',
+    title: 'full-body-workout',
   },
 ];
 

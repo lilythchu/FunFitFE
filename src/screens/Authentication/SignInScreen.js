@@ -180,7 +180,7 @@ async function welcome() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "Welcome to Funfit! 📬",
-      body: 'Have a nice journey with us',
+      body: 'Have a nice day',
       data: { data: 'goes here' },
     },
     trigger: { seconds: 2 },

@@ -12,7 +12,21 @@ const ChatStack= () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name='ChatStory' component={ChatStoriesScreen} />
-      <Stack.Screen name='Chat' component={ChatScreen} />
+      <Stack.Screen
+        name='Chat'
+        component={ChatScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: 'white',
+          },
+          headerTintColor: 'gray',
+          headerTitleStyle: {
+            fontWeight: '400',
+            fontSize: 25,
+          },
+          headerShown: true,
+        }}
+      />
       <Stack.Screen name='Story' component={StoryScreen} />
       <Stack.Screen name='OtherProfile' component={OthersProfileScreen} />
     </Stack.Navigator>
