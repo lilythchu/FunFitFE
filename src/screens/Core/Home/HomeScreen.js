@@ -87,7 +87,7 @@ const HomeScreen = () => {
         {/* Recommended */}
         <View style={styles.discoverWrapper}>
           {/* Title */}
-          <TouchableOpacity onPress={() => navigation.navigate('Recommended', {recData})}>
+          <TouchableOpacity onPress={() => navigation.navigate('Recommended', {token})}>
             <ListItem>
               <ListItem.Content>
                 <ListItem.Title style={styles.titleText}>Discover</ListItem.Title>
