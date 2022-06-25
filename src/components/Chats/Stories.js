@@ -33,7 +33,7 @@ export const StoryItem = ({item, navigation, rounded}) => {
             onPress={() => navigation.navigate('OtherProfile')}
           />
       }
-      <Text style={styles.userName}>{item.name}</Text>
+      <Text style={styles.username}>{item.name}</Text>
     </View>
   );
 };
@@ -41,7 +41,7 @@ export const StoryItem = ({item, navigation, rounded}) => {
 const Stories = ({navigation}) => {
   
   return (
-    <View style={{flexDirection: 'row', paddingLeft: 20, paddingBottom: 15}}>
+    <View style={{paddingLeft: 20, paddingBottom: 15}}>
       <FlatList 
         data={userData}
         keyExtractor={item => item.id}
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: '#ffffff',
   },
-  userName: {
+  username: {
     textAlign: 'center',
     fontSize: 12,
     marginTop: 5,
