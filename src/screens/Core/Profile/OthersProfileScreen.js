@@ -1,17 +1,43 @@
-import { StyleSheet, Text, View, ScrollView} from 'react-native'
-import React, {useState} from 'react'
-import { Icon, Image} from '@rneui/themed';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import { Icon, Image, Avatar} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Achievements from '../../../components/Profile/Achievements';
+import { arrayToString } from '../../../../utils/methods';
+import { iconGender } from '../../../../utils/methods';
+
+import { initConvoURL } from '../../../../api/client';
+import axios from 'axios';
 
 const OthersProfileScreen = () => {
+  const {info, token} = useRoute().params;
+  const [request, setRequest] = useState(true);
   const navigation = useNavigation();
-  const addFriend = () => {
-    console.log("send request");
+  
+  const getStatus = () => {
+    axios
+      .post(initConvoURL,
+        {anotherUserId: info._id},
+        {headers: {"Authorization": `Bearer ${token}`}})
+      .then(res => {
+      })
+      .catch(err => {
+        setRequest(false);
+      });
+  }
+  
+  const initConvo = () => {
+    console.log("init Convo");
   };
+
+  const joinConvo = () => {
+    navigation.navigate('Chat')
+  }
+
+  useEffect(() => getStatus(), []);
 
   return (
     <ScrollView showsHorizontalScrollIndicator={false} style={globalStyles.scrollView}>
@@ -26,22 +52,44 @@ const OthersProfileScreen = () => {
       </View>
 
       <View style={{alignSelf: 'center'}}>
-        <View style={styles.profileImage}>
-          <Image
-            source={require('../../../../assets/images/australia.png')}
-            style={styles.profileImage}
-          />
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.userName}>Name</Text>
+        <Avatar 
+          size={150}
+          rounded
+          icon={{
+            type: 'font-awesome',
+            name: iconGender(info.sex)
+          }}
+          containerStyle={{backgroundColor: 'lightgray'}}
+        />
+        <View style={styles.nameContainer}>
+          <Text style={styles.username}>{info.name}</Text>
         </View>
       </View>
-      {/* <CustomButton 
-        type='FIFTH'
-        title='Request'
-        onPress={addFriend}
-      /> */}
-      <Achievements />
+
+      <View style={styles.infoContainer}>
+        <View style={[styles.subInfoContainer, {flex: 2, marginRight: 5}]}>
+          <Text style={styles.subTitle}>Workout Interests</Text>
+          <Text style={styles.text}>{arrayToString(info.workoutInterests)}</Text>
+        </View>
+        <View style={[styles.subInfoContainer, {flex: 1, marginLeft: 5}]}>
+          <Text style={styles.subTitle}>Age</Text>
+          <Text style={styles.text}>{info.age}</Text>
+        </View>
+      </View>
+      
+      { 
+        request
+          ? <CustomButton 
+              type='FIFTH'
+              title='Message'
+              onPress={initConvo}
+            />
+          : <CustomButton 
+              type='FIFTH'
+              title="Friend"
+            />
+      } 
+      {/* <Achievements /> */}
 
     </ScrollView>
   )
@@ -54,8 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  userName: {
-    fontWeight: '200',
+  username: {
+    fontWeight: '500',
     fontSize: 24,
   },
   image: {
@@ -75,9 +123,42 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     overflow: 'hidden',
   },
-  infoContainer: {
+  nameContainer: {
     alignSelf: 'center',
     alignItems: 'center',
     marginVertical: 16,
   },
+  infoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 20,
+  },
+  subInfoContainer: {
+    alignItems: 'center',
+    backgroundColor: globalColors.cream,
+    borderRadius: 10,
+    margin: 10,
+    padding: 5,
+  },
+  subTitle: {
+    fontSize: 18,
+    fontWeight: '400',
+    color: globalColors.username,
+  },
+  text: {
+    fontSize: 14,
+    padding: 5,
+    textAlign: 'center',
+  },
+  btnTitle: {
+    borderWidth: 1,
+    textAlign: 'center',
+    padding: 10,
+    fontSize: 20,
+    borderRadius: 5,
+    width: 150,
+    alignSelf: 'center',
+    borderColor: globalColors.blueFaded,
+    color: globalColors.navyBlue,
+  }
 })

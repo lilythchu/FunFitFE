@@ -9,6 +9,7 @@ import {
 import Stories from '../../../components/Chats/Stories';
 import MyStories from '../../../components/Chats/MyStories';
 import Chats from '../../../components/Chats/Chats';
+import Suggested from '../../../components/Chats/Suggested';
 import { StoryItem } from '../../../components/Chats/Stories';
 import userData from '../../../../assets/data/userData';
 import { useLogin } from '../../../../context/AuthProvider';
@@ -38,17 +39,7 @@ const ChatStoriesScreen = () => {
 
       {/* Suggested Friend List */}
       <Text style={styles.title}>Suggested Friend</Text>
-      <View style={{flexDirection: 'row', paddingLeft: 20, paddingBottom: 15}}>
-        <FlatList 
-          data={userData}
-          keyExtractor={item => item.id}
-          horizontal
-          renderItem={({item}) => (
-            <StoryItem item = {item} navigation={navigation} rounded={false} />
-          )}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
+      <Suggested navigation={navigation} token={token} />
 
       {/* Chats */}
       <Text style={styles.title}>Chats</Text>

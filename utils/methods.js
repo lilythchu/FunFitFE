@@ -46,4 +46,14 @@ export function arrayToSum(time) {
   return parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
 }
 
+export function iconGender(str) {
+  if (str === "Male") {
+    return 'male';
+  } else if (str === "Female") {
+    return 'female';
+  } else {
+    return 'pencil';
+  }
+}
+
 

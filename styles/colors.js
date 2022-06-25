@@ -7,6 +7,7 @@ const globalColors = {
   cream: '#f2f1f0',
   inactive: '#e6eaf4',
   gray: '#525750',
+  username: '#458452',
 };
 
 export default globalColors;
