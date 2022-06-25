@@ -15,7 +15,7 @@ import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import {globalStyles} from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 import {Checkbox} from 'react-native-paper';
 import {useLogin} from '../../../context/AuthProvider';
 import {loginURL, userURL} from '../../../api/client';

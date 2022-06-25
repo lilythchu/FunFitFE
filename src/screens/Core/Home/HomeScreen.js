@@ -3,29 +3,23 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   ScrollView,
-  ImageBackground,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
-import { useNavigation, NavigationAction } from '@react-navigation/native';
-import CustomSwiper from '../../../components/CustomSwiper';
-import coverImg from '../../../../assets/images/australia.png';
-import { globalStyles } from '../../../../styles/global';
-import globalColors from '../../../../styles/colors';
-import { ProgressBar } from 'react-native-paper';
-import RecRoutineItem from '../../../components/RecRoutineItem';
 import { ListItem, Header } from '@rneui/themed';
+import Feather from 'react-native-vector-icons/Feather';
+import MyRoutineItem from '../../../components/Home/MyRoutineItem';
+import RecRoutineItem from '../../../components/Home/RecRoutineItem';
+import CustomSwiper from '../../../components/CustomSwiper';
+import globalColors from '../../../../styles/colors';
+import globalStyles from '../../../../styles/global';
+import { useNavigation, NavigationAction } from '@react-navigation/native';
 import { useLogin } from '../../../../context/AuthProvider';
 import {getRecURL, getMyURL} from '../../../../api/client';
 import axios from "axios";
-import { Avatar } from '@rneui/themed';
-import CustomButton from '../../../components/CustomButton';
-import MyRoutineItem from '../../../components/MyRoutineItem';
 
-const RoutineScreen = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
   const {token, profile} = useLogin();
   const [recData, setRecData] = useState([]);
@@ -156,7 +150,7 @@ const RoutineScreen = () => {
   );
 }
 
-export default RoutineScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

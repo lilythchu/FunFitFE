@@ -7,8 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import cover from '../../assets/images/australia.png';
-import globalColors from '../../styles/colors';
+import globalColors from '../../../styles/colors';
 
 const RecRoutineItem = ({navigation, item}) => {
   return (

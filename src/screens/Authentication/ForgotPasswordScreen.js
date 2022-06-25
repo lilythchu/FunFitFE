@@ -12,7 +12,7 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 import { forgotURL } from '../../../api/client';
-import {globalStyles} from '../../../styles/global';
+import globalStyles from '../../../styles/global';
 import { EMAIL_REGEX } from '../../../utils/methods';
 import axios from 'axios';
 import Pic from '../../../assets/images/forgot.png';
