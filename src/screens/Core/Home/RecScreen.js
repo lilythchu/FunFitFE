@@ -17,6 +17,7 @@ import CustomButton from '../../../components/CustomButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import globalStyles from '../../../../styles/global';
 import categoriesData from '../../../../assets/data/categoriesData';
+import { useLogin } from '../../../../context/AuthProvider';
 
 import { getGenreURL } from '../../../../api/client';
 import axios from 'axios';
@@ -24,7 +25,7 @@ import axios from 'axios';
 
 const RecScreen = () => {
   const navigation = useNavigation();
-  const {token} = useRoute().params;
+  const {token} = useLogin();
   const [recData, setRecData] = useState([]);
   const [selectedId, setSelectedId] = useState('type-1');
   const [selectedGenre, setSelectedGenre] = useState('cardio');
