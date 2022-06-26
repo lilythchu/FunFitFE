@@ -127,9 +127,9 @@ const MyRoutineItem = ({navigation, item, token}) => {
                 Steps:
               </ListItem.Title>
           </ListItem>
-          {/* <View style={{paddingHorizontal: 20}}>
+          <View style={{paddingHorizontal: 20}}>
             {arrayToSteps(item.steps, item.timings)}
-          </View> */}
+          </View>
         </ScrollView>
         <CustomButton
           type='SECOND'

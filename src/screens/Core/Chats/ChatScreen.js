@@ -37,8 +37,8 @@ const ChatScreen = () => {
               user: {
                 _id: dataMessages[i].sender,
                 name: dataMessages[i].sender === users[0]._id
-                      ? users[0].name
-                      : users[1].name
+                      ? users[1].name
+                      : users[0].name
               },
               text: dataMessages[i].content,
               createdAt: dataMessages[i].createdAt
