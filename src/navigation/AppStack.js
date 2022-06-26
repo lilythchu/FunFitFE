@@ -76,7 +76,14 @@ const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name='Main' component={BottomTab} />
-      <Stack.Screen name='Chat' component={ChatScreen} />
+      <Stack.Screen
+        name='Chat'
+        component={ChatScreen}
+        options={({route}) => ({
+          title: route.params.item.friend[0].name,
+          headerShown: true
+        })}
+      />
       <Stack.Screen name='OtherProfile' component={OthersProfileScreen} />
     </Stack.Navigator>
   );
