@@ -14,6 +14,7 @@ export const getMyURL = "https://orbital-funfit.herokuapp.com/routine/getMyRouti
 export const deleteRoutineURL = "https://orbital-funfit.herokuapp.com/routine/deleteRoutine";
 export const editRoutineURL = "https://orbital-funfit.herokuapp.com/routine/editRoutine";
 export const getGenreURL = "https://orbital-funfit.herokuapp.com/routine/getRoutinesByGenre";
+export const addDayURL = "https://orbital-funfit.herokuapp.com/routine/addDaysFollow";
 
 export const getAllConvosURL = "https://orbital-funfit.herokuapp.com/chat/getAllConvos";
 export const getRecFrdURL = "https://orbital-funfit.herokuapp.com/story/recommendedFriends";

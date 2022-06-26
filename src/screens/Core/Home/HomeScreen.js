@@ -52,18 +52,6 @@ const HomeScreen = () => {
     getMyData();
   }, [myData]);
 
-  const renderMyRoutines= ({item}) => {
-    return (
-      <MyRoutineItem navigation={navigation} item={item} token={token}/>
-    );
-  };
-
-  const renderRecRoutines = ({item}) => {
-    return (
-      <RecRoutineItem item={item} navigation={navigation} />
-    )
-  }
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -106,7 +94,9 @@ const HomeScreen = () => {
             {recData && (
               <FlatList
                 data={recData}
-                renderItem={renderRecRoutines}
+                renderItem={({item}) => (
+                  <RecRoutineItem item={item} navigation={navigation} />
+                )}
                 keyExtractor={(item) => item._id}
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -136,7 +126,9 @@ const HomeScreen = () => {
             {myData && (
               <FlatList
                 data={myData}
-                renderItem={renderMyRoutines}
+                renderItem={({item}) => (
+                  <MyRoutineItem navigation={navigation} item={item} token={token}/>
+                )}
                 keyExtractor={(item) => item._id}
                 numColumns={2}
                 columnWrapperStyle={{justifyContent: 'space-between'}}
@@ -178,6 +170,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   myRoutineWrapper: {
+    marginBottom: 20,
   },
   myRoutineTitle: {
     fontSize: 24,

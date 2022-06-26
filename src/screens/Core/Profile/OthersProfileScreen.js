@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native';
 import { Icon, Image, Avatar} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
+import Chervon from '../../../components/Chervon';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -14,42 +15,31 @@ import axios from 'axios';
 
 const OthersProfileScreen = () => {
   const {info, token} = useRoute().params;
-  const [request, setRequest] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   
-  const getStatus = () => {
+  const initConvo = () => {
+    setLoading(true);
     axios
       .post(initConvoURL,
         {anotherUserId: info._id},
         {headers: {"Authorization": `Bearer ${token}`}})
       .then(res => {
+        setLoading(false);
+        navigation.navigate('ChatStory');
       })
       .catch(err => {
-        setRequest(false);
+        navigation.navigate('ChatStory');
       });
-  }
-  
-  const initConvo = () => {
-    console.log("init Convo");
   };
 
   const joinConvo = () => {
     navigation.navigate('Chat')
   }
 
-  useEffect(() => getStatus(), []);
-
   return (
     <ScrollView showsHorizontalScrollIndicator={false} style={globalStyles.scrollView}>
-      <View style={styles.titleBar}>
-        <Icon
-          name='chevron-left'
-          size={32}
-          type='entypo'
-          color={globalColors.gray}
-          onPress={() => navigation.goBack()}  
-        />
-      </View>
+      <Chervon navigation={navigation} color={globalColors.blueFaded}/>
 
       <View style={{alignSelf: 'center'}}>
         <Avatar 
@@ -60,6 +50,7 @@ const OthersProfileScreen = () => {
         />
         <View style={styles.nameContainer}>
           <Text style={styles.username}>{info.name}</Text>
+          <Text style={styles.bio}>{info.lifestyleTarget}</Text>
         </View>
       </View>
 
@@ -74,18 +65,15 @@ const OthersProfileScreen = () => {
         </View>
       </View>
       
-      { 
-        request
-          ? <CustomButton 
-              type='FIFTH'
-              title='Message'
-              onPress={initConvo}
-            />
-          : <CustomButton 
-              type='FIFTH'
-              title="Friend"
-            />
-      } 
+      {
+        loading
+        ? <ActivityIndicator size='large' /> 
+        : <CustomButton 
+            type='FIFTH'
+            title='Message'
+            onPress={initConvo}
+          />
+      }
       {/* <Achievements /> */}
 
     </ScrollView>
@@ -101,7 +89,7 @@ const styles = StyleSheet.create({
   },
   username: {
     fontWeight: '500',
-    fontSize: 24,
+    fontSize: 28,
   },
   image: {
     flex: 1,
@@ -124,6 +112,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     marginVertical: 16,
+  },
+  bio: {
+    fontSize: 18,
   },
   infoContainer: {
     flexDirection: 'row',

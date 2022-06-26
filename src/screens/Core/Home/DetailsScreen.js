@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../../components/CustomButton';
+import Chervon from '../../../components/Chervon';
 import Img from '../../../../assets/images/australia.png';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
@@ -32,15 +33,11 @@ const DetailsScreen = () => {
 
       {/* Image backgound */}
       <ImageBackground
-        //source={{uri: item.thumbnail}}
         source={Img}
         style={globalStyles.imageBackground}>
-        {/* Back Icon */}
-        <TouchableOpacity
-          style={globalStyles.backIcon}
-          onPress={() => navigation.goBack()}>
-          <Entypo name='chevron-left' size={32} color='white' />
-        </TouchableOpacity>
+
+        <Chervon navigation={navigation} color='white' />
+
         {/* Name & Genre */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.itemTitle}>{item.name}</Text>
@@ -177,6 +174,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 18,
+    textTransform: 'capitalize',
     color: globalColors.babyBlue,
   },
   infoNum: {

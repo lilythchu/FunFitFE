@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  TouchableHighlight,
   ActivityIndicator,
   Button,
 } from 'react-native';
@@ -41,7 +40,7 @@ const ProfileScreen = () => {
   const updateUserInfo = data => {
     setLoading(true);
     axios
-      .post(updateProfileURL, data, {headers: {"Authorization": `Bearer ${token}`}})
+      .put(updateProfileURL, data, {headers: {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setProfile(response.data);
         setLoading(false);
@@ -62,7 +61,7 @@ const ProfileScreen = () => {
   const onChangeInterests = () => {
     setLoading2(true);
     axios
-      .post(updateProfileURL, 
+      .put(updateProfileURL, 
         {"workoutInterests": interests},
         {headers: {"Authorization": `Bearer ${token}`}}
       )
@@ -124,7 +123,7 @@ const ProfileScreen = () => {
               leftIcon={<Text>Age</Text>}
               keyboardType='numeric'
               type='THIRD'
-              placeholder="Age"
+              placeholder={profile.age.toString()}
               control={control}
             />
             {loading 
@@ -187,7 +186,7 @@ const ProfileScreen = () => {
       <More />
 
       {/* Log out */}
-      <ListItem Component={TouchableHighlight} onPress={handleLogOut} containerStyle={{marginBottom: 50}}>
+      <ListItem Component={TouchableOpacity} onPress={handleLogOut} containerStyle={{marginBottom: 50}}>
         <ListItem.Content>
           <ListItem.Title>Log out</ListItem.Title>
         </ListItem.Content>
@@ -201,18 +200,17 @@ export default ProfileScreen;
 
 const styles = StyleSheet.create({
   userName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
     textAlign: 'center',
   },
   aboutUser: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: '600',
     color: '#666',
     textAlign: 'center',
-    marginBottom: 10,
   },
   settingContainer: {
     marginVertical: 20,
