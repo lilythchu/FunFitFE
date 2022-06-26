@@ -19,6 +19,9 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install --force
+      - name: Gradlew 
+        run: |
+          chmod +x ./gradlew
       - name: Build Android Release
         run: |
           cd android && ./gradlew assembleRelease
