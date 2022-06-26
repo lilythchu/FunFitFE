@@ -13,6 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RecCard from '../../../components/Home/RecCard';
 import CustomButton from '../../../components/CustomButton';
+import Chervon from '../../../components/Chervon';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import globalStyles from '../../../../styles/global';
@@ -22,13 +23,11 @@ import { useLogin } from '../../../../context/AuthProvider';
 import { getGenreURL } from '../../../../api/client';
 import axios from 'axios';
 
-
 const RecScreen = () => {
   const navigation = useNavigation();
   const {token} = useLogin();
   const [recData, setRecData] = useState([]);
-  const [selectedId, setSelectedId] = useState('type-1');
-  const [selectedGenre, setSelectedGenre] = useState('cardio');
+  const [selectedId, setSelectedId] = useState();
   const [loading, setLoading] = useState(false);
 
   const getByGenre = (genre) => {
@@ -39,17 +38,13 @@ const RecScreen = () => {
         params: {genre: genre}
       })
       .then(res => {
-        setLoading(false);
         setRecData(res.data);
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
       })
   }
-
-  useEffect(() => {
-    getByGenre(selectedGenre);
-  }, [recData]);
   
   const CategoryList = () => {
     const renderCategoryItem = ({item}) => {
@@ -57,7 +52,7 @@ const RecScreen = () => {
         <TouchableOpacity
           onPress={() => {
             setSelectedId(item.id);
-            setSelectedGenre(item.title);
+            getByGenre(item.title);
           }}
           style={styles.categoryItemWrapper}>
           <Text
@@ -88,22 +83,22 @@ const RecScreen = () => {
       </View>
     );
   };
-  
-  const renderRecCard = ({item}) => {
-    return (
-      <RecCard item={item} navigation={navigation} />
-    );
-  };
 
   return (
     <View style={{flex: 1, padding: 20, backgroundColor: 'white'}}>
       <CategoryList />
-      <FlatList
-        data={recData}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item._id}
-        renderItem={renderRecCard}
-      />
+      { 
+        loading
+          ? <ActivityIndicator size='large' />
+          : <FlatList
+              data={recData}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item._id}
+              renderItem={({item}) => (
+                <RecCard item={item} navigation={navigation} />
+              )}
+            />
+      }
     </View>
   );
 };
@@ -123,6 +118,7 @@ const styles = StyleSheet.create({
   },
   categoryItemText: {
     fontSize: 18,
+    textTransform: 'capitalize',
   },
 });
 

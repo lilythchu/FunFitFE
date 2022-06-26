@@ -8,8 +8,12 @@ import { arrayToSum } from '../../../../utils/methods';
 import CustomButton from '../../../components/CustomButton';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
+import { useLogin } from '../../../../context/AuthProvider';
+import { addDayURL } from '../../../../api/client';
+import axios from 'axios';
 
 const PlayAudio = () => {
+  const {token} = useLogin();
   const [ith, setIth] = useState(0);
   const [startTimer, setStartTimer] = useState(false);
   const [playingSound, setPlayingSound] = useState(false);
@@ -33,6 +37,15 @@ const PlayAudio = () => {
         setPlayingSound(true);
       }
     });
+  }
+
+  const addDayFollow = () => {
+    axios
+      .post(addDayURL,
+        {id: item._id},
+        {headers: {"Authorization": `Bearer ${token}`}}
+      )
+      .catch(err => console.log(err));
   }
 
   const onPause = async () => {
@@ -61,6 +74,7 @@ const PlayAudio = () => {
   const nextStep = () => {
     if (ith === steps.length) {
       Speech.speak("Done");
+      addDayFollow();
       setStartTimer(false);
       setPlayingSound(false);
       setDone(true);

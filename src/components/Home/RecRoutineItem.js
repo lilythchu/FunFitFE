@@ -16,15 +16,9 @@ const RecRoutineItem = ({navigation, item}) => {
       style={styles.container}
     >
       <ImageBackground
-        source={{
-          uri: item.thumbnail
-        }}
+        source={{uri: item.thumbnail}}
         style={styles.discoverItem}
         imageStyle={styles.discoverItemImage}>
-        {/* <View style={styles.discoverItemLocationWrapper}>
-          <Entypo name="dumbbell" size={18} color={'white'} />
-          <Text style={styles.discoverItemLocationText}>{item.genre}</Text>
-        </View> */}
       </ImageBackground>
       <Text style={styles.discoverItemTitle}>{item.name}</Text>
     </TouchableOpacity>
@@ -39,8 +33,8 @@ const styles = StyleSheet.create({
     backgroundColor: globalColors.cream,
   },
   discoverItem: {
-    width: 246,
-    height: 138,
+    width: 196,
+    height: 110,
     justifyContent: 'flex-end',
     paddingHorizontal: 10,
     paddingVertical: 15,
@@ -50,9 +44,10 @@ const styles = StyleSheet.create({
   },
   discoverItemTitle: {
     padding: 10,
+    paddingBottom: 5,
     fontSize: 14,
     color: 'black',
-    width: 246,
+    width: 196,
     fontWeight: '500',
   },
   discoverItemLocationWrapper: {

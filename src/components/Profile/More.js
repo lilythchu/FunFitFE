@@ -37,6 +37,6 @@ export default More;
 
 const styles = StyleSheet.create({
   moreContainer: {
-    marginVertical: 20,
+    marginVertical: 10,
   },
 });

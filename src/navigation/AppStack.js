@@ -36,7 +36,7 @@ const AppStack = () => {
           )
         }}
       />
-      <Tab.Screen 
+      {/* <Tab.Screen 
         name='Calendar'
         component={CalendarScreen}
         options={{
@@ -44,7 +44,7 @@ const AppStack = () => {
             <Icon name='calendar' type='feather' size={size} color={color} />
           )
         }}
-      />
+      /> */}
       <Tab.Screen 
         name='Notification'
         component={NotiScreen}
