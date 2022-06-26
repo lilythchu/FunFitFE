@@ -1,29 +1,79 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useLogin } from '../../../../context/AuthProvider';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import globalColors from '../../../../styles/colors';
+
+import { getAConvosURL } from '../../../../api/client';
+import axios from 'axios';
 
 const ChatScreen = () => {
+  const {token} = useLogin();
   const {item, socket} = useRoute().params;
   const friendId = item.friend[0]._id;
   const friendName = item.friend[0].name;
-
   const isRendered = useRef(false);
+
   const [messages, setMessages] = useState([]);
+  const [isLoadingEarlier, setIsLoadingEarlier] = useState(true);
+
+  const fetchMessages = () => {
+    axios
+      .get(getAConvosURL, {
+        headers: {"Authorization": `Bearer ${token}`},
+        params: {convoId: item.convoId}
+      })
+      .then(res => {
+        var Data = [];
+        const users = res.data.users;
+        const dataMessages = res.data.messages
+        if (dataMessages !== null) {
+          for (let i = dataMessages.length - 1; i >= 0; i--) {
+            Data.push({
+              _id: dataMessages[i]._id,
+              user: {
+                _id: dataMessages[i].sender,
+                name: dataMessages[i].sender === users[0]._id
+                      ? users[1].name
+                      : users[0].name
+              },
+              text: dataMessages[i].content,
+              createdAt: dataMessages[i].createdAt
+            })
+          }
+          setMessages((previousMessages) => 
+            GiftedChat.append(previousMessages, Data)
+          );
+          setIsLoadingEarlier(false);
+        }
+      })
+      .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    initMessages();
+  }, [])
+
+  const initMessages = () => {
+    fetchMessages();
+  }
 
   useEffect(() => {
     socket.on("receive new message", (data) => {
+      console.log(data);
       if (data.sender !== friendId) {
         if (!isRendered.current) {
           var mess = {
+            _id: data._id,
             user: {
               _id: data.sender,
               name: friendName,
             },
             text: data.content,
-            createAt: new Date(),
+            createdAt: data.createdAt,
           }
           setMessages((previousMessages) =>
             GiftedChat.append(previousMessages, mess),
@@ -68,8 +118,8 @@ const ChatScreen = () => {
       <Bubble
         {...props}
         wrapperStyle={{
-          right: { backgroundColor: 'pink', },
-          left: {backgroundColor: 'pink'},
+          right: { backgroundColor: globalColors.sent},
+          left: {backgroundColor: globalColors.received},
         }}
         textStyle={{
           right: { color: 'black', },
@@ -86,20 +136,20 @@ const ChatScreen = () => {
   }
 
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={newMessages => onSend(newMessages)}
-      user={{
-        _id: friendId,
-        name: friendName,
-      }}
-      renderBubble={renderBubble}
-      alwaysShowSend
-      renderSend={renderSend}
-      scrollToBottom
-      scrollToBottomComponent={scrollToBottomComponent}
-      renderUsernameOnMessage={true}
-    />
+      <GiftedChat
+        messages={messages}
+        onSend={newMessages => onSend(newMessages)}
+        user={{
+          _id: friendId,
+          name: friendName,
+        }}
+        alwaysShowSend
+        renderSend={renderSend}
+        scrollToBottom
+        scrollToBottomComponent={scrollToBottomComponent}
+        renderUsernameOnMessage={true}
+        loadEarlier={isLoadingEarlier}
+      />
   );
 };
 

@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Icon } from '@rneui/themed';
 import globalColors from '../../../styles/colors';
 import { getUserURL } from '../../../api/client';
-import { iconGender } from '../../../utils/methods';
+import { avaGender } from '../../../utils/methods';
 import axios from 'axios';
 
-const IconAvatars = ({id, navigation, token}) => {
+const GenderAvatars = ({id, navigation, token}) => {
   const [info, setInfo] = useState({});
   const getInfo = () => {
     axios
@@ -29,10 +29,7 @@ const IconAvatars = ({id, navigation, token}) => {
       <Avatar 
         size={64}
         rounded
-        icon={{
-          type: 'font-awesome',
-          name: iconGender(info.sex)
-        }}
+        source={avaGender(info.sex)}
         containerStyle={{backgroundColor: 'lightgray'}}
         onPress={() => navigation.navigate('OtherProfile', {info, token})}
       />
@@ -41,7 +38,7 @@ const IconAvatars = ({id, navigation, token}) => {
   )
 }
 
-export default IconAvatars
+export default GenderAvatars;
 
 const styles = StyleSheet.create({
   container: {

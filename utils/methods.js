@@ -1,4 +1,7 @@
 import {ListItem, Text} from '@rneui/themed';
+import female from '../assets/images/australia.png';
+import male from '../assets/images/male.png';
+import others from '../assets/images/others.png';
 
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -46,13 +49,13 @@ export function arrayToSum(time) {
   return parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
 }
 
-export function iconGender(str) {
+export function avaGender(str) {
   if (str === "Male") {
-    return 'male';
+    return male;
   } else if (str === "Female") {
-    return 'female';
+    return female;
   } else {
-    return 'pencil';
+    return others;
   }
 }
 

@@ -8,6 +8,8 @@ const globalColors = {
   inactive: '#e6eaf4',
   gray: '#525750',
   username: '#458452',
+  sent: '#6ad5e6',
+  received: '#524d4d'
 };
 
 export default globalColors;
