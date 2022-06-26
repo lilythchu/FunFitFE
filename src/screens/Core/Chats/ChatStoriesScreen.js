@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 import Stories from '../../../components/Chats/Stories';
 import MyStories from '../../../components/Chats/MyStories';
 import Chats from '../../../components/Chats/Chats';
@@ -25,11 +26,12 @@ const ChatStoriesScreen = () => {
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}} showsHorizontalScrollIndicator={false}>
       {/* Header */}
-      <View style={{flexDirection: 'row', padding: 20, justifyContent: 'space-between'}}>
+      <View style={styles.headerContainer}>
         <View style={{padding: 10, justifyContent: 'center'}}>
           <Text style={{fontSize: 30}}>Chats</Text>
         </View>
-        <MyStories navigation={navigation}/>
+        {/* <MyStories navigation={navigation}/> */}
+        <Feather name='message-circle' size={27} style={{padding: 10}} />
       </View>
 
 
@@ -51,6 +53,11 @@ const ChatStoriesScreen = () => {
 export default ChatStoriesScreen
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    padding: 20,
+    justifyContent: 'space-between',
+  },
   title: {
     fontSize: 20,
     fontWeight: '500',
