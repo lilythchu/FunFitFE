@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import globalColors from '../../styles/colors.js';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Icon } from '@rneui/themed';
 
 import HomeStack from './HomeStack.js';
@@ -9,10 +10,13 @@ import CalendarScreen from '../screens/Core/CalendarScreen.js';
 import NotiScreen from '../screens/Core/NotiScreen.js';
 import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
+import ChatScreen from '../screens/Core/Chats/ChatScreen.js';
+import OthersProfileScreen from '../screens/Core/Profile/OthersProfileScreen.js';
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const AppStack = () => {
+const BottomTab = () => {
   return (
     <Tab.Navigator
       activeColor={globalColors.blueGrotto}
@@ -30,11 +34,12 @@ const AppStack = () => {
       <Tab.Screen 
         name='Chats'
         component={ChatStack}
-        options={{
+        options={({route}) => ({
           tabBarIcon: ({color, size}) => (
             <Icon name='message-square' type='feather' size={size} color={color} />
-          )
-        }}
+          ),
+    
+        })}
       />
       {/* <Tab.Screen 
         name='Calendar'
@@ -64,6 +69,16 @@ const AppStack = () => {
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const AppStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name='Main' component={BottomTab} />
+      <Stack.Screen name='Chat' component={ChatScreen} />
+      <Stack.Screen name='OtherProfile' component={OthersProfileScreen} />
+    </Stack.Navigator>
   );
 };
 
