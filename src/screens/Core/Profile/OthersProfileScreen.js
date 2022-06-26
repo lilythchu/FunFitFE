@@ -7,7 +7,7 @@ import globalColors from '../../../../styles/colors';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Achievements from '../../../components/Profile/Achievements';
 import { arrayToString } from '../../../../utils/methods';
-import { iconGender } from '../../../../utils/methods';
+import { avaGender } from '../../../../utils/methods';
 
 import { initConvoURL } from '../../../../api/client';
 import axios from 'axios';
@@ -55,10 +55,7 @@ const OthersProfileScreen = () => {
         <Avatar 
           size={150}
           rounded
-          icon={{
-            type: 'font-awesome',
-            name: iconGender(info.sex)
-          }}
+          source={avaGender(info.sex)}
           containerStyle={{backgroundColor: 'lightgray'}}
         />
         <View style={styles.nameContainer}>

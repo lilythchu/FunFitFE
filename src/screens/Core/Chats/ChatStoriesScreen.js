@@ -34,15 +34,15 @@ const ChatStoriesScreen = () => {
 
 
       {/* Stories */}
-      <Text style={styles.title}>Stories</Text>
-      <Stories navigation={navigation} />
+      {/* <Text style={styles.title}>Stories</Text>
+      <Stories navigation={navigation} /> */}
 
       {/* Suggested Friend List */}
-      <Text style={styles.title}>Suggested Friend</Text>
+      <Text style={styles.title}>Suggested Friends</Text>
       <Suggested navigation={navigation} token={token} />
 
       {/* Chats */}
-      <Text style={styles.title}>Chats</Text>
+      <Text style={styles.title}>Messages</Text>
       <Chats navigation={navigation} token={token} />
     </ScrollView>
   )

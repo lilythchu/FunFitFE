@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { getAllConvosURL } from "../../../api/client";
+import { avaGender } from "../../../utils/methods";
 import { io } from 'socket.io-client';
 import axios from "axios";
 
@@ -48,18 +49,20 @@ const ChatItem = ({item, navigation}) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={joinRoom}>
-      <Image
-        source={require('../../../assets/images/australia.png')}
-        style={styles.image}
-      />
-      <View style={styles.rightContainer}>
-        <View style={styles.row}>
-          <Text style={styles.name}>{item.friend[0].name}</Text>
-          <Text style={styles.text}>{item.updateAt}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{paddingVertical: 15, paddingLeft: 30}} >
+          <Image
+            style={styles.userImg}
+            source={require('../../../assets/images/defaultAva.png')}
+          />
         </View>
-        <Text numberOfLines={1} style={styles.text}>
-          {item.latestMessage}
-        </Text>
+        <View style={styles.textSection}>
+          <View style={styles.userInfoText}>
+            <Text style={styles.username}>{item.friend[0].name}</Text>
+            <Text style={styles.postTime}>{item.updateAt}</Text>
+          </View>
+          <Text style={styles.messageText}>{item.latestMessage}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -69,29 +72,38 @@ export default Chats;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    padding: 20,
+    width: '100%',
   },
-  image: {
-    height: 50,
-    width: 50,
-    borderRadius: 30,
-    marginRight: 10,
-  },
-  rightContainer: {
-    flex: 1,
+  textSection: {
+    flexDirection: 'column',
     justifyContent: 'center',
+    padding: 15, 
+    width: 300,
+    marginLeft: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
   },
-  row: {
+  userImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 25
+  },
+  userInfoText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 5,
   },
-  name: {
+  username: {
+    fontSize: 14,
     fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 3,
   },
-  text: {
-    color: 'grey',
-  }
+  postTime: {
+    fontSize: 12,
+    color: '#666',
+  },
+  messageText: {
+    fontSize: 14,
+    color: '#333333',
+  },
+
 });

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { StoryItem } from './Stories';
-import IconAvatars from '../Profile/IconAvatars';
+import GenderAvatars from '../Profile/GenderAvatars';
 import { getRecFrdURL } from '../../../api/client';
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ const Suggested = ({navigation, token}) => {
         keyExtractor={item => item.id}
         horizontal
         renderItem={({item}) => (
-          <IconAvatars id = {item} navigation={navigation} token={token} />
+          <GenderAvatars id = {item} navigation={navigation} token={token} />
         )}
         showsHorizontalScrollIndicator={false}
       />
