@@ -29,7 +29,7 @@ const NotiScreen = () => {
     {
       title: "Creat ur own routine",
       titleIcon: '️🚀',
-      body: "Let's try and customize by your own",
+      body: "Quickly create a routine by filling in exercise's names and respective timing",
       screen: 'AddRoutine',
     }
   ]);
