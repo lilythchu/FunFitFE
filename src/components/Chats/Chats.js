@@ -82,7 +82,7 @@ const ChatItem = ({item, navigation, token}) => {
           <Text style={styles.messageText}>{item.latestMessage}</Text>
         </View>
         <Feather
-          name='edit'
+          name='trash'
           onPress={toggleDialog}
           size={20}
           style={{paddingVertical: 10, paddingRight: 20}}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Avatar } from '@rneui/themed';
@@ -30,8 +30,7 @@ const UserPic= ({token, names}) => {
     console.log(result);
 
     if (!result.cancelled) {
-      await setImage(result.uri);
-      uploadImage();
+      setImage(result.uri);
     };
   };
 
@@ -44,6 +43,7 @@ const UserPic= ({token, names}) => {
     });
 
     try {
+      console.log(image);
       const res = await axios.post(uploadImageURL, formData, {
         headers: {
           Accept: 'application/json',
