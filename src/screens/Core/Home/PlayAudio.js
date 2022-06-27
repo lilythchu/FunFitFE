@@ -143,7 +143,7 @@ const PlayAudio = () => {
       >
         {({ remainingTime, color }) => (
           <Text style={{ color, fontSize: 40 }}>
-            {`${Math.floor(remainingTime / 60)} : ${remainingTime % 60}`}
+            {`${Math.floor(remainingTime / 3600)} : ${Math.floor((remainingTime % 3600) / 60)}: ${remainingTime % 60}`}
           </Text>
         )}
       </CountdownCircleTimer>
