@@ -10,7 +10,13 @@ const UserPic= ({token, names}) => {
   const [image, setImage] = useState(null);
 
   const downloadPic = () => {
-
+    axios
+      .get(downloadPicURL, {
+        headers: {"Authorizarion": `Bearer ${token}`},
+        params: {"content-type": image/png }
+      })
+      .then(res => setImage(res.data))
+      .catch(err => console.log(err))
   };
 
   const pickImage = async () => {
@@ -59,14 +65,14 @@ const UserPic= ({token, names}) => {
         title={names.charAt(0).toUpperCase()}
         containerStyle={{backgroundColor: globalColors.navyBlue}}
       >
-        {/* <Avatar.Accessory
+        <Avatar.Accessory
           size={23}
           name="camera"
           type="feather"
           onPress={pickImage}
           iconStyle={{color: 'black'}}
           style={{backgroundColor: globalColors.cream}}
-        />    */}
+        />   
       </Avatar>
     </View>
   )

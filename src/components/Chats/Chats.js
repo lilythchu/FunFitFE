@@ -7,8 +7,10 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import Feather from 'react-native-vector-icons/Feather';
+import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
 import LetterAva from "../Profile/LetterAva";
-import { getAllConvosURL } from "../../../api/client";
+import { getAllConvosURL, deleteConvoURL } from "../../../api/client";
 import { avaGender } from "../../../utils/methods";
 import { io } from 'socket.io-client';
 import axios from "axios";
@@ -42,11 +44,28 @@ const Chats = ({navigation, token}) => {
 
 const socket = io.connect("https://orbital-funfit.herokuapp.com/chatFunfit");
 
-const ChatItem = ({item, navigation}) => {
+const ChatItem = ({item, navigation, token}) => {
+  const [visibleDia, setVisibleDia] = useState(false);
+  const toggleDialog = () => {
+    setVisibleDia(!visibleDia);
+  }
   const friendName = item.friend[0].name;
   const joinRoom = () => {
     socket.emit("join", {chatId: item.convoId})
     navigation.navigate('Chat', {item, socket})
+  }
+
+  const deleteConvo = () => {
+    axios
+      .delete(deleteConvoURL, {
+        headers: {"Authorization": `Bearer ${token}`},
+        data: {
+          convoId: item.convoId,
+          anotherUserid: item.friend[0]._id,
+        }
+      })
+      .then(res => setVisibleDia(false))
+      .catch(err => console.log(err))
   }
 
   return (
@@ -62,7 +81,28 @@ const ChatItem = ({item, navigation}) => {
           </View>
           <Text style={styles.messageText}>{item.latestMessage}</Text>
         </View>
+        <Feather
+          name='edit'
+          onPress={toggleDialog}
+          size={20}
+          style={{paddingVertical: 10, paddingRight: 20}}
+        />
       </View>
+      
+      {/* Delete Chat Dialog */}
+      <ThemeProvider>
+        <Dialog 
+          isVisible={visibleDia}
+          onBackdropPress={toggleDialog}
+          overlayStyle={{borderRadius: 15}}
+        >
+          <Dialog.Title title='Are you sure want to delete' />
+          <Dialog.Actions>
+            <Dialog.Button title='Yes' onPress={deleteConvo}/>
+            <Dialog.Button title='No' onPress={toggleDialog}/>
+          </Dialog.Actions>
+        </Dialog>
+      </ThemeProvider>
     </TouchableOpacity>
   );
 };
@@ -76,7 +116,7 @@ const styles = StyleSheet.create({
   textSection: {
     flexDirection: 'column',
     justifyContent: 'center',
-    width: 300,
+    width: '55%',
     paddingHorizontal: 10,
     marginBottom: 10,
     borderTopWidth: 1,
