@@ -1,7 +1,7 @@
 import {ListItem, Text} from '@rneui/themed';
-import female from '../assets/images/australia.png';
-import male from '../assets/images/male.png';
-import others from '../assets/images/others.png';
+import female from '../assets/images/female.jpg';
+import male from '../assets/images/male.jpg';
+import others from '../assets/images/others.jpg';
 
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
