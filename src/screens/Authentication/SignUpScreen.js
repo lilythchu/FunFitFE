@@ -62,14 +62,6 @@ const SignUpScreen = () => {
       .then((response) => {
         setLoading(false);
         navigation.navigate('SignIn');
-        // setIsLoggedIn(true);
-        // const token = response.data.token;
-        // axios
-        //   .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
-        //   .then(response => {
-        //     setProfile(response.data);
-        //   })
-        //   .catch(error => console.log(error));
       })
       .catch(error => {
         setDismiss(false);
