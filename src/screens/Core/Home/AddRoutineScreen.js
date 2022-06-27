@@ -31,6 +31,12 @@ const AddRoutineScreen = () => {
 
   const onAddRoutine = data => {
     setLoading(true);
+    console.log(data);
+    for (let i = 0; i < number; i++) {
+      timings[i][0] = data[`h${i}`];
+      timings[i][1] = data[`min${i}`]
+      timings[i][2] = data[`sec${i}`]
+    }
     const body = {
       "name": data.name,
       "duration": [data.hdur, data.mindur, data.secdur],
@@ -38,7 +44,7 @@ const AddRoutineScreen = () => {
       "steps": steps,
       "timings": timings,
     };
-    console.log(data);
+    console.log(body);
     axios
       .post(addRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
@@ -64,7 +70,8 @@ const AddRoutineScreen = () => {
           placeholder={`Step ${i + 1}`}
           onChangeText={text => steps[i] = text}
         />
-        <View style={styles.timingContainer}>
+        <TimeInput control={control} num={i}/>
+        {/* <View style={styles.timingContainer}>
           <TextInput
             style={styles.textBox}
             keyboardType='numeric'
@@ -85,7 +92,7 @@ const AddRoutineScreen = () => {
             placeholder='00'
             onChangeText={number => timings[i][2] = number}
           />
-        </View>
+        </View> */}
       </View>
     )
   }
@@ -123,11 +130,10 @@ const AddRoutineScreen = () => {
           required: "Genre is required",
         }}
       />
-      <View style={styles.durationContainer}>
+      <View style={globalStyles.durationContainer}>
         <Text style={{fontSize: 16}}>Duration</Text>
         <TimeInput control={control} num='dur' />
       </View>
-
 
       <ListItem.Accordion
         style={{borderWidth: 1}}
@@ -177,12 +183,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  durationContainer: {
-    flexDirection: 'row',
-    paddingBottom: 10,
-    paddingLeft: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 })

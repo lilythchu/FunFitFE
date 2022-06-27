@@ -12,6 +12,7 @@ import { ListItem } from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
+import TimeInput from '../../../components/TimeInput';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
 import { useLogin } from '../../../../context/AuthProvider';
@@ -31,29 +32,39 @@ const EditRoutineScreen = () => {
   const {item} = useRoute().params;
 
   const onAddRoutine = data => {
+    for (let i = 0; i < number; i++) {
+      timings[i][0] = data[`h${i}`];
+      timings[i][1] = data[`min${i}`];
+      timings[i][2] = data[`sec${i}`];
+    }
     const body = {
       "id": item._id,
       "name": item.name,
-      "duration": item.duration,
+      "duration":
+        [
+          data.hdur === undefined ? item.duration[0] : data.hdur,
+          data.mindur === undefined ? item.duration[1] : data.mindur,
+          data.secdur === undefined ? item.duration[2] : data.secdur,
+        ],
       "genre": item.genre,
       "timings": item.timings,
-      "steps": item.steps,
     };
     if (data.name !== undefined) {body.name = data.name}
     if (data.genre !== undefined) {body.genre = data.genre}
     if (steps[0] !== undefined) {body.steps = steps}
     if (timings[0] !== undefined) {body.timings = timings}
-    if (duration[0] !== undefined) {body.duration = duration}
+    console.log(body);
+
     setLoading(true);
-    axios
-      .put(editRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
-      .then(response => {
-        setLoading(false);
-        navigation.navigate('Routine');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      axios
+        .put(editRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
+        .then(response => {
+          setLoading(false);
+          navigation.navigate('Routine');
+        })
+        .catch(error => {
+          console.log(error);
+        });
   }
 
   var myLoop = [];
@@ -62,6 +73,7 @@ const EditRoutineScreen = () => {
   var duration = [];
   
   for (let i = 0; i < number; i++) {
+    steps[i] = `Step ${i + 1}`
     timings[i] = new Array(3);
     myLoop.push(
       <View style={{flexDirection: 'row'}}> 
@@ -70,28 +82,7 @@ const EditRoutineScreen = () => {
           placeholder={`Step ${i + 1}`}
           onChangeText={text => steps[i] = text}
         />
-        <View style={styles.timingContainer}>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][0] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][1] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][2] = number}
-          />
-        </View>
+        <TimeInput control={control} num={i} />
       </View>
     )
   }
@@ -112,41 +103,62 @@ const EditRoutineScreen = () => {
       {/* Form */}
       <CustomInput 
         name="name"
-        leftIcon={<Text>Name</Text>}
+        leftIcon={<Text style={{fontSize: 16}}>Name</Text>}
         type="THIRD"
         placeholder={item.name}
         control={control}
       />
       <CustomInput 
         name="genre"
-        leftIcon={<Text>Genre</Text>}
+        leftIcon={<Text style={{fontSize: 16}}>Genre</Text>}
         type="THIRD"
         placeholder={arrayToString(item.genre)}
         control={control}
       />
 
       <View style={{flexDirection: 'row', paddingBottom: 10, paddingLeft: 10, alignItems: 'center'}}>
-        <Text>Duration</Text>
+        <Text style={{fontSize: 16}}>Duration</Text>
         <View style={styles.timingContainer}>
-          <TextInput
-            style={styles.textBox}
+          <CustomInput
+            type='TIME'
+            name='hdur'
+            control={control}
             keyboardType='numeric'
             placeholder={item.duration[0]}
-            onChangeText={number => duration[0] = number}
           />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
+          <CustomInput
+            type='TIME'
+            name='mindur'
+            control={control}
+            rules={{
+              max: {
+                value: 59,
+                message: 'invalid'
+              },
+              min: {
+                value: 0,
+                message: 'invalid'
+              }
+            }}
             keyboardType='numeric'
             placeholder={item.duration[1]}
-            onChangeText={number => duration[1] = number}
           />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
+          <CustomInput
+            type='TIME'
+            name='secdur'
+            control={control}
+            rules={{
+              max: {
+                value: 59,
+                message: 'invalid'
+              },
+              min: {
+                value: 0,
+                message: 'invalid'
+              }
+            }}
             keyboardType='numeric'
             placeholder={item.duration[2]}
-            onChangeText={number => duration[2] = number}
           />
         </View>
       </View>

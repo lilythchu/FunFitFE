@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import CustomInput from './CustomInput';
 import { useForm } from 'react-hook-form';
 
-const TimeInput = ({control, num}) => {
+const TimeInput = ({control, num, require = true }) => {
   return (
     <View style={styles.timeContainer}>
       <CustomInput 
@@ -13,7 +13,7 @@ const TimeInput = ({control, num}) => {
         control={control}
         rightIcon = {<Text>:</Text>}
         rules={{
-          required: 'hour'
+          required: 'hour',
         }}
       />
       <CustomInput 
