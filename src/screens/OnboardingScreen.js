@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar, Image} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -72,8 +72,7 @@ const OnboardingScreen = (props) => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <StatusBar translucent backgroundColor="transparent" />
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <AppIntroSlider
         keyExtractor={keyExtractor}
         renderItem={renderItem}
