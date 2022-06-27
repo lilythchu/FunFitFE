@@ -142,7 +142,7 @@ const PlayAudio = () => {
         }}
       >
         {({ remainingTime, color }) => (
-          <Text style={{ color, fontSize: 40 }}>
+          <Text style={{ color, fontSize: 35 }}>
             {`${Math.floor(remainingTime / 3600)} : ${Math.floor((remainingTime % 3600) / 60)}: ${remainingTime % 60}`}
           </Text>
         )}
