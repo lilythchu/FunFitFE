@@ -97,6 +97,13 @@ const globalStyles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
+  durationContainer: {
+    flexDirection: 'row',
+    paddingBottom: 10,
+    paddingLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 });
 
 export default globalStyles;

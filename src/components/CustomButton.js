@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginHorizontal: 20,
     marginVertical: 20,
+    marginBottom: 40,
     backgroundColor: globalColors.babyBlue,
-    height: windowHeight/18,
     width: windowWidth/2,
   },
   btn_THIRD: {
