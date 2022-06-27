@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import * as Notifications from 'expo-notifications';
 import {
-  StatusBar,
   ActivityIndicator,
   View,
   Text,
@@ -90,13 +89,6 @@ const SignInScreen = () => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
-      <StatusBar 
-        animated={true}
-        backgroundColor="black"
-        barStyle='default'
-        showHideTransition='slide'
-        hidden={false}
-      />
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
