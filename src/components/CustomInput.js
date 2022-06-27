@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
   },
   container_THIRD: {
   },
+  container_TIME: {
+    width: 70,
+  },
   iconLeft: {
     marginRight: 8,
     width: 24,

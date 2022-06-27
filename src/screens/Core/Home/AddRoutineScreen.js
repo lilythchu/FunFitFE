@@ -11,6 +11,7 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
+import TimeInput from '../../../components/TimeInput';
 import { ListItem } from '@rneui/themed';
 import globalColors from '../../../../styles/colors';
 import { useForm } from 'react-hook-form';
@@ -32,11 +33,12 @@ const AddRoutineScreen = () => {
     setLoading(true);
     const body = {
       "name": data.name,
-      "duration": duration,
+      "duration": [data.hdur, data.mindur, data.secdur],
       "genre": data.genre,
       "steps": steps,
       "timings": timings,
     };
+    console.log(data);
     axios
       .post(addRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
@@ -47,10 +49,10 @@ const AddRoutineScreen = () => {
         console.log(error);
       });
   }
-  var duration = ['00', '00', '00'];
   var myLoop = [];
   var steps = [];
   var timings = [];
+  var test = [];
 
   for (let i = 0; i < number; i++) {
     steps[i] = `Step ${i + 1}`;
@@ -105,7 +107,7 @@ const AddRoutineScreen = () => {
         name="name"
         placeholder="Name"
         type='THIRD'
-        leftIcon={<Text>Name</Text>}
+        leftIcon={<Text style={{fontSize: 16}}>Name</Text>}
         control={control}
         rules={{
           required: "Name is required",
@@ -114,38 +116,18 @@ const AddRoutineScreen = () => {
       <CustomInput 
         name="genre"
         type='THIRD'
-        leftIcon={<Text>Genre</Text>}
+        leftIcon={<Text style={{fontSize: 16}}>Genre</Text>}
         placeholder="Genre"
         control={control}
         rules={{
           required: "Genre is required",
         }}
       />
-      <View style={{flexDirection: 'row', paddingBottom: 10, paddingLeft: 10, alignItems: 'center'}}>
-        <Text>Duration</Text>
-        <View style={styles.timingContainer}>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => duration[0] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => duration[1] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => duration[2] = number}
-          />
-        </View>
+      <View style={styles.durationContainer}>
+        <Text style={{fontSize: 16}}>Duration</Text>
+        <TimeInput control={control} num='dur' />
       </View>
+
 
       <ListItem.Accordion
         style={{borderWidth: 1}}
@@ -195,5 +177,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  durationContainer: {
+    flexDirection: 'row',
+    paddingBottom: 10,
+    paddingLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 })
