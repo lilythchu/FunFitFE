@@ -1,21 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { Avatar } from '@rneui/themed';
+import { Avatar, Image } from '@rneui/themed';
 import globalColors from '../../../styles/colors';
+import {Buffer} from 'buffer';
 import { uploadImageURL, downloadPicURL } from '../../../api/client';
 import axios from 'axios';
 
 const UserPic= ({token, names}) => {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const downloadPic = () => {
+    setLoading(true);
     axios
       .get(downloadPicURL, {
-        headers: {"Authorizarion": `Bearer ${token}`},
-        params: {"content-type": image/png }
+        headers: {"Authorization": `Bearer ${token}`},
+        responseType: "arraybuffer",
       })
-      .then(res => setImage(res.data))
+      .then(response => {
+        let data = `data:${
+          response.headers["content-type"]
+        };base64,${new Buffer(response.data, "binary").toString("base64")}`;
+        setImage(data);
+        setLoading(false);
+      })
       .catch(err => console.log(err))
   };
 
@@ -30,31 +39,34 @@ const UserPic= ({token, names}) => {
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      await setImage(result.uri);
+      uploadImage(result.uri);
     };
   };
 
-  const uploadImage = async () => {
-    const formData = new FormData();
-    formData.append('file', {
+  const uploadImage = async (uri) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`); 
+    var formdata = new FormData();
+    formdata.append("file", {
+      uri: uri,
       name: 'file',
-      uri: image,
-      type: 'image/jpeg',
+      type: 'image/png',
     });
 
-    try {
-      console.log(image);
-      const res = await axios.post(uploadImageURL, formData, {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-          authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+    };
+
+    fetch(uploadImageURL, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  };
+
+  useEffect(() => downloadPic(), []);
 
   return (
     <View style={styles.userImage}>
