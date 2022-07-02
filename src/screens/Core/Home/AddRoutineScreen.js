@@ -8,18 +8,18 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { ListItem } from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';
-import { ListItem } from '@rneui/themed';
-import globalColors from '../../../../styles/colors';
+
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import { useLogin } from '../../../../context/AuthProvider';
 import globalStyles from '../../../../styles/global';
-import { addRoutineURL } from '../../../../api/client';
-import axios from 'axios';
+import globalColors from '../../../../styles/colors';
+import client from '../../../../api/client';
 
 const AddRoutineScreen = () => {
   const {token} = useLogin();
@@ -45,8 +45,8 @@ const AddRoutineScreen = () => {
       "timings": timings,
     };
     console.log(body);
-    axios
-      .post(addRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
+    client
+      .post('/routine/newRoutine', body, {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setLoading(false);
         navigation.navigate('Routine');
@@ -71,28 +71,6 @@ const AddRoutineScreen = () => {
           onChangeText={text => steps[i] = text}
         />
         <TimeInput control={control} num={i}/>
-        {/* <View style={styles.timingContainer}>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][0] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][1] = number}
-          />
-          <Text>:</Text>
-          <TextInput
-            style={styles.textBox}
-            keyboardType='numeric'
-            placeholder='00'
-            onChangeText={number => timings[i][2] = number}
-          />
-        </View> */}
       </View>
     )
   }

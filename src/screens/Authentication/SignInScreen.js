@@ -9,19 +9,18 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {Icon} from '@rneui/themed';
 import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
 import SocialSignInButtons from '../../components/SocialSignInButtons.js';
+
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
-import globalStyles from '../../../styles/global';
-import {Checkbox} from 'react-native-paper';
 import {useLogin} from '../../../context/AuthProvider';
-import {loginURL, userURL} from '../../../api/client';
 import {EMAIL_REGEX} from '../../../utils/methods';
-import {Icon} from '@rneui/themed';
-import axios from 'axios';
+import globalStyles from '../../../styles/global';
+import client from '../../../api/client';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -48,13 +47,13 @@ const SignInScreen = () => {
 
   const onSignInPressed = (credentials) => {
     setLoading(true);
-    axios
-      .post(loginURL, credentials)
+    client
+      .post('/user/login', credentials)
       .then((response) => {
         const token = response.data.token;
         setToken(token);
-        axios
-          .get(userURL, {headers: {"Authorization": `Bearer ${token}`}})
+        client
+          .get('/user/me', {headers: {"Authorization": `Bearer ${token}`}})
           .then(response => {
             if (response.data.age === undefined) {
               navigation.navigate("ExtraInfo");
@@ -127,13 +126,6 @@ const SignInScreen = () => {
           />
 
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
-            {/* <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-              <Checkbox 
-                status={check ? 'checked' : 'unchecked'}
-                onPress={() => setCheck(!check)}
-              />
-              <Text>Remember me</Text>
-            </View> */}
             <View style={{flex: 1, alignItems: 'flex-end'}}>
               <TouchableOpacity onPress={onForgotPasswordPressed}>
                 <Text style={globalStyles.link}>Forgot Password?</Text>

@@ -13,14 +13,14 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';
-import globalColors from '../../../../styles/colors';
-import globalStyles from '../../../../styles/global';
+
 import { useLogin } from '../../../../context/AuthProvider';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { arrayToString } from '../../../../utils/methods';
-import {editRoutineURL} from '../../../../api/client';
-import axios from 'axios';
+import globalColors from '../../../../styles/colors';
+import globalStyles from '../../../../styles/global';
+import client from '../../../../api/client';
 
 const EditRoutineScreen = () => {
   const {token} = useLogin();
@@ -56,8 +56,8 @@ const EditRoutineScreen = () => {
     console.log(body);
 
     setLoading(true);
-      axios
-        .put(editRoutineURL, body, {headers : {"Authorization": `Bearer ${token}`}})
+      client
+        .put('/routine/editRoutine', body, {headers : {"Authorization": `Bearer ${token}`}})
         .then(response => {
           setLoading(false);
           navigation.navigate('Routine');

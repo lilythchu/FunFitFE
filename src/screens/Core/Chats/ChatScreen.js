@@ -6,9 +6,7 @@ import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import globalColors from '../../../../styles/colors';
-
-import { getAConvosURL } from '../../../../api/client';
-import axios from 'axios';
+import client from '../../../../api/client';
 
 const ChatScreen = () => {
   const {token} = useLogin();
@@ -21,8 +19,8 @@ const ChatScreen = () => {
   const [isLoadingEarlier, setIsLoadingEarlier] = useState(true);
 
   const fetchMessages = () => {
-    axios
-      .get(getAConvosURL, {
+    client
+      .get('/chat/getAConvo', {
         headers: {"Authorization": `Bearer ${token}`},
         params: {convoId: item.convoId}
       })

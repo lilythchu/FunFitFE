@@ -16,8 +16,6 @@ import globalStyles from '../../../../styles/global';
 import { useLogin } from '../../../../context/AuthProvider';
 import { useRoute,  useNavigation } from '@react-navigation/native';
 import { arrayToString } from '../../../../utils/methods';
-import { addRoutineURL } from '../../../../api/client';
-import axios from 'axios';
 
 const DetailsScreen = () => {
   const navigation = useNavigation();

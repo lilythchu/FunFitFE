@@ -7,20 +7,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import Feather from 'react-native-vector-icons/Feather';
-import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
-import LetterAva from "../Profile/LetterAva";
-import { getAllConvosURL, deleteConvoURL } from "../../../api/client";
-import { avaGender } from "../../../utils/methods";
 import { io } from 'socket.io-client';
-import axios from "axios";
+import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
+import Feather from 'react-native-vector-icons/Feather';
+
+import LetterAva from "../Profile/LetterAva";
+import { avaGender } from "../../../utils/methods";
 import globalColors from "../../../styles/colors";
+import client from "../../../api/client";
 
 const Chats = ({navigation, token}) => {
   const [convos, setConvos] = useState([]);
   const getConvos = () => {
-    axios
-      .get(getAllConvosURL, {headers : {"Authorization": `Bearer ${token}`}})
+    client
+      .get('/chat/getAllConvos', {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setConvos(response.data);
       })
@@ -56,8 +56,8 @@ const ChatItem = ({item, navigation, token}) => {
   }
 
   const deleteConvo = () => {
-    axios
-      .delete(deleteConvoURL, {
+    client
+      .delete('/chat/deleteConvo', {
         headers: {"Authorization": `Bearer ${token}`},
         data: {
           convoId: item.convoId,

@@ -2,15 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import { StoryItem } from './Stories';
 import GenderAvatars from '../Profile/GenderAvatars';
-import { getRecFrdURL } from '../../../api/client';
-import axios from 'axios';
+import client from '../../../api/client';
 
 const Suggested = ({navigation, token}) => {
   const [friendIds, setFriendIds] = useState([]);
 
   const getRecFriendIds = () => {
-    axios
-      .get(getRecFrdURL, {headers: {"Authorization": `Bearer ${token}`}})
+    client
+      .get('/story/recommendedFriends', {headers: {"Authorization": `Bearer ${token}`}})
       .then(res => {
         setFriendIds(res.data);
       })

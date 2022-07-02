@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import * as Speech from 'expo-speech';
-import { Audio } from 'expo-av';
 import { Text, View, StyleSheet, ScrollView} from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { Audio } from 'expo-av';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import { arrayToSum } from '../../../../utils/methods';
 import CustomButton from '../../../components/CustomButton';
+
+import { useRoute } from '@react-navigation/native';
+import { arrayToSum } from '../../../../utils/methods';
+import { useLogin } from '../../../../context/AuthProvider';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
-import { useLogin } from '../../../../context/AuthProvider';
-import { addDayURL } from '../../../../api/client';
-import axios from 'axios';
+import client from '../../../../api/client';
 
 const PlayAudio = () => {
   const {token} = useLogin();
@@ -40,8 +40,7 @@ const PlayAudio = () => {
   }
 
   const addDayFollow = () => {
-    axios
-      .post(addDayURL,
+    client.post('/routine/addDaysFollow',
         {id: item._id},
         {headers: {"Authorization": `Bearer ${token}`}}
       )

@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+
+import Pic from '../../../assets/images/forgot.png';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import { forgotURL } from '../../../api/client';
-import globalStyles from '../../../styles/global';
-import { EMAIL_REGEX } from '../../../utils/methods';
-import axios from 'axios';
-import Pic from '../../../assets/images/forgot.png';
 import {useLogin} from '../../../context/AuthProvider';
+import { EMAIL_REGEX } from '../../../utils/methods';
+import globalStyles from '../../../styles/global';
+import client from '../../../api/client';
 
 const ForgotPasswordScreen = () => {
   const {control, handleSubmit} = useForm();
@@ -27,8 +27,8 @@ const ForgotPasswordScreen = () => {
 
   const onSendPressed = data => {
     setLoading(true);
-    axios
-      .post(forgotURL, data)
+    client
+      .post('/user/forgotPassword', data)
       .then((response) => {
         setLoading(false);
         const userId = response.data.userId;

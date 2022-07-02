@@ -8,19 +8,19 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
+import { Icon } from '@rneui/themed';
+import CountryPicker from 'react-native-country-picker-modal';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
+
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import globalStyles from '../../../styles/global';
-import Picture from '../../../assets/images/signup.png';
 import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
-import {signupURL, userURL} from '../../../api/client';
 import {useLogin} from '../../../context/AuthProvider';
-import { Icon } from '@rneui/themed';
-import CountryPicker from 'react-native-country-picker-modal';
-import axios from 'axios';
+import Picture from '../../../assets/images/signup.png';
+import globalStyles from '../../../styles/global';
+import client from '../../../api/client';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -57,8 +57,8 @@ const SignUpScreen = () => {
       "country": country
     }
     setLoading(true);
-    axios
-      .post(signupURL, userInfo)
+    client
+      .post('/user/signup', userInfo)
       .then((response) => {
         setLoading(false);
         navigation.navigate('SignIn');
