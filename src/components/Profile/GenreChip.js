@@ -1,31 +1,31 @@
-import { StyleSheet, Text, ScrollView, View } from 'react-native'
-import React from 'react'
-import CustomChip from '../CustomChip'
-import globalColors from '../../../styles/colors'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import CustomChip from '../CustomChip';
+import globalColors from '../../../styles/colors';
 
 const GenreChip = ({interests}) => {
   return (
     <View>
       <Text style={styles.title}>Choose your workout interests</Text>
       <View style={styles.rowContainer}>
-        <CustomChip text='cardio' array={interests} />
-        <CustomChip text='yoga' array={interests} />
-        <CustomChip text='pilates' array={interests} />
+        <CustomChip text="cardio" array={interests} />
+        <CustomChip text="yoga" array={interests} />
+        <CustomChip text="pilates" array={interests} />
       </View>
 
       <View style={styles.rowContainer}>
-        <CustomChip text='no-equipment' array={interests} />
-        <CustomChip text='fat-burning' array={interests} />
+        <CustomChip text="no-equipment" array={interests} />
+        <CustomChip text="fat-burning" array={interests} />
       </View>
 
       <View style={styles.rowContainer}>
-        <CustomChip text='full-body-workout' array={interests} />
+        <CustomChip text="full-body-workout" array={interests} />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default GenreChip
+export default GenreChip;
 
 const styles = StyleSheet.create({
   rowContainer: {
@@ -38,5 +38,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingBottom: 30,
     color: globalColors.navyBlue,
-  }
-})
+  },
+});

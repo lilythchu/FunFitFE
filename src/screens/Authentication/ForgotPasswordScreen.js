@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   ScrollView,
   Image,
   ActivityIndicator,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
@@ -13,8 +13,7 @@ import CustomButton from '../../components/CustomButton';
 import Pic from '../../../assets/images/forgot.png';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import {useLogin} from '../../../context/AuthProvider';
-import { EMAIL_REGEX } from '../../../utils/methods';
+import {EMAIL_REGEX} from '../../../utils/methods';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
 
@@ -29,7 +28,7 @@ const ForgotPasswordScreen = () => {
     setLoading(true);
     client
       .post('/user/forgotPassword', data)
-      .then((response) => {
+      .then(response => {
         setLoading(false);
         const userId = response.data.userId;
         navigation.navigate('NewPassword', {userId: userId});
@@ -43,19 +42,19 @@ const ForgotPasswordScreen = () => {
         } else {
           setMessage('Oops! Something went wrong, try again');
         }
-      })
+      });
   };
 
   const onSignInPress = () => {
     navigation.navigate('SignIn');
   };
-  
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image source={Pic} style={globalStyles.logo} resizeMode="contain" />
-          
           <Text style={globalStyles.title}>Reset your password</Text>
 
           <CustomInput
@@ -70,23 +69,28 @@ const ForgotPasswordScreen = () => {
           />
 
           <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'red', fontSize: 16}}>{(message && !dismiss) ? message : ''}</Text>
+            <Text style={{color: 'red', fontSize: 16}}>
+              {message && !dismiss ? message : ''}
+            </Text>
           </View>
 
-          { loading
-            ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-            : <CustomButton title="Send" onPress={handleSubmit(onSendPressed)} />
-          }
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              style={globalStyles.activityIdicator}
+            />
+          ) : (
+            <CustomButton title="Send" onPress={handleSubmit(onSendPressed)} />
+          )}
 
           <View style={globalStyles.textLinkContainer}>
             <Text>
-              Back to{' '} 
+              Back to{' '}
               <Text style={globalStyles.link} onPress={onSignInPress}>
                 Sign in
               </Text>
             </Text>
           </View>
-          
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

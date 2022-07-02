@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const data = [
   {
@@ -22,7 +22,7 @@ const data = [
   },
 ];
 
-const OnboardingScreen = (props) => {
+const OnboardingScreen = props => {
   const renderItem = ({item}) => {
     return (
       <View style={styles.slide}>
@@ -35,7 +35,7 @@ const OnboardingScreen = (props) => {
     );
   };
 
-  const keyExtractor = (item) => item.title;
+  const keyExtractor = item => item.title;
 
   const renderNextButton = () => {
     return (
@@ -49,7 +49,6 @@ const OnboardingScreen = (props) => {
     return (
       <LinearGradient
         colors={['#A5C8FF', '#23286B']}
-        style={styles.linearGradient}
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 0.5}}
         style={styles.doneButtonWrapper}>
@@ -104,17 +103,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'black',
     textAlign: 'center',
-    //fontFamily: 'OpenSans-Bold',
     marginHorizontal: 60,
   },
   text: {
     fontSize: 14,
     color: 'gray',
     textAlign: 'center',
-    //fontFamily: 'OpenSans-SemiBold',
     marginHorizontal: 60,
     marginTop: 20,
-
   },
   dotStyle: {
     backgroundColor: '#8d8fad',
@@ -132,7 +128,6 @@ const styles = StyleSheet.create({
   },
   rightText: {
     color: '#1c215d',
-    //fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
   },
   leftTextWrapper: {
@@ -145,7 +140,6 @@ const styles = StyleSheet.create({
   },
   leftText: {
     color: '#1c215d',
-    //fontFamily: 'OpenSans-SemiBold',
     fontSize: 14,
   },
   doneButtonWrapper: {
@@ -157,7 +151,6 @@ const styles = StyleSheet.create({
   },
   doneButtonText: {
     fontSize: 14,
-    //fontFamily: 'OpenSans-SemiBold',
     textAlign: 'center',
     alignItems: 'center',
     color: 'white',

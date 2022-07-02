@@ -1,15 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import Swiper from 'react-native-swiper/src';
 
 const CustomSwiper = () => {
-  return (  
+  return (
     <View style={styles.sliderContainer}>
-      <Swiper
-        autoplay
-        horizontal={true}
-        height={200}
-        activeDotColor="#FF6347">
+      <Swiper autoplay horizontal={true} height={200} activeDotColor="#FF6347">
         <View style={styles.slide}>
           <Image
             source={require('../../assets/images/swiper1.png')}
@@ -33,8 +29,8 @@ const CustomSwiper = () => {
         </View>
       </Swiper>
     </View>
-  )
-}
+  );
+};
 
 export default CustomSwiper;
 

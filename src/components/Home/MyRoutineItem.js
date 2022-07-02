@@ -5,8 +5,7 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
-  Alert,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
 import Feather from 'react-native-vector-icons/Feather';
@@ -15,7 +14,7 @@ import coverImg from '../../../assets/images/australia.png';
 
 import globalStyles from '../../../styles/global';
 import globalColors from '../../../styles/colors';
-import { arrayToSteps, arrayToString, arrayToTime } from '../../../utils/methods';
+import {arrayToSteps, arrayToString, arrayToTime} from '../../../utils/methods';
 import client from '../../../api/client';
 
 const MyRoutineItem = ({navigation, item, token}) => {
@@ -23,15 +22,15 @@ const MyRoutineItem = ({navigation, item, token}) => {
   const [visibleDia, setVisibleDia] = useState(false);
   const toggleDialog = () => {
     setVisibleDia(!visibleDia);
-  }
+  };
   const toggleOverlay = () => {
     setVisible(!visible);
-  }
-  const onDeleteRoutine= () => {
+  };
+  const onDeleteRoutine = () => {
     client
       .delete('/routine/deleteRoutine', {
-        headers : {"Authorization": `Bearer ${token}`},
-        data: {id: item._id}
+        headers: {Authorization: `Bearer ${token}`},
+        data: {id: item._id},
       })
       .then(response => {
         navigation.navigate('Routine');
@@ -39,26 +38,14 @@ const MyRoutineItem = ({navigation, item, token}) => {
       .catch(error => {
         console.log(error);
       });
-  }
-
-  const onEditRoutine = data => {
-    client
-      .put('routine/editRoutine', data, {headers : {"Authorization": `Bearer ${token}`}})
-      .then(response => {
-        navigation.navigate('Routine');
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  };
 
   const myRoutineDetail = () => {
     setVisible(!visible);
-  }
+  };
 
   return (
     <View style={globalStyles.myRoutineItemContainer}>
-      
       {/* Cover Image */}
       <TouchableOpacity onPress={myRoutineDetail}>
         <ImageBackground
@@ -74,22 +61,22 @@ const MyRoutineItem = ({navigation, item, token}) => {
         <TouchableOpacity onPress={toggleDialog}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('EditRoutine', {item})}>
-          <Feather name="edit" size={24}/>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('EditRoutine', {item})}>
+          <Feather name="edit" size={24} />
         </TouchableOpacity>
       </View>
 
       {/* Delete Routine Dialog */}
       <ThemeProvider>
-        <Dialog 
+        <Dialog
           isVisible={visibleDia}
           onBackdropPress={toggleDialog}
-          overlayStyle={{borderRadius: 15}}
-        >
-          <Dialog.Title title='Are you sure want to delete' />
+          overlayStyle={{borderRadius: 15}}>
+          <Dialog.Title title="Are you sure want to delete" />
           <Dialog.Actions>
-            <Dialog.Button title='Yes' onPress={onDeleteRoutine}/>
-            <Dialog.Button title='No' onPress={toggleDialog}/>
+            <Dialog.Button title="Yes" onPress={onDeleteRoutine} />
+            <Dialog.Button title="No" onPress={toggleDialog} />
           </Dialog.Actions>
         </Dialog>
       </ThemeProvider>
@@ -98,8 +85,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
       <Overlay
         isVisible={visible}
         onBackdropPress={toggleOverlay}
-        overlayStyle={globalStyles.overlay}
-      >
+        overlayStyle={globalStyles.overlay}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={globalStyles.title}>{item.name}</Text>
 
@@ -111,43 +97,36 @@ const MyRoutineItem = ({navigation, item, token}) => {
             </ListItem.Content>
             <Text>{arrayToTime(item.duration)}</Text>
           </ListItem>
-          
           <ListItem bottomDivider>
             <ListItem.Content>
-              <ListItem.Title style={styles.listTitle}>
-                Genre:
-              </ListItem.Title>
+              <ListItem.Title style={styles.listTitle}>Genre:</ListItem.Title>
             </ListItem.Content>
             <Text>{arrayToString(item.genre)}</Text>
           </ListItem>
-          
           <ListItem bottomDivider>
-              <ListItem.Title style={styles.listTitle}>
-                Steps:
-              </ListItem.Title>
+            <ListItem.Title style={styles.listTitle}>Steps:</ListItem.Title>
           </ListItem>
           <View style={{paddingHorizontal: 21}}>
             {arrayToSteps(item.steps, item.timings)}
           </View>
         </ScrollView>
         <CustomButton
-          type='SECOND'
-          title='Play'
+          type="SECOND"
+          title="Play"
           onPress={() => {
             if (item.steps[0] === undefined) {
-              alert('Have you created steps')
+              alert('Have you created steps');
             } else {
-              navigation.navigate("Audio", {item})
+              navigation.navigate('Audio', {item});
             }
           }}
         />
       </Overlay>
-
     </View>
-  )
-}
+  );
+};
 
-export default MyRoutineItem
+export default MyRoutineItem;
 
 const styles = StyleSheet.create({
   myRoutineItemImage: {
@@ -161,7 +140,7 @@ const styles = StyleSheet.create({
   },
   crudIcon: {
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     marginVertical: 5,
     borderRadius: 10,
     paddingHorizontal: 20,
@@ -170,5 +149,5 @@ const styles = StyleSheet.create({
   },
   listTitle: {
     fontWeight: 'bold',
-  }
-})
+  },
+});

@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, ThemeProvider} from '@rneui/themed';
 import globalColors from '../../styles/colors';
-import { windowHeight, windowWidth } from '../../utils/Dimensions';
+import {windowHeight, windowWidth} from '../../utils/Dimensions';
 
 const CustomButton = ({type = 'FIRST', ...props}) => {
   return (
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginBottom: 40,
     backgroundColor: globalColors.babyBlue,
-    width: windowWidth/2,
+    width: windowWidth / 2,
   },
   btn_THIRD: {
     marginHorizontal: 30,
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 20,
     backgroundColor: globalColors.inactive,
-    height: windowHeight/18,
-    width: windowWidth/2,
+    height: windowHeight / 18,
+    width: windowWidth / 2,
   },
   btn_FIFTH: {
     alignSelf: 'center',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   title_FITH: {
     fontSize: 20,
-    color: 'white'
+    color: 'white',
   },
   title_FACE: {
     marginLeft: 10,

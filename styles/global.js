@@ -1,4 +1,4 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimensions';
 import globalColors from './colors';
 
@@ -35,8 +35,7 @@ const globalStyles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
   },
-  root: {
-  },
+  root: {},
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -59,7 +58,7 @@ const globalStyles = StyleSheet.create({
   },
   cardInfoContainer: {
     borderRadius: 10,
-    padding: 10, 
+    padding: 10,
     backgroundColor: globalColors.cream,
     flex: 1,
   },
@@ -76,10 +75,10 @@ const globalStyles = StyleSheet.create({
   },
   myRoutineItemContainer: {
     marginVertical: 15,
-    width: windowWidth/2 - 30,
+    width: windowWidth / 2 - 30,
   },
   myRoutineItem: {
-    height: windowWidth/2 - 40,
+    height: windowWidth / 2 - 40,
     justifyContent: 'flex-end',
   },
   backIcon: {
@@ -87,7 +86,7 @@ const globalStyles = StyleSheet.create({
     marginTop: 60,
   },
   genreWrapper: {
-    width: windowWidth/2,
+    width: windowWidth / 2,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,

@@ -1,28 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Icon } from '@rneui/themed';
+import {StyleSheet, Text, View} from 'react-native';
+import {Icon} from '@rneui/themed';
 import globalColors from '../../../styles/colors';
 
 const NotiCard = ({item}) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>{item.title}
+        <Text style={styles.title}>
+          {item.title}
           <Text style={styles.titleIcon}>{item.titleIcon}</Text>
         </Text>
         <Icon
-          name='bell'
-          type='feather'
+          name="bell"
+          type="feather"
           size={20}
           containerStyle={{padding: 5}}
         />
       </View>
       <Text style={styles.body}>{item.body}</Text>
     </View>
-  )
-}
+  );
+};
 
-export default NotiCard
+export default NotiCard;
 
 const styles = StyleSheet.create({
   container: {
@@ -53,4 +54,4 @@ const styles = StyleSheet.create({
     padding: 5,
     fontStyle: 'italic',
   },
-})
+});

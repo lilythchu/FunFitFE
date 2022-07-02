@@ -8,16 +8,16 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { ListItem } from '@rneui/themed';
+import {ListItem} from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';
 
-import { useLogin } from '../../../../context/AuthProvider';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
-import { arrayToString } from '../../../../utils/methods';
+import {useLogin} from '../../../../context/AuthProvider';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
+import {arrayToString} from '../../../../utils/methods';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
 import client from '../../../../api/client';
@@ -38,77 +38,86 @@ const EditRoutineScreen = () => {
       timings[i][2] = data[`sec${i}`];
     }
     const body = {
-      "id": item._id,
-      "name": item.name,
-      "duration":
-        [
-          data.hdur === undefined ? item.duration[0] : data.hdur,
-          data.mindur === undefined ? item.duration[1] : data.mindur,
-          data.secdur === undefined ? item.duration[2] : data.secdur,
-        ],
-      "genre": item.genre,
-      "timings": item.timings,
+      id: item._id,
+      name: item.name,
+      duration: [
+        data.hdur === undefined ? item.duration[0] : data.hdur,
+        data.mindur === undefined ? item.duration[1] : data.mindur,
+        data.secdur === undefined ? item.duration[2] : data.secdur,
+      ],
+      genre: item.genre,
+      timings: item.timings,
     };
-    if (data.name !== undefined) {body.name = data.name}
-    if (data.genre !== undefined) {body.genre = data.genre}
-    if (steps[0] !== undefined) {body.steps = steps}
-    if (timings[0] !== undefined) {body.timings = timings}
+    if (data.name !== undefined) {
+      body.name = data.name;
+    }
+    if (data.genre !== undefined) {
+      body.genre = data.genre;
+    }
+    if (steps[0] !== undefined) {
+      body.steps = steps;
+    }
+    if (timings[0] !== undefined) {
+      body.timings = timings;
+    }
     console.log(body);
 
     setLoading(true);
-      client
-        .put('/routine/editRoutine', body, {headers : {"Authorization": `Bearer ${token}`}})
-        .then(response => {
-          setLoading(false);
-          navigation.navigate('Routine');
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  }
+    client
+      .put('/routine/editRoutine', body, {
+        headers: {Authorization: `Bearer ${token}`},
+      })
+      .then(response => {
+        setLoading(false);
+        navigation.navigate('Routine');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   var myLoop = [];
   var steps = [];
   var timings = [];
-  var duration = [];
-  
+
   for (let i = 0; i < number; i++) {
-    steps[i] = `Step ${i + 1}`
+    steps[i] = `Step ${i + 1}`;
     timings[i] = new Array(3);
     myLoop.push(
-      <View style={{flexDirection: 'row'}}> 
+      <View style={{flexDirection: 'row'}}>
         <TextInput
           style={{flex: 1, textAlign: 'center'}}
           placeholder={`Step ${i + 1}`}
-          onChangeText={text => steps[i] = text}
+          onChangeText={text => (steps[i] = text)}
         />
         <TimeInput control={control} num={i} />
-      </View>
-    )
+      </View>,
+    );
   }
 
   return (
-    <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={globalStyles.scrollView}
+      showsVerticalScrollIndicator={false}>
       {/* Navigation */}
       <TouchableOpacity
         style={globalStyles.backIcon}
-        onPress={() => navigation.goBack()}
-      >
-        <Entypo name='chevron-left' size={32} color={globalColors.babyBlue} />
+        onPress={() => navigation.goBack()}>
+        <Entypo name="chevron-left" size={32} color={globalColors.babyBlue} />
       </TouchableOpacity>
 
       {/* Title */}
       <Text style={[globalStyles.title, {fontSize: 21}]}>Edit my Routine</Text>
-      
+
       {/* Form */}
-      <CustomInput 
+      <CustomInput
         name="name"
         leftIcon={<Text style={{fontSize: 16}}>Name</Text>}
         type="THIRD"
         placeholder={item.name}
         control={control}
       />
-      <CustomInput 
+      <CustomInput
         name="genre"
         leftIcon={<Text style={{fontSize: 16}}>Genre</Text>}
         type="THIRD"
@@ -116,48 +125,48 @@ const EditRoutineScreen = () => {
         control={control}
       />
 
-      <View style={{flexDirection: 'row', paddingBottom: 10, paddingLeft: 10, alignItems: 'center'}}>
+      <View style={styles.duration}>
         <Text style={{fontSize: 16}}>Duration</Text>
         <View style={styles.timingContainer}>
           <CustomInput
-            type='TIME'
-            name='hdur'
+            type="TIME"
+            name="hdur"
             control={control}
-            keyboardType='numeric'
+            keyboardType="numeric"
             placeholder={item.duration[0]}
           />
           <CustomInput
-            type='TIME'
-            name='mindur'
+            type="TIME"
+            name="mindur"
             control={control}
             rules={{
               max: {
                 value: 59,
-                message: 'invalid'
+                message: 'invalid',
               },
               min: {
                 value: 0,
-                message: 'invalid'
-              }
+                message: 'invalid',
+              },
             }}
-            keyboardType='numeric'
+            keyboardType="numeric"
             placeholder={item.duration[1]}
           />
           <CustomInput
-            type='TIME'
-            name='secdur'
+            type="TIME"
+            name="secdur"
             control={control}
             rules={{
               max: {
                 value: 59,
-                message: 'invalid'
+                message: 'invalid',
               },
               min: {
                 value: 0,
-                message: 'invalid'
-              }
+                message: 'invalid',
+              },
             }}
-            keyboardType='numeric'
+            keyboardType="numeric"
             placeholder={item.duration[2]}
           />
         </View>
@@ -167,35 +176,33 @@ const EditRoutineScreen = () => {
         style={{borderWidth: 1}}
         content={
           <ListItem.Content>
-            <TextInput 
-              keyboardType='numeric'
-              placeholder='Number of steps(< 10)'
-              onChangeText={number => {
-                setNumber(number);
+            <TextInput
+              keyboardType="numeric"
+              placeholder="Number of steps(< 10)"
+              onChangeText={num => {
+                setNumber(num);
                 setExpanded(!expanded);
               }}
             />
           </ListItem.Content>
         }
-        isExpanded={expanded}
-      >
-        <View style={{alignItems: 'center', marginVertical: 10}}>
-          {myLoop}
-        </View>
+        isExpanded={expanded}>
+        <View style={{alignItems: 'center', marginVertical: 10}}>{myLoop}</View>
       </ListItem.Accordion>
-      
+
       {/* Button */}
-      { loading
-        ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-        : <CustomButton
-            title="Update"
-            onPress={handleSubmit(onAddRoutine)}
-            type="SECOND"
-          />
-      }
+      {loading ? (
+        <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
+      ) : (
+        <CustomButton
+          title="Update"
+          onPress={handleSubmit(onAddRoutine)}
+          type="SECOND"
+        />
+      )}
     </ScrollView>
-  )
-}
+  );
+};
 
 export default EditRoutineScreen;
 
@@ -212,4 +219,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+  duration: {
+    flexDirection: 'row',
+    paddingBottom: 10,
+    paddingLeft: 10,
+    alignItems: 'center',
+  },
+});

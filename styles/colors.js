@@ -9,7 +9,7 @@ const globalColors = {
   gray: '#525750',
   username: '#458452',
   sent: '#6ad5e6',
-  received: '#524d4d'
+  received: '#524d4d',
 };
 
 export default globalColors;

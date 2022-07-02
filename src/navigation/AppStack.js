@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import {Icon} from '@rneui/themed';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import globalColors from '../../styles/colors.js';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Icon } from '@rneui/themed';
 
 import HomeStack from './HomeStack.js';
-import CalendarScreen from '../screens/Core/CalendarScreen.js';
 import NotiScreen from '../screens/Core/NotiScreen.js';
 import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
@@ -20,25 +18,28 @@ const BottomTab = () => {
   return (
     <Tab.Navigator
       activeColor={globalColors.blueGrotto}
-      barStyle={{backgroundColor: 'white'}}
-    >
-      <Tab.Screen 
-        name='Home'
+      barStyle={{backgroundColor: 'white'}}>
+      <Tab.Screen
+        name="Home"
         component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name='home' type='feather' size={size} color={color} />
-          )
+            <Icon name="home" type="feather" size={size} color={color} />
+          ),
         }}
       />
-      <Tab.Screen 
-        name='Chats'
+      <Tab.Screen
+        name="Chats"
         component={ChatStack}
         options={({route}) => ({
           tabBarIcon: ({color, size}) => (
-            <Icon name='message-square' type='feather' size={size} color={color} />
+            <Icon
+              name="message-square"
+              type="feather"
+              size={size}
+              color={color}
+            />
           ),
-    
         })}
       />
       {/* <Tab.Screen 
@@ -50,22 +51,22 @@ const BottomTab = () => {
           )
         }}
       /> */}
-      <Tab.Screen 
-        name='Notification'
+      <Tab.Screen
+        name="Notification"
         component={NotiScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name='bell' type='feather' size={size} color={color} />
-          )
+            <Icon name="bell" type="feather" size={size} color={color} />
+          ),
         }}
       />
-      <Tab.Screen 
-        name='Profile'
+      <Tab.Screen
+        name="Profile"
         component={ProfileStack}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name='user' type='feather' size={size} color={color} />
-          )
+            <Icon name="user" type="feather" size={size} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -75,16 +76,16 @@ const BottomTab = () => {
 const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name='Main' component={BottomTab} />
+      <Stack.Screen name="Main" component={BottomTab} />
       <Stack.Screen
-        name='Chat'
+        name="Chat"
         component={ChatScreen}
         options={({route}) => ({
           title: route.params.item.friend[0].name,
-          headerShown: true
+          headerShown: true,
         })}
       />
-      <Stack.Screen name='OtherProfile' component={OthersProfileScreen} />
+      <Stack.Screen name="OtherProfile" component={OthersProfileScreen} />
     </Stack.Navigator>
   );
 };

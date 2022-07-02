@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import globalStyles from '../../../styles/global';
 
 const RecCard = ({item, navigation}) => {
@@ -15,16 +14,18 @@ const RecCard = ({item, navigation}) => {
       <ImageBackground
         source={{uri: item.thumbnail}}
         style={globalStyles.recItem}
-        imageStyle={styles.ItemImage}>
-      </ImageBackground>
+        imageStyle={styles.ItemImage}
+      />
 
       <View style={globalStyles.cardInfoContainer}>
         <Text style={styles.routineName}>{item.name}</Text>
-        <Text numberOfLines={2} style={{textAlign: 'auto'}}>{item.description}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Details', {item})}>
-          <Text
-            style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
-            More 
+        <Text numberOfLines={2} style={{textAlign: 'auto'}}>
+          {item.description}
+        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Details', {item})}>
+          <Text style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
+            More
           </Text>
         </TouchableOpacity>
       </View>

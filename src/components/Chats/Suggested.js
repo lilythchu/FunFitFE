@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
-import { StoryItem } from './Stories';
+import {StyleSheet, View, FlatList} from 'react-native';
 import GenderAvatars from '../Profile/GenderAvatars';
 import client from '../../../api/client';
 
@@ -9,32 +8,34 @@ const Suggested = ({navigation, token}) => {
 
   const getRecFriendIds = () => {
     client
-      .get('/story/recommendedFriends', {headers: {"Authorization": `Bearer ${token}`}})
+      .get('/story/recommendedFriends', {
+        headers: {Authorization: `Bearer ${token}`},
+      })
       .then(res => {
         setFriendIds(res.data);
       })
       .catch(err => {
         console.log(err);
-      })
-  }
+      });
+  };
 
-  useEffect(() => { getRecFriendIds() }, []);
+  useEffect(() => {
+    getRecFriendIds();
+  }, []);
 
   return (
     <View style={{paddingLeft: 20, paddingBottom: 15}}>
-      <FlatList 
+      <FlatList
         data={friendIds}
         keyExtractor={item => item.id}
         horizontal
         renderItem={({item}) => (
-          <GenderAvatars id = {item} navigation={navigation} token={token} />
+          <GenderAvatars id={item} navigation={navigation} token={token} />
         )}
         showsHorizontalScrollIndicator={false}
       />
     </View>
-  )
-}
+  );
+};
 
-export default Suggested
-
-const styles = StyleSheet.create({})
+export default Suggested;
