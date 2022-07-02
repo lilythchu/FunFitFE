@@ -4,28 +4,25 @@ import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
 const ListImage = ({image}) => {
   return (
     <View style={{padding: 10}}>
-      <Image 
-        source={image.photo}
-        style={styles.galleryImage}
-      />
+      <Image source={image.photo} style={styles.galleryImage} />
     </View>
-  )
-}
+  );
+};
 
 const images = [
   {
     id: '1',
-    photo: require('../../../assets/images/australia.png')
+    photo: require('../../../assets/images/australia.png'),
   },
   {
     id: '2',
-    photo: require('../../../assets/images/australia.png')
+    photo: require('../../../assets/images/australia.png'),
   },
   {
     id: '3',
-    photo: require('../../../assets/images/australia.png')
+    photo: require('../../../assets/images/australia.png'),
   },
-]
+];
 
 const Achievements = () => {
   return (
@@ -55,6 +52,6 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 20,
   },
-})
+});
 
 export default Achievements;

@@ -3,7 +3,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignInScreen from '../screens/Authentication/SignInScreen.js';
 import SignUpScreen from '../screens/Authentication/SignUpScreen.js';
 import ForgotPasswordScreen from '../screens/Authentication/ForgotPasswordScreen.js';
-import ConfirmEmailScreen from '../screens/Authentication/ConfirmEmailScreen.js';
 import NewPasswordScreen from '../screens/Authentication/NewPasswordScreen.js';
 import OnboardingScreen from '../screens/OnboardingScreen.js';
 import ExtraInfoScreen from '../screens/Authentication/ExtraInfoScreen.js';

@@ -28,18 +28,18 @@ const NewPasswordScreen = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
-  }
+  };
 
   const onSubmitPressed = data => {
     const credentails = {
-      "userId": routes.params.userId,
-      "code": data.code,
-      "password": data.newPassword,
+      userId: routes.params.userId,
+      code: data.code,
+      password: data.newPassword,
     };
     setLoading(true);
     client
       .post('/user/resetPassword', credentails)
-      .then((response) => {
+      .then(response => {
         setLoading(false);
         navigation.navigate('SignIn');
       })
@@ -52,7 +52,7 @@ const NewPasswordScreen = () => {
         } else {
           setMessage('Oops! Something went wrong, try again');
         }
-      })
+      });
   };
 
   const onSignInPress = () => {
@@ -60,7 +60,9 @@ const NewPasswordScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image
@@ -80,10 +82,14 @@ const NewPasswordScreen = () => {
 
           <CustomInput
             name="newPassword"
-            icon="lock" 
+            icon="lock"
             rightIcon={
               <TouchableOpacity onPress={handleViewPassword}>
-                <Icon type={'font-awesome'} name={viewPassword ? "eye" : "eye-slash"} color="#424040" />
+                <Icon
+                  type={'font-awesome'}
+                  name={viewPassword ? 'eye' : 'eye-slash'}
+                  color="#424040"
+                />
               </TouchableOpacity>
             }
             control={control}
@@ -99,22 +105,31 @@ const NewPasswordScreen = () => {
           />
 
           <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'red', fontSize: 16}}>{(message && !dismiss) ? message : ''}</Text>
+            <Text style={{color: 'red', fontSize: 16}}>
+              {message && !dismiss ? message : ''}
+            </Text>
           </View>
 
-          { loading
-            ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-            : <CustomButton title="Submit" onPress={handleSubmit(onSubmitPressed)} />
-          }
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              style={globalStyles.activityIdicator}
+            />
+          ) : (
+            <CustomButton
+              title="Submit"
+              onPress={handleSubmit(onSubmitPressed)}
+            />
+          )}
 
           <View style={globalStyles.textLinkContainer}>
-              <Text>
-                Back to{' '} 
-                <Text style={globalStyles.link} onPress={onSignInPress}>
-                  Sign in
-                </Text>
+            <Text>
+              Back to{' '}
+              <Text style={globalStyles.link} onPress={onSignInPress}>
+                Sign in
               </Text>
-            </View>
+            </Text>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

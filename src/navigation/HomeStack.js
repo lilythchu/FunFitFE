@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import HomeScreen from '../screens/Core/Home/HomeScreen.js';
 import DetailsScreen from '../screens/Core/Home/DetailsScreen.js';
@@ -14,9 +13,9 @@ const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name='Routine' component={HomeScreen} />
+      <Stack.Screen name="Routine" component={HomeScreen} />
       <Stack.Screen
-        name='Audio'
+        name="Audio"
         component={PlayAudio}
         options={{
           headerStyle: {
@@ -30,11 +29,11 @@ const HomeStack = () => {
           headerShown: true,
         }}
       />
-      <Stack.Screen name='Details' component={DetailsScreen} />
-      <Stack.Screen name='AddRoutine' component={AddRoutineScreen} />
-      <Stack.Screen name='EditRoutine' component={EditRoutineScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="AddRoutine" component={AddRoutineScreen} />
+      <Stack.Screen name="EditRoutine" component={EditRoutineScreen} />
       <Stack.Screen
-        name='Video'
+        name="Video"
         component={PlayVideo}
         options={{
           headerStyle: {
@@ -48,8 +47,8 @@ const HomeStack = () => {
           headerShown: true,
         }}
       />
-      <Stack.Screen 
-        name='Recommended'
+      <Stack.Screen
+        name="Recommended"
         component={RecScreen}
         options={{
           title: 'Routines',
@@ -65,7 +64,7 @@ const HomeStack = () => {
         }}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export default HomeStack;

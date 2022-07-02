@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import { ListItem, Header } from '@rneui/themed';
+import {ListItem} from '@rneui/themed';
 import Feather from 'react-native-vector-icons/Feather';
 import MyRoutineItem from '../../../components/Home/MyRoutineItem';
 import RecRoutineItem from '../../../components/Home/RecRoutineItem';
@@ -15,19 +15,21 @@ import CustomSwiper from '../../../components/CustomSwiper';
 
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
-import { useNavigation, NavigationAction } from '@react-navigation/native';
-import { useLogin } from '../../../../context/AuthProvider';
+import {useNavigation} from '@react-navigation/native';
+import {useLogin} from '../../../../context/AuthProvider';
 import client from '../../../../api/client';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const {token, profile} = useLogin();
+  const {token} = useLogin();
   const [recData, setRecData] = useState([]);
   const [myData, setMyData] = useState([]);
 
   const getMyData = () => {
     client
-      .get('/routine/getMyRoutines', {headers : {"Authorization": `Bearer ${token}`}})
+      .get('/routine/getMyRoutines', {
+        headers: {Authorization: `Bearer ${token}`},
+      })
       .then(response => {
         setMyData(response.data);
       })
@@ -38,7 +40,9 @@ const HomeScreen = () => {
 
   const getRecData = () => {
     client
-      .get('routine/getRecRoutines', {headers : {"Authorization": `Bearer ${token}`}})
+      .get('routine/getRecRoutines', {
+        headers: {Authorization: `Bearer ${token}`},
+      })
       .then(response => {
         setRecData(response.data);
       })
@@ -56,19 +60,12 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={globalStyles.scrollView}
-      >
-
+        style={globalStyles.scrollView}>
         {/*Header*/}
         <View style={styles.menuWrapper}>
-          <Feather 
-            name='menu'
-            size={32}
-            color='black'
-          />
+          <Feather name="menu" size={32} color="black" />
           <Text style={styles.heading}>FunFit</Text>
         </View>
-
 
         {/* Swiper */}
         <CustomSwiper />
@@ -76,16 +73,15 @@ const HomeScreen = () => {
         {/* Recommended */}
         <View style={styles.discoverWrapper}>
           {/* Title */}
-          <TouchableOpacity onPress={() => navigation.navigate('Recommended', {token})}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Recommended', {token})}>
             <ListItem>
               <ListItem.Content>
-                <ListItem.Title style={styles.titleText}>Discover</ListItem.Title>
+                <ListItem.Title style={styles.titleText}>
+                  Discover
+                </ListItem.Title>
               </ListItem.Content>
-              <Feather
-                name='chevron-right'
-                size={24}
-                color='black'
-              />
+              <Feather name="chevron-right" size={24} color="black" />
             </ListItem>
           </TouchableOpacity>
 
@@ -97,7 +93,7 @@ const HomeScreen = () => {
                 renderItem={({item}) => (
                   <RecRoutineItem item={item} navigation={navigation} />
                 )}
-                keyExtractor={(item) => item._id}
+                keyExtractor={item => item._id}
                 horizontal
                 showsHorizontalScrollIndicator={false}
               />
@@ -110,26 +106,28 @@ const HomeScreen = () => {
           {/* Title */}
           <ListItem>
             <ListItem.Content>
-              <ListItem.Title style={styles.myRoutineTitle}>My Routines</ListItem.Title>
+              <ListItem.Title style={styles.myRoutineTitle}>
+                My Routines
+              </ListItem.Title>
             </ListItem.Content>
             <TouchableOpacity onPress={() => navigation.navigate('AddRoutine')}>
-              <Feather
-                name='plus'
-                size={24}
-                color='black'
-              />
+              <Feather name="plus" size={24} color="black" />
             </TouchableOpacity>
           </ListItem>
-          
+
           {/* List */}
           <View style={styles.myRoutineItemsWrapper}>
             {myData && (
               <FlatList
                 data={myData}
                 renderItem={({item}) => (
-                  <MyRoutineItem navigation={navigation} item={item} token={token}/>
+                  <MyRoutineItem
+                    navigation={navigation}
+                    item={item}
+                    token={token}
+                  />
                 )}
-                keyExtractor={(item) => item._id}
+                keyExtractor={item => item._id}
                 numColumns={2}
                 columnWrapperStyle={{justifyContent: 'space-between'}}
                 showsHorizontalScrollIndicator={false}
@@ -140,7 +138,7 @@ const HomeScreen = () => {
       </ScrollView>
     </View>
   );
-}
+};
 
 export default HomeScreen;
 

@@ -1,27 +1,33 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native';
-import { Icon, Image, Avatar} from '@rneui/themed';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+import {Avatar} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
 import Chervon from '../../../components/Chervon';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import Achievements from '../../../components/Profile/Achievements';
-import { arrayToString } from '../../../../utils/methods';
-import { avaGender } from '../../../../utils/methods';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {arrayToString} from '../../../../utils/methods';
+import {avaGender} from '../../../../utils/methods';
 import client from '../../../../api/client';
 
 const OthersProfileScreen = () => {
   const {info, token} = useRoute().params;
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  
   const initConvo = () => {
     setLoading(true);
     client
-      .post('/chat/initiateConvo',
+      .post(
+        '/chat/initiateConvo',
         {anotherUserId: info._id},
-        {headers: {"Authorization": `Bearer ${token}`}})
+        {headers: {Authorization: `Bearer ${token}`}},
+      )
       .then(res => {
         setLoading(false);
         navigation.navigate('ChatStory');
@@ -31,16 +37,14 @@ const OthersProfileScreen = () => {
       });
   };
 
-  const joinConvo = () => {
-    navigation.navigate('Chat')
-  }
-
   return (
-    <ScrollView showsHorizontalScrollIndicator={false} style={globalStyles.scrollView}>
-      <Chervon navigation={navigation} color={globalColors.blueFaded}/>
+    <ScrollView
+      showsHorizontalScrollIndicator={false}
+      style={globalStyles.scrollView}>
+      <Chervon navigation={navigation} color={globalColors.blueFaded} />
 
       <View style={{alignSelf: 'center'}}>
-        <Avatar 
+        <Avatar
           size={150}
           rounded
           source={avaGender(info.sex)}
@@ -55,30 +59,26 @@ const OthersProfileScreen = () => {
       <View style={styles.infoContainer}>
         <View style={[styles.subInfoContainer, {flex: 2, marginRight: 5}]}>
           <Text style={styles.subTitle}>Workout Interests</Text>
-          <Text style={styles.text}>{arrayToString(info.workoutInterests)}</Text>
+          <Text style={styles.text}>
+            {arrayToString(info.workoutInterests)}
+          </Text>
         </View>
         <View style={[styles.subInfoContainer, {flex: 1, marginLeft: 5}]}>
           <Text style={styles.subTitle}>Age</Text>
           <Text style={styles.text}>{info.age}</Text>
         </View>
       </View>
-      
-      {
-        loading
-        ? <ActivityIndicator size='large' /> 
-        : <CustomButton 
-            type='FIFTH'
-            title='Message'
-            onPress={initConvo}
-          />
-      }
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <CustomButton type="FIFTH" title="Message" onPress={initConvo} />
+      )}
       {/* <Achievements /> */}
-
     </ScrollView>
-  )
-}
+  );
+};
 
-export default OthersProfileScreen
+export default OthersProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -146,5 +146,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: globalColors.blueFaded,
     color: globalColors.navyBlue,
-  }
-})
+  },
+});

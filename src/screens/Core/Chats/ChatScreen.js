@@ -1,11 +1,10 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react';
-import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { useLogin } from '../../../../context/AuthProvider';
-import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
+import {View} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import {useLogin} from '../../../../context/AuthProvider';
+import {GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
 
 const ChatScreen = () => {
@@ -21,46 +20,47 @@ const ChatScreen = () => {
   const fetchMessages = () => {
     client
       .get('/chat/getAConvo', {
-        headers: {"Authorization": `Bearer ${token}`},
-        params: {convoId: item.convoId}
+        headers: {Authorization: `Bearer ${token}`},
+        params: {convoId: item.convoId},
       })
       .then(res => {
         var Data = [];
         const users = res.data.users;
-        const dataMessages = res.data.messages
+        const dataMessages = res.data.messages;
         if (dataMessages !== null) {
           for (let i = dataMessages.length - 1; i >= 0; i--) {
             Data.push({
               _id: dataMessages[i]._id,
               user: {
                 _id: dataMessages[i].sender,
-                name: dataMessages[i].sender === users[0]._id
-                      ? users[1].name
-                      : users[0].name
+                name:
+                  dataMessages[i].sender === users[0]._id
+                    ? users[1].name
+                    : users[0].name,
               },
               text: dataMessages[i].content,
-              createdAt: dataMessages[i].createdAt
-            })
+              createdAt: dataMessages[i].createdAt,
+            });
           }
-          setMessages((previousMessages) => 
-            GiftedChat.append(previousMessages, Data)
+          setMessages(previousMessages =>
+            GiftedChat.append(previousMessages, Data),
           );
           setIsLoadingEarlier(false);
         }
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => console.log(err));
+  };
 
   useEffect(() => {
     initMessages();
-  }, [])
+  }, []);
 
   const initMessages = () => {
     fetchMessages();
-  }
+  };
 
   useEffect(() => {
-    socket.on("receive new message", (data) => {
+    socket.on('receive new message', data => {
       console.log(data);
       if (data.sender !== friendId) {
         if (!isRendered.current) {
@@ -72,13 +72,13 @@ const ChatScreen = () => {
             },
             text: data.content,
             createdAt: data.createdAt,
-          }
-          setMessages((previousMessages) =>
+          };
+          setMessages(previousMessages =>
             GiftedChat.append(previousMessages, mess),
           );
         }
       }
-    })
+    });
     return () => {
       isRendered.current = true;
     };
@@ -89,14 +89,13 @@ const ChatScreen = () => {
       content: messages[0].text,
       userId: friendId,
     };
-    
-    socket.emit("send new message", sendMessage);
-    setMessages((previousMessages) =>
+    socket.emit('send new message', sendMessage);
+    setMessages(previousMessages =>
       GiftedChat.append(previousMessages, messages),
     );
   }, []);
 
-  const renderSend = (props) => {
+  const renderSend = props => {
     return (
       <Send {...props}>
         <View>
@@ -111,52 +110,42 @@ const ChatScreen = () => {
     );
   };
 
-  const renderBubble = (props) => {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: { backgroundColor: globalColors.sent},
-          left: {backgroundColor: globalColors.received},
-        }}
-        textStyle={{
-          right: { color: 'black', },
-          left: {color: 'black',},
-        }}
-      />
-    );
-  };
+  // const renderBubble = props => {
+  //   return (
+  //     <Bubble
+  //       {...props}
+  //       wrapperStyle={{
+  //         right: {backgroundColor: globalColors.sent},
+  //         left: {backgroundColor: globalColors.received},
+  //       }}
+  //       textStyle={{
+  //         right: {color: 'black'},
+  //         left: {color: 'black'},
+  //       }}
+  //     />
+  //   );
+  // };
 
   const scrollToBottomComponent = () => {
-    return(
-      <FontAwesome name='angle-double-down' size={22} color='#333' />
-    );
-  }
+    return <FontAwesome name="angle-double-down" size={22} color="#333" />;
+  };
 
   return (
-      <GiftedChat
-        messages={messages}
-        onSend={newMessages => onSend(newMessages)}
-        user={{
-          _id: friendId,
-          name: friendName,
-        }}
-        alwaysShowSend
-        renderSend={renderSend}
-        scrollToBottom
-        scrollToBottomComponent={scrollToBottomComponent}
-        renderUsernameOnMessage={true}
-        loadEarlier={isLoadingEarlier}
-      />
+    <GiftedChat
+      messages={messages}
+      onSend={newMessages => onSend(newMessages)}
+      user={{
+        _id: friendId,
+        name: friendName,
+      }}
+      alwaysShowSend
+      renderSend={renderSend}
+      scrollToBottom
+      scrollToBottomComponent={scrollToBottomComponent}
+      renderUsernameOnMessage={true}
+      loadEarlier={isLoadingEarlier}
+    />
   );
 };
 
 export default ChatScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

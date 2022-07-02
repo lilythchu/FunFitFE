@@ -6,7 +6,6 @@ const AuthProvider = ({children}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState({});
   const [token, setToken] = useState();
-  const [data, setData] = useState({});
 
   return (
     <AuthContext.Provider
@@ -16,7 +15,7 @@ const AuthProvider = ({children}) => {
         profile,
         setProfile,
         token,
-        setToken
+        setToken,
       }}>
       {children}
     </AuthContext.Provider>

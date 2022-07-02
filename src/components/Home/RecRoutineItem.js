@@ -1,25 +1,22 @@
 import React from 'react';
 import {
-  View,
   Text,
   ImageBackground,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
 import globalColors from '../../../styles/colors';
 
 const RecRoutineItem = ({navigation, item}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Details", {item})}
-      style={styles.container}
-    >
+      onPress={() => navigation.navigate('Details', {item})}
+      style={styles.container}>
       <ImageBackground
         source={{uri: item.thumbnail}}
         style={styles.discoverItem}
-        imageStyle={styles.discoverItemImage}>
-      </ImageBackground>
+        imageStyle={styles.discoverItemImage}
+      />
       <Text style={styles.discoverItemTitle}>{item.name}</Text>
     </TouchableOpacity>
   );

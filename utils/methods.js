@@ -17,18 +17,18 @@ export const onPrivacyPressed = () => {
 export function arrayToString(a) {
   let res = a[0];
   for (let i = 1; i < a.length; i++) {
-    res = res + ", " + a[i];
+    res = res + ', ' + a[i];
   }
   return res;
-};
+}
 
 export function arrayToTime(arr) {
   let res = arr[0];
   for (let i = 1; i < arr.length; i++) {
-    res = res + " : " + arr[i];
+    res = res + ' : ' + arr[i];
   }
   return res;
-};
+}
 
 export function arrayToSteps(step, timing) {
   var res = [];
@@ -40,23 +40,25 @@ export function arrayToSteps(step, timing) {
         </ListItem.Content>
         <Text>{arrayToTime(timing[i])}</Text>
       </ListItem>
-    )
+    );
   }
   return res;
-};
+}
 
 export function arrayToSum(time) {
-  return parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
+  return (
+    parseInt(time[0], 10) * 3600 +
+    parseInt(time[1], 10) * 60 +
+    parseInt(time[2], 10)
+  );
 }
 
 export function avaGender(str) {
-  if (str === "Male") {
+  if (str === 'Male') {
     return male;
-  } else if (str === "Female") {
+  } else if (str === 'Female') {
     return female;
   } else {
     return others;
   }
 }
-
-

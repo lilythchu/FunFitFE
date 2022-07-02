@@ -1,6 +1,6 @@
-import React, {useState, useCallback, useRef} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import React, {useState, useCallback} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 const PlayVideo = () => {
@@ -8,15 +8,10 @@ const PlayVideo = () => {
   const {item} = route.params;
   const [playing, setPlaying] = useState(false);
 
-  const onStateChange = useCallback((state) => {
-    if (state === "ended") {
+  const onStateChange = useCallback(state => {
+    if (state === 'ended') {
       setPlaying(false);
-      Alert.alert("video has finished playing!");
     }
-  }, []);
-
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
   }, []);
 
   return (
@@ -34,7 +29,7 @@ const PlayVideo = () => {
 export default PlayVideo;
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',

@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import globalColors from '../../../../styles/colors';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const StoryScreen = () => {
   const navigation = useNavigation();
@@ -39,10 +38,11 @@ const StoryScreen = () => {
 
   return (
     <View style={styles.container}>
-
       {/* Progress bar */}
       <View style={styles.progressBar}>
-        <Animated.View style={[styles.barAnimation, {width: progressAnimation}]} />
+        <Animated.View
+          style={[styles.barAnimation, {width: progressAnimation}]}
+        />
       </View>
 
       {/* Header */}
@@ -54,18 +54,12 @@ const StoryScreen = () => {
           <Text style={styles.userName}>{item.name}</Text>
         </View>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionic
-            name="close"
-            style={{fontSize: 32, color: 'black'}}
-          />
+          <Ionic name="close" style={{fontSize: 32, color: 'black'}} />
         </TouchableOpacity>
       </View>
 
       {/* Story Image */}
-      <Image
-        source={item.photo}
-        style={styles.storyImg}
-      />
+      <Image source={item.photo} style={styles.storyImg} />
 
       {/* Emotion */}
       {/* <View style={styles.emotionContainer}>
@@ -163,5 +157,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     bottom: 100,
-  }
+  },
 });

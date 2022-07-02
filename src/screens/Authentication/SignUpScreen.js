@@ -8,41 +8,41 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import { Icon } from '@rneui/themed';
+import {Icon} from '@rneui/themed';
 import CountryPicker from 'react-native-country-picker-modal';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import SocialSignInButtons from '../../components/SocialSignInButtons';
 
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import {EMAIL_REGEX, onPrivacyPressed, onTermsOfUsePressed} from '../../../utils/methods';
-import {useLogin} from '../../../context/AuthProvider';
+import {
+  EMAIL_REGEX,
+  onPrivacyPressed,
+  onTermsOfUsePressed,
+} from '../../../utils/methods';
 import Picture from '../../../assets/images/signup.png';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
-  const {setIsLoggedIn, setProfile} = useLogin();
   const {control, handleSubmit, watch} = useForm();
   const pwd = watch('password');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [dismiss, setDismiss] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);
-  const [text, setText] = useState();
   const [countryCode, setCountryCode] = useState('VN');
   const [country, setCountry] = useState();
 
-  const onSelect = (country) => {
-    setCountry(country.name);
-    setCountryCode(country.cca2)
+  const onSelect = countries => {
+    setCountry(countries.name);
+    setCountryCode(countries.cca2);
   };
 
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
-  }
+  };
 
   const onSignInPress = () => {
     navigation.navigate('SignIn');
@@ -50,16 +50,16 @@ const SignUpScreen = () => {
 
   const onRegisterPressed = credentials => {
     const userInfo = {
-      "email": credentials.email,
-      "name": credentials.name,
-      "password": credentials.password,
-      "sex": credentials.sex,
-      "country": country
-    }
+      email: credentials.email,
+      name: credentials.name,
+      password: credentials.password,
+      sex: credentials.sex,
+      country: country,
+    };
     setLoading(true);
     client
       .post('/user/signup', userInfo)
-      .then((response) => {
+      .then(response => {
         setLoading(false);
         navigation.navigate('SignIn');
       })
@@ -72,14 +72,16 @@ const SignUpScreen = () => {
         } else {
           setMessage('Oops! Something went wrong, try again');
         }
-      })
+      });
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
-          <Image 
+          <Image
             source={Picture}
             style={globalStyles.logo}
             resizeMode="contain"
@@ -104,7 +106,7 @@ const SignUpScreen = () => {
             }}
           />
 
-          <CustomInput 
+          <CustomInput
             name="email"
             icon="envelope"
             placeholder="Email"
@@ -117,10 +119,14 @@ const SignUpScreen = () => {
 
           <CustomInput
             name="password"
-            icon="lock" 
+            icon="lock"
             rightIcon={
               <TouchableOpacity onPress={handleViewPassword}>
-                <Icon type={'font-awesome'} name={viewPassword ? "eye" : "eye-slash"} color="#424040" />
+                <Icon
+                  type={'font-awesome'}
+                  name={viewPassword ? 'eye' : 'eye-slash'}
+                  color="#424040"
+                />
               </TouchableOpacity>
             }
             control={control}
@@ -134,7 +140,6 @@ const SignUpScreen = () => {
               },
             }}
           />
-          
           <CustomInput
             name="confirm-password"
             icon="key"
@@ -145,21 +150,25 @@ const SignUpScreen = () => {
               validate: value => value === pwd || 'Password do not match',
             }}
           />
-          <CustomInput 
+          <CustomInput
             name="sex"
             icon="transgender"
             control={control}
             placeholder="Male/Female/Others"
             rules={{
               required: 'Gender is required',
-              validate: value => value === "Male" || value === "Female" || value === "Others" || 'Gender does not match', 
+              validate: value =>
+                value === 'Male' ||
+                value === 'Female' ||
+                value === 'Others' ||
+                'Gender does not match',
             }}
           />
-          <CustomInput 
+          <CustomInput
             name="country"
             icon="globe"
             rightIcon={
-              <CountryPicker 
+              <CountryPicker
                 withFilter
                 countryCode={countryCode}
                 withAlphaFilter={false}
@@ -177,15 +186,21 @@ const SignUpScreen = () => {
 
           <View style={{alignItems: 'center'}}>
             <Text style={{color: 'red', fontSize: 16}}>
-              {(message && !dismiss) ? message : ''}
+              {message && !dismiss ? message : ''}
             </Text>
           </View>
 
-          { loading
-            ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-            : <CustomButton title="Sign up" onPress={handleSubmit(onRegisterPressed)} />
-          }
-          
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              style={globalStyles.activityIdicator}
+            />
+          ) : (
+            <CustomButton
+              title="Sign up"
+              onPress={handleSubmit(onRegisterPressed)}
+            />
+          )}
           <Text style={globalStyles.text}>
             By registering, you confirm that you accept our{' '}
             <Text style={globalStyles.link} onPress={onTermsOfUsePressed}>
@@ -207,7 +222,6 @@ const SignUpScreen = () => {
               </Text>
             </Text>
           </View>
-
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

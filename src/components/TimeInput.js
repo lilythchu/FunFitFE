@@ -1,27 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import CustomInput from './CustomInput';
-import { useForm } from 'react-hook-form';
 
-const TimeInput = ({control, num, require = true }) => {
+const TimeInput = ({control, num, require = true}) => {
   return (
     <View style={styles.timeContainer}>
-      <CustomInput 
-        type='TIME'
+      <CustomInput
+        type="TIME"
         name={`h${num}`}
-        keyboardType='numeric'
+        keyboardType="numeric"
         control={control}
-        rightIcon = {<Text>:</Text>}
+        rightIcon={<Text>:</Text>}
         rules={{
           required: 'hour',
         }}
       />
-      <CustomInput 
-        type='TIME'
+      <CustomInput
+        type="TIME"
         name={`min${num}`}
-        keyboardType='numeric'
+        keyboardType="numeric"
         control={control}
-        rightIcon = {<Text>:</Text>}
+        rightIcon={<Text>:</Text>}
         rules={{
           required: 'minute',
           max: {
@@ -34,10 +33,10 @@ const TimeInput = ({control, num, require = true }) => {
           },
         }}
       />
-      <CustomInput 
-        type='TIME'
+      <CustomInput
+        type="TIME"
         name={`sec${num}`}
-        keyboardType='numeric'
+        keyboardType="numeric"
         control={control}
         rules={{
           required: 'sec',
@@ -52,13 +51,13 @@ const TimeInput = ({control, num, require = true }) => {
         }}
       />
     </View>
-  )
-}
+  );
+};
 
-export default TimeInput
+export default TimeInput;
 
 const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: 'row',
   },
-})
+});

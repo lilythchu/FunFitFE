@@ -13,7 +13,6 @@ import {Icon} from '@rneui/themed';
 import Logo from '../../../assets/images/login.png';
 import CustomInput from '../../components/CustomInput.js';
 import CustomButton from '../../components/CustomButton.js';
-import SocialSignInButtons from '../../components/SocialSignInButtons.js';
 
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
@@ -32,35 +31,37 @@ Notifications.setNotificationHandler({
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const {control, handleSubmit, formState: {errors}} = useForm();
-  const {setIsLoggedIn, setProfile, setToken, profile} = useLogin();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+  const {setIsLoggedIn, setProfile, setToken} = useLogin();
 
-  const [check, setCheck] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [dismiss, setDismiss] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);
-  
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
-  }
+  };
 
-  const onSignInPressed = (credentials) => {
+  const onSignInPressed = credentials => {
     setLoading(true);
     client
       .post('/user/login', credentials)
-      .then((response) => {
+      .then(response => {
         const token = response.data.token;
         setToken(token);
         client
-          .get('/user/me', {headers: {"Authorization": `Bearer ${token}`}})
-          .then(response => {
-            if (response.data.age === undefined) {
-              navigation.navigate("ExtraInfo");
+          .get('/user/me', {headers: {Authorization: `Bearer ${token}`}})
+          .then(res => {
+            if (res.data.age === undefined) {
+              navigation.navigate('ExtraInfo');
             } else {
               setLoading(false);
               setIsLoggedIn(true);
-              setProfile(response.data);
+              setProfile(res.data);
               welcome();
             }
           })
@@ -70,12 +71,12 @@ const SignInScreen = () => {
         setLoading(false);
         setDismiss(false);
         const mes = error.response.data;
-        if (mes === 'User does not exist' || mes == 'Incorrect password') {
+        if (mes === 'User does not exist' || mes === 'Incorrect password') {
           setMessage(mes);
         } else {
           setMessage('Oops! Something went wrong, try again');
         }
-      })
+      });
   };
 
   const onForgotPasswordPressed = () => {
@@ -87,20 +88,22 @@ const SignInScreen = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scrollView}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={globalStyles.scrollView}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
 
-          <CustomInput 
+          <CustomInput
             name="email"
             icon="envelope"
             label="Email"
             placeholder="Email"
             control={control}
             rules={{
-              required: "Email is required",
-              pattern: {value: EMAIL_REGEX, message: "Email is invalid"},
+              required: 'Email is required',
+              pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
             }}
           />
 
@@ -108,9 +111,13 @@ const SignInScreen = () => {
             label="Password"
             icon="lock"
             name="password"
-            rightIcon = {
+            rightIcon={
               <TouchableOpacity onPress={handleViewPassword}>
-                <Icon type={'font-awesome'} name={viewPassword ? "eye" : "eye-slash"} color="#424040" />
+                <Icon
+                  type={'font-awesome'}
+                  name={viewPassword ? 'eye' : 'eye-slash'}
+                  color="#424040"
+                />
               </TouchableOpacity>
             }
             placeholder="Password"
@@ -134,13 +141,22 @@ const SignInScreen = () => {
           </View>
 
           <View style={{alignItems: 'center'}}>
-            <Text style={{color: 'red', fontSize: 16}}>{(message && !dismiss) ? message : ''}</Text>
+            <Text style={{color: 'red', fontSize: 16}}>
+              {message && !dismiss ? message : ''}
+            </Text>
           </View>
 
-          { loading
-            ? <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-            : <CustomButton title="Sign in" onPress={handleSubmit(onSignInPressed)} />
-          }
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              style={globalStyles.activityIdicator}
+            />
+          ) : (
+            <CustomButton
+              title="Sign in"
+              onPress={handleSubmit(onSignInPressed)}
+            />
+          )}
 
           <View style={globalStyles.textLinkContainer}>
             <Text>
@@ -163,10 +179,10 @@ export default SignInScreen;
 async function welcome() {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "Welcome to Funfit! 📬",
+      title: 'Welcome to Funfit! 📬',
       body: 'Have a nice day',
-      data: { data: 'goes here' },
+      data: {data: 'goes here'},
     },
-    trigger: { seconds: 2 },
+    trigger: {seconds: 2},
   });
 }

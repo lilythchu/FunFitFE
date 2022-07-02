@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
   ImageBackground,
   StyleSheet,
   ScrollView,
@@ -13,39 +12,33 @@ import Chervon from '../../../components/Chervon';
 import Img from '../../../../assets/images/australia.png';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
-import { useLogin } from '../../../../context/AuthProvider';
-import { useRoute,  useNavigation } from '@react-navigation/native';
-import { arrayToString } from '../../../../utils/methods';
+import {useRoute, useNavigation} from '@react-navigation/native';
+import {arrayToString} from '../../../../utils/methods';
 
 const DetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {token} = useLogin();
   const {item} = route.params;
   const onStart = () => {
-    navigation.navigate('Video', {item})
-  }
+    navigation.navigate('Video', {item});
+  };
 
   return (
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
-
       {/* Image backgound */}
-      <ImageBackground
-        source={Img}
-        style={globalStyles.imageBackground}>
-
-        <Chervon navigation={navigation} color='white' />
+      <ImageBackground source={Img} style={globalStyles.imageBackground}>
+        <Chervon navigation={navigation} color="white" />
 
         {/* Name & Genre */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.itemTitle}>{item.name}</Text>
           <View style={globalStyles.genreWrapper}>
-            <Entypo name="battery" size={24} color='white' />
+            <Entypo name="battery" size={24} color="white" />
             <Text style={styles.genreText}>{arrayToString(item.genre)}</Text>
           </View>
         </View>
       </ImageBackground>
-     
+
       {/* Description */}
       <View style={styles.descriptionWrapper}>
         <View style={styles.heartWrapper}>
@@ -84,18 +77,13 @@ const DetailsScreen = () => {
         </View>
 
         {/* Button */}
-        <CustomButton 
-          type='SECOND'
-          title="Start"
-          onPress={onStart}
-        />
+        <CustomButton type="SECOND" title="Start" onPress={onStart} />
       </View>
-
     </ScrollView>
-  )
-}
+  );
+};
 
-export default DetailsScreen
+export default DetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -152,7 +140,7 @@ const styles = StyleSheet.create({
   descriptionText: {
     marginTop: 20,
     fontSize: 16,
-    color: 'gray', 
+    color: 'gray',
   },
   infoWrapper: {
     flexDirection: 'row',
@@ -183,4 +171,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'gray',
   },
-})
+});

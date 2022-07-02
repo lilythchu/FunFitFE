@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import * as Speech from 'expo-speech';
-import { Text, View, StyleSheet, ScrollView} from 'react-native';
-import { Audio } from 'expo-av';
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import {Text, View, StyleSheet} from 'react-native';
+import {Audio} from 'expo-av';
+import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import CustomButton from '../../../components/CustomButton';
 
-import { useRoute } from '@react-navigation/native';
-import { arrayToSum } from '../../../../utils/methods';
-import { useLogin } from '../../../../context/AuthProvider';
-import globalStyles from '../../../../styles/global';
+import {useRoute} from '@react-navigation/native';
+import {arrayToSum} from '../../../../utils/methods';
+import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
 
@@ -23,39 +22,40 @@ const PlayAudio = () => {
 
   const steps = item.steps;
   const timings = item.timings;
-  
-  {/* Start Workout */}
+
   const onStart = () => {
     setStartWorkout(true);
     //playSound();
     Speech.speak("Let's get started");
-    Speech.speak("step 1");
+    Speech.speak('step 1');
     Speech.speak(steps[0], {
       onDone: () => {
         setStartTimer(true);
         playSound();
         setPlayingSound(true);
-      }
+      },
     });
-  }
+  };
 
   const addDayFollow = () => {
-    client.post('/routine/addDaysFollow',
+    client
+      .post(
+        '/routine/addDaysFollow',
         {id: item._id},
-        {headers: {"Authorization": `Bearer ${token}`}}
+        {headers: {Authorization: `Bearer ${token}`}},
       )
       .catch(err => console.log(err));
-  }
+  };
 
   const onPause = async () => {
     await sound.pauseAsync();
     setPlayingSound(false);
-  }
+  };
 
   const onPlaySound = async () => {
     await sound.playAsync();
     setPlayingSound(true);
-  }
+  };
 
   const onPlayAndPause = () => {
     if (playingSound) {
@@ -63,7 +63,7 @@ const PlayAudio = () => {
     } else {
       onPlaySound();
     }
-  }
+  };
 
   const timeleft = () => {
     const thingToSay = '10 seconds left';
@@ -72,14 +72,13 @@ const PlayAudio = () => {
 
   const nextStep = () => {
     if (ith === steps.length) {
-      Speech.speak("Done");
+      Speech.speak('Done');
       addDayFollow();
       setStartTimer(false);
       setPlayingSound(false);
       setDone(true);
       pauseSound();
     } else {
-      const stepName = steps[ith]
       Speech.speak('Next');
       Speech.speak(`Step ${ith + 1}`);
       Speech.speak(steps[ith]);
@@ -90,16 +89,16 @@ const PlayAudio = () => {
 
   const pauseSound = async () => {
     sound.pauseAsync();
-  }
+  };
 
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-       require('../../../../assets/audio/bg.mp3'),
-       {
+    const {sound} = await Audio.Sound.createAsync(
+      require('../../../../assets/audio/bg.mp3'),
+      {
         shouldPlay: true,
         isLooping: true,
         volume: 0.2,
-       }
+      },
     );
     setSound(sound);
     //await sound.playAsync();
@@ -109,68 +108,68 @@ const PlayAudio = () => {
     return sound
       ? () => {
           console.log('Unloading Sound');
-          sound.unloadAsync(); }
+          sound.unloadAsync();
+        }
       : undefined;
   }, [sound]);
 
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{ith === steps.length ? `Done` : `Step ${ith + 1}`}</Text>
+      <Text style={styles.title}>
+        {ith === steps.length ? 'Done' : `Step ${ith + 1}`}
+      </Text>
       <Text style={styles.subtitle}>{steps[ith]}</Text>
       <CountdownCircleTimer
         isPlaying={playingSound}
         duration={arrayToSum(timings[0])}
-        colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         onComplete={() => ({
           shouldRepeat: true,
           delay: 5,
-          newInitialRemainingTime: timings[ith] === undefined ? 0 : arrayToSum(timings[ith])
+          newInitialRemainingTime:
+            timings[ith] === undefined ? 0 : arrayToSum(timings[ith]),
         })}
         colorsTime={[10, 6, 3, 0]}
         onUpdate={time => {
           if (time === 10) {
             timeleft();
           }
-          if (time ===1) {
+          if (time === 1) {
             setIth(ith + 1);
           }
           if (time === 0) {
             nextStep();
           }
-        }}
-      >
-        {({ remainingTime, color }) => (
-          <Text style={{ color, fontSize: 35 }}>
-            {`${Math.floor(remainingTime / 3600)} : ${Math.floor((remainingTime % 3600) / 60)}: ${remainingTime % 60}`}
+        }}>
+        {({remainingTime, color}) => (
+          <Text style={{color, fontSize: 35}}>
+            {`${Math.floor(remainingTime / 3600)} : ${Math.floor(
+              (remainingTime % 3600) / 60,
+            )}: ${remainingTime % 60}`}
           </Text>
         )}
       </CountdownCircleTimer>
-      { !startWorkout && 
-        <CustomButton
-          title='Start'
-          onPress={onStart}
-          type='SECOND'
-        />
-      }
-      { startWorkout && !done &&
+      {!startWorkout && (
+        <CustomButton title="Start" onPress={onStart} type="SECOND" />
+      )}
+      {startWorkout && !done && (
         <CustomButton
           title={playingSound ? 'Pause' : 'Play'}
           onPress={onPlayAndPause}
-          type='SECOND'
+          type="SECOND"
         />
-      }
+      )}
     </View>
   );
-}
+};
 
-export default PlayAudio
+export default PlayAudio;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ecf0f1',
     padding: 10,
     backgroundColor: 'white',
   },

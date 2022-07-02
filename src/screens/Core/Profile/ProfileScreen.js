@@ -2,67 +2,64 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
   ActivityIndicator,
-  Button,
 } from 'react-native';
-import { ListItem, Icon, Avatar, Switch, Overlay } from '@rneui/themed';
+import {ListItem, Icon, Switch, Overlay} from '@rneui/themed';
 import GenreChip from '../../../components/Profile/GenreChip';
 import UserPic from '../../../components/Profile/UserPic';
 import More from '../../../components/Profile/More';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
-import { useLogin } from '../../../../context/AuthProvider.js'
-import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
+import {useLogin} from '../../../../context/AuthProvider.js';
+import {useForm} from 'react-hook-form';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
 import client from '../../../../api/client';
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
   const {setIsLoggedIn, profile, token, setProfile} = useLogin();
   const {control, handleSubmit} = useForm();
   const [switch1, setSwitch1] = useState(true);
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
-  }
+  };
 
-  {/* Methods for updating info */}
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const updateUserInfo = data => {
     setLoading(true);
     client
-      .put('/user/updateProfile', data, {headers: {"Authorization": `Bearer ${token}`}})
+      .put('/user/updateProfile', data, {
+        headers: {Authorization: `Bearer ${token}`},
+      })
       .then(response => {
         setProfile(response.data);
         setLoading(false);
         setExpanded(false);
       })
       .catch(error => console.log(error));
-  }
+  };
 
-  {/* Methods for changing interests */}
   const interests = [];
   const [visible, setVisible] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
   const toggleOverlay = () => {
     setVisible(!visible);
-  }
+  };
 
   const onChangeInterests = () => {
     setLoading2(true);
     client
-      .put('/user/updateProfile', 
-        {"workoutInterests": interests},
-        {headers: {"Authorization": `Bearer ${token}`}}
+      .put(
+        '/user/updateProfile',
+        {workoutInterests: interests},
+        {headers: {Authorization: `Bearer ${token}`}},
       )
       .then(response => {
         toggleOverlay();
@@ -70,22 +67,24 @@ const ProfileScreen = () => {
         setProfile(response.data);
       })
       .catch(error => console.log(error));
-  }
+  };
 
   return (
-    <ScrollView style={globalStyles.scrollView} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={globalStyles.scrollView}
+      showsVerticalScrollIndicator={false}>
       {/* User Avatar */}
-      <UserPic token={token} names={profile.name}/>
+      <UserPic token={token} names={profile.name} />
 
       {/* User name and bio */}
       <Text style={styles.userName}>{profile.name}</Text>
       <Text style={styles.aboutUser}>{profile.lifestyleTarget}</Text>
-      
+
       {/* Settings */}
       <View style={styles.settingContainer}>
         {/* Title */}
         <ListItem bottomDivider containerStyle={globalStyles.roundTitle}>
-          <Icon name='settings' />
+          <Icon name="settings" />
           <ListItem.Title>Settings</ListItem.Title>
         </ListItem>
 
@@ -100,39 +99,42 @@ const ProfileScreen = () => {
           }
           isExpanded={expanded}
           onPress={() => setExpanded(!expanded)}
-          bottomDivider
-        >
+          bottomDivider>
           <View style={styles.accordionContainer}>
-            <CustomInput 
-              name='name'
-              type='THIRD'
+            <CustomInput
+              name="name"
+              type="THIRD"
               leftIcon={<Text>Name</Text>}
               placeholder={profile.name}
               control={control}
             />
-            <CustomInput 
-              name='lifestyleTarget'
-              type='THIRD'
+            <CustomInput
+              name="lifestyleTarget"
+              type="THIRD"
               leftIcon={<Text>Bio</Text>}
               placeholder={profile.lifestyleTarget}
               control={control}
             />
-            <CustomInput 
+            <CustomInput
               name="age"
               leftIcon={<Text>Age</Text>}
-              keyboardType='numeric'
-              type='THIRD'
+              keyboardType="numeric"
+              type="THIRD"
               placeholder={profile.age.toString()}
               control={control}
             />
-            {loading 
-              ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
-              : <CustomButton
-                  type='SECOND'
-                  title="Update"
-                  onPress={handleSubmit(updateUserInfo)}
-                />
-            }
+            {loading ? (
+              <ActivityIndicator
+                size="large"
+                style={globalStyles.activityIdicator}
+              />
+            ) : (
+              <CustomButton
+                type="SECOND"
+                title="Update"
+                onPress={handleSubmit(updateUserInfo)}
+              />
+            )}
           </View>
         </ListItem.Accordion>
 
@@ -140,56 +142,56 @@ const ProfileScreen = () => {
         <ListItem
           bottomDivider
           Component={TouchableOpacity}
-          onPress={() => setVisible(!visible)}
-        >
+          onPress={() => setVisible(!visible)}>
           <ListItem.Content>
             <ListItem.Title>Change workout interests</ListItem.Title>
           </ListItem.Content>
-          <ListItem.Chevron color='black'/>
+          <ListItem.Chevron color="black" />
         </ListItem>
 
         {/* Change Interests Overlay */}
         <Overlay
           isVisible={visible}
           onBackdropPress={toggleOverlay}
-          overlayStyle={globalStyles.overlay}
-        >
+          overlayStyle={globalStyles.overlay}>
           <ScrollView style={globalStyles.scrollView}>
             <GenreChip interests={interests} />
           </ScrollView>
-          
-          {loading2
-            ? <ActivityIndicator size='large' style={globalStyles.activityIdicator} />
-            : <CustomButton
-                title="Update"
-                type='SECOND'
-                onPress={onChangeInterests}
-              />
-          }
+          {loading2 ? (
+            <ActivityIndicator
+              size="large"
+              style={globalStyles.activityIdicator}
+            />
+          ) : (
+            <CustomButton
+              title="Update"
+              type="SECOND"
+              onPress={onChangeInterests}
+            />
+          )}
         </Overlay>
 
         {/* Noti */}
-        <ListItem bottomDivider >
+        <ListItem bottomDivider>
           <ListItem.Content>
             <ListItem.Title>Notifications</ListItem.Title>
           </ListItem.Content>
-          <Switch 
-            value={switch1}
-            onValueChange={(value) => setSwitch1(value)}
-          />
+          <Switch value={switch1} onValueChange={value => setSwitch1(value)} />
         </ListItem>
-
       </View>
-      
+
       {/* More */}
       <More />
 
       {/* Log out */}
-      <ListItem Component={TouchableOpacity} onPress={handleLogOut} containerStyle={{marginBottom: 50}}>
+      <ListItem
+        Component={TouchableOpacity}
+        onPress={handleLogOut}
+        containerStyle={{marginBottom: 50}}>
         <ListItem.Content>
           <ListItem.Title>Log out</ListItem.Title>
         </ListItem.Content>
-        <Icon name="log-out" type='feather'/>
+        <Icon name="log-out" type="feather" />
       </ListItem>
     </ScrollView>
   );

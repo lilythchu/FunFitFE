@@ -18,7 +18,7 @@ const SocialSignInButtons = () => {
         title="Sign in with Facebook"
         type="FACE"
         onPress={onSignInFacebook}
-        icon={<FontAwesome name="facebook" size={22} color="#4867aa"/>}
+        icon={<FontAwesome name="facebook" size={22} color="#4867aa" />}
       />
       <CustomButton
         title="Sign in with Google"
