@@ -9,9 +9,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import Achievements from '../../../components/Profile/Achievements';
 import { arrayToString } from '../../../../utils/methods';
 import { avaGender } from '../../../../utils/methods';
-
-import { initConvoURL } from '../../../../api/client';
-import axios from 'axios';
+import client from '../../../../api/client';
 
 const OthersProfileScreen = () => {
   const {info, token} = useRoute().params;
@@ -20,8 +18,8 @@ const OthersProfileScreen = () => {
   
   const initConvo = () => {
     setLoading(true);
-    axios
-      .post(initConvoURL,
+    client
+      .post('/chat/initiateConvo',
         {anotherUserId: info._id},
         {headers: {"Authorization": `Bearer ${token}`}})
       .then(res => {

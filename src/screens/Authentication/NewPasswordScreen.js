@@ -8,15 +8,15 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
+import {Icon} from '@rneui/themed';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+
+import ResetPic from '../../../assets/images/newPass.png';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import globalStyles from '../../../styles/global';
-import { resetpwdURL } from '../../../api/client';
-import axios from 'axios';
-import {Icon} from '@rneui/themed';
-import ResetPic from '../../../assets/images/newPass.png';
+import client from '../../../api/client';
 
 const NewPasswordScreen = () => {
   const {control, handleSubmit} = useForm();
@@ -37,8 +37,8 @@ const NewPasswordScreen = () => {
       "password": data.newPassword,
     };
     setLoading(true);
-    axios
-      .post(resetpwdURL, credentails)
+    client
+      .post('/user/resetPassword', credentails)
       .then((response) => {
         setLoading(false);
         navigation.navigate('SignIn');

@@ -9,15 +9,14 @@ import {
   ScrollView
 } from 'react-native';
 import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
-import { ProgressBar } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
 import CustomButton from '../CustomButton';
 import coverImg from '../../../assets/images/australia.png';
+
 import globalStyles from '../../../styles/global';
 import globalColors from '../../../styles/colors';
 import { arrayToSteps, arrayToString, arrayToTime } from '../../../utils/methods';
-import { deleteRoutineURL, editRoutineURL } from '../../../api/client';
-import axios from 'axios';
+import client from '../../../api/client';
 
 const MyRoutineItem = ({navigation, item, token}) => {
   const [visible, setVisible] = useState(false);
@@ -29,8 +28,8 @@ const MyRoutineItem = ({navigation, item, token}) => {
     setVisible(!visible);
   }
   const onDeleteRoutine= () => {
-    axios
-      .delete(deleteRoutineURL, {
+    client
+      .delete('/routine/deleteRoutine', {
         headers : {"Authorization": `Bearer ${token}`},
         data: {id: item._id}
       })
@@ -43,8 +42,8 @@ const MyRoutineItem = ({navigation, item, token}) => {
   }
 
   const onEditRoutine = data => {
-    axios
-      .put(editRoutineURL, data, {headers : {"Authorization": `Bearer ${token}`}})
+    client
+      .put('routine/editRoutine', data, {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         navigation.navigate('Routine');
       })
@@ -144,14 +143,6 @@ const MyRoutineItem = ({navigation, item, token}) => {
         />
       </Overlay>
 
-      {/* Progress Bar */}
-      {/* <View>
-        <ProgressBar
-          progress={item.progress}
-          color={globalColors.navyBlue}
-          style={{height: 6, borderRadius: 5, marginVertical: 5}}
-        />
-      </View> */}
     </View>
   )
 }

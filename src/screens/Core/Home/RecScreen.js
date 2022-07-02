@@ -15,13 +15,11 @@ import RecCard from '../../../components/Home/RecCard';
 import CustomButton from '../../../components/CustomButton';
 import Chervon from '../../../components/Chervon';
 
-import { useNavigation, useRoute } from '@react-navigation/native';
-import globalStyles from '../../../../styles/global';
 import categoriesData from '../../../../assets/data/categoriesData';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useLogin } from '../../../../context/AuthProvider';
-
-import { getGenreURL } from '../../../../api/client';
-import axios from 'axios';
+import globalStyles from '../../../../styles/global';
+import client from '../../../../api/client';
 
 const RecScreen = () => {
   const navigation = useNavigation();
@@ -32,8 +30,7 @@ const RecScreen = () => {
 
   const getByGenre = (genre) => {
     setLoading(true);
-    axios
-      .get(getGenreURL, {
+    client.get('/routine/getRoutinesByGenre', {
         headers: {"Authorization": `Bearer ${token}`},
         params: {genre: genre}
       })

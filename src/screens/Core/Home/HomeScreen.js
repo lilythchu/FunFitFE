@@ -12,12 +12,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import MyRoutineItem from '../../../components/Home/MyRoutineItem';
 import RecRoutineItem from '../../../components/Home/RecRoutineItem';
 import CustomSwiper from '../../../components/CustomSwiper';
+
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
 import { useNavigation, NavigationAction } from '@react-navigation/native';
 import { useLogin } from '../../../../context/AuthProvider';
-import {getRecURL, getMyURL} from '../../../../api/client';
-import axios from "axios";
+import client from '../../../../api/client';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -26,8 +26,8 @@ const HomeScreen = () => {
   const [myData, setMyData] = useState([]);
 
   const getMyData = () => {
-    axios
-      .get(getMyURL, {headers : {"Authorization": `Bearer ${token}`}})
+    client
+      .get('/routine/getMyRoutines', {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setMyData(response.data);
       })
@@ -37,8 +37,8 @@ const HomeScreen = () => {
   };
 
   const getRecData = () => {
-    axios
-      .get(getRecURL, {headers : {"Authorization": `Bearer ${token}`}})
+    client
+      .get('routine/getRecRoutines', {headers : {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setRecData(response.data);
       })

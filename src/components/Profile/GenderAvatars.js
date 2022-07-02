@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Icon } from '@rneui/themed';
-import globalColors from '../../../styles/colors';
-import { getUserURL } from '../../../api/client';
 import { avaGender } from '../../../utils/methods';
-import axios from 'axios';
+import globalColors from '../../../styles/colors';
+import client from '../../../api/client';
 
 const GenderAvatars = ({id, navigation, token}) => {
   const [info, setInfo] = useState({});
   const getInfo = () => {
-    axios
-      .get(getUserURL, {
+    client
+      .get('/user/getUserProfile', {
         headers: {"Authorization": `Bearer ${token}`},
         params: {otherId: id}
       })

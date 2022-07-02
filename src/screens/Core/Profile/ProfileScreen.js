@@ -18,10 +18,9 @@ import CustomButton from '../../../components/CustomButton';
 import { useLogin } from '../../../../context/AuthProvider.js'
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import { updateProfileURL } from '../../../../api/client';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
-import axios from 'axios';
+import client from '../../../../api/client';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -39,8 +38,8 @@ const ProfileScreen = () => {
 
   const updateUserInfo = data => {
     setLoading(true);
-    axios
-      .put(updateProfileURL, data, {headers: {"Authorization": `Bearer ${token}`}})
+    client
+      .put('/user/updateProfile', data, {headers: {"Authorization": `Bearer ${token}`}})
       .then(response => {
         setProfile(response.data);
         setLoading(false);
@@ -60,8 +59,8 @@ const ProfileScreen = () => {
 
   const onChangeInterests = () => {
     setLoading2(true);
-    axios
-      .put(updateProfileURL, 
+    client
+      .put('/user/updateProfile', 
         {"workoutInterests": interests},
         {headers: {"Authorization": `Bearer ${token}`}}
       )
