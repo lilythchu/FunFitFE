@@ -1,7 +1,9 @@
-import {ListItem, Text} from '@rneui/themed';
+import {useState} from 'react';
+import {ListItem, Text, ThemeProvider, Dialog} from '@rneui/themed';
 import female from '../assets/images/female.jpg';
 import male from '../assets/images/male.jpg';
 import others from '../assets/images/others.jpg';
+import client from '../api/client';
 
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -62,3 +64,4 @@ export function avaGender(str) {
     return others;
   }
 }
+

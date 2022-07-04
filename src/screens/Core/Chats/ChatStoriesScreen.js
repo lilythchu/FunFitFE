@@ -10,7 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const ChatStoriesScreen = () => {
   const navigation = useNavigation();
-  const {token} = useLogin();
+  const {token, profile} = useLogin();
 
   return (
     <ScrollView
@@ -22,7 +22,7 @@ const ChatStoriesScreen = () => {
         <View style={{padding: 10, justifyContent: 'center'}}>
           <Text style={{fontSize: 30}}>Chats</Text>
         </View>
-        <MyStories token={token} navigation={navigation} />
+        <MyStories token={token} navigation={navigation} userInfo={profile} />
       </View>
 
       {/* Stories */}

@@ -16,11 +16,10 @@ const StoryScreen = () => {
         headers: {Authorization: `Bearer ${token}`},
         params: {id: userInfo._id},
       })
-      .then(response => {
-        const stories = response.data;
-        for (let i = 0; i < stories.length; i++) {
-          const filename = stories[i].filename;
-          const contentType = stories[i].contentType;
+      .then(response => 
+        response.data.map((item, index) => {
+          const filename = item.filename;
+          const contentType = item.contentType;
           client
             .get(`/story/getStory?name=${filename}&contentType=${contentType}`, {
               headers: {Authorization: `Bearer ${token}`},
@@ -34,9 +33,10 @@ const StoryScreen = () => {
               console.log('okie');
             })
             .catch(err => console.log(err));
-        }
-      })
-      .catch(err => console.log(err));
+        })
+      )
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
   useEffect(() => {
@@ -57,7 +57,6 @@ const StoryScreen = () => {
       userProfile={{
         userImage: avaGender(userInfo.sex),
         userName: userInfo.name,
-        userMessage: userInfo.lifestyleTarget,
         onImageClick: () => {
           console.log('lskndclksnc');
         },

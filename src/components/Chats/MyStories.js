@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Avatar, ThemeProvider, Dialog} from '@rneui/themed';
-import {uploadStoryURL} from '../../../api/client';
-import img from '../../../assets/images/australia.png';
+import client, {uploadStoryURL} from '../../../api/client';
+import {avaGender} from '../../../utils/methods';
 
-const MyStories = ({token, navigation}) => {
+const MyStories = ({token, navigation, userInfo}) => {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [visibleDia, setVisibleDia] = useState(false);
+  const [stories, setStories] = useState([]);
   
   const uploadImage = (uri) => {
     setVisibleDia(true);
@@ -47,14 +48,34 @@ const MyStories = ({token, navigation}) => {
       uploadImage(result.uri);
     }
   };
+  
+  const getStoriesInfo = () => {
+    client
+      .get('/story/getStoriesInfo', {
+        headers: {Authorization: `Bearer ${token}`},
+        params: {id: userInfo._id},
+      })
+      .then(response => setStories(response.data))
+      .catch(err => console.log(err));
+  }
+
+  const viewMyStories = () => {
+    if (stories[0] === undefined) {
+      Alert.alert("You don't have any stories");
+    } else {
+      navigation.navigate('MyStory', {stories})
+    }
+  }
+
+  useEffect(() => getStoriesInfo());
 
   return (
     <View>
       <Avatar
         size={64}
         rounded
-        source={img}
-        onPress={() => navigation.navigate('MyStory')}
+        source={avaGender(userInfo.sex)}
+        onPress={viewMyStories}
         containerStyle={{backgroundColor: 'grey'}}>
         <Avatar.Accessory
           name="plus"
