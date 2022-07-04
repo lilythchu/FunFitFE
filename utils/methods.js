@@ -34,7 +34,7 @@ export function arrayToSteps(step, timing) {
   var res = [];
   for (let i = 0; i < step.length; i++) {
     res.push(
-      <ListItem bottomDivider>
+      <ListItem bottomDivider key={i}>
         <ListItem.Content>
           <ListItem.Title>{step[i]}</ListItem.Title>
         </ListItem.Content>

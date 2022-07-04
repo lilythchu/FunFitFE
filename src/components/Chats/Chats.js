@@ -24,14 +24,16 @@ const Chats = ({navigation, token}) => {
     getConvos();
   }, [convos]);
   return (
-    <FlatList
-      data={convos}
-      keyExtractor={item => item.id}
-      renderItem={({item}) => (
-        <ChatItem item={item} navigation={navigation} token={token} />
-      )}
-      showsVerticalScrollIndicator={false}
-    />
+    <View style={{paddingTop: 10}}>
+      <FlatList
+        data={convos}
+        keyExtractor={item => item.convoId}
+        renderItem={({item}) => (
+          <ChatItem item={item} navigation={navigation} token={token} />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 

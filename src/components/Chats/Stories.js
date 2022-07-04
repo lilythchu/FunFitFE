@@ -1,51 +1,42 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
-import React from 'react';
-import {LinearGradient} from 'expo-linear-gradient';
-import userData from '../../../assets/data/userData';
-import {Image} from '@rneui/themed';
+import React, { useState, useEffect } from 'react';
+import {View, FlatList} from 'react-native';
+import StoryItem from './StoryItem';
+import client from '../../../api/client';
 
-export const StoryItem = ({item, navigation, rounded}) => {
-  return (
-    <View style={{width: 75, padding: 5}}>
-      {rounded ? (
-        <LinearGradient
-          colors={['#50b1f2', '#c7c432', '#32c790']}
-          style={{padding: 2, borderRadius: 50}}>
-          <Image
-            source={item.photo}
-            containerStyle={[styles.userImage, {borderWidth: 4}]}
-            PlaceholderContent={<ActivityIndicator />}
-            onPress={() => navigation.navigate('Story', {item})}
-          />
-        </LinearGradient>
-      ) : (
-        <Image
-          source={item.photo}
-          containerStyle={[styles.userImage, {borderWidth: 4}]}
-          PlaceholderContent={<ActivityIndicator />}
-          onPress={() => navigation.navigate('OtherProfile')}
-        />
-      )}
-      <Text style={styles.username}>{item.name}</Text>
-    </View>
-  );
-};
+const Stories = ({navigation, token}) => {
+  const [validUser, setValidUser] = useState([]);
 
-const Stories = ({navigation}) => {
+  const getUser = () => {
+    client
+      .get('/story/recommendedFriends', {
+        headers: {Authorization: `Bearer ${token}`},
+      })
+      .then(res => {
+        res.data.map((item, idx) => {
+          client
+            .get('/story/getStoriesInfo', {
+              headers: {Authorization: `Bearer ${token}`},
+              params: {id: item},
+            })
+            .then(res => setValidUser(prev => [...prev, item]))
+            .catch(err => console.log(err.response));
+        })
+      }) 
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
   return (
-    <View style={{paddingLeft: 20, paddingBottom: 15}}>
+    <View style={{paddingLeft: 20, paddingVertical: 5}}>
       <FlatList
-        data={userData}
-        keyExtractor={item => item.id}
+        data={validUser}
+        keyExtractor={item => item}
         horizontal
         renderItem={({item}) => (
-          <StoryItem item={item} navigation={navigation} rounded={true} />
+          <StoryItem item={item} navigation={navigation} token={token} />
         )}
         showsHorizontalScrollIndicator={false}
       />
@@ -55,16 +46,3 @@ const Stories = ({navigation}) => {
 
 export default Stories;
 
-const styles = StyleSheet.create({
-  userImage: {
-    height: 60,
-    width: 60,
-    borderRadius: 50,
-    borderColor: '#ffffff',
-  },
-  username: {
-    textAlign: 'center',
-    fontSize: 12,
-    marginTop: 5,
-  },
-});

@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Chats from '../../../components/Chats/Chats';
 import Suggested from '../../../components/Chats/Suggested';
+import Stories from '../../../components/Chats/Stories';
+import MyStories from '../../../components/Chats/MyStories';
 import {useLogin} from '../../../../context/AuthProvider';
 import {useNavigation} from '@react-navigation/native';
 
@@ -13,19 +15,19 @@ const ChatStoriesScreen = () => {
   return (
     <ScrollView
       style={{flex: 1, backgroundColor: 'white'}}
-      showsHorizontalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}>
+
       {/* Header */}
       <View style={styles.headerContainer}>
         <View style={{padding: 10, justifyContent: 'center'}}>
           <Text style={{fontSize: 30}}>Chats</Text>
         </View>
-        {/* <MyStories navigation={navigation}/> */}
-        <Feather name="message-circle" size={27} style={{padding: 10}} />
+        <MyStories token={token} navigation={navigation} />
       </View>
 
       {/* Stories */}
-      {/* <Text style={styles.title}>Stories</Text>
-      <Stories navigation={navigation} /> */}
+      <Text style={styles.title}>Stories</Text>
+      <Stories navigation={navigation} token={token} />
 
       {/* Suggested Friend List */}
       <Text style={styles.title}>Suggested Friends</Text>
@@ -50,6 +52,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     paddingLeft: 20,
-    marginBottom: 10,
+    paddingVertical: 10,
   },
 });

@@ -1,20 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {StoryContainer} from 'react-native-stories-view';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {Buffer} from 'buffer';
 import {avaGender} from '../../../../utils/methods';
+import {useLogin} from '../../../../context/AuthProvider';
 import client from '../../../../api/client';
 
-const StoryScreen = () => {
+const MyStoryScreen = () => {
   const navigation = useNavigation();
-  const {userInfo, token} = useRoute().params;
+  const {profile, token} = useLogin();
   const [images, setImages] = useState([]);
 
   const getImages = () => {
     client
       .get('/story/getStoriesInfo', {
         headers: {Authorization: `Bearer ${token}`},
-        params: {id: userInfo._id},
+        params: {id: profile._id},
       })
       .then(response => {
         const stories = response.data;
@@ -55,15 +56,32 @@ const StoryScreen = () => {
           height: '100%',
       }}
       userProfile={{
-        userImage: avaGender(userInfo.sex),
-        userName: userInfo.name,
-        userMessage: userInfo.lifestyleTarget,
+        userImage: avaGender(profile.sex),
+        userName: profile.name,
+        userMessage: profile.lifestyleTarget,
         onImageClick: () => {
           console.log('lskndclksnc');
         },
       }}
+      replyView={{
+      isShowReply: true,
+      onReplyTextChange: (textReply, progressIndex) => {
+          console.log(`Text : ${textReply} , position : ${progressIndex}`);
+      },
+      onReplyButtonClick: (buttonType, progressIndex) => {
+         switch (buttonType) {
+            case 'send':
+               console.log(`Send button tapped for position : ${progressIndex}`);
+               break;
+
+             case 'smiley':
+               console.log(`Smiley button tapped for position : ${progressIndex}`);
+               break;
+          }
+       },
+   }}
     />
   )
 }
 
-export default StoryScreen;
+export default MyStoryScreen;
