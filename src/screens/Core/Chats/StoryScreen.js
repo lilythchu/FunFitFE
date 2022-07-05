@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
 import {StoryContainer} from 'react-native-stories-view';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Buffer} from 'buffer';
@@ -21,11 +22,9 @@ const StoryScreen = () => {
           let data = `data:${
             response.headers['content-type']
           };base64,${new Buffer(response.data, 'binary').toString('base64')}`;
-          //setImages(prev => [...prev, data]);
-          console.log('download image');
           images[index] = data;
         })
-        .catch(err => console.log(err));
+        .catch(err => Alert.alert("Error"));
     })
   }
 
@@ -47,6 +46,7 @@ const StoryScreen = () => {
       userProfile={{
         userImage: avaGender(userInfo.sex),
         userName: userInfo.name,
+        userMessage: userInfo.country,
         onImageClick: () => {
           console.log('lskndclksnc');
         },

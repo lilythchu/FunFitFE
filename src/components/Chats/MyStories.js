@@ -30,10 +30,9 @@ const MyStories = ({token, navigation, userInfo}) => {
     fetch(uploadStoryURL, requestOptions)
       .then(response => response.text())
       .then(result => {
-        console.log(result);
         setVisibleDia(false);
       })
-      .catch(error => console.log('error', error));
+      .catch(error => Alert.alert("Error"));
   };
 
   const newStories = async () => {
