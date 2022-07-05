@@ -8,3 +8,6 @@ export const uploadImageURL =
   'https://orbital-funfit.herokuapp.com/user/upload';
 export const downloadPicURL =
   'https://orbital-funfit.herokuapp.com/user/downloadPic?contentType=image/png';
+
+export const uploadStoryURL = 
+  'https://orbital-funfit.herokuapp.com/story/uploadStory';

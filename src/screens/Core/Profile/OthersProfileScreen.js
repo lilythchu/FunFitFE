@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Avatar} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
-import Chervon from '../../../components/Chervon';
+import Chevron from '../../../components/Chevron';
 import globalStyles from '../../../../styles/global';
 import globalColors from '../../../../styles/colors';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -41,7 +41,7 @@ const OthersProfileScreen = () => {
     <ScrollView
       showsHorizontalScrollIndicator={false}
       style={globalStyles.scrollView}>
-      <Chervon navigation={navigation} color={globalColors.blueFaded} />
+      <Chevron navigation={navigation} color={globalColors.blueFaded} />
 
       <View style={{alignSelf: 'center'}}>
         <Avatar

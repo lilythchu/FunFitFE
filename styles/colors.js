@@ -10,6 +10,7 @@ const globalColors = {
   username: '#458452',
   sent: '#6ad5e6',
   received: '#524d4d',
+  storyText: 'gray',
 };
 
 export default globalColors;

@@ -24,10 +24,10 @@ const Suggested = ({navigation, token}) => {
   }, []);
 
   return (
-    <View style={{paddingLeft: 20, paddingBottom: 15}}>
+    <View style={{paddingLeft: 20, paddingVertical: 5}}>
       <FlatList
         data={friendIds}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item}
         horizontal
         renderItem={({item}) => (
           <GenderAvatars id={item} navigation={navigation} token={token} />

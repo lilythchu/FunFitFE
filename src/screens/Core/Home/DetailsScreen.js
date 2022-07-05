@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../../components/CustomButton';
-import Chervon from '../../../components/Chervon';
+import Chevron from '../../../components/Chevron';
 import Img from '../../../../assets/images/australia.png';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
@@ -27,7 +27,7 @@ const DetailsScreen = () => {
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
       {/* Image backgound */}
       <ImageBackground source={Img} style={globalStyles.imageBackground}>
-        <Chervon navigation={navigation} color="white" />
+        <Chevron navigation={navigation} color="white" />
 
         {/* Name & Genre */}
         <View style={styles.titlesWrapper}>

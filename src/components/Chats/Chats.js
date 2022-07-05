@@ -24,18 +24,19 @@ const Chats = ({navigation, token}) => {
     getConvos();
   }, [convos]);
   return (
-    <FlatList
-      data={convos}
-      keyExtractor={item => item.id}
-      renderItem={({item}) => (
-        <ChatItem item={item} navigation={navigation} token={token} />
-      )}
-      showsVerticalScrollIndicator={false}
-    />
+    <View style={{paddingTop: 10}}>
+      <FlatList
+        data={convos}
+        keyExtractor={item => item.convoId}
+        renderItem={({item}) => (
+          <ChatItem item={item} navigation={navigation} token={token} />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 
-const socket = io.connect('https://orbital-funfit.herokuapp.com/chatFunfit');
 
 const ChatItem = ({item, navigation, token}) => {
   const [visibleDia, setVisibleDia] = useState(false);
@@ -44,6 +45,7 @@ const ChatItem = ({item, navigation, token}) => {
   };
   const friendName = item.friend[0].name;
   const joinRoom = () => {
+    const socket = io.connect('https://orbital-funfit.herokuapp.com/chatFunfit');
     socket.emit('join', {chatId: item.convoId});
     navigation.navigate('Chat', {item, socket});
   };
