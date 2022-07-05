@@ -7,6 +7,7 @@ import client from '../../../api/client';
       
 const StoryItem = ({item, navigation, token}) => {
   const [userInfo, setUserInfo] = useState({});
+  const [stories, setStories] = useState([]);
 
   const getInfo = () => {
     client
@@ -16,10 +17,24 @@ const StoryItem = ({item, navigation, token}) => {
       })
       .then(res => {
         setUserInfo(res.data);
+        getStoriesInfo(res.data._id);
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  const getStoriesInfo = (id) => {
+    client
+      .get('/story/getStoriesInfo', {
+        headers: {Authorization: `Bearer ${token}`},
+        params: {id: id},
+      })
+      .then(response => {
+        setStories(response.data);
+        console.log('get Stories');
+      })
+      .catch(err => console.log(err));
   }
 
   useEffect(() => {
@@ -35,7 +50,7 @@ const StoryItem = ({item, navigation, token}) => {
           source={avaGender(userInfo.sex)}
           containerStyle={[styles.userImage, {borderWidth: 4}]}
           PlaceholderContent={<ActivityIndicator />}
-          onPress={() => navigation.navigate('Story', {userInfo, token})}
+          onPress={() => navigation.navigate('Story', {userInfo, token, stories})}
         />
       </LinearGradient>
       <Text style={styles.username}>{userInfo.name}</Text>

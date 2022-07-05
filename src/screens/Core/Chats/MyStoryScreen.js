@@ -10,6 +10,7 @@ import {Icon, Image} from '@rneui/themed';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';
+import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
 
 const MyStoryScreen = () => {
@@ -86,7 +87,7 @@ const MyStoryScreen = () => {
         <Text style={styles.userName}>Your Story</Text>
         <Icon
           name="close"
-          color="white"
+          color={globalColors.storyText}
           size={32}
           onPress={() => navigation.goBack()}
         />
@@ -101,8 +102,20 @@ const MyStoryScreen = () => {
       {loading && <ActivityIndicator size='large' />}
 
       <View style={styles.naviIcon}>
-        <Icon name='arrow-left' type='feather' onPress={previous} color='white' size={30} />
-        <Icon name='arrow-right' type='feather' onPress={next} color='white' size={30} />
+        <Icon
+          name='arrow-left'
+          type='feather'
+          onPress={previous}
+          color={globalColors.storyText}
+          size={30}
+        />
+        <Icon
+          name='arrow-right'
+          type='feather'
+          onPress={next}
+          color={globalColors.storyText}
+          size={30}
+        />
       </View>  
       
       {/* Delete Story */}
@@ -110,7 +123,7 @@ const MyStoryScreen = () => {
         name="trash-2"
         type="feather"
         size={30}
-        color="white"
+        color={globalColors.storyText}
         containerStyle={styles.deleteIconContainer} 
         onPress={deleteStory}
       />
@@ -145,7 +158,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 24,
     paddingLeft: 10,
-    color: 'white',
+    color: globalColors.storyText,
   },
   indicatorContainer: {
     flexDirection: 'row',
