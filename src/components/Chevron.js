@@ -3,7 +3,7 @@ import {TouchableOpacity} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import globalStyles from '../../styles/global';
 
-const Chervon = ({navigation, color}) => {
+const Chevron = ({navigation, color}) => {
   return (
     <TouchableOpacity
       style={globalStyles.backIcon}
@@ -13,4 +13,4 @@ const Chervon = ({navigation, color}) => {
   );
 };
 
-export default Chervon;
+export default Chevron;

@@ -103,15 +103,15 @@ const MyStoryScreen = () => {
 
       <View style={styles.naviIcon}>
         <Icon
-          name='arrow-left'
-          type='feather'
+          name='chevron-left'
+          type='entypo'
           onPress={previous}
           color={globalColors.storyText}
           size={30}
         />
         <Icon
-          name='arrow-right'
-          type='feather'
+          name='chevron-right'
+          type='entypo'
           onPress={next}
           color={globalColors.storyText}
           size={30}
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     position: 'absolute',
-    top: 40,
+    top: 20,
   },
   userName: {
     fontSize: 24,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     padding: 20,
-    top: 120,
+    top: 80,
     position: 'absolute',
     width: '100%',
   },

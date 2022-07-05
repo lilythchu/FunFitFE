@@ -30,7 +30,7 @@ const StoryScreen = () => {
 
   useEffect(() => {
     getImages();
-  }, []);
+  }, [images]);
 
   return (
     <StoryContainer

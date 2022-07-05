@@ -37,7 +37,6 @@ const Chats = ({navigation, token}) => {
   );
 };
 
-const socket = io.connect('https://orbital-funfit.herokuapp.com/chatFunfit');
 
 const ChatItem = ({item, navigation, token}) => {
   const [visibleDia, setVisibleDia] = useState(false);
@@ -46,6 +45,7 @@ const ChatItem = ({item, navigation, token}) => {
   };
   const friendName = item.friend[0].name;
   const joinRoom = () => {
+    const socket = io.connect('https://orbital-funfit.herokuapp.com/chatFunfit');
     socket.emit('join', {chatId: item.convoId});
     navigation.navigate('Chat', {item, socket});
   };

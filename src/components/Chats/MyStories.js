@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import {View, Text, Alert} from 'react-native';
+import {LinearGradient} from 'expo-linear-gradient';
 import {Avatar, ThemeProvider, Dialog} from '@rneui/themed';
-import client, {uploadStoryURL} from '../../../api/client';
 import {avaGender} from '../../../utils/methods';
+import client, {uploadStoryURL} from '../../../api/client';
 
 const MyStories = ({token, navigation, userInfo}) => {
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -69,7 +70,9 @@ const MyStories = ({token, navigation, userInfo}) => {
   useEffect(() => getStoriesInfo());
 
   return (
-    <View>
+    <LinearGradient
+      colors={['#50b1f2', '#c7c432', '#32c790']}
+      style={{padding: 3, borderRadius: 70}}>
       <Avatar
         size={64}
         rounded
@@ -91,8 +94,8 @@ const MyStories = ({token, navigation, userInfo}) => {
           <Dialog.Title title="Uploading File..." />
         </Dialog>
       </ThemeProvider>
-    </View>
-  );
+    </LinearGradient>
+  )
 };
 
 export default MyStories;
