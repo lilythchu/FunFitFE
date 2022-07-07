@@ -7,7 +7,7 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {Overlay, ListItem, Dialog, ThemeProvider} from '@rneui/themed';
+import {Overlay, ListItem, Dialog, ThemeProvider, Icon} from '@rneui/themed';
 import Feather from 'react-native-vector-icons/Feather';
 import CustomButton from '../CustomButton';
 import coverImg from '../../../assets/images/australia.png';
@@ -44,6 +44,10 @@ const MyRoutineItem = ({navigation, item, token}) => {
     setVisible(!visible);
   };
 
+  const setReminder = () => {
+    navigation.navigate('TimePicker', {item});
+  }
+
   return (
     <View style={globalStyles.myRoutineItemContainer}>
       {/* Cover Image */}
@@ -58,13 +62,31 @@ const MyRoutineItem = ({navigation, item, token}) => {
 
       {/* CRUD icon */}
       <View style={styles.crudIcon}>
-        <TouchableOpacity onPress={toggleDialog}>
+        {/* <TouchableOpacity onPress={toggleDialog}>
           <Feather name="trash" size={24} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('EditRoutine', {item})}>
           <Feather name="edit" size={24} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Icon 
+          name="trash"
+          type="feather"
+          size={24}
+          onPress={toggleDialog}
+        />
+        <Icon 
+          name="clock"
+          type="feather"
+          size={24}
+          onPress={setReminder}
+        />
+        <Icon 
+          name="edit"
+          type="feather"
+          size={24}
+          onPress={() => navigation.navigate('EditRoutine', {item})}
+        />
       </View>
 
       {/* Delete Routine Dialog */}

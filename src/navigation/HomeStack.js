@@ -8,6 +8,7 @@ import PlayVideo from '../screens/Core/Home/PlayVideo.js';
 import AddRoutineScreen from '../screens/Core/Home/AddRoutineScreen.js';
 import EditRoutineScreen from '../screens/Core/Home/EditRoutineScreen.js';
 import PlayAudio from '../screens/Core/Home/PlayAudio.js';
+import TimePickerScreen from '../screens/Core/Home/TimePickerScreen.js';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = () => {
@@ -32,6 +33,7 @@ const HomeStack = () => {
       <Stack.Screen name="Details" component={DetailsScreen} />
       <Stack.Screen name="AddRoutine" component={AddRoutineScreen} />
       <Stack.Screen name="EditRoutine" component={EditRoutineScreen} />
+      <Stack.Screen name="TimePicker" component={TimePickerScreen} />
       <Stack.Screen
         name="Video"
         component={PlayVideo}
