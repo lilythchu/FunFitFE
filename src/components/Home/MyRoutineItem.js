@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {Overlay, ListItem, Dialog, ThemeProvider, Icon} from '@rneui/themed';
 import Feather from 'react-native-vector-icons/Feather';
@@ -20,6 +21,8 @@ import client from '../../../api/client';
 const MyRoutineItem = ({navigation, item, token}) => {
   const [visible, setVisible] = useState(false);
   const [visibleDia, setVisibleDia] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const toggleDialog = () => {
     setVisibleDia(!visibleDia);
   };
@@ -27,17 +30,17 @@ const MyRoutineItem = ({navigation, item, token}) => {
     setVisible(!visible);
   };
   const onDeleteRoutine = () => {
+    setLoading(true);
     client
       .delete('/routine/deleteRoutine', {
         headers: {Authorization: `Bearer ${token}`},
         data: {id: item._id},
       })
       .then(response => {
-        navigation.navigate('Routine');
+        setVisibleDia(false);
+        setLoading(false);
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => Alert.alert("Error"));
   };
 
   const myRoutineDetail = () => {
@@ -62,13 +65,6 @@ const MyRoutineItem = ({navigation, item, token}) => {
 
       {/* CRUD icon */}
       <View style={styles.crudIcon}>
-        {/* <TouchableOpacity onPress={toggleDialog}>
-          <Feather name="trash" size={24} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('EditRoutine', {item})}>
-          <Feather name="edit" size={24} />
-        </TouchableOpacity> */}
         <Icon 
           name="trash"
           type="feather"
@@ -97,7 +93,7 @@ const MyRoutineItem = ({navigation, item, token}) => {
           overlayStyle={{borderRadius: 15}}>
           <Dialog.Title title="Are you sure want to delete" />
           <Dialog.Actions>
-            <Dialog.Button title="Yes" onPress={onDeleteRoutine} />
+            <Dialog.Button title="Yes" onPress={onDeleteRoutine} loading={loading} />
             <Dialog.Button title="No" onPress={toggleDialog} />
           </Dialog.Actions>
         </Dialog>

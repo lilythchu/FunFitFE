@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {ListItem} from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -30,7 +31,6 @@ const AddRoutineScreen = () => {
 
   const onAddRoutine = data => {
     setLoading(true);
-    console.log(data);
     for (let i = 0; i < number; i++) {
       timings[i][0] = data[`h${i}`];
       timings[i][1] = data[`min${i}`];
@@ -43,7 +43,6 @@ const AddRoutineScreen = () => {
       steps: steps,
       timings: timings,
     };
-    console.log(body);
     client
       .post('/routine/newRoutine', body, {
         headers: {Authorization: `Bearer ${token}`},
@@ -52,9 +51,7 @@ const AddRoutineScreen = () => {
         setLoading(false);
         navigation.navigate('Routine');
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => Alert.alert("Error"));
   };
   var myLoop = [];
   var steps = [];
@@ -64,7 +61,7 @@ const AddRoutineScreen = () => {
     steps[i] = `Step ${i + 1}`;
     timings[i] = ['00', '00', '00'];
     myLoop.push(
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row'}} key={i}>
         <TextInput
           style={{flex: 1, textAlign: 'center'}}
           placeholder={`Step ${i + 1}`}
@@ -136,15 +133,12 @@ const AddRoutineScreen = () => {
       </ListItem.Accordion>
 
       {/* Button */}
-      {loading ? (
-        <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-      ) : (
-        <CustomButton
-          title="Create"
-          onPress={handleSubmit(onAddRoutine)}
-          type="SECOND"
-        />
-      )}
+      <CustomButton
+        title="Create"
+        onPress={handleSubmit(onAddRoutine)}
+        type="SECOND"
+        loading={loading}
+      />
     </ScrollView>
   );
 };
