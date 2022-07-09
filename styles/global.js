@@ -27,10 +27,6 @@ const globalStyles = StyleSheet.create({
     alignSelf: 'center',
     height: windowHeight * 0.3,
   },
-  imageBackground: {
-    height: windowHeight * 0.6,
-    justifyContent: 'space-between',
-  },
   scrollView: {
     backgroundColor: 'white',
     padding: 20,

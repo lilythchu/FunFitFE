@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {ListItem} from '@rneui/themed';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -60,8 +61,6 @@ const EditRoutineScreen = () => {
     if (timings[0] !== undefined) {
       body.timings = timings;
     }
-    console.log(body);
-
     setLoading(true);
     client
       .put('/routine/editRoutine', body, {
@@ -71,9 +70,7 @@ const EditRoutineScreen = () => {
         setLoading(false);
         navigation.navigate('Routine');
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => Alert.alert('Error'));
   };
 
   var myLoop = [];
@@ -84,7 +81,7 @@ const EditRoutineScreen = () => {
     steps[i] = `Step ${i + 1}`;
     timings[i] = new Array(3);
     myLoop.push(
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row'}} key={i}>
         <TextInput
           style={{flex: 1, textAlign: 'center'}}
           placeholder={`Step ${i + 1}`}
@@ -190,16 +187,12 @@ const EditRoutineScreen = () => {
         <View style={{alignItems: 'center', marginVertical: 10}}>{myLoop}</View>
       </ListItem.Accordion>
 
-      {/* Button */}
-      {loading ? (
-        <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
-      ) : (
-        <CustomButton
-          title="Update"
-          onPress={handleSubmit(onAddRoutine)}
-          type="SECOND"
-        />
-      )}
+      <CustomButton
+        title="Update"
+        onPress={handleSubmit(onAddRoutine)}
+        type="SECOND"
+        loading={loading}
+      />
     </ScrollView>
   );
 };

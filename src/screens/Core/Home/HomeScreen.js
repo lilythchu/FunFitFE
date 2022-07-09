@@ -30,12 +30,8 @@ const HomeScreen = () => {
       .get('/routine/getMyRoutines', {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(response => {
-        setMyData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(response => setMyData(response.data))
+      .catch(error => console.log(error));
   };
 
   const getRecData = () => {
@@ -43,12 +39,8 @@ const HomeScreen = () => {
       .get('routine/getRecRoutines', {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(response => {
-        setRecData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(response => setRecData(response.data))
+      .catch(error => console.log(error));
   };
 
   useEffect(() => {
@@ -63,7 +55,7 @@ const HomeScreen = () => {
         style={globalStyles.scrollView}>
         {/*Header*/}
         <View style={styles.menuWrapper}>
-          <Feather name="menu" size={32} color="black" />
+          {/* <Feather name="menu" size={32} color="black" /> */}
           <Text style={styles.heading}>FunFit</Text>
         </View>
 
@@ -154,7 +146,6 @@ const styles = StyleSheet.create({
   menuWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     paddingVertical: 10,
   },
   titleText: {
