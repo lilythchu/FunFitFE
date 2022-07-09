@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 import globalColors from '../../../styles/colors';
 
-const RecRoutineItem = ({navigation, item}) => {
+const RecRoutineItem = ({navigation, item, type}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Details', {item})}
+      onPress={() => navigation.navigate('Details', {item, type})}
       style={styles.container}>
       <ImageBackground
         source={{uri: item.thumbnail}}

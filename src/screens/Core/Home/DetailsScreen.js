@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
   ImageBackground,
   StyleSheet,
   ScrollView,
+  Alert,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {Button, Icon, ThemeProvider} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
 import Chevron from '../../../components/Chevron';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
+import {useLogin} from '../../../../context/AuthProvider';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {arrayToString} from '../../../../utils/methods';
 import {windowWidth} from '../../../../utils/Dimensions';
+import client from '../../../../api/client';
 
 const DetailsScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const {item} = route.params;
+  const {item, type} = useRoute().params;
+  const {token} = useLogin();
+  const [loading, setLoading] = useState();
+
   const onStart = () => {
     navigation.navigate('Video', {item});
+  };
+
+  const onAddToLibrary = () => {
+    setLoading(true);
+    client
+      .post('/routine/addToLibrary', 
+        {id: item._id},
+        {headers: {Authorization: `Bearer ${token}`}},
+      )
+      .then(res => {
+        setLoading(false)
+        navigation.navigate('Routine')
+      })
+      .catch(err => {
+        setLoading(false);
+        Alert.alert("Error");
+      });
   };
 
   return (
@@ -36,7 +58,7 @@ const DetailsScreen = () => {
       {/* Description */}
       <View style={styles.descriptionWrapper}>
         <View style={styles.heartWrapper}>
-          <Entypo name="heart" size={32} color={globalColors.babyBlue} />
+          <Icon type="entypo" name="heart" size={32} color={globalColors.babyBlue} />
         </View>
 
         {/* Name & Genre */}
@@ -67,7 +89,27 @@ const DetailsScreen = () => {
         </View>
 
         {/* Button */}
-        <CustomButton type="SECOND" title="Start" onPress={onStart} />
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginVertical: 20,
+          alignContent: 'center',
+          alignSelf: 'center',
+          }}>
+          <ThemeProvider>
+            {type === "pair" && (
+              <Button
+                title="Add"
+                type="outline"
+                titleStyle={{color: globalColors.babyBlue}}
+                buttonStyle={styles.button}
+                onPress={onAddToLibrary}
+                loading={loading}
+              />
+            )}
+            <Button title="Start" onPress={onStart} buttonStyle={[styles.button, {backgroundColor: globalColors.babyBlue}]} />
+          </ThemeProvider>
+        </View>
       </View>
     </ScrollView>
   );
@@ -150,5 +192,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textTransform: 'capitalize',
     color: globalColors.babyBlue,
+  },
+  button: {
+    width: windowWidth / 2 - 50,
+    borderRadius: 10,
+    marginHorizontal: 5,
+    borderWidth: 2,
+    borderColor: globalColors.babyBlue,
   },
 });

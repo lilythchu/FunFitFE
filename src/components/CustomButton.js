@@ -58,12 +58,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 150,
   },
-  btn_FACE: {
-    backgroundColor: '#e6eaf4',
-  },
-  btn_GG: {
-    backgroundColor: '#f5e7ea',
-  },
 
   title: {},
   title_FIRST: {
@@ -85,16 +79,6 @@ const styles = StyleSheet.create({
   title_FITH: {
     fontSize: 20,
     color: 'white',
-  },
-  title_FACE: {
-    marginLeft: 10,
-    fontWeight: '600',
-    color: '#4867aa',
-  },
-  title_GG: {
-    marginLeft: 10,
-    fontWeight: '600',
-    color: '#de4d41',
   },
 });
 
