@@ -9,11 +9,11 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomButton from '../../../components/CustomButton';
 import Chevron from '../../../components/Chevron';
-import Img from '../../../../assets/images/australia.png';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
 import {useRoute, useNavigation} from '@react-navigation/native';
 import {arrayToString} from '../../../../utils/methods';
+import {windowWidth} from '../../../../utils/Dimensions';
 
 const DetailsScreen = () => {
   const navigation = useNavigation();
@@ -26,23 +26,22 @@ const DetailsScreen = () => {
   return (
     <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
       {/* Image backgound */}
-      <ImageBackground source={Img} style={globalStyles.imageBackground}>
-        <Chevron navigation={navigation} color="white" />
-
-        {/* Name & Genre */}
-        <View style={styles.titlesWrapper}>
-          <Text style={styles.itemTitle}>{item.name}</Text>
-          <View style={globalStyles.genreWrapper}>
-            <Entypo name="battery" size={24} color="white" />
-            <Text style={styles.genreText}>{arrayToString(item.genre)}</Text>
-          </View>
-        </View>
+      <ImageBackground
+        source={{uri: item.thumbnail}}
+        style={styles.imageBackground}
+      >
+        <Chevron navigation={navigation} color="black" />
       </ImageBackground>
 
       {/* Description */}
       <View style={styles.descriptionWrapper}>
         <View style={styles.heartWrapper}>
           <Entypo name="heart" size={32} color={globalColors.babyBlue} />
+        </View>
+
+        {/* Name & Genre */}
+        <View style={styles.titlesWrapper}>
+          <Text style={styles.itemTitle}>{item.name}</Text>
         </View>
 
         <View style={styles.descriptionTextWrapper}>
@@ -52,14 +51,6 @@ const DetailsScreen = () => {
 
         {/* Basic routine's information */}
         <View style={styles.infoWrapper}>
-          {/* <View style={styles.infoItem}>
-            <Text style={styles.infoTitle}>TOTAL</Text>
-            <View style={styles.infoTextWrapper}>
-              <Text style={styles.infoNum}></Text>
-              <Text style={styles.infoSubText}>/weeks</Text>
-            </View>
-          </View> */}
-
           <View style={styles.infoItem}>
             <Text style={styles.infoTitle}>DIFFICULTY</Text>
             <View style={styles.infoTextWrapper}>
@@ -67,13 +58,12 @@ const DetailsScreen = () => {
             </View>
           </View>
 
-          {/* <View style={styles.infoItem}>
-            <Text style={styles.infoTitle}>DURATION</Text>
+          <View style={styles.infoItem}>
+            <Text style={styles.infoTitle}>GENRE</Text>
             <View style={styles.infoTextWrapper}>
-              <Text style={styles.infoNum}></Text>
-              <Text style={styles.infoSubText}>/hours</Text>
+              <Text style={styles.infoText}>{arrayToString(item.genre)}</Text>
             </View>
-          </View> */}
+          </View>
         </View>
 
         {/* Button */}
@@ -91,18 +81,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingBottom: 30,
   },
+  imageBackground: {
+    height: windowWidth * 0.56,
+  },
   titlesWrapper: {
     marginHorizontal: 20,
-    marginBottom: 40,
+    marginTop: 50,
   },
   itemTitle: {
-    fontSize: 28,
-    color: 'white',
-  },
-  genreText: {
-    fontSize: 16,
-    color: 'white',
-    marginLeft: 10,
+    fontSize: 20,
+    color: globalColors.navyBlue,
   },
   descriptionWrapper: {
     flex: 1,
@@ -130,12 +118,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   descriptionTextWrapper: {
-    marginTop: 30,
+    marginTop: 20,
     marginHorizontal: 20,
   },
   descriptionTitle: {
     fontSize: 24,
-    color: 'black',
   },
   descriptionText: {
     marginTop: 20,
@@ -143,12 +130,13 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   infoWrapper: {
-    flexDirection: 'row',
     marginHorizontal: 20,
     marginTop: 20,
     justifyContent: 'space-between',
   },
-  infoItem: {},
+  infoItem: {
+    marginBottom: 10,
+  },
   infoTitle: {
     fontSize: 12,
     color: 'gray',
@@ -159,16 +147,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   infoText: {
-    fontSize: 18,
+    fontSize: 17,
     textTransform: 'capitalize',
     color: globalColors.babyBlue,
-  },
-  infoNum: {
-    fontSize: 24,
-    color: globalColors.babyBlue,
-  },
-  infoSubText: {
-    fontSize: 14,
-    color: 'gray',
   },
 });
