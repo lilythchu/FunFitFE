@@ -18,12 +18,17 @@ const CustomButton = ({type = 'FIRST', ...props}) => {
   );
 };
 
+/**
+ * - firts: larged-sized
+ * - second: medium-sized
+ * - third: small rounded corner 
+ */
+
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
   },
   btn: {
-    borderWidth: 0,
     borderRadius: 30,
     borderColor: 'transparent',
   },
@@ -39,20 +44,6 @@ const styles = StyleSheet.create({
     width: windowWidth / 2,
   },
   btn_THIRD: {
-    marginHorizontal: 30,
-    backgroundColor: globalColors.babyBlue,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  btn_FOURTH: {
-    alignSelf: 'center',
-    marginHorizontal: 20,
-    marginVertical: 20,
-    backgroundColor: globalColors.inactive,
-    height: windowHeight / 18,
-    width: windowWidth / 2,
-  },
-  btn_FIFTH: {
     alignSelf: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -69,14 +60,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   title_THIRD: {
-    fontSize: 16,
-    color: 'white',
-  },
-  title_FOURTH: {
-    fontSize: 18,
-    color: 'white',
-  },
-  title_FITH: {
     fontSize: 20,
     color: 'white',
   },

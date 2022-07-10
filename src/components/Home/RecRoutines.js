@@ -16,7 +16,7 @@ const RecRoutines = ({token, navigation}) => {
       .catch(error => console.log(error));
   };
 
-  useEffect(() => getRecData(), []);
+  useEffect(() => getRecData(), [recData]);
 
   return (
     <View style={styles.discoverWrapper}>

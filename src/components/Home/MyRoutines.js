@@ -18,7 +18,7 @@ const MyRoutines = ({token, navigation}) => {
       .catch(error => console.log(error));
   };
 
-  useEffect(() => getMyData());
+  useEffect(() => getMyData(), [myData]);
 
   return (
     <View style={styles.myRoutineWrapper}>

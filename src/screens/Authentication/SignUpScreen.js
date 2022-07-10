@@ -15,11 +15,7 @@ import CustomButton from '../../components/CustomButton';
 
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
-import {
-  EMAIL_REGEX,
-  onPrivacyPressed,
-  onTermsOfUsePressed,
-} from '../../../utils/methods';
+import {EMAIL_REGEX} from '../../../utils/methods';
 import Picture from '../../../assets/images/signup.png';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
@@ -201,18 +197,6 @@ const SignUpScreen = () => {
               onPress={handleSubmit(onRegisterPressed)}
             />
           )}
-          <Text style={globalStyles.text}>
-            By registering, you confirm that you accept our{' '}
-            <Text style={globalStyles.link} onPress={onTermsOfUsePressed}>
-              Terms of Use
-            </Text>{' '}
-            and{' '}
-            <Text style={globalStyles.link} onPress={onPrivacyPressed}>
-              Privacy Policy
-            </Text>
-          </Text>
-
-          {/* <SocialSignInButtons /> */}
 
           <View style={globalStyles.textLinkContainer}>
             <Text>
