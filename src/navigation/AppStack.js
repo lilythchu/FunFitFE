@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import globalColors from '../../styles/colors.js';
 
 import HomeStack from './HomeStack.js';
+import CalendarScreen from '../screens/Core/CalendarScreen.js';
 import NotiScreen from '../screens/Core/NotiScreen.js';
 import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
@@ -50,6 +51,15 @@ const BottomTab = () => {
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="bell" type="feather" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Calendar"
+        component={CalendarScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="calendar" type="feather" size={size} color={color} />
           ),
         }}
       />
