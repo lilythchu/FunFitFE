@@ -68,12 +68,8 @@ const OthersProfileScreen = () => {
           <Text style={styles.text}>{info.age}</Text>
         </View>
       </View>
-      {loading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <CustomButton type="FIFTH" title="Message" onPress={initConvo} />
-      )}
-      {/* <Achievements /> */}
+
+      <CustomButton type="THIRD" title="Message" onPress={initConvo} loading={loading} />
     </ScrollView>
   );
 };

@@ -18,7 +18,7 @@ import globalColors from '../../../styles/colors';
 import {arrayToSteps, arrayToString, arrayToTime} from '../../../utils/methods';
 import client from '../../../api/client';
 
-const MyRoutineItem = ({navigation, item, token}) => {
+const MyRoutineItem = ({navigation, item, token, type}) => {
   const [visible, setVisible] = useState(false);
   const [visibleDia, setVisibleDia] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,11 @@ const MyRoutineItem = ({navigation, item, token}) => {
   };
 
   const myRoutineDetail = () => {
-    setVisible(!visible);
+    if (type === "created") {
+      setVisible(!visible);
+    } else {
+      navigation.navigate('Details', {item})
+    }
   };
 
   const setReminder = () => {
@@ -56,10 +60,10 @@ const MyRoutineItem = ({navigation, item, token}) => {
       {/* Cover Image */}
       <TouchableOpacity onPress={myRoutineDetail}>
         <ImageBackground
-          source={coverImg}
+          source={type === "created" ? coverImg : {uri: item.thumbnail}}
           style={globalStyles.myRoutineItem}
           imageStyle={styles.myRoutineItemImage}>
-          <Text style={styles.myRoutineItemText}>{item.name}</Text>
+          {type === "created" && (<Text style={styles.myRoutineItemText}>{item.name}</Text>)}
         </ImageBackground>
       </TouchableOpacity>
 
@@ -77,12 +81,14 @@ const MyRoutineItem = ({navigation, item, token}) => {
           size={24}
           onPress={setReminder}
         />
-        <Icon 
-          name="edit"
-          type="feather"
-          size={24}
-          onPress={() => navigation.navigate('EditRoutine', {item})}
-        />
+        {type === "created" && (
+          <Icon 
+            name="edit"
+            type="feather"
+            size={24}
+            onPress={() => navigation.navigate('EditRoutine', {item})}
+          />
+        )}
       </View>
 
       {/* Delete Routine Dialog */}
