@@ -38,9 +38,9 @@ const MyRoutineItem = ({navigation, item, token, type}) => {
       })
       .then(response => {
         setVisibleDia(false);
-        setLoading(false);
       })
-      .catch(error => Alert.alert("Error"));
+      .catch(error => Alert.alert("Oops", "Something went wrong, cannot delete this routine"))
+      .finally(() => setLoading(false))
   };
 
   const myRoutineDetail = () => {

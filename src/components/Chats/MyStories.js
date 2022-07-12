@@ -33,7 +33,7 @@ const MyStories = ({token, navigation, userInfo}) => {
       .then(result => {
         setVisibleDia(false);
       })
-      .catch(error => Alert.alert("Error"));
+      .catch(error => console.log(error));
   };
 
   const newStories = async () => {
@@ -67,7 +67,7 @@ const MyStories = ({token, navigation, userInfo}) => {
     }
   }
 
-  useEffect(() => getStoriesInfo());
+  useEffect(() => getStoriesInfo(), [stories]);
 
   return (
     <LinearGradient

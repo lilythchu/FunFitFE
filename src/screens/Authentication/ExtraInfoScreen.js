@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, ScrollView, ActivityIndicator} from 'react-native';
+import {Text, ScrollView, ActivityIndicator, Alert} from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import GenreChip from '../../components/Profile/GenreChip';
@@ -28,9 +28,9 @@ const ExtraInfoScreen = () => {
       .then(response => {
         setProfile(response.data);
         setIsLoggedIn(true);
-        setLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => Alert.alert("Oops", "Something went wrong"))
+      .finally(() => setLoading(false))
   };
 
   return (

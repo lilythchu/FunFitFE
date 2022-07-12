@@ -47,11 +47,9 @@ const AddRoutineScreen = () => {
       .post('/routine/newRoutine', body, {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(response => {
-        setLoading(false);
-        navigation.navigate('Routine');
-      })
-      .catch(error => Alert.alert("Error"));
+      .then(response => navigation.navigate('Routine'))
+      .catch(error => Alert.alert("Oops", "Something went wrong"))
+      .finally(() => setLoading(false));
   };
   var myLoop = [];
   var steps = [];

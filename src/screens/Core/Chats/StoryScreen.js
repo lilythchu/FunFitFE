@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Alert} from 'react-native';
 import {StoryContainer} from 'react-native-stories-view';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Buffer} from 'buffer';
@@ -24,7 +23,7 @@ const StoryScreen = () => {
           };base64,${new Buffer(response.data, 'binary').toString('base64')}`;
           images[index] = data;
         })
-        .catch(err => Alert.alert("Error"));
+        .catch(err => console.log(err));
     })
   }
 

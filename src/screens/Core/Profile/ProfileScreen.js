@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {ListItem, Icon, Switch, Overlay} from '@rneui/themed';
 import GenreChip from '../../../components/Profile/GenreChip';
@@ -22,7 +23,6 @@ import client from '../../../../api/client';
 const ProfileScreen = () => {
   const {setIsLoggedIn, profile, token, setProfile} = useLogin();
   const {control, handleSubmit} = useForm();
-  const [switch1, setSwitch1] = useState(true);
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
@@ -39,10 +39,10 @@ const ProfileScreen = () => {
       })
       .then(response => {
         setProfile(response.data);
-        setLoading(false);
         setExpanded(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => Alert.alert("Oops!", "Something went wrong, cannot update info"))
+      .finally(() => setLoading(false))
   };
 
   const interests = [];
@@ -63,10 +63,10 @@ const ProfileScreen = () => {
       )
       .then(response => {
         toggleOverlay();
-        setLoading2(false);
         setProfile(response.data);
       })
-      .catch(error => console.log(error));
+      .catch(error => Alert.alert("Oops", "Something went wrong"))
+      .finally(() => setLoading2(false))
   };
 
   return (
@@ -170,14 +170,6 @@ const ProfileScreen = () => {
             />
           )}
         </Overlay>
-
-        {/* Noti */}
-        <ListItem bottomDivider>
-          <ListItem.Content>
-            <ListItem.Title>Notifications</ListItem.Title>
-          </ListItem.Content>
-          <Switch value={switch1} onValueChange={value => setSwitch1(value)} />
-        </ListItem>
       </View>
 
       {/* More */}
