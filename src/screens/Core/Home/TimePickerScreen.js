@@ -6,6 +6,7 @@ import {
   View,
   Platform
 } from 'react-native';
+import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Icon, Input} from '@rneui/themed';
 import CustomButton from '../../../components/CustomButton';
@@ -15,6 +16,14 @@ import globalStyles from '../../../../styles/global';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useLogin} from '../../../../context/AuthProvider';
 import client from '../../../../api/client';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 const TimePickerScreen = () => {
   const [datePicker, setDatePicker] = useState(false);
@@ -45,6 +54,18 @@ const TimePickerScreen = () => {
   const {token} = useLogin();
   const {item} = useRoute().params;
   const onSetReminder = () => {
+    const trigger = new Date(date);
+    trigger.setHours(time.getHours());
+    trigger.setMinutes(time.getMinutes());
+
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Reminder",
+        body: `Time for some exercise! ${item.name}`,
+      },
+      trigger,
+    });
+
     setLoading(true);
     client
       .put('/routine/editRoutine',
@@ -52,9 +73,7 @@ const TimePickerScreen = () => {
           id: item._id,
           reminder: date,
         },
-        {
-          headers: {Authorization: `Bearer ${token}`},
-        }
+        {headers: {Authorization: `Bearer ${token}`}},
       )
       .then(res => {
         setLoading(false);
@@ -82,7 +101,7 @@ const TimePickerScreen = () => {
           disabled
         />
 
-        {/* <Input
+        <Input
           label='TIME'
           placeholder='Time'
           value={time.toLocaleTimeString()}
@@ -90,7 +109,7 @@ const TimePickerScreen = () => {
             <Icon type="feather" name="clock" onPress={showTimePicker}/>
           }
           disabled
-        /> */}
+        />
       </View>
 
       {datePicker && (
