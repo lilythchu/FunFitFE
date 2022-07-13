@@ -6,7 +6,6 @@ import globalColors from '../../styles/colors.js';
 
 import HomeStack from './HomeStack.js';
 import CalendarScreen from '../screens/Core/CalendarScreen.js';
-import NotiScreen from '../screens/Core/NotiScreen.js';
 import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
 import ChatScreen from '../screens/Core/Chats/ChatScreen.js';
@@ -44,15 +43,6 @@ const BottomTab = () => {
             />
           ),
         })}
-      />
-      <Tab.Screen
-        name="Notification"
-        component={NotiScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="bell" type="feather" size={size} color={color} />
-          ),
-        }}
       />
       <Tab.Screen
         name="Calendar"

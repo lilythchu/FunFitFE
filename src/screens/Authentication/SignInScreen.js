@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import * as Notifications from 'expo-notifications';
 import {
   ActivityIndicator,
   View,
@@ -20,14 +19,6 @@ import {useLogin} from '../../../context/AuthProvider';
 import {EMAIL_REGEX} from '../../../utils/methods';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -62,7 +53,6 @@ const SignInScreen = () => {
               setLoading(false);
               setIsLoggedIn(true);
               setProfile(res.data);
-              welcome();
             }
           })
           .catch(error => console.log(error));
@@ -175,14 +165,3 @@ const SignInScreen = () => {
 };
 
 export default SignInScreen;
-
-async function welcome() {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: 'Welcome to Funfit! 📬',
-      body: 'Have a nice day',
-      data: {data: 'goes here'},
-    },
-    trigger: {seconds: 2},
-  });
-}
