@@ -3,35 +3,79 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {Agenda} from 'react-native-calendars';
 import {useLogin} from '../../../context/AuthProvider';
-import axios from 'axios';
+import {addDayFollow} from '../../../utils/methods';
+import client from '../../../api/client';
 
 const CalendarScreen = () => {
   const {token} = useLogin();
-  const [items, setItems] = useState({});
+  const [reminder, setReminder] = useState({});
+  const [daysFollow, setDaysFollow] = useState({});
+
+  const getDaysFollow = () => {
+    client
+      .get('/user/getDaysFollow', {
+        headers: {Authorization: `Bearer ${token}`}
+      })
+      .then(res => {
+        for (let k in res.data) {
+          res.data[k] = res.data[k].map(item => {
+            return {
+              name: item,
+              type: 'Completed',
+            }
+          })       
+        }
+        setDaysFollow(res.data);
+      })
+      .catch(err => console.log(err.response));
+  }
+
+  const getReminder = () => {
+    client
+      .get('/user/getReminderList', {
+        headers: {Authorization: `Bearer ${token}`}
+      })
+      .then(res => {
+        for (let k in res.data) {
+          res.data[k] = res.data[k].map(item => {
+            return {
+              name: item,
+              type: 'Reminder',
+            }
+          })       
+        }
+        setReminder(res.data);
+      })
+      .catch(err => console.log(err.response));
+  }
+
+  const merge = async () => {
+    const first = await getDaysFollow();
+    const second = getReminder();
+    console.log(first);
+    setItems(mergeObjects(first, second));
+  }
 
   useEffect(() => {
-    const getData = () => {
-      axios
-        .get('https://orbital-funfit.herokuapp.com/user/getDaysFollow', {
-          headers: {Authorization: `Bearer ${token}`}
-        })
-        .then(res => setItems(res.data))
-        .catch(err => console.log(err.response));
-    };
-    getData();
-  }, [items]);
+    getDaysFollow();
+    getReminder();
+  }, []);
 
   const renderItem = (item) => {
     return (
       <View style={styles.itemContainer}>
-        <Text>{item}</Text>
-        <Text style={{paddingTop: 10, color: 'green'}}>Completed!!</Text>
+        <Text>{item.name}</Text>
+        <Text style={{
+          paddingTop: 10,
+          color: item.type === 'Completed' ? 'green' : 'orange',}}>
+          {item.type}
+        </Text>
       </View>
     );
   };
 
   return (
-    <View style={styles.safe}>
+    <View style={styles.safe}> 
       {/* Header */}
       <ListItem bottomDivider>
         <Icon name="calendar" type="feather" size={30} />
@@ -41,7 +85,7 @@ const CalendarScreen = () => {
       </ListItem>
 
       <Agenda
-        items={items}
+        items={{...daysFollow, ...reminder}}
         renderItem={renderItem}
         renderEmptyDate={() => {
           return <View />;

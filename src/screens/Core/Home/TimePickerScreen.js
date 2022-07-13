@@ -67,13 +67,14 @@ const TimePickerScreen = () => {
   const onSetReminder = () => {
     schedulePushNotification();
     setLoading(true);
+    date.setUTCHours(time.getHours());
+    date.setUTCMinutes(time.getMinutes());
     client
-      .post('/routine/addReminder',
+      .post(
+        '/routine/addReminder',
         {
-          // id: item._id,
-          // reminder: date,
-          date: time + "", 
-          reminderMessage: `${item.name} is due`
+          date: date,
+          reminderMessage: `${item.name} is due`, 
         },
         {headers: {Authorization: `Bearer ${token}`}},
       )
