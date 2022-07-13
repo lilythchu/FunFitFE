@@ -41,7 +41,7 @@ const DetailsScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Image backgound */}
       <ImageBackground
         source={{uri: item.thumbnail}}
