@@ -35,18 +35,19 @@ const DetailsScreen = () => {
         {id: item._id},
         {headers: {Authorization: `Bearer ${token}`}},
       )
-      .then(res => {
-        setLoading(false)
-        navigation.navigate('Routine')
-      })
+      .then(res => navigation.navigate('Routine'))
       .catch(err => {
-        setLoading(false);
-        Alert.alert("Error");
-      });
+        if (err.response.status === 400) {
+          Alert.alert("Oops", "It has already been added to your library");
+        } else {
+          Alert.alert("Oops", "Something went wrong, cannot add routine to library")
+        }
+      })
+      .finally(() => setLoading(false))
   };
 
   return (
-    <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Image backgound */}
       <ImageBackground
         source={{uri: item.thumbnail}}

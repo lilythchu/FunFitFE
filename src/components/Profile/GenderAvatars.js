@@ -13,12 +13,8 @@ const GenderAvatars = ({id, navigation, token}) => {
         headers: {Authorization: `Bearer ${token}`},
         params: {otherId: id},
       })
-      .then(res => {
-        setInfo(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(res => setInfo(res.data))
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {

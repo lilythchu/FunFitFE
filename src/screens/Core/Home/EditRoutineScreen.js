@@ -66,11 +66,9 @@ const EditRoutineScreen = () => {
       .put('/routine/editRoutine', body, {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(response => {
-        setLoading(false);
-        navigation.navigate('Routine');
-      })
-      .catch(error => Alert.alert('Error'));
+      .then(response => navigation.navigate('Routine'))
+      .catch(error => Alert.alert('Oops', 'Something went wrong, cannot edit routine'))
+      .finally(() => setLoading(false))
   };
 
   var myLoop = [];

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import CustomSwiper from '../../../components/CustomSwiper';
 import RecRoutines from '../../../components/Home/RecRoutines';
@@ -7,7 +7,6 @@ import {useNavigation} from '@react-navigation/native';
 import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import globalStyles from '../../../../styles/global';
-import client from '../../../../api/client';
 
 const HomeScreen = () => {
   const navigation = useNavigation();

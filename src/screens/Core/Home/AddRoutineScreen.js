@@ -47,11 +47,15 @@ const AddRoutineScreen = () => {
       .post('/routine/newRoutine', body, {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(response => {
-        setLoading(false);
-        navigation.navigate('Routine');
+      .then(response => navigation.navigate('Routine'))
+      .catch(error => {
+        if (error.response.data === 'Please choose a different name') {
+          Alert.alert("Oops", error.response.data);
+        } else {
+          Alert.alert("Oops", "Something went wrong")
+        }
       })
-      .catch(error => Alert.alert("Error"));
+      .finally(() => setLoading(false));
   };
   var myLoop = [];
   var steps = [];

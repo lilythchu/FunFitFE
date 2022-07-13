@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, FlatList, ActivityIndicator} from 'react-native';
+import {View, FlatList, ActivityIndicator, Alert} from 'react-native';
 import RecCard from '../../../components/Home/RecCard';
 import CategoryList from '../../../components/Home/CategoryList';
 import {useNavigation} from '@react-navigation/native';
@@ -24,7 +24,7 @@ const RecScreen = () => {
         setRecData(res.data);
         setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => Alert.alert("Oops!", "Cannot get recommended routines"));
   };
 
   return (

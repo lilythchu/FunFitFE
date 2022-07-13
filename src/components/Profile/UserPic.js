@@ -1,16 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import {Avatar} from '@rneui/themed';
 import globalColors from '../../../styles/colors';
+import globalStyles from '../../../styles/global';
 import {Buffer} from 'buffer';
 import {uploadImageURL, downloadPicURL} from '../../../api/client';
 import axios from 'axios';
 
 const UserPic = ({token, names}) => {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const downloadPic = () => {
+    setLoading(true);
     axios
       .get(downloadPicURL, {
         headers: {Authorization: `Bearer ${token}`},
@@ -22,7 +25,8 @@ const UserPic = ({token, names}) => {
         };base64,${new Buffer(response.data, 'binary').toString('base64')}`;
         setImage(data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   const pickImage = async () => {
@@ -66,21 +70,25 @@ const UserPic = ({token, names}) => {
 
   return (
     <View style={styles.userImage}>
-      <Avatar
-        size={90}
-        rounded
-        source={image && {uri: image}}
-        title={names.charAt(0).toUpperCase()}
-        containerStyle={{backgroundColor: globalColors.navyBlue}}>
-        <Avatar.Accessory
-          size={23}
-          name="camera"
-          type="feather"
-          onPress={pickImage}
-          iconStyle={{color: 'black'}}
-          style={{backgroundColor: globalColors.cream}}
-        />
-      </Avatar>
+      {loading ? (
+        <ActivityIndicator size="large" style={globalStyles.activityIdicator} />
+      ) : (
+        <Avatar
+          size={90}
+          rounded
+          source={image && {uri: image}}
+          title={names.charAt(0).toUpperCase()}
+          containerStyle={{backgroundColor: globalColors.navyBlue}}>
+          <Avatar.Accessory
+            size={23}
+            name="camera"
+            type="feather"
+            onPress={pickImage}
+            iconStyle={{color: 'black'}}
+            style={{backgroundColor: globalColors.cream}}
+          />
+        </Avatar>
+      )}
     </View>
   );
 };

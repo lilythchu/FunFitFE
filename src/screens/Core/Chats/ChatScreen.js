@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {useLogin} from '../../../../context/AuthProvider';
 import {GiftedChat, Send} from 'react-native-gifted-chat';
@@ -45,10 +45,10 @@ const ChatScreen = () => {
           setMessages(previousMessages =>
             GiftedChat.append(previousMessages, Data),
           );
-          setIsLoadingEarlier(false);
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => Alert.alert("Error", "Cannot get earlier messages"))
+      .finally(() => setIsLoadingEarlier(false));
   };
 
   useEffect(() => {
@@ -109,22 +109,6 @@ const ChatScreen = () => {
       </Send>
     );
   };
-
-  // const renderBubble = props => {
-  //   return (
-  //     <Bubble
-  //       {...props}
-  //       wrapperStyle={{
-  //         right: {backgroundColor: globalColors.sent},
-  //         left: {backgroundColor: globalColors.received},
-  //       }}
-  //       textStyle={{
-  //         right: {color: 'black'},
-  //         left: {color: 'black'},
-  //       }}
-  //     />
-  //   );
-  // };
 
   const scrollToBottomComponent = () => {
     return <FontAwesome name="angle-double-down" size={22} color="#333" />;

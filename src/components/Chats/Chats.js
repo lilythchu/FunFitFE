@@ -3,7 +3,6 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {io} from 'socket.io-client';
 import {Dialog, ThemeProvider} from '@rneui/themed';
 import Feather from 'react-native-vector-icons/Feather';
-
 import LetterAva from '../Profile/LetterAva';
 import client from '../../../api/client';
 
