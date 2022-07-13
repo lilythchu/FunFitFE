@@ -36,7 +36,13 @@ const DetailsScreen = () => {
         {headers: {Authorization: `Bearer ${token}`}},
       )
       .then(res => navigation.navigate('Routine'))
-      .catch(err => Alert.alert("Oops", "Something went wrong, cannot add routine to library"))
+      .catch(err => {
+        if (err.response.status === 400) {
+          Alert.alert("Oops", "It has already been added to your library");
+        } else {
+          Alert.alert("Oops", "Something went wrong, cannot add routine to library")
+        }
+      })
       .finally(() => setLoading(false))
   };
 

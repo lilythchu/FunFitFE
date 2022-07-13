@@ -48,7 +48,13 @@ const AddRoutineScreen = () => {
         headers: {Authorization: `Bearer ${token}`},
       })
       .then(response => navigation.navigate('Routine'))
-      .catch(error => Alert.alert("Oops", "Something went wrong"))
+      .catch(error => {
+        if (error.response.data === 'Please choose a different name') {
+          Alert.alert("Oops", error.response.data);
+        } else {
+          Alert.alert("Oops", "Something went wrong")
+        }
+      })
       .finally(() => setLoading(false));
   };
   var myLoop = [];
