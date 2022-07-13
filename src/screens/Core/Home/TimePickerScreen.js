@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform
+  Platform,
+  Alert,
 } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -32,40 +33,39 @@ const TimePickerScreen = () => {
   const [time, setTime] = useState(new Date(Date.now()));
   const [loading, setLoading] = useState(false);
  
-  function showDatePicker() {
-    setDatePicker(true);
-  };
- 
-  function showTimePicker() {
-    setTimePicker(true);
-  };
- 
-  function onDateSelected(event, value) {
+  const showDatePicker = () => setDatePicker(true)
+  const showTimePicker = () => setTimePicker(true)
+  const onDateSelected = (event, value) => {
     setDate(value);
     setDatePicker(false);
   };
- 
-  function onTimeSelected(event, value) {
+  const onTimeSelected = (event, value) => {
     setTime(value);
     setTimePicker(false);
   };
+
+  async function schedulePushNotification() {
+    const hasPushNotificationPermissionGranted = await allowsNotificationsAsync()
+    if (!hasPushNotificationPermissionGranted) {
+      await requestPermissionsAsync();
+    }
+      const trigger = new Date(date)
+      trigger.setHours(time.getHours());
+      trigger.setMinutes(time.getMinutes());
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Reminder",
+          body: "Don't forget to workout today",
+        },
+        trigger,
+      });
+  }
 
   const navigation = useNavigation();
   const {token} = useLogin();
   const {item} = useRoute().params;
   const onSetReminder = () => {
-    const trigger = new Date(date);
-    trigger.setHours(time.getHours());
-    trigger.setMinutes(time.getMinutes());
-
-    Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Reminder",
-        body: `Time for some exercise! ${item.name}`,
-      },
-      trigger,
-    });
-
+    schedulePushNotification();
     setLoading(true);
     client
       .put('/routine/editRoutine',
@@ -76,10 +76,10 @@ const TimePickerScreen = () => {
         {headers: {Authorization: `Bearer ${token}`}},
       )
       .then(res => {
-        setLoading(false);
         navigation.navigate('Routine');
       })
-      .catch(err => console.log(err));
+      .catch(err => Alert.alert("Oops", "Something went wrong, cannot set reminder"))
+      .finally(() => setLoading(false))
   }
  
   return (
@@ -166,3 +166,21 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
 });
+
+async function allowsNotificationsAsync() {
+  const settings = await Notifications.getPermissionsAsync();
+  return (
+    settings.granted || settings.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL
+  );
+}
+
+async function requestPermissionsAsync() {
+  return await Notifications.requestPermissionsAsync({
+    ios: {
+      allowAlert: true,
+      allowBadge: true,
+      allowSound: true,
+      allowAnnouncements: true,
+    },
+  });
+}
