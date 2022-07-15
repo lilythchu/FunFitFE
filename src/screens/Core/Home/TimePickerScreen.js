@@ -54,8 +54,8 @@ const TimePickerScreen = () => {
       trigger.setMinutes(time.getMinutes());
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "Reminder",
-          body: "Don't forget to workout today",
+          title: 'Exercise Reminder',
+          body: `Time for some exercise! \n${item.name}`,
         },
         trigger,
       });
