@@ -57,16 +57,28 @@ const OthersProfileScreen = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <View style={[styles.subInfoContainer, {flex: 2, marginRight: 5}]}>
+        <View style={[styles.subInfoContainer1, {flex: 1, marginRight: 5}]}>
+          <Text style={styles.subTitle}>Level</Text>
+          <Text style={styles.text}>{info.level}</Text>
+        </View>
+        <View style={[styles.subInfoContainer1, {flex: 1, marginLeft: 5}]}>
+          <Text style={styles.subTitle}>Points</Text>
+          <Text style={styles.text}>{info.points}</Text>
+        </View>
+        <View style={[styles.subInfoContainer1, {flex: 1, marginLeft: 5}]}>
+          <Text style={styles.subTitle}>Age</Text>
+          <Text style={styles.text}>{info.age}</Text>
+        </View>
+      </View>
+      
+      <View style={styles.infoContainer}>
+        <View style={[styles.subInfoContainer, {flex: 1, marginRight: 5}]}>
           <Text style={styles.subTitle}>Workout Interests</Text>
           <Text style={styles.text}>
             {arrayToString(info.workoutInterests)}
           </Text>
-        </View>
-        <View style={[styles.subInfoContainer, {flex: 1, marginLeft: 5}]}>
-          <Text style={styles.subTitle}>Age</Text>
-          <Text style={styles.text}>{info.age}</Text>
-        </View>
+      </View>
+
       </View>
 
       <CustomButton type="THIRD" title="Message" onPress={initConvo} loading={loading} />
@@ -113,11 +125,18 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 20,
+    paddingBottom: 5,
   },
   subInfoContainer: {
     alignItems: 'center',
-    backgroundColor: globalColors.cream,
+    // backgroundColor: globalColors.cream,
+    borderRadius: 10,
+    margin: 10,
+    padding: 5,
+  },
+  subInfoContainer1: {
+    alignItems: 'center',
+    // backgroundColor: globalColors.cream,
     borderRadius: 10,
     margin: 10,
     padding: 5,
