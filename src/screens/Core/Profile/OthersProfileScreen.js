@@ -57,15 +57,15 @@ const OthersProfileScreen = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <View style={[styles.subInfoContainer1, {flex: 1, marginRight: 5}]}>
+        <View style={[styles.subInfoContainer, {flex: 1, marginRight: 5}]}>
           <Text style={styles.subTitle}>Level</Text>
           <Text style={styles.text}>{info.level}</Text>
         </View>
-        <View style={[styles.subInfoContainer1, {flex: 1, marginLeft: 5}]}>
+        <View style={[styles.subInfoContainer, {flex: 1, marginLeft: 5}]}>
           <Text style={styles.subTitle}>Points</Text>
           <Text style={styles.text}>{info.points}</Text>
         </View>
-        <View style={[styles.subInfoContainer1, {flex: 1, marginLeft: 5}]}>
+        <View style={[styles.subInfoContainer, {flex: 1, marginLeft: 5}]}>
           <Text style={styles.subTitle}>Age</Text>
           <Text style={styles.text}>{info.age}</Text>
         </View>
@@ -128,13 +128,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
   subInfoContainer: {
-    alignItems: 'center',
-    // backgroundColor: globalColors.cream,
-    borderRadius: 10,
-    margin: 10,
-    padding: 5,
-  },
-  subInfoContainer1: {
     alignItems: 'center',
     // backgroundColor: globalColors.cream,
     borderRadius: 10,
