@@ -23,12 +23,7 @@ const CustomInput = ({
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              labelStyle={styles.label}
               containerStyle={[styles.container, styles[`container_${type}`]]}
-              inputContainerStyle={[
-                styles.inputContainer,
-                styles[`inputContainer_${type}`],
-              ]}
               inputStyle={[styles.input, styles[`input_${type}`]]}
               leftIcon={
                 <Icon type={'font-awesome'} name={icon} color="#424040" />
@@ -36,8 +31,8 @@ const CustomInput = ({
               leftIconContainerStyle={
                 icon ? [styles.iconLeft, styles[`iconLeft_${type}`]] : {}
               }
-              errorMessage={error ? error.message : ''}
-              errorStyle={{fontSize: 12}}
+              errorMessage={error && error.message}
+              errorStyle={styles.errors}
               {...props}
             />
           </View>
@@ -55,22 +50,22 @@ const styles = StyleSheet.create({
   container_SECOND: {
     borderWidth: 1,
   },
-  container_THIRD: {},
   container_TIME: {
     width: 70,
+  },
+  input: {},
+  input_THIRD: {
+    fontSize: 15,
+    textAlign: 'center',
   },
   iconLeft: {
     marginRight: 8,
     width: 24,
     height: 24,
   },
-  label: {},
-  input: {},
-  input_THIRD: {
-    fontSize: 15,
-    textAlign: 'center',
+  errors: {
+    fontSize: 12,
   },
-  inputContainer: {},
 });
 
 export default CustomInput;

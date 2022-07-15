@@ -71,7 +71,7 @@ const AddRoutineScreen = () => {
           placeholder={`Step ${i + 1}`}
           onChangeText={text => (steps[i] = text)}
         />
-        <TimeInput control={control} num={i} />
+        <TimeInput control={control} name={i} />
       </View>,
     );
   }
@@ -115,7 +115,7 @@ const AddRoutineScreen = () => {
       />
       <View style={globalStyles.durationContainer}>
         <Text style={{fontSize: 16}}>Duration</Text>
-        <TimeInput control={control} num="dur" />
+        <TimeInput control={control} name="dur" />
       </View>
 
       <ListItem.Accordion
