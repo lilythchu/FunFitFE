@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import CustomInput from './CustomInput';
 
-const TimeInput = ({control, num, require = true}) => {
+const TimeInput = ({control, name}) => {
   return (
     <View style={styles.timeContainer}>
       <CustomInput
         type="TIME"
-        name={`h${num}`}
+        name={`h${name}`}
         keyboardType="numeric"
         control={control}
         rightIcon={<Text>:</Text>}
@@ -17,7 +17,7 @@ const TimeInput = ({control, num, require = true}) => {
       />
       <CustomInput
         type="TIME"
-        name={`min${num}`}
+        name={`min${name}`}
         keyboardType="numeric"
         control={control}
         rightIcon={<Text>:</Text>}
@@ -35,7 +35,7 @@ const TimeInput = ({control, num, require = true}) => {
       />
       <CustomInput
         type="TIME"
-        name={`sec${num}`}
+        name={`sec${name}`}
         keyboardType="numeric"
         control={control}
         rules={{

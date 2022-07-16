@@ -9,10 +9,10 @@ import {
   Alert,
 } from 'react-native';
 import {ListItem} from '@rneui/themed';
-import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';
+import Chevron from '../../../components/Chevron';
 
 import {useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
@@ -71,7 +71,7 @@ const AddRoutineScreen = () => {
           placeholder={`Step ${i + 1}`}
           onChangeText={text => (steps[i] = text)}
         />
-        <TimeInput control={control} num={i} />
+        <TimeInput control={control} name={i} />
       </View>,
     );
   }
@@ -81,11 +81,7 @@ const AddRoutineScreen = () => {
       style={globalStyles.scrollView}
       showsVerticalScrollIndicator={false}>
       {/* Navigation */}
-      <TouchableOpacity
-        style={globalStyles.backIcon}
-        onPress={() => navigation.goBack()}>
-        <Entypo name="chevron-left" size={32} color={globalColors.babyBlue} />
-      </TouchableOpacity>
+      <Chevron navigation={navigation} color={globalColors.babyBlue} />
 
       {/* Title */}
       <Text style={[globalStyles.title, {fontSize: 21}]}>
@@ -115,7 +111,7 @@ const AddRoutineScreen = () => {
       />
       <View style={globalStyles.durationContainer}>
         <Text style={{fontSize: 16}}>Duration</Text>
-        <TimeInput control={control} num="dur" />
+        <TimeInput control={control} name="dur" />
       </View>
 
       <ListItem.Accordion

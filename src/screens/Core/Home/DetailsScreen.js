@@ -58,10 +58,6 @@ const DetailsScreen = () => {
 
       {/* Description */}
       <View style={styles.descriptionWrapper}>
-        <View style={styles.heartWrapper}>
-          <Icon type="entypo" name="heart" size={32} color={globalColors.babyBlue} />
-        </View>
-
         {/* Name & Genre */}
         <View style={styles.titlesWrapper}>
           <Text style={styles.itemTitle}>{item.name}</Text>
@@ -140,25 +136,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: -20,
     borderRadius: 25,
-  },
-  heartWrapper: {
-    position: 'absolute',
-    right: 40,
-    top: -30,
-    width: 64,
-    height: 64,
-    backgroundColor: 'white',
-    borderRadius: 64,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   descriptionTextWrapper: {
     marginTop: 20,

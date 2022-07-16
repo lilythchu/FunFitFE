@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {useLogin} from '../../../../context/AuthProvider';
+import {addDayFollow} from '../../../../utils/methods';
 import client from '../../../../api/client';
 
 const PlayVideo = () => {
@@ -13,19 +14,9 @@ const PlayVideo = () => {
   const onStateChange = useCallback(state => {
     if (state === 'ended') {
       setPlaying(false);
-      addDayFollow();
+      addDayFollow(item._id, token);
     }
   }, []);
-
-  const addDayFollow = () => {
-    client
-      .post(
-        '/routine/adddaysfollow',
-        {id: item._id},
-        {headers: {Authorization: `Bearer ${token}`}},
-      )
-      .catch(err => console.log(err));
-  };
 
   return (
     <View style={styles.container}>

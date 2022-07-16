@@ -10,10 +10,10 @@ import {
   Alert,
 } from 'react-native';
 import {ListItem} from '@rneui/themed';
-import Entypo from 'react-native-vector-icons/Entypo';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';
+import Chevron from '../../../components/Chevron';
 
 import {useLogin} from '../../../../context/AuthProvider';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -40,14 +40,11 @@ const EditRoutineScreen = () => {
     }
     const body = {
       id: item._id,
-      name: item.name,
       duration: [
         data.hdur === undefined ? item.duration[0] : data.hdur,
         data.mindur === undefined ? item.duration[1] : data.mindur,
         data.secdur === undefined ? item.duration[2] : data.secdur,
       ],
-      genre: item.genre,
-      timings: item.timings,
     };
     if (data.name !== undefined) {
       body.name = data.name;
@@ -85,7 +82,7 @@ const EditRoutineScreen = () => {
           placeholder={`Step ${i + 1}`}
           onChangeText={text => (steps[i] = text)}
         />
-        <TimeInput control={control} num={i} />
+        <TimeInput control={control} name={i} />
       </View>,
     );
   }
@@ -95,11 +92,7 @@ const EditRoutineScreen = () => {
       style={globalStyles.scrollView}
       showsVerticalScrollIndicator={false}>
       {/* Navigation */}
-      <TouchableOpacity
-        style={globalStyles.backIcon}
-        onPress={() => navigation.goBack()}>
-        <Entypo name="chevron-left" size={32} color={globalColors.babyBlue} />
-      </TouchableOpacity>
+      <Chevron navigation={navigation} color={globalColors.babyBlue} />
 
       {/* Title */}
       <Text style={[globalStyles.title, {fontSize: 21}]}>Edit my Routine</Text>

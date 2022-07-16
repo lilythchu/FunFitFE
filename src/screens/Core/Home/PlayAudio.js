@@ -6,7 +6,7 @@ import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import CustomButton from '../../../components/CustomButton';
 
 import {useRoute} from '@react-navigation/native';
-import {arrayToSum} from '../../../../utils/methods';
+import {arrayToSum, addDayFollow} from '../../../../utils/methods';
 import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
@@ -37,16 +37,6 @@ const PlayAudio = () => {
     });
   };
 
-  const addDayFollow = () => {
-    client
-      .post(
-        '/routine/addDaysFollow',
-        {id: item._id},
-        {headers: {Authorization: `Bearer ${token}`}},
-      )
-      .catch(err => console.log(err));
-  };
-
   const onPause = async () => {
     await sound.pauseAsync();
     setPlayingSound(false);
@@ -73,7 +63,7 @@ const PlayAudio = () => {
   const nextStep = () => {
     if (ith === steps.length) {
       Speech.speak('Done');
-      addDayFollow();
+      addDayFollow(item._id, token);
       setStartTimer(false);
       setPlayingSound(false);
       setDone(true);
@@ -101,7 +91,6 @@ const PlayAudio = () => {
       },
     );
     setSound(sound);
-    //await sound.playAsync();
   }
 
   React.useEffect(() => {
