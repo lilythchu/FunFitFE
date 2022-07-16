@@ -60,7 +60,7 @@ const SignInScreen = () => {
       .catch(error => {
         setLoading(false);
         setDismiss(false);
-        const mes = error.response.data;
+        const mes = error.response.data.message;
         if (mes === 'User does not exist' || mes === 'Incorrect password') {
           setMessage(mes);
         } else {

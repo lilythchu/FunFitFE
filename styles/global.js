@@ -79,7 +79,8 @@ const globalStyles = StyleSheet.create({
   },
   backIcon: {
     marginLeft: 20,
-    marginTop: 60,
+    marginTop: 40,
+    marginBottom: 10,
   },
   genreWrapper: {
     width: windowWidth / 2,

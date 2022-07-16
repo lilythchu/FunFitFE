@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Alert} from 'react-native';
 import {ListItem, Text, ThemeProvider, Dialog} from '@rneui/themed';
 import female from '../assets/images/female.jpg';
 import male from '../assets/images/male.jpg';
@@ -60,4 +61,15 @@ export function avaGender(str) {
     return others;
   }
 }
+
+export const addDayFollow = (id, token) => {
+  client
+    .post(
+      '/routine/addDaysFollow',
+      {id: id},
+      {headers: {Authorization: `Bearer ${token}`}},
+    )
+    .then(res => Alert.alert("Add days and points successfully"))
+    .catch(err => Alert.alert("Oops", "Cannot add days and points"));
+};
 
