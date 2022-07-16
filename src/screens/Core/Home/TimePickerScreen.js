@@ -55,7 +55,7 @@ const TimePickerScreen = () => {
       await Notifications.scheduleNotificationAsync({
         content: {
           title: 'Exercise Reminder',
-          body: `Time for some exercise! \n${item.name}`,
+          body: `${item.name} is due today`,
         },
         trigger,
       });
