@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import {ListItem, Icon, Overlay} from "@rneui/themed";
+import {ListItem, Icon, Overlay} from 'react-native-elements';
 import CustomButton from "../CustomButton";
 import CustomInput from "../CustomInput";
 import GenreChip from '../../components/Profile/GenreChip';

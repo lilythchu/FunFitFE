@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Controller} from 'react-hook-form';
-import {Input, Icon} from '@rneui/themed';
+import {Input, Icon} from 'react-native-elements';
 
 const CustomInput = ({
   icon,

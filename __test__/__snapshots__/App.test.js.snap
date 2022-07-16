@@ -1,0 +1,508 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> Renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaProvider
+    onInsetsChange={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={true}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="Onboarding"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+              },
+              Object {
+                "backgroundColor": "rgb(242, 242, 242)",
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "white",
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <RCTScrollView
+                bottomButton={false}
+                bounces={false}
+                data={
+                  Array [
+                    Object {
+                      "image": 1,
+                      "text": "",
+                      "title": "Welcome to FUNFIT",
+                    },
+                    Object {
+                      "image": 1,
+                      "text": "",
+                      "title": "Enjoy your journey with us",
+                    },
+                    Object {
+                      "image": 1,
+                      "text": "",
+                      "title": "Let's get started",
+                    },
+                  ]
+                }
+                dotClickEnabled={true}
+                extraData={1}
+                getItem={[Function]}
+                getItemCount={[Function]}
+                horizontal={true}
+                initialNumToRender={3}
+                keyExtractor={[Function]}
+                onContentSizeChange={[Function]}
+                onDone={[Function]}
+                onLayout={[Function]}
+                onMomentumScrollBegin={[Function]}
+                onMomentumScrollEnd={[Function]}
+                onScroll={[Function]}
+                onScrollBeginDrag={[Function]}
+                onScrollEndDrag={[Function]}
+                pagingEnabled={true}
+                removeClippedSubviews={false}
+                renderDoneButton={[Function]}
+                renderItem={[Function]}
+                renderNextButton={[Function]}
+                renderPrevButton={[Function]}
+                scrollEventThrottle={50}
+                showDoneButton={true}
+                showNextButton={true}
+                showPrevButton={true}
+                showSkipButton={false}
+                showsHorizontalScrollIndicator={false}
+                stickyHeaderIndices={Array []}
+                style={
+                  Object {
+                    "flex": 1,
+                    "flexDirection": "row",
+                  }
+                }
+                viewabilityConfigCallbackPairs={Array []}
+              >
+                <View>
+                  <View
+                    onLayout={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                        },
+                        null,
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "flex": 1,
+                          "width": 0,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "flex": 1,
+                            "justifyContent": "center",
+                          }
+                        }
+                      >
+                        <Image
+                          source={1}
+                          style={
+                            Object {
+                              "height": 350,
+                              "marginVertical": 60,
+                              "width": 350,
+                            }
+                          }
+                        />
+                        <View>
+                          <Text
+                            style={
+                              Object {
+                                "color": "black",
+                                "fontSize": 24,
+                                "marginHorizontal": 60,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            Welcome to FUNFIT
+                          </Text>
+                          <Text
+                            style={
+                              Object {
+                                "color": "gray",
+                                "fontSize": 14,
+                                "marginHorizontal": 60,
+                                "marginTop": 20,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    onLayout={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                        },
+                        null,
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "flex": 1,
+                          "width": 0,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "flex": 1,
+                            "justifyContent": "center",
+                          }
+                        }
+                      >
+                        <Image
+                          source={1}
+                          style={
+                            Object {
+                              "height": 350,
+                              "marginVertical": 60,
+                              "width": 350,
+                            }
+                          }
+                        />
+                        <View>
+                          <Text
+                            style={
+                              Object {
+                                "color": "black",
+                                "fontSize": 24,
+                                "marginHorizontal": 60,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            Enjoy your journey with us
+                          </Text>
+                          <Text
+                            style={
+                              Object {
+                                "color": "gray",
+                                "fontSize": 14,
+                                "marginHorizontal": 60,
+                                "marginTop": 20,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    onLayout={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                        },
+                        null,
+                      ]
+                    }
+                  >
+                    <View
+                      style={
+                        Object {
+                          "flex": 1,
+                          "width": 0,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "flex": 1,
+                            "justifyContent": "center",
+                          }
+                        }
+                      >
+                        <Image
+                          source={1}
+                          style={
+                            Object {
+                              "height": 350,
+                              "marginVertical": 60,
+                              "width": 350,
+                            }
+                          }
+                        />
+                        <View>
+                          <Text
+                            style={
+                              Object {
+                                "color": "black",
+                                "fontSize": 24,
+                                "marginHorizontal": 60,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            Let's get started
+                          </Text>
+                          <Text
+                            style={
+                              Object {
+                                "color": "gray",
+                                "fontSize": 14,
+                                "marginHorizontal": 60,
+                                "marginTop": 20,
+                                "textAlign": "center",
+                              }
+                            }
+                          >
+                            
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </RCTScrollView>
+              <View
+                style={
+                  Object {
+                    "bottom": 16,
+                    "justifyContent": "center",
+                    "left": 16,
+                    "position": "absolute",
+                    "right": 16,
+                  }
+                }
+              >
+                <RCTSafeAreaView
+                  emulateUnlessSupported={true}
+                >
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "height": 16,
+                        "justifyContent": "center",
+                        "margin": 16,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "backgroundColor": "#1c215d",
+                          "borderRadius": 5,
+                          "height": 10,
+                          "marginHorizontal": 4,
+                          "opacity": 1,
+                          "width": 10,
+                        }
+                      }
+                    />
+                    <View
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "backgroundColor": "#8d8fad",
+                          "borderRadius": 5,
+                          "height": 10,
+                          "marginHorizontal": 4,
+                          "opacity": 1,
+                          "width": 10,
+                        }
+                      }
+                    />
+                    <View
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "backgroundColor": "#8d8fad",
+                          "borderRadius": 5,
+                          "height": 10,
+                          "marginHorizontal": 4,
+                          "opacity": 1,
+                          "width": 10,
+                        }
+                      }
+                    />
+                  </View>
+                  <View
+                    style={
+                      Object {
+                        "position": "absolute",
+                        "right": 0,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "opacity": 1,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "height": 40,
+                            "justifyContent": "center",
+                            "marginRight": 20,
+                            "textAlign": "center",
+                            "width": 40,
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            Object {
+                              "color": "#1c215d",
+                              "fontSize": 14,
+                            }
+                          }
+                        >
+                          Next
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </RCTSafeAreaView>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </RNCSafeAreaProvider>
+</RCTSafeAreaView>
+`;

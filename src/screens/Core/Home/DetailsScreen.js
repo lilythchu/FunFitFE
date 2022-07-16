@@ -7,7 +7,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {Button, Icon, ThemeProvider} from '@rneui/themed';
+import {Button, Icon, ThemeProvider} from 'react-native-elements';
 import CustomButton from '../../../components/CustomButton';
 import Chevron from '../../../components/Chevron';
 import globalColors from '../../../../styles/colors';

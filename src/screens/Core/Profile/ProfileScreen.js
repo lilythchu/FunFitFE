@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, TouchableOpacity, StyleSheet, ScrollView, View} from 'react-native';
-import {ListItem, Icon} from '@rneui/themed';
+import {ListItem, Icon} from 'react-native-elements';
 import Settings from '../../../components/Profile/Settings';
 import UserPic from '../../../components/Profile/UserPic';
 import More from '../../../components/Profile/More';
@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }, 
   flexBox: {
-    flex: 1,
     flexDirection: 'row',
-    paddingTop: 10
+    paddingTop: 10,
   }
 });

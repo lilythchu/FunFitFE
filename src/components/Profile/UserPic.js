@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import {Avatar} from '@rneui/themed';
+import {Avatar} from 'react-native-elements';
 import globalColors from '../../../styles/colors';
 import globalStyles from '../../../styles/global';
 import {Buffer} from 'buffer';

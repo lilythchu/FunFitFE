@@ -11,7 +11,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
 import Pic from '../../../assets/images/forgot.png';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {EMAIL_REGEX} from '../../../utils/methods';
 import globalStyles from '../../../styles/global';

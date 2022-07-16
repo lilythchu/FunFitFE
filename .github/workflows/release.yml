@@ -25,4 +25,7 @@ jobs:
 
       - name: 📋 Publish preview
         run: expo publish
+      - name: Run tests
+        run: |
+          yarn test
         

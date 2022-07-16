@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import {Icon} from '@rneui/themed';
+import {Icon} from 'react-native-elements';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 

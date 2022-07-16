@@ -6,7 +6,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import {Icon, Image} from '@rneui/themed';
+import {Icon, Image} from 'react-native-elements';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';

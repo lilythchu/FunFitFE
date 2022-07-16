@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Icon} from '@rneui/themed';
+import {Icon} from 'react-native-elements';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import globalColors from '../../styles/colors.js';

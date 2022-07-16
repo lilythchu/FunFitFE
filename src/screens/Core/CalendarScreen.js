@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {ListItem, Icon} from '@rneui/themed';
+import {ListItem, Icon} from 'react-native-elements';
 import {Agenda} from 'react-native-calendars';
 import {useLogin} from '../../../context/AuthProvider';
 import axios from 'axios';

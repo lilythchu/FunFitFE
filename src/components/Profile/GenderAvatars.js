@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Avatar} from '@rneui/themed';
+import {Avatar} from 'react-native-elements';
 import {avaGender} from '../../../utils/methods';
 import globalColors from '../../../styles/colors';
 import client from '../../../api/client';

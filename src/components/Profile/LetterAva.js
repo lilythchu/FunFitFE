@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar} from '@rneui/themed';
+import {Avatar} from 'react-native-elements';
 import globalColors from '../../../styles/colors';
 
 const LetterAva = ({name}) => {
