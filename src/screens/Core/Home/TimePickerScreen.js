@@ -72,7 +72,7 @@ const TimePickerScreen = () => {
         {
           // id: item._id,
           // reminder: date,
-          date: date, 
+          date: time + "", 
           reminderMessage: `${item.name} is due`
         },
         {headers: {Authorization: `Bearer ${token}`}},
