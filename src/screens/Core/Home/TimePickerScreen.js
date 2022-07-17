@@ -68,7 +68,7 @@ const TimePickerScreen = () => {
     schedulePushNotification();
     setLoading(true);
     client
-      .put('/routine/addReminder',
+      .post('/routine/addReminder',
         {
           // id: item._id,
           // reminder: date,
