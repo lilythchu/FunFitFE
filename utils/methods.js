@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Alert} from 'react-native';
-import {ListItem, Text, ThemeProvider, Dialog} from '@rneui/themed';
+import {ListItem, Text, ThemeProvider, Dialog} from 'react-native-elements';
 import female from '../assets/images/female.jpg';
 import male from '../assets/images/male.jpg';
 import others from '../assets/images/others.jpg';

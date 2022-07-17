@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity, ScrollView, Text} from 'react-native';
-import {ListItem, Icon, Overlay} from '@rneui/themed';
+import {ListItem, Icon, Overlay} from 'react-native-elements';
 import globalStyles from '../../../styles/global';
 import globalColors from '../../../styles/colors';
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {Chip, ThemeProvider} from '@rneui/themed';
+import {Chip, ThemeProvider} from 'react-native-elements';
 import globalColors from '../../styles/colors';
 
 const CustomChip = ({text, icon, array, ...props}) => {

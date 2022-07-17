@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import {View, Text, Alert} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
-import {Avatar, ThemeProvider, Dialog} from '@rneui/themed';
+import {Avatar, ThemeProvider, Dialog} from 'react-native-elements';
 import {avaGender} from '../../../utils/methods';
 import client, {uploadStoryURL} from '../../../api/client';
 

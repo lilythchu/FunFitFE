@@ -8,7 +8,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {Overlay, ListItem, Dialog, ThemeProvider, Icon} from '@rneui/themed';
+import {Overlay, ListItem, Dialog, ThemeProvider, Icon} from 'react-native-elements';
 import Feather from 'react-native-vector-icons/Feather';
 import CustomButton from '../CustomButton';
 import coverImg from '../../../assets/images/australia.png';

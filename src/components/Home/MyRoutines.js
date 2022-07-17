@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
-import {ListItem, Icon} from '@rneui/themed';
+import {ListItem, Icon} from 'react-native-elements';
 import MyRoutineItem from './MyRoutineItem';
 import client from '../../../api/client';
 

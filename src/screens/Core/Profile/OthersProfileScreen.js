@@ -6,7 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import {Avatar} from '@rneui/themed';
+import {Avatar} from 'react-native-elements';
 import CustomButton from '../../../components/CustomButton';
 import Chevron from '../../../components/Chevron';
 import globalStyles from '../../../../styles/global';

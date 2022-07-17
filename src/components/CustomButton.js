@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Button, ThemeProvider} from '@rneui/themed';
+import {Button, ThemeProvider} from 'react-native-elements';
 import globalColors from '../../styles/colors';
 import {windowHeight, windowWidth} from '../../utils/Dimensions';
 

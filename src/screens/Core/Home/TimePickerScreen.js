@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Icon, Input} from '@rneui/themed';
+import {Icon, Input} from 'react-native-elements';
 import CustomButton from '../../../components/CustomButton';
 import Chevron from '../../../components/Chevron';
 import globalColors from '../../../../styles/colors';

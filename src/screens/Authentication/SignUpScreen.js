@@ -8,12 +8,12 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import {Icon} from '@rneui/themed';
+import {Icon} from 'react-native-elements';
 import CountryPicker from 'react-native-country-picker-modal';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {EMAIL_REGEX} from '../../../utils/methods';
 import Picture from '../../../assets/images/signup.png';

@@ -8,7 +8,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import {ListItem} from '@rneui/themed';
+import {ListItem} from 'react-native-elements';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import TimeInput from '../../../components/TimeInput';

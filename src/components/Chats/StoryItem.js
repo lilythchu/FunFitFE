@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
-import {Image} from '@rneui/themed';
+import {Image} from 'react-native-elements';
 import {avaGender} from '../../../utils/methods';
 import client from '../../../api/client';
       
