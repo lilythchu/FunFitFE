@@ -23,7 +23,7 @@ const RecCard = ({item, navigation}) => {
           {item.description}
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Details', {item})}>
+          onPress={() => navigation.navigate('Details', {item, type: "pair"})}>
           <Text style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
             More
           </Text>
