@@ -19,9 +19,7 @@ const StoryItem = ({item, navigation, token}) => {
         setUserInfo(res.data);
         getStoriesInfo(res.data._id);
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => console.log(err));
   }
 
   const getStoriesInfo = (id) => {
@@ -30,10 +28,7 @@ const StoryItem = ({item, navigation, token}) => {
         headers: {Authorization: `Bearer ${token}`},
         params: {id: id},
       })
-      .then(response => {
-        setStories(response.data);
-        console.log('get Stories');
-      })
+      .then(response => setStories(response.data))
       .catch(err => console.log(err));
   }
 
@@ -50,7 +45,7 @@ const StoryItem = ({item, navigation, token}) => {
           source={avaGender(userInfo.sex)}
           containerStyle={[styles.userImage, {borderWidth: 4}]}
           PlaceholderContent={<ActivityIndicator />}
-          onPress={() => navigation.navigate('Story', {userInfo, token, stories})}
+          onPress={() => navigation.navigate('MyStory', {userInfo, stories, type: 'friends'})}
         />
       </LinearGradient>
       <Text style={styles.username}>{userInfo.name}</Text>

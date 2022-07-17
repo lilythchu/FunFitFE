@@ -5,6 +5,7 @@ import {
   ImageBackground,
   Text,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {Icon, Image} from 'react-native-elements';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -15,12 +16,9 @@ import client from '../../../../api/client';
 
 const MyStoryScreen = () => {
   const navigation = useNavigation();
-  const {stories} = useRoute().params;
+  const {stories, userInfo, type} = useRoute().params;
   const {token} = useLogin();
-  const length = stories.length
-  const [visible, setVisible] = useState(false);
-
-  const stopAnimation = () => setStop(true);
+  const length = stories.length;
 
   const getAnImage = (idx) => {
     setLoading(true);
@@ -31,7 +29,6 @@ const MyStoryScreen = () => {
         responseType: 'arraybuffer',
       })
       .then(response => {
-        console.log(`working ${index}`);
         let data =  `data:${
           response.headers['content-type']
         };base64,${new Buffer(response.data, 'binary').toString('base64')}`;
@@ -66,16 +63,22 @@ const MyStoryScreen = () => {
   const deleteStory = () => {
     client
       .delete('/story/deleteStory', {
-          headers: {Authorization: `Bearer ${token}`},
-          data: {storyId: stories[index]._id},
-        })
-        .then(response => {
-          navigation.goBack();
-        })
-        .catch(error => {
-          console.log(error);
-        });
+        headers: {Authorization: `Bearer ${token}`},
+        data: {storyId: stories[index]._id},
+      })
+      .then(response => navigation.goBack())
+      .catch(error => Alert.alert('Oops', 'Something went wrong! Cannot delete this item'));
   }
+
+  const onDeletePress = () =>
+    Alert.alert(
+      'Alert',
+      'Are you sure want to delete', 
+      [
+        { text: "Cancel" },
+        { text: "OK", onPress: () => deleteStory() },
+      ]
+    );
 
   useEffect(() => getAnImage(0), []);
 
@@ -84,7 +87,7 @@ const MyStoryScreen = () => {
       <ImageBackground source={{uri: currentImage}} style={styles.image} resizeMode='cover'>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <Text style={styles.userName}>Your Story</Text>
+        <Text style={styles.userName}>{type === 'friends' ? userInfo.name : 'Your story'}</Text>
         <Icon
           name="close"
           color={globalColors.storyText}
@@ -119,14 +122,16 @@ const MyStoryScreen = () => {
       </View>  
       
       {/* Delete Story */}
-      <Icon
-        name="trash-2"
-        type="feather"
-        size={30}
-        color={globalColors.storyText}
-        containerStyle={styles.deleteIconContainer} 
-        onPress={deleteStory}
-      />
+      {type === 'mine' && (
+        <Icon
+          name="trash-2"
+          type="feather"
+          size={30}
+          color={globalColors.storyText}
+          containerStyle={styles.deleteIconContainer} 
+          onPress={onDeletePress}
+        />
+      )}
       </ImageBackground>
     </View>
   )
@@ -153,7 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     position: 'absolute',
-    top: 20,
+    top: 10,
   },
   userName: {
     fontSize: 24,
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     padding: 20,
-    top: 80,
+    top: 60,
     position: 'absolute',
     width: '100%',
   },
