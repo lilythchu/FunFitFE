@@ -56,18 +56,20 @@ const MyStories = ({token, navigation, userInfo}) => {
         params: {id: userInfo._id},
       })
       .then(response => setStories(response.data))
-      .catch(err => console.log(err));
+      .catch(err => setStories([]));
   }
 
   const viewMyStories = () => {
     if (stories[0] === undefined) {
       Alert.alert("You don't have any stories");
     } else {
-      navigation.navigate('MyStory', {stories})
+      navigation.navigate('MyStory', {stories, type: 'mine'})
     }
   }
 
-  useEffect(() => getStoriesInfo(), [stories]);
+  useEffect(() => {
+    getStoriesInfo();
+  }, [stories]);
 
   return (
     <LinearGradient

@@ -11,12 +11,8 @@ const Chats = ({navigation, token}) => {
   const getConvos = () => {
     client
       .get('/chat/getAllConvos', {headers: {Authorization: `Bearer ${token}`}})
-      .then(response => {
-        setConvos(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(response => setConvos(response.data))
+      .catch(error => console.log(error));
   };
 
   useEffect(() => {

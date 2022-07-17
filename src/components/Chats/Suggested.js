@@ -11,12 +11,8 @@ const Suggested = ({navigation, token}) => {
       .get('/story/recommendedFriends', {
         headers: {Authorization: `Bearer ${token}`},
       })
-      .then(res => {
-        setFriendIds(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(res => setFriendIds(res.data))
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
