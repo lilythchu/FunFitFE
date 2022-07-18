@@ -86,6 +86,7 @@ const SignInScreen = () => {
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
 
           <CustomInput
+            testID="emailInput"
             name="email"
             icon="envelope"
             label="Email"
@@ -98,6 +99,7 @@ const SignInScreen = () => {
           />
 
           <CustomInput
+            testID="pwdInput"
             label="Password"
             icon="lock"
             name="password"
@@ -124,7 +126,9 @@ const SignInScreen = () => {
 
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <TouchableOpacity onPress={onForgotPasswordPressed}>
+              <TouchableOpacity
+                testID="forgotPwd"
+                onPress={onForgotPasswordPressed}>
                 <Text style={globalStyles.link}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
@@ -143,6 +147,7 @@ const SignInScreen = () => {
             />
           ) : (
             <CustomButton
+              testID="signinButton"
               title="Sign in"
               onPress={handleSubmit(onSignInPressed)}
             />
@@ -151,13 +156,11 @@ const SignInScreen = () => {
           <View style={globalStyles.textLinkContainer}>
             <Text>
               Don't have an account?{' '}
-              <Text style={globalStyles.link} onPress={onSignUpPressed}>
+              <Text style={globalStyles.link} onPress={onSignUpPressed} testID="signup">
                 Sign up
               </Text>
             </Text>
           </View>
-
-          {/* <SocialSignInButtons /> */}
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
