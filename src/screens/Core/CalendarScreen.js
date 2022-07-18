@@ -8,68 +8,22 @@ import client from '../../../api/client';
 
 const CalendarScreen = () => {
   const {token} = useLogin();
-  const [reminder, setReminder] = useState({});
-  const [daysFollow, setDaysFollow] = useState({});
+  const [items, setItems] = useState({});
 
-  const getDaysFollow = () => {
-    client
-      .get('/user/getDaysFollow', {
-        headers: {Authorization: `Bearer ${token}`}
-      })
-      .then(res => {
-        for (let k in res.data) {
-          res.data[k] = res.data[k].map(item => {
-            return {
-              name: item,
-              type: 'Completed',
-            }
-          })       
-        }
-        setDaysFollow(res.data);
-      })
-      .catch(err => console.log(err.response));
+  const getItems = () => {
+    client.get('/user/getCalendarList', {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then(res => setItems(res.data))
+    .catch(err => console.log(err));
   }
 
-  const getReminder = () => {
-    client
-      .get('/user/getReminderList', {
-        headers: {Authorization: `Bearer ${token}`}
-      })
-      .then(res => {
-        for (let k in res.data) {
-          res.data[k] = res.data[k].map(item => {
-            return {
-              name: item,
-              type: 'Reminder',
-            }
-          })       
-        }
-        setReminder(res.data);
-      })
-      .catch(err => console.log(err.response));
-  }
-
-  const merge = async () => {
-    const first = await getDaysFollow();
-    const second = getReminder();
-    console.log(first);
-    setItems(mergeObjects(first, second));
-  }
-
-  useEffect(() => {
-    getDaysFollow();
-    getReminder();
-  }, []);
+  useEffect(() => getItems(), [items]);
 
   const renderItem = (item) => {
     return (
       <View style={styles.itemContainer}>
-        <Text>{item.name}</Text>
-        <Text style={{
-          paddingTop: 10,
-          color: item.type === 'Completed' ? 'green' : 'orange',}}>
-          {item.type}
-        </Text>
+        <Text>{item}</Text>
       </View>
     );
   };
@@ -85,7 +39,7 @@ const CalendarScreen = () => {
       </ListItem>
 
       <Agenda
-        items={{...daysFollow, ...reminder}}
+        items={items}
         renderItem={renderItem}
         renderEmptyDate={() => {
           return <View />;
