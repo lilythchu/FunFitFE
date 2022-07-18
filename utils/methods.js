@@ -72,4 +72,3 @@ export const addDayFollow = (id, token) => {
     .then(res => Alert.alert("Add days and points successfully"))
     .catch(err => Alert.alert("Oops", "Cannot add days and points"));
 };
-

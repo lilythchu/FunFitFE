@@ -1,37 +1,41 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {Agenda} from 'react-native-calendars';
 import {useLogin} from '../../../context/AuthProvider';
-import axios from 'axios';
+import {addDayFollow} from '../../../utils/methods';
+import client from '../../../api/client';
 
 const CalendarScreen = () => {
   const {token} = useLogin();
   const [items, setItems] = useState({});
 
-  useEffect(() => {
-    const getData = () => {
-      axios
-        .get('https://orbital-funfit.herokuapp.com/user/getDaysFollow', {
-          headers: {Authorization: `Bearer ${token}`}
-        })
-        .then(res => setItems(res.data))
-        .catch(err => console.log(err.response));
-    };
-    getData();
-  }, [items]);
+  const getItems = () => {
+    client.get('/user/getCalendarList', {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then(res => {
+      if (res.data === "You haven't completed any routine or has any reminder yet") {
+        Alert.alert("You haven't completed any routine or has any reminder yet");
+      } else {
+        setItems(res.data);
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  useEffect(() => getItems(), [items]);
 
   const renderItem = (item) => {
     return (
       <View style={styles.itemContainer}>
-        <Text>{item}</Text>
-        <Text style={{paddingTop: 10, color: 'green'}}>Completed!!</Text>
+        <Text style={{color: item[0] === 'C' ? 'green' : 'orange'}}>{item}</Text>
       </View>
     );
   };
 
   return (
-    <View style={styles.safe}>
+    <View style={styles.safe}> 
       {/* Header */}
       <ListItem bottomDivider>
         <Icon name="calendar" type="feather" size={30} />
