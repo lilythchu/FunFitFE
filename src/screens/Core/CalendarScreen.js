@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {Agenda} from 'react-native-calendars';
 import {useLogin} from '../../../context/AuthProvider';
@@ -14,7 +14,13 @@ const CalendarScreen = () => {
     client.get('/user/getCalendarList', {
       headers: {Authorization: `Bearer ${token}`},
     })
-    .then(res => setItems(res.data))
+    .then(res => {
+      if (res.data === "You haven't completed any routine or has any reminder yet") {
+        Alert.alert("You haven't completed any routine or has any reminder yet");
+      } else {
+        setItems(res.data);
+      }
+    })
     .catch(err => console.log(err));
   }
 
@@ -23,7 +29,7 @@ const CalendarScreen = () => {
   const renderItem = (item) => {
     return (
       <View style={styles.itemContainer}>
-        <Text>{item}</Text>
+        <Text style={{color: item[0] === 'C' ? 'green' : 'orange'}}>{item}</Text>
       </View>
     );
   };
