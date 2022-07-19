@@ -39,7 +39,7 @@ const RecRoutines = ({token, navigation}) => {
           <FlatList
             data={recData}
             renderItem={({item}) => (
-              <RecRoutineItem item={item} navigation={navigation} type="pair" />
+              <RecRoutineItem item={item} navigation={navigation} />
             )}
             keyExtractor={item => item._id}
             horizontal

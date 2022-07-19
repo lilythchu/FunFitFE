@@ -1,0 +1,455 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign In renders Sign in screen correctly 1`] = `
+<RCTScrollView
+  showsVerticalScrollIndicator={false}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "padding": 20,
+    }
+  }
+>
+  <View>
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={Object {}}
+    >
+      <Image
+        resizeMode="contain"
+        source={1}
+        style={
+          Object {
+            "alignSelf": "center",
+            "height": 400.2,
+            "width": "70%",
+          }
+        }
+      />
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "paddingHorizontal": 10,
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#86939e",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Email
+          </Text>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 1,
+                "borderColor": "#86939e",
+                "flexDirection": "row",
+                "transform": Array [
+                  Object {
+                    "translateX": 0,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 24,
+                  "justifyContent": "center",
+                  "marginRight": 8,
+                  "marginVertical": 4,
+                  "paddingRight": 4,
+                  "width": 24,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "overflow": "hidden",
+                  }
+                }
+              >
+                <View>
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "transparent",
+                        "justifyContent": "center",
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <TextInput
+              editable={true}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              placeholder="Email"
+              placeholderTextColor="#86939e"
+              style={
+                Object {
+                  "color": "#242424",
+                  "flex": 1,
+                  "fontSize": 18,
+                  "minHeight": 40,
+                }
+              }
+              testID="emailInput"
+              underlineColorAndroid="transparent"
+            />
+          </View>
+          <Text
+            style={
+              Object {
+                "color": "#ff190c",
+                "fontSize": 12,
+                "margin": 5,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "paddingHorizontal": 10,
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#86939e",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Password
+          </Text>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 1,
+                "borderColor": "#86939e",
+                "flexDirection": "row",
+                "transform": Array [
+                  Object {
+                    "translateX": 0,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 24,
+                  "justifyContent": "center",
+                  "marginRight": 8,
+                  "marginVertical": 4,
+                  "paddingRight": 4,
+                  "width": 24,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "overflow": "hidden",
+                  }
+                }
+              >
+                <View>
+                  <View
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "transparent",
+                        "justifyContent": "center",
+                      }
+                    }
+                  >
+                    <Text />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <TextInput
+              editable={true}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              placeholder="Password"
+              placeholderTextColor="#86939e"
+              secureTextEntry={true}
+              style={
+                Object {
+                  "color": "#242424",
+                  "flex": 1,
+                  "fontSize": 18,
+                  "minHeight": 40,
+                }
+              }
+              testID="pwdInput"
+              underlineColorAndroid="transparent"
+            />
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 4,
+                  "paddingRight": 4,
+                }
+              }
+            >
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "overflow": "hidden",
+                    }
+                  }
+                >
+                  <View>
+                    <View
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "backgroundColor": "transparent",
+                          "justifyContent": "center",
+                        }
+                      }
+                    >
+                      <Text />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <Text
+            style={
+              Object {
+                "color": "#ff190c",
+                "fontSize": 12,
+                "margin": 5,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "paddingVertical": 10,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID="forgotPwd"
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#003060",
+                }
+              }
+            >
+              Forgot Password?
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "red",
+              "fontSize": 16,
+            }
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "borderRadius": 3,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 3,
+            },
+            Object {
+              "marginTop": 10,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "busy": false,
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID="signinButton"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#68bbe3",
+                "borderColor": "transparent",
+                "borderRadius": 30,
+                "borderWidth": 0,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "padding": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "white",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                  "paddingVertical": 1,
+                  "textAlign": "center",
+                }
+              }
+            >
+              Sign in
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginBottom": 30,
+            "padding": 10,
+          }
+        }
+      >
+        <Text>
+          Don't have an account?
+           
+          <Text
+            onPress={[Function]}
+            style={
+              Object {
+                "color": "#003060",
+              }
+            }
+            testID="signup"
+          >
+            Sign up
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

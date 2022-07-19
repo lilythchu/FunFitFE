@@ -22,17 +22,14 @@ import client from '../../../api/client';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const {control, handleSubmit} = useForm();
   const {setIsLoggedIn, setProfile, setToken} = useLogin();
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [dismiss, setDismiss] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);
+
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
   };
@@ -86,6 +83,7 @@ const SignInScreen = () => {
           <Image source={Logo} style={globalStyles.logo} resizeMode="contain" />
 
           <CustomInput
+            testID="emailInput"
             name="email"
             icon="envelope"
             label="Email"
@@ -98,6 +96,7 @@ const SignInScreen = () => {
           />
 
           <CustomInput
+            testID="pwdInput"
             label="Password"
             icon="lock"
             name="password"
@@ -124,7 +123,9 @@ const SignInScreen = () => {
 
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <TouchableOpacity onPress={onForgotPasswordPressed}>
+              <TouchableOpacity
+                testID="forgotPwd"
+                onPress={onForgotPasswordPressed}>
                 <Text style={globalStyles.link}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
@@ -143,6 +144,7 @@ const SignInScreen = () => {
             />
           ) : (
             <CustomButton
+              testID="signinButton"
               title="Sign in"
               onPress={handleSubmit(onSignInPressed)}
             />
@@ -151,13 +153,11 @@ const SignInScreen = () => {
           <View style={globalStyles.textLinkContainer}>
             <Text>
               Don't have an account?{' '}
-              <Text style={globalStyles.link} onPress={onSignUpPressed}>
+              <Text style={globalStyles.link} onPress={onSignUpPressed} testID="signup">
                 Sign up
               </Text>
             </Text>
           </View>
-
-          {/* <SocialSignInButtons /> */}
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>

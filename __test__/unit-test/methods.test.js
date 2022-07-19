@@ -1,4 +1,4 @@
-import {arrayToSteps, arrayToString, arrayToTime, arrayToSum} from "../utils/methods";
+import {arrayToSteps, arrayToString, arrayToTime, arrayToSum} from '../../utils/methods';
 
 test('array of genres to strings', () => {
   expect(arrayToString(['yoga', 'cardio', 'pilates'])).toBe('yoga, cardio, pilates');
