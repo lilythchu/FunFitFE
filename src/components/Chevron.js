@@ -6,6 +6,7 @@ import globalStyles from '../../styles/global';
 const Chevron = ({navigation, color}) => {
   return (
     <TouchableOpacity
+      testID='chevron'
       style={globalStyles.backIcon}
       onPress={() => navigation.goBack()}>
       <Entypo name="chevron-left" size={32} color={color} />

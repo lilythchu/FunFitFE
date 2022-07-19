@@ -18,11 +18,12 @@ const RecCard = ({item, navigation}) => {
       />
 
       <View style={globalStyles.cardInfoContainer}>
-        <Text style={styles.routineName}>{item.name}</Text>
-        <Text numberOfLines={2} style={{textAlign: 'auto'}}>
+        <Text style={styles.routineName} testID="recName">{item.name}</Text>
+        <Text numberOfLines={2} style={{textAlign: 'auto'}} testID="recDes">
           {item.description}
         </Text>
         <TouchableOpacity
+          testID="nav"
           onPress={() => navigation.navigate('Details', {item, type: "pair"})}>
           <Text style={[globalStyles.link, {textDecorationLine: 'underline'}]}>
             More

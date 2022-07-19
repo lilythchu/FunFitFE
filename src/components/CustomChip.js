@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {Chip, ThemeProvider} from 'react-native-elements';
 import globalColors from '../../styles/colors';
 
-const CustomChip = ({text, icon, array, ...props}) => {
+const CustomChip = ({text, array, ...props}) => {
   const [isSelected, setIsSelected] = useState(false);
   return (
     <ThemeProvider>

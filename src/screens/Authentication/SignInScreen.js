@@ -22,17 +22,14 @@ import client from '../../../api/client';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
+  const {control, handleSubmit} = useForm();
   const {setIsLoggedIn, setProfile, setToken} = useLogin();
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [dismiss, setDismiss] = useState(true);
   const [viewPassword, setViewPassword] = useState(false);
+
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
   };
