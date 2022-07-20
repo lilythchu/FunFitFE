@@ -15,7 +15,7 @@ export function arrayToString(a) {
   for (let i = 1; i < a.length; i++) {
     res = res + ', ' + a[i];
   }
-  return res;
+  return res === undefined ? '' : res;
 }
 
 export function arrayToTime(arr) {
@@ -72,3 +72,10 @@ export const addDayFollow = (id, token) => {
     .then(res => Alert.alert("Add days and points successfully"))
     .catch(err => Alert.alert("Oops", "Cannot add days and points"));
 };
+
+export function firstLetterofName(name) {
+  if (typeof(name) === 'string' && name.trim()[0] !== undefined) {
+    return name.trim()[0].toUpperCase();
+  }
+  return 'User';
+}

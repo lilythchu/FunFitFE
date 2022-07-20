@@ -6,6 +6,7 @@ import globalColors from '../../../styles/colors';
 import globalStyles from '../../../styles/global';
 import {Buffer} from 'buffer';
 import {uploadImageURL, downloadPicURL} from '../../../api/client';
+import {firstLetterofName} from '../../../utils/methods';
 import axios from 'axios';
 
 const UserPic = ({token, names}) => {
@@ -77,7 +78,7 @@ const UserPic = ({token, names}) => {
           size={90}
           rounded
           source={image && {uri: image}}
-          title={names.charAt(0).toUpperCase()}
+          title={firstLetterofName(names)}
           containerStyle={{backgroundColor: globalColors.navyBlue}}>
           <Avatar.Accessory
             size={23}
