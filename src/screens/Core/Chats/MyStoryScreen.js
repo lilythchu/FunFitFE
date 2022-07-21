@@ -85,7 +85,11 @@ const MyStoryScreen = () => {
       ]
     );
 
-  useEffect(() => getAnImage(0), []);
+  useEffect(() => {
+    for (let i = 0; i < length; i++) {
+      getAnImage(i);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
