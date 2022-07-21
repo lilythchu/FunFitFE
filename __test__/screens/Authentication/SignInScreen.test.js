@@ -1,7 +1,7 @@
 import React from 'react';
 import {fireEvent, render, screen, act, waitFor} from '@testing-library/react-native';
-import SignInScreen from '../src/screens/Authentication/SignInScreen';
-import AuthProvider from '../context/AuthProvider';
+import SignInScreen from '../../../src/screens/Authentication/SignInScreen';
+import AuthProvider from '../../../context/AuthProvider';
 
 jest.useFakeTimers();
 

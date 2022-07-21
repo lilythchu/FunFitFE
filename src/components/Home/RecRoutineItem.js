@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  View,
   Text,
   ImageBackground,
   StyleSheet,
@@ -18,7 +19,7 @@ const RecRoutineItem = ({navigation, item}) => {
         style={styles.discoverItem}
         imageStyle={styles.discoverItemImage}
       />
-      <Text style={styles.discoverItemTitle}>{item.name}</Text>
+      <Text style={styles.discoverItemTitle} testID="name" >{item.name}</Text>
     </TouchableOpacity>
   );
 };

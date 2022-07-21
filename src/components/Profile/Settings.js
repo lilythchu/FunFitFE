@@ -98,7 +98,7 @@ const Settings = () => {
               leftIcon={<Text>Age</Text>}
               keyboardType="numeric"
               type="THIRD"
-              placeholder={profile.age.toString()}
+              placeholder={profile.age !== undefined ? profile.age.toString() : ''}
               control={control}
             />
             <CustomButton

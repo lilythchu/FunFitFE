@@ -58,24 +58,29 @@ const MyRoutineItem = ({navigation, item, token, type}) => {
   return (
     <View style={globalStyles.myRoutineItemContainer}>
       {/* Cover Image */}
-      <TouchableOpacity onPress={myRoutineDetail}>
+      <TouchableOpacity onPress={myRoutineDetail} testID="routineDetails">
         <ImageBackground
+          testID='image'
           source={type === "created" ? coverImg : {uri: item.thumbnail}}
           style={globalStyles.myRoutineItem}
           imageStyle={styles.myRoutineItemImage}>
-          {type === "created" && (<Text style={styles.myRoutineItemText}>{item.name}</Text>)}
+          {type === "created" && (
+            <Text style={styles.myRoutineItemText} testID="myRoutineName">
+              {item.name}
+            </Text>
+          )}
         </ImageBackground>
       </TouchableOpacity>
 
       {/* CRUD icon */}
-      <View style={styles.crudIcon}>
-        <Icon 
+      <View style={styles.crudIcon} testID="crudIcon">
+        <Icon
           name="trash"
           type="feather"
           size={24}
           onPress={toggleDialog}
         />
-        <Icon 
+        <Icon
           name="clock"
           type="feather"
           size={24}
@@ -107,6 +112,7 @@ const MyRoutineItem = ({navigation, item, token, type}) => {
 
       {/* Routines Details */}
       <Overlay
+        testID='details'
         isVisible={visible}
         onBackdropPress={toggleOverlay}
         overlayStyle={globalStyles.overlay}>

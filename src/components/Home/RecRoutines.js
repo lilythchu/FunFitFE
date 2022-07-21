@@ -22,8 +22,9 @@ const RecRoutines = ({token, navigation}) => {
     <View style={styles.discoverWrapper}>
       {/* Title */}
       <TouchableOpacity
+        testID="nav"
         onPress={() => navigation.navigate('Recommended', {token})}>
-        <ListItem>
+        <ListItem testID="title">
           <ListItem.Content>
             <ListItem.Title style={styles.titleText}>
               Discover
