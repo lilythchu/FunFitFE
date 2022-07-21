@@ -10,7 +10,6 @@ import ChatStack from './ChatStack.js';
 import ProfileStack from './ProfileStack.js';
 import ChatScreen from '../screens/Core/Chats/ChatScreen.js';
 import OthersProfileScreen from '../screens/Core/Profile/OthersProfileScreen.js';
-import StoryScreen from '../screens/Core/Chats/StoryScreen.js';
 import MyStoryScreen from '../screens/Core/Chats/MyStoryScreen.js';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -79,7 +78,6 @@ const AppStack = () => {
         })}
       />
       <Stack.Screen name="OtherProfile" component={OthersProfileScreen} />
-      <Stack.Screen name='Story' component={StoryScreen} />
       <Stack.Screen name='MyStory' component={MyStoryScreen} />
     </Stack.Navigator>
   );
