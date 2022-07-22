@@ -30,6 +30,7 @@ const MyRoutines = ({token, navigation}) => {
           </ListItem.Title>
         </ListItem.Content>
         <Icon
+          testID="addRoutine"
           type="feather"
           name="plus"
           size={24}

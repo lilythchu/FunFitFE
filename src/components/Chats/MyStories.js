@@ -76,12 +76,14 @@ const MyStories = ({token, navigation, userInfo}) => {
       colors={['#50b1f2', '#c7c432', '#32c790']}
       style={{padding: 3, borderRadius: 70}}>
       <Avatar
+        testID="myStories"
         size={64}
         rounded
         source={avaGender(userInfo.sex)}
         onPress={viewMyStories}
         containerStyle={{backgroundColor: 'grey'}}>
         <Avatar.Accessory
+          testID="addStory"
           name="plus"
           type="feather"
           size={23}

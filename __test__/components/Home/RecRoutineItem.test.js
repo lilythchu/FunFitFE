@@ -3,7 +3,7 @@ import {render, screen, fireEvent} from '@testing-library/react-native';
 import RecRoutineItem from '../../../src/components/Home/RecRoutineItem';
 
 const item = {
-  name: 'name',
+  name: 'rec item name',
   thumbnail: 'url',
 };
 
@@ -18,7 +18,7 @@ describe('Rec routine item', () => {
     )
   })
   test('renders rec card correctly', () => {
-    expect(screen).toMatchSnapshot();
+    expect(screen.getByTestId('name').props.children).toEqual('rec item name')
   })
   
   test('navigate to Details screen', () => {

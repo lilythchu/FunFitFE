@@ -1,0 +1,528 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Other Profile screen renders correctly 1`] = `
+<RCTScrollView
+  showsHorizontalScrollIndicator={false}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "padding": 20,
+    }
+  }
+>
+  <View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "marginBottom": 10,
+          "marginLeft": 20,
+          "marginTop": 40,
+          "opacity": 1,
+        }
+      }
+      testID="chevron"
+    >
+      <Text />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "lightgray",
+            "borderRadius": 75,
+            "height": 150,
+            "width": 150,
+          }
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "black": "#242424",
+              "disabled": "hsl(208, 8%, 90%)",
+              "divider": "#bcbbc1",
+              "error": "#ff190c",
+              "grey0": "#393e42",
+              "grey1": "#43484d",
+              "grey2": "#5e6977",
+              "grey3": "#86939e",
+              "grey4": "#bdc6cf",
+              "grey5": "#e1e8ee",
+              "greyOutline": "#bbb",
+              "platform": Object {
+                "android": Object {
+                  "error": "#f44336",
+                  "grey": "rgba(0, 0, 0, 0.54)",
+                  "primary": "#2196f3",
+                  "searchBg": "#dcdce1",
+                  "secondary": "#9C27B0",
+                  "success": "#4caf50",
+                  "warning": "#ffeb3b",
+                },
+                "default": Object {
+                  "error": "#ff3b30",
+                  "grey": "#7d7d7d",
+                  "primary": "#007aff",
+                  "searchBg": "#dcdce1",
+                  "secondary": "#5856d6",
+                  "success": "#4cd964",
+                  "warning": "#ffcc00",
+                },
+                "ios": Object {
+                  "error": "#ff3b30",
+                  "grey": "#7d7d7d",
+                  "primary": "#007aff",
+                  "searchBg": "#dcdce1",
+                  "secondary": "#5856d6",
+                  "success": "#4cd964",
+                  "warning": "#ffcc00",
+                },
+                "web": Object {
+                  "error": "#ff190c",
+                  "grey": "#393e42",
+                  "primary": "#2089dc",
+                  "searchBg": "#303337",
+                  "secondary": "#ca71eb",
+                  "success": "#52c41a",
+                  "warning": "#faad14",
+                },
+              },
+              "primary": "#2089dc",
+              "searchBg": "#303337",
+              "secondary": "#ca71eb",
+              "success": "#52c41a",
+              "warning": "#faad14",
+              "white": "#ffffff",
+            },
+          }
+        }
+      >
+        <View
+          accessibilityIgnoresInvertColors={true}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderRadius": 75,
+              "flex": 1,
+              "overflow": "hidden",
+              "position": "relative",
+            }
+          }
+        >
+          <Image
+            borderRadius={75}
+            onLoad={[Function]}
+            source={1}
+            style={
+              Object {
+                "bottom": 0,
+                "flex": 1,
+                "height": undefined,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": undefined,
+              }
+            }
+            testID="RNE__Image"
+            theme={
+              Object {
+                "colors": Object {
+                  "black": "#242424",
+                  "disabled": "hsl(208, 8%, 90%)",
+                  "divider": "#bcbbc1",
+                  "error": "#ff190c",
+                  "grey0": "#393e42",
+                  "grey1": "#43484d",
+                  "grey2": "#5e6977",
+                  "grey3": "#86939e",
+                  "grey4": "#bdc6cf",
+                  "grey5": "#e1e8ee",
+                  "greyOutline": "#bbb",
+                  "platform": Object {
+                    "android": Object {
+                      "error": "#f44336",
+                      "grey": "rgba(0, 0, 0, 0.54)",
+                      "primary": "#2196f3",
+                      "searchBg": "#dcdce1",
+                      "secondary": "#9C27B0",
+                      "success": "#4caf50",
+                      "warning": "#ffeb3b",
+                    },
+                    "default": Object {
+                      "error": "#ff3b30",
+                      "grey": "#7d7d7d",
+                      "primary": "#007aff",
+                      "searchBg": "#dcdce1",
+                      "secondary": "#5856d6",
+                      "success": "#4cd964",
+                      "warning": "#ffcc00",
+                    },
+                    "ios": Object {
+                      "error": "#ff3b30",
+                      "grey": "#7d7d7d",
+                      "primary": "#007aff",
+                      "searchBg": "#dcdce1",
+                      "secondary": "#5856d6",
+                      "success": "#4cd964",
+                      "warning": "#ffcc00",
+                    },
+                    "web": Object {
+                      "error": "#ff190c",
+                      "grey": "#393e42",
+                      "primary": "#2089dc",
+                      "searchBg": "#303337",
+                      "secondary": "#ca71eb",
+                      "success": "#52c41a",
+                      "warning": "#faad14",
+                    },
+                  },
+                  "primary": "#2089dc",
+                  "searchBg": "#303337",
+                  "secondary": "#ca71eb",
+                  "success": "#52c41a",
+                  "warning": "#faad14",
+                  "white": "#ffffff",
+                },
+              }
+            }
+            transition={true}
+            transitionDuration={360}
+          />
+          <View
+            accessibilityElementsHidden={true}
+            collapsable={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "flex": 1,
+                  "height": undefined,
+                  "justifyContent": "center",
+                  "width": undefined,
+                }
+              }
+              testID="RNE__Image__placeholder"
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "height": undefined,
+                "width": undefined,
+              }
+            }
+            testID="RNE__Image__children__container"
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "marginVertical": 16,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 28,
+              "fontWeight": "500",
+            }
+          }
+        >
+          friendName
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 5,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 10,
+              "margin": 10,
+              "padding": 5,
+            },
+            Object {
+              "flex": 1,
+              "marginRight": 5,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#458452",
+              "fontSize": 18,
+              "fontWeight": "400",
+            }
+          }
+        >
+          Level
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 14,
+              "padding": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          1
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 10,
+              "margin": 10,
+              "padding": 5,
+            },
+            Object {
+              "flex": 1,
+              "marginLeft": 5,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#458452",
+              "fontSize": 18,
+              "fontWeight": "400",
+            }
+          }
+        >
+          Points
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 14,
+              "padding": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 10,
+              "margin": 10,
+              "padding": 5,
+            },
+            Object {
+              "flex": 1,
+              "marginLeft": 5,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#458452",
+              "fontSize": 18,
+              "fontWeight": "400",
+            }
+          }
+        >
+          Age
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 14,
+              "padding": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          20
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "paddingBottom": 5,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderRadius": 10,
+              "margin": 10,
+              "padding": 5,
+            },
+            Object {
+              "flex": 1,
+              "marginRight": 5,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#458452",
+              "fontSize": 18,
+              "fontWeight": "400",
+            }
+          }
+        >
+          Workout Interests
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 14,
+              "padding": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          yoga
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "borderRadius": 3,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 3,
+          },
+          Object {
+            "marginTop": 10,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "busy": false,
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "center",
+              "backgroundColor": "#2089dc",
+              "borderColor": "transparent",
+              "borderRadius": 5,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "padding": 8,
+              "width": 150,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 20,
+                "paddingVertical": 1,
+                "textAlign": "center",
+              }
+            }
+          >
+            Message
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

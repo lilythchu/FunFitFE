@@ -21,6 +21,7 @@ const MyStoryScreen = () => {
   const {stories, userInfo, type} = useRoute().params;
   const {token} = useLogin();
   const length = stories.length;
+  const [storyItems, setStoryItems] = useState(new Array(length));
 
   const getAnImage = (idx) => {
     setLoading(true);
@@ -34,20 +35,22 @@ const MyStoryScreen = () => {
         let data =  `data:${
           response.headers['content-type']
         };base64,${new Buffer(response.data, 'binary').toString('base64')}`;
-        setCurrentImage(data);
+        storyItems[idx] = data;
+        setStoryItems([...storyItems]);
         setLoading(false);
       })
       .catch(err => console.log(err));
   }
 
   const [index, setIndex] = useState(0);
-  const [currentImage, setCurrentImage] = useState();
   const [loading, setLoading] = useState(false);
 
   const next = () => {
     if (index < length - 1) {
+      if (storyItems[index + 1] === undefined) {
+        getAnImage(index + 1);
+      }
       setIndex(index + 1);
-      getAnImage(index + 1);
     } else {
       navigation.goBack();
     }
@@ -55,8 +58,10 @@ const MyStoryScreen = () => {
 
   const previous = () => {
     if (index > 0) {
+      if (storyItems[index - 1] === undefined) {
+        getAnImage(index - 1);
+      }
       setIndex(index - 1);
-      getAnImage(index - 1);
     } else {
       navigation.goBack();
     }
@@ -82,11 +87,18 @@ const MyStoryScreen = () => {
       ]
     );
 
-  useEffect(() => getAnImage(0), []);
+  useEffect(() => {
+    for (let i = 0; i < length; i++) {
+      getAnImage(i);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={{uri: currentImage}} style={styles.image} resizeMode='cover'>
+      <ImageBackground
+        source={{uri: storyItems[index]}}
+        style={styles.image}
+        resizeMode='cover'>
       {/* Header */}
       <View style={styles.headerContainer}>
         <Text style={styles.userName}>{type === 'friends' ? userInfo.name : 'Your story'}</Text>
