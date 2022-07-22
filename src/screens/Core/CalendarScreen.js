@@ -7,10 +7,11 @@ import {addDayFollow} from '../../../utils/methods';
 import client from '../../../api/client';
 
 const CalendarScreen = () => {
-  const {token} = useLogin();
+  const {token, getVerifiedToken} = useLogin();
   const [items, setItems] = useState({});
 
   const getItems = () => {
+    var token = getVerifiedToken(); 
     client.get('/user/getCalendarList', {
       headers: {Authorization: `Bearer ${token}`},
     })
