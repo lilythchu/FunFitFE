@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {ListItem} from 'react-native-elements';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
@@ -77,9 +78,14 @@ const AddRoutineScreen = () => {
   }
 
   return (
-    <ScrollView
-      style={globalStyles.scrollView}
-      showsVerticalScrollIndicator={false}>
+    // <ScrollView
+    //   style={globalStyles.scrollView}
+    //   showsVerticalScrollIndicator={false}>
+    <KeyboardAwareScrollView
+    style={{ backgroundColor: "white" }}
+    resetScrollToCoords={{ x: 0, y: 0 }}
+    contentContainerStyle={globalStyles.scrollView}
+    scrollEnabled={true}>
       {/* Navigation */}
       <Chevron navigation={navigation} color={globalColors.babyBlue} />
 
@@ -106,7 +112,7 @@ const AddRoutineScreen = () => {
         placeholder="Genre"
         control={control}
         rules={{
-          required: 'Genre is required',
+          required: 'Genre is required'
         }}
       />
       <View style={globalStyles.durationContainer}>
@@ -120,7 +126,7 @@ const AddRoutineScreen = () => {
           <ListItem.Content>
             <TextInput
               keyboardType="numeric"
-              placeholder="Number of steps(< 10)"
+              placeholder="Number of steps(< 10) ~ One digit input"
               onChangeText={num => {
                 setNumber(num);
                 setExpanded(!expanded);
@@ -139,7 +145,8 @@ const AddRoutineScreen = () => {
         type="SECOND"
         loading={loading}
       />
-    </ScrollView>
+    {/* // </ScrollView> */}
+    </KeyboardAwareScrollView>
   );
 };
 

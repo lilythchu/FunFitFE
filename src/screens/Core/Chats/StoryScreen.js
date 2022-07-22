@@ -10,6 +10,8 @@ const StoryScreen = () => {
   const {userInfo, token, stories} = useRoute().params;
   const [images, setImages] = useState(new Array(stories.length));
 
+  const [mess, setMess] = useState("")
+
   const getImages = () => {
     stories.map((item, index) => {
       client
@@ -32,25 +34,41 @@ const StoryScreen = () => {
   }, [images]);
 
   return (
-    <StoryContainer
-      visible={true}
-      enableProgress={true}
-      images={images}
-      onComplete={() => navigation.goBack()}
-      duration={20}  
-      containerStyle={{
-          width: '100%',
-          height: '100%',
-      }}
-      userProfile={{
-        userImage: avaGender(userInfo.sex),
-        userName: userInfo.name,
-        userMessage: userInfo.country,
-        onImageClick: () => {
-          console.log('lskndclksnc');
-        },
-      }}
-    />
+    <View>
+      
+    </View>
+    // <StoryContainer
+    //   visible={true}
+    //   enableProgress={true}
+    //   images={images}
+    //   onComplete={() => navigation.goBack()}
+    //   duration={20}  
+    //   // containerStyle={{
+    //   //     width: '100%',
+    //   //     height: '100%',
+    //   // }}
+    //   userProfile={{
+    //     userImage: avaGender(userInfo.sex),
+    //     userName: userInfo.name,
+    //     userMessage: userInfo.country,
+    //     onImageClick: () => {
+    //       console.log('lskndclksnc');
+    //     },
+    //   }}
+    //   // footerComponent={<View></View>}
+    //   replyView={{
+    //     isShowReply: true,
+    //     onReplyTextChange: (textReply, progressIndex) => {
+    //       setMess(textReply);
+    //       console.log(textReply);
+    //     },
+    //     onReplyButtonClick: (buttonType, progressIndex) => {
+    //        if (buttonType == "send") {
+
+    //        }
+    //      },
+    //  }}
+    // />
   )
 }
 

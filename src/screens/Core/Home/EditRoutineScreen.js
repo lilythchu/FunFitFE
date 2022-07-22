@@ -120,6 +120,20 @@ const EditRoutineScreen = () => {
             type="TIME"
             name="hdur"
             control={control}
+            rules={{
+              max: {
+                value: 10,
+                message: 'invalid',
+              },
+              min: {
+                value: 0,
+                message: 'invalid',
+              },
+              maxLength: {
+                value: 2, 
+                message: '2 digits'
+              }
+            }}
             keyboardType="numeric"
             placeholder={item.duration[0]}
           />
@@ -136,6 +150,10 @@ const EditRoutineScreen = () => {
                 value: 0,
                 message: 'invalid',
               },
+              maxLength: {
+                value: 2, 
+                message: '2 digits'
+              }
             }}
             keyboardType="numeric"
             placeholder={item.duration[1]}
@@ -153,6 +171,10 @@ const EditRoutineScreen = () => {
                 value: 0,
                 message: 'invalid',
               },
+              maxLength: {
+                value: 2, 
+                message: '2 digits'
+              }
             }}
             keyboardType="numeric"
             placeholder={item.duration[2]}

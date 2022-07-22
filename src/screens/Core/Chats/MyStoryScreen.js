@@ -13,6 +13,8 @@ import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
+import ReplyBar from '../../../components/Chats/ReplyBar';
+import { windowHeight } from '../../../../utils/Dimensions';
 
 const MyStoryScreen = () => {
   const navigation = useNavigation();
@@ -132,6 +134,16 @@ const MyStoryScreen = () => {
           onPress={onDeletePress}
         />
       )}
+
+      {/* Reply Story */}
+      {type === 'friends' && (
+        <View style={{height: 50, ...styles.replyContainer}}>
+          <ReplyBar
+          anotherUserId={userInfo._id}
+          token={token}
+          />
+        </View> 
+      )}
       </ImageBackground>
     </View>
   )
@@ -194,6 +206,13 @@ const styles = StyleSheet.create({
   deleteIconContainer: {
     position: 'absolute',
     bottom: 20,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  replyContainer: {
+    position: 'absolute',
+    bottom: 0,
     justifyContent: 'center',
     alignSelf: 'center',
     marginVertical: 10,
