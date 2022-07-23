@@ -10,14 +10,21 @@ jest.mock('../context/AuthProvider', () => {
   return {
     ...original,
     useLogin: () => ({
-      isLoggedIn: true
+      isLoggedIn: false,
     })
   }
 })
 
-describe('Test Routes', () => {
-  test('renders correctly', () => {
+describe('Authenticated routes', () => {
+  beforeEach(() => {
     render(<Routes />);
-    expect(screen).toMatchSnapshot();
+  });
+
+  test('should display onboarding screen if user havent logged in', async () => {
+    expect(await screen.findByText('Welcome to FUNFIT')).toBeTruthy();
+  });
+
+  test('should not display home page if user havent logged in', () => {
+    expect(screen.queryByText('Home')).toBeNull();
   })
 })
