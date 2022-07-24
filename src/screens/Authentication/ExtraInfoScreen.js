@@ -4,6 +4,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import GenreChip from '../../components/Profile/GenreChip';
 
+import {useRoute} from '@react-navigation/native';
 import {useLogin} from '../../../context/AuthProvider';
 import {useForm} from 'react-hook-form';
 import globalStyles from '../../../styles/global';
@@ -12,7 +13,8 @@ import client from '../../../api/client';
 const ExtraInfoScreen = () => {
   const [loading, setLoading] = useState(false);
   const {control, handleSubmit} = useForm();
-  const {setIsLoggedIn, setProfile, token} = useLogin();
+  const {token} = useRoute().params;
+  const {setIsLoggedIn, setProfile} = useLogin();
   const interests = [];
   const onSubmitPressed = data => {
     setLoading(true);

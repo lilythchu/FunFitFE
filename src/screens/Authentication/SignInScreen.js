@@ -47,7 +47,7 @@ const SignInScreen = () => {
           .get('/user/me', {headers: {Authorization: `Bearer ${token}`}})
           .then(res => {
             if (res.data.age === undefined) {
-              navigation.navigate('ExtraInfo');
+              navigation.navigate('ExtraInfo', {token});
             } else {
               setLoading(false);
               setIsLoggedIn(true);

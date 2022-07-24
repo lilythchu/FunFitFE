@@ -59,13 +59,15 @@ const SignUpScreen = () => {
       .post('/user/signup', userInfo)
       .then(response => {
         setLoading(false);
-        navigation.navigate('SignIn');
+        console.log(response.data);
+        const token = response.data.token;
+        navigation.navigate('ExtraInfo', {token});
       })
       .catch(error => {
         setDismiss(false);
         setLoading(false);
-        const mes = error.response.data;
-        if (mes === 'User already existed') {
+        const res = error.response.data;
+        if (res.message === 'User already existed') {
           setMessage('Email already existed');
         } else {
           setMessage('Oops! Something went wrong, try again');
@@ -197,7 +199,7 @@ const SignUpScreen = () => {
             />
           ) : (
             <CustomButton
-              title="Sign up"
+              title="Continue"
               onPress={handleSubmit(onRegisterPressed)}
             />
           )}
