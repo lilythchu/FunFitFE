@@ -46,7 +46,7 @@ exports[`Custom Button renders button correctly 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#68bbe3",
+          "backgroundColor": "#07a4f2",
           "borderColor": "transparent",
           "borderRadius": 30,
           "borderWidth": 0,
