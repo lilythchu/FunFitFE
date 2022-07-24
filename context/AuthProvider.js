@@ -1,11 +1,11 @@
 import React, {createContext, useContext, useState} from 'react';
-
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profile, setProfile] = useState({});
   const [token, setToken] = useState();
+  const [refreshToken, setRefreshToken] = useState(); 
 
   return (
     <AuthContext.Provider
@@ -16,6 +16,8 @@ const AuthProvider = ({children}) => {
         setProfile,
         token,
         setToken,
+        refreshToken, 
+        setRefreshToken,
       }}>
       {children}
     </AuthContext.Provider>

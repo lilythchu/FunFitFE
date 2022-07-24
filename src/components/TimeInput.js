@@ -13,6 +13,18 @@ const TimeInput = ({control, name}) => {
         rightIcon={<Text>:</Text>}
         rules={{
           required: 'hour',
+          maxLength: {
+            value: 2, 
+            message: '2 digits only'
+          },
+          max: {
+            value: 10,
+            message: 'invalid',
+          },
+          min: {
+            value: 0,
+            message: 'invalid',
+          },
         }}
       />
       <CustomInput
@@ -31,6 +43,10 @@ const TimeInput = ({control, name}) => {
             value: 0,
             message: 'invalid',
           },
+          maxLength: {
+            value: 2, 
+            message: '2 digits only'
+          }        
         }}
       />
       <CustomInput
@@ -48,6 +64,10 @@ const TimeInput = ({control, name}) => {
             value: 0,
             message: 'invalid',
           },
+          maxLength: {
+            value: 2, 
+            message: '2 digits only'
+          }
         }}
       />
     </View>

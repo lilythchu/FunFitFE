@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   btn_FIRST: {
-    backgroundColor: '#68bbe3',
+    backgroundColor: '#07a4f2',
   },
   btn_SECOND: {
     alignSelf: 'center',
     marginHorizontal: 20,
     marginVertical: 20,
     marginBottom: 40,
-    backgroundColor: globalColors.babyBlue,
+    backgroundColor: '#07a4f2',
     width: windowWidth / 2,
   },
   btn_THIRD: {
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 150,
   },
-
   title: {},
   title_FIRST: {
     fontWeight: 'bold',

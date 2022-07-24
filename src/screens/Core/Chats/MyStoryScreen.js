@@ -18,6 +18,7 @@ import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
+import { windowHeight } from '../../../../utils/Dimensions';
 
 const MyStoryScreen = () => {
   const navigation = useNavigation();
@@ -220,6 +221,13 @@ const styles = StyleSheet.create({
   deleteIconContainer: {
     position: 'absolute',
     bottom: 20,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  replyContainer: {
+    position: 'absolute',
+    bottom: 0,
     justifyContent: 'center',
     alignSelf: 'center',
     marginVertical: 10,

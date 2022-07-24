@@ -147,6 +147,7 @@ const MyRoutineItem = ({navigation, item, token, type}) => {
             if (item.steps[0] === undefined) {
               alert('Have you created steps');
             } else {
+              setVisible(false);
               navigation.navigate('Audio', {item});
             }
           }}

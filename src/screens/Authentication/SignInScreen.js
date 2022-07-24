@@ -23,7 +23,7 @@ import client from '../../../api/client';
 const SignInScreen = () => {
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
-  const {setIsLoggedIn, setProfile, setToken} = useLogin();
+  const {setIsLoggedIn, setProfile, setToken, setRefreshToken} = useLogin();
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -40,7 +40,9 @@ const SignInScreen = () => {
       .post('/user/login', credentials)
       .then(response => {
         const token = response.data.token;
+        const refreshToken = response.data.refreshToken;
         setToken(token);
+        setRefreshToken(refreshToken);
         client
           .get('/user/me', {headers: {Authorization: `Bearer ${token}`}})
           .then(res => {

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  ScrollView,
+  // ScrollView,
   Image,
   ActivityIndicator,
   TouchableWithoutFeedback,
@@ -12,6 +12,8 @@ import {Icon} from 'react-native-elements';
 import CountryPicker from 'react-native-country-picker-modal';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
@@ -72,9 +74,11 @@ const SignUpScreen = () => {
   };
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={globalStyles.scrollView}>
+    <KeyboardAwareScrollView
+    style={{ backgroundColor: "white" }}
+    resetScrollToCoords={{ x: 0, y: 0 }}
+    contentContainerStyle={globalStyles.scrollView}
+    scrollEnabled={true}>
       <TouchableWithoutFeedback onPress={() => setDismiss(true)}>
         <View style={globalStyles.root}>
           <Image
@@ -208,7 +212,7 @@ const SignUpScreen = () => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
