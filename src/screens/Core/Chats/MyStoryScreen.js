@@ -18,7 +18,6 @@ import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';
 import globalColors from '../../../../styles/colors';
 import client from '../../../../api/client';
-import ReplyBar from '../../../components/Chats/ReplyBar';
 import { windowHeight } from '../../../../utils/Dimensions';
 
 const MyStoryScreen = () => {
