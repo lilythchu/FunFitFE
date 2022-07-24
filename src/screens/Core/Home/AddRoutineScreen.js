@@ -122,6 +122,7 @@ const AddRoutineScreen = () => {
 
       <ListItem.Accordion
         style={{borderWidth: 1}}
+        noIcon
         content={
           <ListItem.Content>
             <TextInput
