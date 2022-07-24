@@ -39,6 +39,7 @@ const ReplyBar = ({token, userId, navigation}) => {
     const socket = io.connect('https://orbital-funfit.herokuapp.com/chatFunfit');
     socket.emit('join', {chatId: item.convoId});
     sendAMess(socket);
+    onChangeSendedMessage('');
     setLoading(false);
   }
 
@@ -51,6 +52,7 @@ const ReplyBar = ({token, userId, navigation}) => {
 
   const onSendRequest = async () => {
     setLoading(true);
+    Keyboard.dismiss();
     await initiateConvo();
   }
 
@@ -59,6 +61,7 @@ const ReplyBar = ({token, userId, navigation}) => {
       <TextInput
         placeholder='Send a message'
         onChangeText={text => onChangeSendedMessage(text)}
+        value={sendedMessage}
         style={{flex: 1}}
         clearButtonMode='always'
       />
