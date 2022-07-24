@@ -625,7 +625,7 @@ exports[`Profile screen renders correctly 1`] = `
                   Object {
                     "alignItems": "center",
                     "alignSelf": "center",
-                    "backgroundColor": "#68bbe3",
+                    "backgroundColor": "#07a4f2",
                     "borderColor": "transparent",
                     "borderRadius": 30,
                     "borderWidth": 0,

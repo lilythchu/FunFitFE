@@ -91,7 +91,7 @@ const AddRoutineScreen = () => {
 
       {/* Title */}
       <Text style={[globalStyles.title, {fontSize: 21}]}>
-        Creat your own Routine
+        Create your own Routine
       </Text>
 
       {/* Form */}
@@ -122,6 +122,7 @@ const AddRoutineScreen = () => {
 
       <ListItem.Accordion
         style={{borderWidth: 1}}
+        noIcon
         content={
           <ListItem.Content>
             <TextInput
