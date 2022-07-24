@@ -17,9 +17,6 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-let output = {};
-const mockSignIn = jest.fn(data => output = data);
-
 jest.mock("react-hook-form", () => ({
   ...jest.requireActual("react-hook-form"),
   register: jest.fn(),
@@ -44,19 +41,24 @@ describe('Sign In', () => {
     expect(screen).toMatchSnapshot();    
   });
 
-  test('renders signin button', () => {
-    const signinButton = screen.getByTestId('signinButton');
-    expect(signinButton).toBeTruthy();
+  test('should display required error when email and password are invalid', async () => {
+    fireEvent.press(screen.getByTestId('signinButton'));
+    expect(await screen.findByText('Email is required')).toBeTruthy();
+    expect(await screen.findByText('Password is required')).toBeTruthy();
   })
 
-  test('updates email input field', async () => {
-    fireEvent.changeText(screen.getByTestId('emailInput'), userObject.email);
-    expect(screen.getByTestId('emailInput').props.value).toEqual(userObject.email);
+  test('should display matching error when email is invalid', async () => {
+    fireEvent.changeText(screen.getByTestId('emailInput'), 'abc@');
+    fireEvent.press(screen.getByTestId('signinButton'));
+    expect(screen.getByTestId('emailInput').props.value).toEqual('abc@');
+    expect(await screen.findByText('Email is invalid')).toBeTruthy();
   });
 
-  test('updates password input field', async () => {
-    fireEvent.changeText(screen.getByTestId('pwdInput'), userObject.password);
-    expect(screen.getByTestId('pwdInput').props.value).toEqual(userObject.password);
+  test('should display matching error when password is inavlid', async () => {
+    fireEvent.changeText(screen.getByTestId('pwdInput'), '12');
+    fireEvent.press(screen.getByTestId('signinButton'));
+    expect(screen.getByTestId('pwdInput').props.value).toEqual('12');
+    expect(await screen.findByText('Password should be minimum 3 characters long')).toBeTruthy();
   });
 
   test('navigate to forgot password screen', () => {
@@ -67,5 +69,5 @@ describe('Sign In', () => {
   test('navigate to sign up screen', () => {
     fireEvent.press(screen.getByTestId('signup'));
     expect(mockedNavigate).toBeCalledWith('SignUp');
-  });
+  });  
 })
