@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Alert} from 'react-native';
 import {io} from 'socket.io-client';
 import {Dialog, ThemeProvider} from 'react-native-elements';
 import Feather from 'react-native-vector-icons/Feather';
@@ -8,6 +8,7 @@ import client from '../../../api/client';
 
 const ChatItem = ({item, navigation, token}) => {
   const [visibleDia, setVisibleDia] = useState(false);
+  const [loading, setLoading] = useState(false); //for deleting chat
   const toggleDialog = () => {
     setVisibleDia(!visibleDia);
   };
@@ -19,6 +20,7 @@ const ChatItem = ({item, navigation, token}) => {
   };
 
   const deleteConvo = () => {
+    setLoading(true);
     client
       .delete('/chat/deleteConvo', {
         headers: {Authorization: `Bearer ${token}`},
@@ -27,8 +29,11 @@ const ChatItem = ({item, navigation, token}) => {
           anotherUserid: item.friend[0]._id,
         },
       })
-      .then(res => setVisibleDia(false))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => {
+        setLoading(false);
+        setVisibleDia(false);
+      });
   };
 
   return (
@@ -59,7 +64,7 @@ const ChatItem = ({item, navigation, token}) => {
           overlayStyle={{borderRadius: 15}}>
           <Dialog.Title title="Are you sure want to delete" />
           <Dialog.Actions>
-            <Dialog.Button title="Yes" onPress={deleteConvo} />
+            <Dialog.Button title="Yes" onPress={deleteConvo} loading={loading} />
             <Dialog.Button title="No" onPress={toggleDialog} />
           </Dialog.Actions>
         </Dialog>

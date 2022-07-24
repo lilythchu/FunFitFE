@@ -6,8 +6,13 @@ import {
   Text,
   ActivityIndicator,
   Alert,
+  Platform,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {Icon, Image} from 'react-native-elements';
+import ReplyBar from '../../../components/Chats/ReplyBar';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Buffer} from 'buffer';
 import {useLogin} from '../../../../context/AuthProvider';
@@ -92,7 +97,11 @@ const MyStoryScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ImageBackground
         source={{uri: storyItems[index]}}
         style={styles.image}
@@ -144,8 +153,13 @@ const MyStoryScreen = () => {
           onPress={onDeletePress}
         />
       )}
+
+      {type === 'friends' && (
+        <ReplyBar token={token} userId={userInfo._id} navigation={navigation} />
+      )}
       </ImageBackground>
-    </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 
