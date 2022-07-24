@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import client from '../../../../api/client';
 
 const ChatScreen = () => {
-  const {token} = useLogin();
+  const {token, profile} = useLogin();
   const {item, socket} = useRoute().params;
   const friendId = item.friend[0]._id;
   const friendName = item.friend[0].name;
@@ -35,8 +35,8 @@ const ChatScreen = () => {
                 _id: dataMessages[i].sender,
                 name:
                   dataMessages[i].sender === users[0]._id
-                    ? users[1].name
-                    : users[0].name,
+                    ? users[0].name
+                    : users[1].name,
               },
               text: dataMessages[i].content,
               createdAt: dataMessages[i].createdAt,
@@ -61,14 +61,13 @@ const ChatScreen = () => {
 
   useEffect(() => {
     socket.on('receive new message', data => {
-      console.log(data);
       if (data.sender !== friendId) {
         if (!isRendered.current) {
           var mess = {
             _id: data._id,
             user: {
               _id: data.sender,
-              name: friendName,
+              name: profile.name,
             },
             text: data.content,
             createdAt: data.createdAt,
@@ -87,7 +86,7 @@ const ChatScreen = () => {
   const onSend = useCallback((messages = []) => {
     var sendMessage = {
       content: messages[0].text,
-      userId: friendId,
+      userId: profile._id,
     };
     socket.emit('send new message', sendMessage);
     setMessages(previousMessages =>
@@ -119,8 +118,8 @@ const ChatScreen = () => {
       messages={messages}
       onSend={newMessages => onSend(newMessages)}
       user={{
-        _id: friendId,
-        name: friendName,
+        _id: profile._id,
+        name: profile.name,
       }}
       alwaysShowSend
       renderSend={renderSend}
