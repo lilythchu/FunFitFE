@@ -58,9 +58,6 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-      - run:
-          name: Run linting
-          command: npm lint
 
   publish_to_expo:
     <<: *publish
