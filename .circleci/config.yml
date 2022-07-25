@@ -9,7 +9,7 @@ orbs:
 publish: &publish
   working_directory: ~/loplop-native
   docker:
-    - image: circleci/node:10.13.0
+    - image: circleci/node:12.13.0
   steps:
     - checkout
     # - restore_cache:
