@@ -44,6 +44,7 @@ const Settings = () => {
 
   const onChangeInterests = () => {
     setLoading2(true);
+    console.log(interests);
     client
       .put(
         '/user/updateProfile',
