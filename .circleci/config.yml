@@ -57,7 +57,7 @@ jobs:
       #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
       - run:
           name: Run tests
-          command: npm test --ci
+          command: npm test
       - run:
           name: Run linting
           command: npm lint
