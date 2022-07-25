@@ -26,7 +26,7 @@ const ChatItem = ({item, navigation, token}) => {
         headers: {Authorization: `Bearer ${token}`},
         data: {
           convoId: item.convoId,
-          anotherUserid: item.friend[0]._id,
+          anotherUserId: item.friend[0]._id,
         },
       })
       .catch(err => console.log(err))

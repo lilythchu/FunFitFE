@@ -21,6 +21,7 @@ import {EMAIL_REGEX} from '../../../utils/methods';
 import Picture from '../../../assets/images/signup.png';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
+import { useLogin } from '../../../context/AuthProvider'; 
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ const SignUpScreen = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const [countryCode, setCountryCode] = useState('VN');
   const [country, setCountry] = useState();
+  const { token, setToken } = useLogin();
 
   const onSelect = countries => {
     setCountry(countries.name);
@@ -59,8 +61,9 @@ const SignUpScreen = () => {
       .post('/user/signup', userInfo)
       .then(response => {
         setLoading(false);
-        console.log(response.data);
         const token = response.data.token;
+        setToken(token);
+        console.log("token: " + token)
         navigation.navigate('ExtraInfo', {token});
       })
       .catch(error => {
@@ -70,6 +73,7 @@ const SignUpScreen = () => {
         if (res.message === 'User already existed') {
           setMessage('Email already existed');
         } else {
+          console.log(res.message);
           setMessage('Oops! Something went wrong, try again');
         }
       });
