@@ -6,11 +6,13 @@ import GenreChip from '../../components/Profile/GenreChip';
 
 import {useRoute} from '@react-navigation/native';
 import {useLogin} from '../../../context/AuthProvider';
+import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import globalStyles from '../../../styles/global';
 import client from '../../../api/client';
 
 const ExtraInfoScreen = () => {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const {control, handleSubmit} = useForm();
   const {token} = useRoute().params;
@@ -28,8 +30,9 @@ const ExtraInfoScreen = () => {
         headers: {Authorization: `Bearer ${token}`},
       })
       .then(response => {
-        setProfile(response.data);
-        setIsLoggedIn(true);
+        // setProfile(response.data);
+        // setIsLoggedIn(true);
+        navigation.navigate("SignIn");
       })
       .catch(error => Alert.alert("Oops", "Something went wrong"))
       .finally(() => setLoading(false))
