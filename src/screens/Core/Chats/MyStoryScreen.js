@@ -23,7 +23,7 @@ import { windowHeight } from '../../../../utils/Dimensions';
 const MyStoryScreen = () => {
   const navigation = useNavigation();
   const {stories, userInfo, type} = useRoute().params;
-  const {token} = useLogin();
+  const {token, profile} = useLogin();
   const length = stories.length;
   const [storyItems, setStoryItems] = useState(new Array(length));
 
@@ -156,7 +156,7 @@ const MyStoryScreen = () => {
       )}
 
       {type === 'friends' && (
-        <ReplyBar token={token} userId={userInfo._id} navigation={navigation} />
+        <ReplyBar token={token} userId={userInfo._id} navigation={navigation} profileId={profile._id}/>
       )}
       </ImageBackground>
     </TouchableWithoutFeedback>

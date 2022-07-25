@@ -5,7 +5,7 @@ import {io} from 'socket.io-client';
 import globalColors from '../../../styles/colors';
 import client from '../../../api/client';
 
-const ReplyBar = ({token, userId, navigation}) => {
+const ReplyBar = ({token, userId, navigation, profileId}) => {
   const [sendedMessage, onChangeSendedMessage] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,7 @@ const ReplyBar = ({token, userId, navigation}) => {
   const sendAMess = (socket) => {
     socket.emit('send new message', {
       content: sendedMessage,
-      userId: userId,
+      userId: profileId,
     });
   }
 
