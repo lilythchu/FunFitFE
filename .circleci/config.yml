@@ -12,17 +12,17 @@ publish: &publish
     - image: circleci/node:10.13.0
   steps:
     - checkout
-    - restore_cache:
-        name: Restore yarn package cache
-        key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
+    # - restore_cache:
+    #     name: Restore yarn package cache
+    #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
     - run:
         name: Install dependencies
-        command: yarn install --frozen-lockfile
-    - save_cache:
-        name: Save yarn package cache
-        paths:
-          - ~/.cache/yarn
-        key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
+        command: npm install --force
+    # - save_cache:
+    #     name: Save yarn package cache
+    #     paths:
+    #       - ~/.cache/yarn
+    #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
     - run:
         name: Login into Expo
         command: npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
@@ -44,23 +44,23 @@ jobs:
       - image: circleci/node:10.13.0
     steps:
       - checkout
-      - restore_cache:
-          name: Restore yarn package cache
-          key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
+      # - restore_cache:
+      #     name: Restore yarn package cache
+      #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
       - run:
           name: Install dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save yarn package cache
-          paths:
-            - ~/.cache/yarn
-          key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
+          command: npm install --force
+      # - save_cache:
+      #     name: Save yarn package cache
+      #     paths:
+      #       - ~/.cache/yarn
+      #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
       - run:
           name: Run tests
-          command: yarn test:js --ci
+          command: npm test:js --ci
       - run:
           name: Run linting
-          command: yarn lint:js
+          command: npm lint:js
 
   publish_to_expo:
     <<: *publish
@@ -71,6 +71,8 @@ workflows:
       jobs:
         - build_and_test
         - publish_to_expo:
+            requires: 
+              - build_and_test
             filters:
               branches:
                 ignore: gh-pages
