@@ -7,7 +7,7 @@ orbs:
   node: circleci/node@5.0.2
 
 publish: &publish
-  working_directory: ~/loplop-native
+  working_directory: ~/FunFitFE
   docker:
     - image: circleci/node:12.13.0
   steps:
