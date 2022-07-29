@@ -19,6 +19,7 @@
     "axios": "^0.27.2",
     "expo": "~45.0.0",
     "expo-av": "~11.2.3",
+    "expo-cli": "^5.5.1",
     "expo-device": "~4.2.0",
     "expo-image-picker": "~13.1.1",
     "expo-linear-gradient": "~11.3.0",
