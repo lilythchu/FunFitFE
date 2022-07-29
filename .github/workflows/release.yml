@@ -1,6 +1,10 @@
 name: release
 on:
-  pull_request
+  pull_request:
+    
+  push: 
+    branches: 
+      main
   
 jobs:
   publish:
@@ -25,7 +29,4 @@ jobs:
 
       - name: 📋 Publish preview
         run: expo publish
-      - name: Run tests
-        run: |
-          yarn test
         
