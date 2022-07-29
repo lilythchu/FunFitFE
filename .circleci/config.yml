@@ -6,37 +6,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 
-publish: &publish
-  working_directory: ~/FunFitFE
-  docker:
-    - image: circleci/node:12.13.0
-  steps:
-    - checkout
-    # - restore_cache:
-    #     name: Restore yarn package cache
-    #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
-    - run:
-        name: Install dependencies
-        command: npm ci
-    # - save_cache:
-    #     name: Save yarn package cache
-    #     paths:
-    #       - ~/.cache/yarn
-    #     key: v1-cache-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}-{{ arch }}
-    - run:
-        name: Login into Expo
-        command: npx expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-    - run:
-        name: Save current branch name to an env variable
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            echo 'export EXPO_RELEASE_CHANNEL="default"' >> $BASH_ENV
-          else
-            echo 'export EXPO_RELEASE_CHANNEL=$CIRCLE_BRANCH' >> $BASH_ENV
-          fi
-    - run:
-        name: Publish to Expo
-        command: npx expo publish --non-interactive --max-workers 1 --release-channel $EXPO_RELEASE_CHANNEL
 
 jobs:
   build_and_test:
@@ -59,19 +28,8 @@ jobs:
           name: Run tests
           command: npm test
 
-  publish_to_expo:
-    environment:
-      EXPO_RELEASE_CHANNEL: dev
-    <<: *publish
-
 workflows:
   version: 2
   FunFitFE: 
     jobs:
       - build_and_test
-      - publish_to_expo:
-          requires: 
-            - build_and_test
-          filters:
-            branches:
-              ignore: gh-pages
