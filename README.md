@@ -5,8 +5,8 @@
 
 **Nguyen Hong Ngoc** 
 
-## Proposed level of achievement 
-Apollo 11
+## Level of achievement 
+Artemis
 
 ## What is Funfit? 
 Funfit is a mobile application that helps users stick with their workout routines, thus promoting a healthy lifestyle. 
