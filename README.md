@@ -5,8 +5,15 @@
 
 **Nguyen Hong Ngoc** 
 
-## Level of achievement 
+## Level of achievement:
 Artemis
+
+## Product Documentation:
+
+[Documentation](https://docs.google.com/document/d/1WQjS8imb594OwwgxLR8O5RfU5ZfX6ZVX1GNW9qsdOgk/edit?usp=sharing)
+
+## APK
+[APK](https://drive.google.com/file/d/1Rq_V-7S5DGaphjFBm3W9CeMAyAWEl4V7/view?usp=sharing)
 
 ## What is Funfit? 
 Funfit is a mobile application that helps users stick with their workout routines, thus promoting a healthy lifestyle. 
@@ -44,7 +51,7 @@ With the fascinating journey of building the app, we expect to help students lik
 - Backend: Express.js 
 - Deployment: Heroku 
 - Database: MongoDB 
-- Quality Assurance: Postman + Jest 
+- Quality Assurance: Postman + Jest + Appium
 
 ### Detailed functionalities 
 1. Profile page:
@@ -99,12 +106,3 @@ With the fascinating journey of building the app, we expect to help students lik
 | Milestone 2 | <ul> <li> Complete core features of Routine page: view routines, create new routines, view a separate routine </li> <li> Complete core features of Notifications: view notifications, click on each notification </li> <li> Complete core features of Story: view stories, create stories, delete stories </li> <li> Complete core features of Chat: view chats, sends message, delete message </li> </ul> | 
 | Milestone 3 | <ul> <li> Complete Ranking system </li> <li> Complete Calendar features </li> <li> Testing </li> </ul> | 
 
-
-## Instructions for pull requests 
-1. Ensure the branch you are working on is named semantically based on the task at hand. Eg. fe-add-faq-page (for frontend), be-add-message-routes (for backend)
-2. Submit the Pull Request with master as the target branch.
-3. If any, link the GitHub issue to the Pull Request.
-4. Ensure all CI checks are passing.
-5. Assign a reviewer to review the Pull Request (optional).
-6. Once the reviewer has approved the Pull Request, merge it and delete the source branch.
-More information: https://docs.github.com/en/get-started/quickstart/github-flow 
